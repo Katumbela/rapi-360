@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import logo from "../imgs/logo-d.png";
 import cart from "../imgs/carrinho.png";
+import iconn from "../imgs/iconn.png";
 import "../css/header.css";
 import { NavLink } from "react-router-dom";
 import firebase from "firebase/compat/app";
@@ -118,43 +119,50 @@ const Header = (props) => {
                     </div>
                 </div>
             </nav> */}
-      <div className="nav bg-dark py-2">
-                <div className="d-flex container-lg container-fluid justify-content-between">
-                    <div className="logo">
-                        <NavLink to="/pt"><img src={logo} alt="" /></NavLink>
-                    </div>
-                    <div className="item-menu">
-                        <ul>
-                            <li>
-                                <NavLink to="/pt/faqs"> FAQ</NavLink>
-                            </li>
+      <div className="nav bg-white py-2">
+        <div className="d-flex container-lg container-fluid justify-content-between">
+          <div className="logo">
+            <NavLink to="/pt">
+              <img src={iconn} alt="" />
+            </NavLink>
+          </div>
+          <div className="pesquisa">
+            <input type="search" name="" placeholder="Pesquise por empresa, NIF ou site" id="" />
+            <i className="bi bi-search"></i>
+          </div>
+          <div className="item-menu">
+            <ul>
+              <li>
+                <NavLink className={"btn btn-outline-success"} to="/pt/login">
+                  {" "}
+                  Entrar
+                </NavLink>
+              </li>
 
-                            {use.name !== '' ?
-                                <li>
-                                    <NavLink to="/pt/add-artigo"> Add Artigo</NavLink>
-                                </li>
-                                :
-                                <span></span>
-                            }
+              {use.name !== "" ? (
+                <li>
+                  <NavLink to="/pt/add-artigo"> Add Artigo</NavLink>
+                </li>
+              ) : (
+                <span></span>
+              )}
 
-                            {use.name !== '' ?
-                                <li>
-                                <NavLink to="/pt/perfil">{use.name?.split(' ')[0]}</NavLink>
-                              </li>
-                               :
-
-                                <li>
-
-                                    <NavLink to="/pt/login"> Entrar</NavLink>
-                                </li>
-
-                            }
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-    
+              {use.name !== "" ? (
+                <li>
+                  <NavLink to="/pt/perfil">{use.name?.split(" ")[0]}</NavLink>
+                </li>
+              ) : (
+                <li>
+                  <NavLink className={"btn btn-success"} to="/pt/login">
+                    {" "}
+                    Cadastro
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

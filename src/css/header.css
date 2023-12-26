@@ -1,5 +1,6 @@
 .nav {
-    background-color: black!important;
+    background-color: #fff!important;
+    border-bottom: 2px solid #d9d9d9;
 }
 
 .nav .logo img {
@@ -25,13 +26,34 @@
     list-style-type: none;
 }
 
-.item-menu li a {
-    color: white;
-    text-decoration: none;
+
+.pesquisa {
+    background: #fff;
+    width: 100%;
+    margin-left: 1.9rem;
+    display: flex;
+    padding: .4rem .8rem;
+    align-items: center;
+    border: 1px solid #c4dcc4;
+    border-radius: 4px!important;
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all .3s ease;
 }
 
-.item-menu li a:hover , .item-menu li a:focus {
-    color: #ffdd00;
-    transition: .15s all ease-in-out;
-    border-bottom: 1.5px solid #ffea00;
+.pesquisa input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.pesquisa i{
+    color: #498b49;
+}
+
+.pesquisa:focus-visible,
+.pesquisa:focus-within,
+.pesquisa:focus {
+    box-shadow: 1px 1px 6px #d9d9d9;
+    transition: all .3s ease-in;
 }
