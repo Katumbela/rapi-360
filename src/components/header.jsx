@@ -170,7 +170,7 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-      <div className="menu-sm">
+      <div className="menu-sm overflow-x-auto">
         <ul>
           <li>
             <NavLink>Entrar</NavLink>
@@ -181,6 +181,11 @@ const Header = (props) => {
           <li>
             <NavLink>Prêmios R360</NavLink>
           </li>
+                <li>
+                  <button className="btn  btn-sm btn-danger">
+                    <i className="bi bi-megaphone me-2"></i> Reclamar
+                  </button>
+                </li>
         </ul>
       </div>
     </>
