@@ -249,7 +249,7 @@
     margin-left: 10px; /* Espaço entre os itens (opcional, ajuste conforme necessário) */
     flex-direction: column-reverse;
     justify-content: center;
-    text-align: cente!important;
+    text-align: center!important;
     position: relative;
   }
   .qq i {
@@ -261,7 +261,8 @@
   }
 
   .desconto .imm {
-    text-align: center;
+    text-align: center !important;
+    align-items: center;
     padding-bottom: 1rem;
   }
   .scroll-md{
@@ -271,6 +272,5 @@
 
 
 .desconto .imm {
-  text-align: end;
-  align-items: flex-end;
+  text-align: end !important;
 }

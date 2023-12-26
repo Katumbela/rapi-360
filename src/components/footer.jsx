@@ -47,63 +47,68 @@ function Footer() {
 
   return (
     <div className="footerr">
-      <div className="container-lg foo">
+      <div className="container-fluid foo">
         <div className=" mt-4 footer">
-          <div className=" row text-success">
+          <div className=" row">
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-white">Contacte nos</h5>
+              <h5 className="text-dark">Contacte nos</h5>
               <ul>
                 <li>Endereço: Luanda - Angola</li>
                 <li>Phone: +244 28 134 249</li>
                 <li>E-mail: info@gokside.site</li>
               </ul>
             </div>
-            <div className="col-12 my-2 my-md-1 col-sm-2 col-md-2 text-start">
-              <h5 className="text-white">Conta</h5>
+            <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
+              <h5 className="text-dark">Para empresas</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink" to="/pt/login">
-                    Entrar
+                  <NavLink className="footerlink rounded-1 text-white w-100 btn btn-success" to="/pt/login">
+                    Área da empresa
                   </NavLink>
                 </li>
                 <li>
                   <NavLink className="footerlink" to="/pt/login">
-                    Criar conta
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-            <div className="col-12 my-2 my-md-1 col-sm-2 col-md-2 text-start">
-              <h5 className="text-white">Reportes</h5>
-              <ul>
-                <li>
-                  <NavLink className="footerlink" to="/pt/prestadores">
-                    De prestadores
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="footerlink" to="/pt/aquisitores">
-                    De aquisitores
+                    Cadastrar empresa
                   </NavLink>
                 </li>
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-white">Regulamentos</h5>
+              <h5 className="text-dark">Para consumidor</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink" to="/pt/politicas">
-                    Termos & Políticas
+                  <NavLink className="footerlink rounded-1 text-white btn btn-success w-100" to="/pt/prestadores">
+                    Área do consumidor
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="footerlink" to="/pt/aquisitores">
+                    Rankings
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="footerlink" to="/pt/aquisitores">
+                    Buscar descontos
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
+              <h5 className="text-dark">Central de Ajuda</h5>
+              <ul>
+                <li>
+                  <NavLink className="footerlink btn btn-outline-danger rounded-1 w-100" to="/pt/politicas">
+                    Reclamar de uma empresa
                   </NavLink>
                 </li>
                 <li>
                   <NavLink className="footerlink" to="/pt/reembolso">
-                    Politicas de reembolso
+                   Quero trocar minha senha
                   </NavLink>
                 </li>
                 <li>
                   <NavLink className="footerlink" to="/pt/seguro">
-                    Seguro de aluguel
+                    Blog R360
                   </NavLink>
                 </li>
                 <li>

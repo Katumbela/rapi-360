@@ -68,7 +68,7 @@ const Banner = () => {
     <>
       <div className="banner shadow-md">
         <div className="body-banner text-center container">
-          <h4 className="  titulo">
+          <h4 className="f-reg  titulo">
             O Reputa 360 te aproxima das marcas que têm a confiança do
             consumidor!
           </h4>
@@ -103,12 +103,8 @@ const Banner = () => {
               <i className="bi bi-megaphone"></i>
             </div>
           </div>
-
         </div>
       </div>
-      <br />
-      <br />
-      <br />
       {/* <div className="container-fluid container-lg">
         <div className="row">
           <div className="col-12 col-md-4 col-xl-3 col-xxl-2 pt-1">
@@ -185,8 +181,13 @@ const Banner = () => {
         </div>
       </div> */}
 
-      <div className="publicidade py-5 text-center">
+      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
+        <br />
+        <br />
         <h5>Publicidade</h5>
+
+        <br />
+        <br />
       </div>
 
       <div className="ranking-emp bg-light py-4 container">
@@ -785,10 +786,14 @@ const Banner = () => {
       <br />
       <br />
 
-      <div className="publicidade py-5 text-center">
+      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
+        <br />
+        <br />
         <h5>Publicidade</h5>
-      </div>
 
+        <br />
+        <br />
+      </div>
       <br />
       <br />
     </>
