@@ -1,0 +1,37 @@
+.nav {
+    background-color: black!important;
+}
+
+.nav .logo img {
+    height: 3em;
+}
+
+.nav .d-flex {
+    justify-content: space-between!important;
+}
+
+
+.item-menu {
+    margin: auto 0!important;
+}
+
+.item-menu ul {
+    display: flex;
+    margin: auto 0!important;
+    gap: 10px;
+}
+
+.item-menu li {
+    list-style-type: none;
+}
+
+.item-menu li a {
+    color: white;
+    text-decoration: none;
+}
+
+.item-menu li a:hover , .item-menu li a:focus {
+    color: #ffdd00;
+    transition: .15s all ease-in-out;
+    border-bottom: 1.5px solid #ffea00;
+}

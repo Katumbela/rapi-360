@@ -1,0 +1,28 @@
+
+.serv_img {
+    border-radius: 5px!important;
+}
+
+.serv_img img {
+   max-height: 15em!important;
+}
+
+.cc {
+    border-radius: 5px!important;
+}
+
+
+.cc:hover {
+   box-shadow: none!important;
+   border: .2px dashed #d9d9d9;
+   transition: .3s all ease-in;
+}
+
+fieldset .form-control {
+    border: none;
+}
+
+fieldset .form-control:focus-within {
+    border: none;
+    outline: 1.5px solid #04d700;
+}

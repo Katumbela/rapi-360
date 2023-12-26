@@ -1,0 +1,28 @@
+
+.spa1{
+    color: gray;
+    font-size: 10px;
+}
+
+.spa{
+    color: gray;
+    font-size: 12px;
+}
+
+.corpo-curso .b{
+    color: #202020;
+    font-weight: 450;
+    font-size: 14px;
+}
+
+.corpo-curso {
+    height: 8rem;
+    position: relative;
+}
+
+.corpo-curso .preco{
+    position: absolute;
+    bottom: -.5rem;
+    font-size: 15px;
+    font-weight: 300 ;
+}
