@@ -23,19 +23,19 @@
   text-align: left;
   font-size: 12px;
   margin-left: 0.1rem;
-  color: #a3a3a3;
+  color: #787878;
 }
 
 .footer div ul li .footerlink {
   font-size: 12px;
-  color: #a3a3a3;
+  color: #575757;
   text-decoration: none;
   transition: 0.2s all;
 }
 
 .foo center a:hover, .footer div ul li .footerlink:hover {
   font-size: 12px;
-  color: #ffdd00;
+  color: #007313;
   text-decoration: underline;
   transition: 0.2s all;
 }
@@ -55,7 +55,7 @@
 .span {
   font-size: 12px;
   margin-left: 2rem;
-  color: #a3a3a3;
+  color: #474747;
 }
 
 * {
@@ -64,7 +64,7 @@
 
 .letter {
   background: #333334dd;
-  color: white;
+  color: #242424;
   border-color: #333334dd;
 }
 
@@ -90,4 +90,17 @@
 
 footer .form-control {
   background: #fff !important;
+}
+
+
+.footerr {
+  border-top: 2px solid #d9d9d9;
+}
+
+.midias div a {
+  color: #16a700!important;
+}
+
+.logo-blogg {
+  height: 2.5em;
 }

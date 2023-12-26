@@ -31,7 +31,7 @@ import Navba from '../components/nav';
 const Home = ({ cart, nomee, emaill }) => {
 
   const { user, handleLogout } = useContext(UserContext);
-  document.title = `Pagina Inicial | D'Aluguel`;
+  document.title = `Pagina Inicial | Reputação 360`;
 
 
   useEffect(() => {

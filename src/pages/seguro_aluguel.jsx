@@ -28,12 +28,12 @@ const Seguro = ({ emaill, nomee, cart }) => {
                 </p>
 
                 <p>
-                    No momento a D'Aluguel não fornece ainda seguro de aluguel. No entanto a segurança e prevenção e segurança dos seus equipamentos ou materiais serão garantidos por sí mesmo com o aquisitor por meio de um acordo.
+                    No momento a Reputação 360 não fornece ainda seguro de aluguel. No entanto a segurança e prevenção e segurança dos seus equipamentos ou materiais serão garantidos por sí mesmo com o aquisitor por meio de um acordo.
                 </p>
 
 
                 <p>
-                    Qualquer situação ou problema ocorido fora da plataforma não está na jurisdição da plataforma no entanto terá de o resolver sozinho. do contrário o caso será submetido ao suporte da D'Aluguel (GOKSIDE INC) e posteriormente as autoridades locais.
+                    Qualquer situação ou problema ocorido fora da plataforma não está na jurisdição da plataforma no entanto terá de o resolver sozinho. do contrário o caso será submetido ao suporte da Reputação 360 (GOKSIDE INC) e posteriormente as autoridades locais.
                 </p>
 
 

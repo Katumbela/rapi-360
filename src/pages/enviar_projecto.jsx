@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 
 function SubmitP({ nomee, emaill, cart }) {
   const [fotoUrl, setFotoUrl] = useState("");
-  document.title = "Adicionar material/equipamento | D'Aluguel";
+  document.title = "Adicionar material/equipamento | Reputação 360";
 
   const [use, setUser] = useState([]);
 

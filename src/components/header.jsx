@@ -127,7 +127,12 @@ const Header = (props) => {
             </NavLink>
           </div>
           <div className="pesquisa">
-            <input type="search" name="" placeholder="Pesquise por empresa, NIF ou site" id="" />
+            <input
+              type="search"
+              name=""
+              placeholder="Pesquise por empresa, NIF ou site"
+              id=""
+            />
             <i className="bi bi-search"></i>
           </div>
           <div className="item-menu">
