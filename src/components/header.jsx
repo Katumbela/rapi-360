@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import logo from "../imgs/logo-d.png";
 import cart from "../imgs/carrinho.png";
 import iconn from "../imgs/iconn.png";
+import logosm from "../imgs/logo-sm.png";
 import "../css/header.css";
 import { NavLink } from "react-router-dom";
 import firebase from "firebase/compat/app";
@@ -123,10 +124,11 @@ const Header = (props) => {
         <div className="d-flex container-lg container-fluid justify-content-between">
           <div className="logo">
             <NavLink to="/pt">
-              <img src={iconn} alt="" />
+              <img src={iconn} alt="" className="logo-md" />
+              <img src={logosm} alt="" className="logo-sm" />
             </NavLink>
           </div>
-          <div className="pesquisa">
+          <div className="pesquisa pesquisa-md">
             <input
               type="search"
               name=""
@@ -135,7 +137,7 @@ const Header = (props) => {
             />
             <i className="bi bi-search"></i>
           </div>
-          <div className="item-menu">
+          <div className="item-menu menu-md">
             <ul>
               <li>
                 <NavLink className={"btn btn-outline-success"} to="/pt/login">
@@ -167,6 +169,19 @@ const Header = (props) => {
             </ul>
           </div>
         </div>
+      </div>
+      <div className="menu-sm">
+        <ul>
+          <li>
+            <NavLink>Entrar</NavLink>
+          </li>
+          <li>
+            <NavLink>Cadastro</NavLink>
+          </li>
+          <li>
+            <NavLink>Prêmios R360</NavLink>
+          </li>
+        </ul>
       </div>
     </>
   );

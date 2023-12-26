@@ -1,59 +1,110 @@
 .nav {
-    background-color: #fff!important;
-    border-bottom: 2px solid #d9d9d9;
+  background-color: #fff !important;
+  border-bottom: 2px solid #d9d9d9;
 }
 
 .nav .logo img {
-    height: 3em;
+  height: 3em;
 }
 
 .nav .d-flex {
-    justify-content: space-between!important;
+  justify-content: space-between !important;
 }
 
-
 .item-menu {
-    margin: auto 0!important;
+  margin: auto 0 !important;
 }
 
 .item-menu ul {
-    display: flex;
-    margin: auto 0!important;
-    gap: 10px;
+  display: flex;
+  margin: auto 0 !important;
+  gap: 10px;
 }
 
 .item-menu li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
-
 .pesquisa {
-    background: #fff;
-    width: 100%;
-    margin-left: 1.9rem;
-    display: flex;
-    padding: .4rem .8rem;
-    align-items: center;
-    border: 1px solid #c4dcc4;
-    border-radius: 4px!important;
-    margin-top: auto;
-    margin-bottom: auto;
-    transition: all .3s ease;
+  background: #fff;
+  width: 100%;
+  margin-left: 1.9rem;
+  display: flex;
+  padding: 0.4rem 0.8rem;
+  align-items: center;
+  border: 1px solid #c4dcc4;
+  border-radius: 4px !important;
+  margin-top: auto;
+  margin-bottom: auto;
+  transition: all 0.3s ease;
 }
 
 .pesquisa input {
-    width: 100%;
-    border: none;
-    outline: none;
+  width: 100%;
+  border: none;
+  outline: none;
 }
 
-.pesquisa i{
-    color: #498b49;
+.pesquisa i {
+  color: #498b49;
 }
 
 .pesquisa:focus-visible,
 .pesquisa:focus-within,
 .pesquisa:focus {
-    box-shadow: 1px 1px 6px #d9d9d9;
-    transition: all .3s ease-in;
+  box-shadow: 1px 1px 6px #d9d9d9;
+  transition: all 0.3s ease-in;
+}
+
+@media (max-width: 630px) {
+  .logo-md {
+    display: none;
+  }
+
+  .logo-sm {
+    display: block;
+  }
+  .menu-md {
+    display: none;
+  }
+}
+
+@media (min-width: 631px) {
+  .logo-md {
+    display: block;
+  }
+
+  .menu-sm {
+    display: none;
+  }
+
+  .logo-sm {
+    display: none;
+  }
+}
+
+.menu-sm {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.menu-sm ul {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.menu-sm ul li {
+  display: inline-flex;
+  padding: 0.3rem 0.5rem;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.menu-sm ul li:hover {
+    background: #a3d0a3;
+    color: white !important;
+    cursor: pointer;
+}
+.menu-sm ul li a {
+  text-decoration: none;
+  color: rgb(80, 80, 80);
 }
