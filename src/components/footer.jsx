@@ -54,15 +54,15 @@ function Footer() {
               <h5 className="text-dark">Contacte nos</h5>
               <ul>
                 <li>Endereço: Luanda - Angola</li>
-                <li>Phone: +244 28 134 249</li>
-                <li>E-mail: info@gokside.site</li>
+                <li>Phone: +244 928 134 249</li>
+                <li>E-mail: info@reputa360.ao</li>
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
               <h5 className="text-dark">Para empresas</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink rounded-1 text-white w-100 btn btn-success" to="/pt/login">
+                  <NavLink className="footerlink rounded-1 text-white  btn btn-success" to="/pt/login">
                     Área da empresa
                   </NavLink>
                 </li>
@@ -77,7 +77,7 @@ function Footer() {
               <h5 className="text-dark">Para consumidor</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink rounded-1 text-white btn btn-success w-100" to="/pt/prestadores">
+                  <NavLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/prestadores">
                     Área do consumidor
                   </NavLink>
                 </li>
@@ -97,7 +97,7 @@ function Footer() {
               <h5 className="text-dark">Central de Ajuda</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink btn btn-outline-danger rounded-1 w-100" to="/pt/politicas">
+                  <NavLink className="footerlink btn btn-outline-danger rounded-1 " to="/pt/politicas">
                     Reclamar de uma empresa
                   </NavLink>
                 </li>
@@ -111,16 +111,11 @@ function Footer() {
                     Blog R360
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink className="footerlink" to="/pt/itens">
-                    Itens proibidos
-                  </NavLink>
-                </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="d-flex text-success midias justify-content-between">
+        <div className="d-flex flex-wrap text-success midias justify-content-between">
           <div className="d-flex gap-3 ms-4">
             <a href="https://www.facebook.com/Arotec1/" className="navlink">
               <i className="bi bi-facebook text-success"></i>
