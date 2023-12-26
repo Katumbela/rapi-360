@@ -177,7 +177,7 @@ const Home = ({ cart, nomee, emaill }) => {
        
         < Footer />
       </div>
-      <CookieConsent
+      {/* <CookieConsent
         location="bottom"
         buttonText="Aceitar"
         cookieName="myAwesomeCookieConsent"
@@ -186,11 +186,11 @@ const Home = ({ cart, nomee, emaill }) => {
         expires={150}
       >
         Este site usa cookies para melhorar sua experiência de navegação e interação com o nosso site.
-      </CookieConsent>
+      </CookieConsent> */}
       {/* O resto do seu componente aqui */}
 
       {/* Conteúdo do seu componente aqui */}
-      {showModal && (
+      {/* {showModal && (
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title className='text-primary'>Uhaaa!. Temos um novo visual</Modal.Title>
@@ -218,7 +218,7 @@ const Home = ({ cart, nomee, emaill }) => {
             </Button>
           </Modal.Footer>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
