@@ -17,6 +17,7 @@ import EnviarMensagem from "./enviar_mensagem";
 import Mensagens from "./mensagens";
 import Conversa from "./conversa";
 import Perfil from "./perfil";
+import Ranking from "./ranking";
 
 
 const RotasPT = (props) => {
@@ -35,6 +36,7 @@ const RotasPT = (props) => {
                     <Route element={<Conversa nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/conversa/:uid" />
                     <Route element={<NotFoundPage nomee={nomee} emaill={emaill} cart={cart}/>}  />
                     <Route element={<Contactar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/contactar" exact />
+                    <Route element={<Ranking  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/ranking" exact />
                     <Route element={<Faqs  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/faqs" exact />
                     <Route element={<Login cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/login" exact />
                     <Route element={<NotFoundPage/>}/>

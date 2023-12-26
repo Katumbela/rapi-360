@@ -166,13 +166,6 @@ const Home = ({ cart, nomee, emaill }) => {
      
       <div className="s">
        
-        <br />
-        <br />
-
-        <br />
-
-        <br />
-        <br />
 
        
         < Footer />

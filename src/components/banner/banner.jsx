@@ -207,9 +207,9 @@ const Banner = () => {
             </span>
             <br />
             <br />
-            <button className="btn rounded-1 btn-outline-success">
+            <NavLink to={'/pt/ranking'} className="btn rounded-1 btn-outline-success">
               Ver Ranking Completo
-            </button>
+            </NavLink>
           </div>
           <div className="col-12 col-lg-8 my-lg-0 my-5">
             <div className="tabss w-100   overflow-x-auto">

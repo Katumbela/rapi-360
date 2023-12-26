@@ -1,0 +1,12 @@
+.card-ranking {
+    border: 1px solid #d9d9d9;
+}
+
+.rate {
+    border: 1px solid #d9d9d9;
+    padding-left: .3rem;
+    padding-right: .3rem;
+}
+.boddy a:hover {
+text-decoration: underline !important;
+}

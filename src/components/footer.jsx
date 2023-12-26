@@ -77,7 +77,7 @@ function Footer() {
               <h5 className="text-dark">Para consumidor</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/prestadores">
+                  <NavLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/login">
                     Área do consumidor
                   </NavLink>
                 </li>
