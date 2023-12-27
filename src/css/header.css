@@ -75,7 +75,7 @@
   }
 
   .menu-sm {
-    display: none;
+    display: none !important;
   }
 
   .logo-sm {
@@ -113,7 +113,7 @@
 }
 
 
-@media (max-width: 690px) {
+@media (min-width: 325px) and (max-width: 690px) {
   .nav {
     position: fixed !important;
     top: 0;
