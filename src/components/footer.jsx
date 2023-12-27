@@ -46,7 +46,7 @@ function Footer() {
   };
 
   return (
-    <div className="footerr">
+    <div className="footerr bg-white">
       <div className="container-fluid foo">
         <div className=" mt-4 footer">
           <div className=" row">

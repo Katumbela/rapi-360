@@ -69,6 +69,10 @@
     display: none;
   }
 
+  .c {
+    padding-top: 9rem!important;
+  }
+
   .logo-sm {
     display: block;
   }

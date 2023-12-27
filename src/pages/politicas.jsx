@@ -26,7 +26,7 @@ const Politicas = ({ emaill, nomee, cart }) => {
           </p>
 
           <p>
-            Nós adotamos esta Política de Privacidade, que determina como nós estamos processando as informações coletadas pelo site www.d-aluguel.ao e também explica por quais razões nós precisamos coletar dados pessoais sobre você. Portanto, você deve ler esta Política de Privacidade antes de usar o site www.d-aluguel.ao.
+            Nós adotamos esta Política de Privacidade, que determina como nós estamos processando as informações coletadas pelo site www.reputa360.ao e também explica por quais razões nós precisamos coletar dados pessoais sobre você. Portanto, você deve ler esta Política de Privacidade antes de usar o site www.reputa360.ao.
           </p>
 
           <p>
@@ -36,7 +36,7 @@ const Politicas = ({ emaill, nomee, cart }) => {
           <p>
 
             Estes são as informações pessoais que coletamos:
-            Quando você visita o site www.d-aluguel.ao, nós automaticamente coletamos certas informações sobre seu dispositivo, incluindo informações sobre seu navegador, endereço IP, fuso horário e alguns dos cookies instalados no seu sispositivo. Além disso, quando você navega pelo Site, nós coletamos informações sobre as páginas individuais ou produtos que você visualiza, sobre quais sites ou termos de busca redirecionaram você para nosso Site, e sobre como você interage com o Site. Nós nos referimos a essas informações coletadas automaticamente como "Informações sobre o dispositivo". Além disso, nós podemos coletar dados pessoais que você fornecer (incluindo, mas não limitado a: Nome, Sobrenome, Endereço, informações de pagamento, etc) durante o processo de registro para poder cumprir o acordo.
+            Quando você visita o site www.reputa360.ao, nós automaticamente coletamos certas informações sobre seu dispositivo, incluindo informações sobre seu navegador, endereço IP, fuso horário e alguns dos cookies instalados no seu sispositivo. Além disso, quando você navega pelo Site, nós coletamos informações sobre as páginas individuais ou produtos que você visualiza, sobre quais sites ou termos de busca redirecionaram você para nosso Site, e sobre como você interage com o Site. Nós nos referimos a essas informações coletadas automaticamente como "Informações sobre o dispositivo". Além disso, nós podemos coletar dados pessoais que você fornecer (incluindo, mas não limitado a: Nome, Sobrenome, Endereço, informações de pagamento, etc) durante o processo de registro para poder cumprir o acordo.
 
           </p>
 
@@ -46,7 +46,7 @@ const Politicas = ({ emaill, nomee, cart }) => {
             Nossa maior prioridade é a segurança dos dados pessoais dos usuários e, portanto, nós podemos processar apenas dados mínimos, apenas enquanto for absolutamente necessário para a manutenção do site. Informações coletadas automaticamente são usadas para identificar possíveis casos de abuso e estabelecer dados estatísticos sobre o uso do site. Esses dados estatísticos não pe agregada de outras formas que permitam a identificação de usuários específicos do sistema.
             <br />
             <br />
-            Você pode visitar o site sem nos contar sobre quem você é ou relevar qualquer informação que possa ser usada por outra pessoa para identificar você individualmente. Se, apesar disso, você quiser utilizar algum dos recursos do site, ou quiser receber nossa newsletter, ou quiser conceder outros detalhes através do preencimento e envio de formulários, você poderá fornecer dados pessoais para nós, como seu email, nome, sobrenome, cidade de residência, organização e número de telefone. Você pode escolher não fornecer dados pessoais para nós, mas, dessa forma, talvez você não consiga usar alguns dos resursos do site. Por exemplo, você não vai conseguir receber nossa Newsletter ou entrar em contato conosco diretamente pelo nosso site. Usuários que não tenham certeza sobre quais informações pessoais são obrigatórias são convidados a entrarem em contato conosco pelo e-mail info@gokside.site.
+            Você pode visitar o site sem nos contar sobre quem você é ou relevar qualquer informação que possa ser usada por outra pessoa para identificar você individualmente. Se, apesar disso, você quiser utilizar algum dos recursos do site, ou quiser receber nossa newsletter, ou quiser conceder outros detalhes através do preencimento e envio de formulários, você poderá fornecer dados pessoais para nós, como seu email, nome, sobrenome, cidade de residência, organização e número de telefone. Você pode escolher não fornecer dados pessoais para nós, mas, dessa forma, talvez você não consiga usar alguns dos resursos do site. Por exemplo, você não vai conseguir receber nossa Newsletter ou entrar em contato conosco diretamente pelo nosso site. Usuários que não tenham certeza sobre quais informações pessoais são obrigatórias são convidados a entrarem em contato conosco pelo e-mail info@reputa360.ao.
 
           </p>
           <b>Seus direitos:</b><br />
@@ -110,7 +110,7 @@ const Politicas = ({ emaill, nomee, cart }) => {
           <p>
 
             <b>Informações de contato:</b><br />
-            Se você quiser entrar em contato conosco para saber mais sobre esta Política de Privacidade, ou quiser acessar quaisquer informações relativas aos seus direitos individuais e às suas Informações Pessoais, você poderá enviar um e-mail para o endereço info@gokside.site.
+            Se você quiser entrar em contato conosco para saber mais sobre esta Política de Privacidade, ou quiser acessar quaisquer informações relativas aos seus direitos individuais e às suas Informações Pessoais, você poderá enviar um e-mail para o endereço info@reputa360.ao.
 
           </p>
 

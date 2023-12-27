@@ -10,12 +10,10 @@
 .form {
     background: #fff;
     padding: 1rem;
-    color: white;
+    border: .9px solid #d9d9d9;
     width: 75vw;
 }
-.c .row {
-    height: 80vh;
-}
+
 
 @media (min-width: 766px) {
 
@@ -24,17 +22,19 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 .luanda div {
     display: block!important;
 }
     
 .form {
     width: 30vw;
+} 
+.form-c {
+    width: 50vw!important;
 }
 
-.c .row {
-    height: 100vh;
-}
 }
 
 .body {

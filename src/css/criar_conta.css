@@ -7,9 +7,6 @@
     align-items: center!important;
 }
 
-.c .row {
-    height: 80vh;
-}
 
 @media (min-width: 766px) {
 
@@ -23,9 +20,6 @@
 }
     
 
-.c .row {
-    height: 100vh;
-}
 }
 
 .body {

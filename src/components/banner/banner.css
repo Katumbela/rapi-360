@@ -33,10 +33,6 @@
   border-radius: 6px;
 }
 
-.text-primary {
-  color: #efe700 !important;
-}
-
 ::selection {
   background: #009650;
   color: #fff;
@@ -96,14 +92,13 @@
 
 }
 
-.btn-primary,
 .swal2-styled {
   background: #23d500 !important;
   border-color: #23d500 !important;
   color: black !important;
   border-radius: 6px;
 }
-
+/* 
 .btn-primary:hover,
 .btn-primary:focus-within,
 .btn-primary:focus-visible {
@@ -112,7 +107,7 @@
   border-color: #189000 !important;
   color: #fff !important;
   border-radius: 6px;
-}
+} */
 
 .btn-secondary {
   background: #f1f1f1 !important;

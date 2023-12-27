@@ -85,18 +85,17 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         emaill={emaill}
         cart={cart}
       />
-      <div className="c l mx-auto body">
+      <div className="c mx-auto pb-5 body">
         <div className="row ">
-          <div className="col-12  text-center "></div>
-          <div className="col-12  ">
+          <div className="col-12  text-center pt-sm-0 pt-lg-0"></div>
+          <div className="col-12  pt-sm-5 ">
             <div className="text-center">
-              <h4>Que bom que você vai usar o R360</h4>
+              <h4 className="f-reg">Que bom que você vai usar o R360</h4>
               <p className="fw-light fw-400 fw-thin f-14">
                 Insira o login e senha para acessar sua área do consumidor.
               </p>
             </div>
-            <div className="container my-auto form">
-           
+            <div className="container pb-5 my-auto form">
               <center>
                 {user ? (
                   <div>
@@ -140,8 +139,8 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                       </div>
                     </div>
                     <button
-                      className="d-flex text-white w-100 btn-google btn btn-primary"
-                      onClick={handleLoginWithGoogle}
+                      className="d-flex w-100 rounded-1 justify-content-center btn btn-primary"
+                      
                     >
                       <span>Entrar</span>
                     </button>
@@ -151,27 +150,25 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             </div>
             <br />
             <div className="container my-auto form">
-             
               <center>
-               
-                  <>
+                <>
                   <div className="pb-2">
-                  <b className="text-dark">Você é uma empresa?</b>
-                  
+                    <b className="text-dark">Você é uma empresa?</b>
                   </div>
-                    <button
-                      className="d-flex  w-100 btn-google btn btn-outline-primary"
-                      onClick={handleLoginWithGoogle}
-                    >
-                      <span>Acessar área da empresa</span>
-                    </button>
-                  </>
-            
+                  <button
+                    className="d-flex  w-100 btn-google btn btn-outline-primary"
+                    onClick={handleLoginWithGoogle}
+                  >
+                    <span>Acessar área da empresa</span>
+                  </button>
+                </>
               </center>
             </div>
             <br />
             <div className="text-center">
-                <span>Não tem uma conta ? <a href="/pt/cadastro">Cadastre-se</a> </span>
+              <span>
+                Não tem uma conta ? <a href="/pt/cadastro">Cadastre-se</a>{" "}
+              </span>
             </div>
           </div>
         </div>

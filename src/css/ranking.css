@@ -37,4 +37,24 @@ text-decoration: underline !important;
   
   }
   }
+
+  /* Area do cadastro  */
+
+  .card-cadastro .logo {
+        height: 5em;
+  }
   
+
+  .card-cadastro {
+    border: .8px solid #d9d9d9;
+  }
+
+  .card-cadastro button {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+
+  .headc {
+    border-bottom: 1px solid #d9d9d9;
+  }

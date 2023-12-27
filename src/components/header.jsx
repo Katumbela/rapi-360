@@ -161,7 +161,7 @@ const Header = (props) => {
                 </li>
               ) : (
                 <li>
-                  <NavLink className={"btn btn-success"} to="/pt/login">
+                  <NavLink className={"btn btn-success"} to="/pt/cadastro">
                     {" "}
                     Cadastro
                   </NavLink>
@@ -174,7 +174,7 @@ const Header = (props) => {
       <div className="menu-sm d-flex justify-content-between overflow-x-auto">
         <NavLink to={'/pt/login'}>Entrar</NavLink>
 
-        <NavLink>Cadastro</NavLink>
+        <NavLink to={'/pt/cadastro'}>Cadastro</NavLink>
 
         <NavLink>Prêmio R360</NavLink>
 
