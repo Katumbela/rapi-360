@@ -125,10 +125,11 @@ const Header = (props) => {
           <div className="logo">
             <NavLink to="/pt">
               <img src={iconn} alt="" className="logo-md" />
-              <img src={logosm} alt="" className="logo-sm" />
             </NavLink>
           </div>
           <div className="pesquisa pesquisa-md">
+
+          <img src={logosm} alt="" className="logo-sm" />
             <input
               type="search"
               name=""
@@ -171,7 +172,7 @@ const Header = (props) => {
         </div>
       </div>
       <div className="menu-sm d-flex justify-content-between overflow-x-auto">
-        <NavLink>Entrar</NavLink>
+        <NavLink to={'/pt/login'}>Entrar</NavLink>
 
         <NavLink>Cadastro</NavLink>
 

@@ -18,4 +18,23 @@ text-decoration: underline !important;
 }
 .lista-descontos .card-loja {
     transition: all .3s ease;
+
 }
+
+
+@media (max-width: 600px) {
+  
+    .s{
+        margin-top: 5.5rem;
+    }
+    
+    .l {
+        margin-top: 6.3rem;
+    }
+  
+  .lista-descontos .card-loja {
+    width: 9.5rem!important;
+  
+  }
+  }
+  

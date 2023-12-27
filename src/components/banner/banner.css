@@ -89,10 +89,11 @@
 } */
 }
 
-@media (max-witdh: 600px) {
+@media (max-width: 600px) {
   .logo-footer {
     height: 2em !important;
   }
+
 }
 
 .btn-primary,
@@ -269,7 +270,7 @@
     overflow-x: auto;
   }
   .desconto .imm {
-    
+
   }
 }
 

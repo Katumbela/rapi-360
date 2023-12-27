@@ -85,7 +85,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         emaill={emaill}
         cart={cart}
       />
-      <div className="c mx-auto body">
+      <div className="c l mx-auto body">
         <div className="row ">
           <div className="col-12  text-center "></div>
           <div className="col-12  ">
