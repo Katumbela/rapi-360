@@ -53,7 +53,7 @@ import AbreviarTexto from "../components/abreviarTexto";
 
 const Ranking = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
-  document.title = `Pagina Inicial | Reputação 360`;
+  document.title = `Ranking R360 | Reputação 360`;
 
   useEffect(() => {
     // Adicione um listener para o estado da autenticação

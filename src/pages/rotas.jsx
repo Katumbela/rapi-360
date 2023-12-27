@@ -18,6 +18,7 @@ import Mensagens from "./mensagens";
 import Conversa from "./conversa";
 import Perfil from "./perfil";
 import Ranking from "./ranking";
+import Descontos from "./descontos";
 
 
 const RotasPT = (props) => {
@@ -37,6 +38,7 @@ const RotasPT = (props) => {
                     <Route element={<NotFoundPage nomee={nomee} emaill={emaill} cart={cart}/>}  />
                     <Route element={<Contactar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/contactar" exact />
                     <Route element={<Ranking  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/ranking" exact />
+                    <Route element={<Descontos  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/descontos" exact />
                     <Route element={<Faqs  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/faqs" exact />
                     <Route element={<Login cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/login" exact />
                     <Route element={<NotFoundPage/>}/>

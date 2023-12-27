@@ -90,10 +90,10 @@ const Banner = () => {
             <div className="q rounded-2">
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </div>
-            <div className="q rounded-2">
+            <NavLink to={'/pt/descontos'} className="q text-decoration-none rounded-2">
               <span>Cupons de Desconto</span>{" "}
               <i className="bi bi-ticket-perforated"></i>
-            </div>
+            </NavLink>
             <div className="q rounded-2">
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
@@ -476,9 +476,9 @@ const Banner = () => {
 
               <br />
               <br />
-              <button className="btn rounded-1 btn-outline-success">
+              <NavLink to={'/pt/descontos'} className="btn rounded-1 btn-outline-success">
                 Ver Todos os Descontos
-              </button>
+              </NavLink>
             </div>
           </div>
         </div>
