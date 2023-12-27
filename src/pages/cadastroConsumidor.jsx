@@ -86,7 +86,7 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         emaill={emaill}
         cart={cart}
       />
-      <div className="c l mx-auto body pt-4 bg-light">
+      <div className="c  mx-auto body pt-4 bg-light">
         <div className="container ">
           <div className="row ">
             <div className="col-12  text-center "></div>

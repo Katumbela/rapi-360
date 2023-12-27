@@ -194,11 +194,10 @@ const Cadastro = ({ cart, nomee, emaill }) => {
         </center>
         <br />
 
-        <br />
         <div className="container">
           <div className="row">
             <div className="col-12 col-sm-1"></div>
-            <div className="col-12 col-sm-5">
+            <div className="col-12 col-sm-5 my-3">
               <div className="card-cadastro bg-white p-4">
                 <center>
                   <img src={userSignup} className="logo" alt="" />
@@ -222,7 +221,7 @@ const Cadastro = ({ cart, nomee, emaill }) => {
                 </center>
               </div>
             </div>
-            <div className="col-12 col-sm-5">
+            <div className="col-12 col-sm-5 my-3">
               <div className="card-cadastro bg-white p-4">
                 <center>
                   <img src={company} className="logo" alt="" />
