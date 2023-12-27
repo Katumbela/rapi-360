@@ -28,7 +28,7 @@
     display: block!important;
 }
     
-.form {
+.form, .pesq-busca {
     width: 30vw;
 } 
 .form-c {

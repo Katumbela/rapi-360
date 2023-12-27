@@ -21,6 +21,7 @@ import Ranking from "./ranking";
 import Descontos from "./descontos";
 import Cadastro from "./cadastro";
 import CadastroConsumidor from "./cadastroConsumidor";
+import ReclamarBuscar from "./reclamarBusca";
 
 
 const RotasPT = (props) => {
@@ -40,6 +41,7 @@ const RotasPT = (props) => {
                     <Route element={<NotFoundPage nomee={nomee} emaill={emaill} cart={cart}/>}  />
                     <Route element={<Contactar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/contactar" exact />
                     <Route element={<Ranking  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/ranking" exact />
+                    <Route element={<ReclamarBuscar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/reclamar" exact />
                     <Route element={<Descontos  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/descontos" exact />
                     <Route element={<Cadastro  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro" exact />
                     <Route element={<CadastroConsumidor  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro/consumidor" exact />

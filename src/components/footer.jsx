@@ -63,7 +63,7 @@ function Footer() {
               <h5 className="text-dark">Para empresas</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink rounded-1 text-white  btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink btn-sm rounded-1 text-white  btn btn-success" to="/pt/login">
                     Área da empresa
                   </ScrollToTopLink>
                 </li>
@@ -78,7 +78,7 @@ function Footer() {
               <h5 className="text-dark">Para consumidor</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink btn-sm rounded-1 text-white btn btn-success" to="/pt/login">
                     Área do consumidor
                   </ScrollToTopLink>
                 </li>
@@ -98,7 +98,7 @@ function Footer() {
               <h5 className="text-dark">Central de Ajuda</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink btn btn-outline-danger rounded-1 " to="/pt/politicas">
+                  <ScrollToTopLink className="footerlink btn-sm btn btn-outline-danger rounded-1 " to="/pt/politicas">
                     Reclamar de uma empresa
                   </ScrollToTopLink>
                 </li>

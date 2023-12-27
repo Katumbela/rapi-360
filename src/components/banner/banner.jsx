@@ -84,10 +84,10 @@ const Banner = () => {
               <span>Pesquise uma empresa </span>{" "}
               <i className="bi bi-search"></i>
             </div>
-            <div className="q rounded-2">
+            <ScrollToTopLink to={'/pt/cadastro/empresa'} className="q text-decoration-none rounded-2">
               <span>Cadastre uma empresa</span>{" "}
               <i className="bi bi-building-add"></i>
-            </div>
+            </ScrollToTopLink>
             <div className="q rounded-2">
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </div>
@@ -99,10 +99,10 @@ const Banner = () => {
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
             </div>
-            <div className="q rounded-2">
+            <ScrollToTopLink to={'/pt/reclamar'} className="q text-decoration-none rounded-2">
               <span>Faça uma Reclamação</span>{" "}
               <i className="bi bi-megaphone"></i>
-            </div>
+            </ScrollToTopLink>
           </div>
         </div>
       </div>
