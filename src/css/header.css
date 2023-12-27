@@ -67,6 +67,9 @@
   .menu-md {
     display: none;
   }
+  .pesquisa {
+    margin-left: .9rem;
+  }
 }
 
 @media (min-width: 631px) {
