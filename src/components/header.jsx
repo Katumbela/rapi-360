@@ -175,7 +175,7 @@ const Header = (props) => {
 
         <NavLink to={"/pt/cadastro"}>Cadastro</NavLink>
 
-        <NavLink>Prêmio R360</NavLink>
+        <NavLink><span className="premio-md">Prêmios</span></NavLink>
 
         <NavLink to={"/pt/reclamar"}>
           <button className="btn rec btn-sm btn-danger">
