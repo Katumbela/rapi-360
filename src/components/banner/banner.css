@@ -268,9 +268,12 @@
   .scroll-md{
     overflow-x: auto;
   }
+  .desconto .imm {
+    
+  }
 }
 
 
 .desconto .imm {
-  text-align: end !important;
+  text-align: end ;
 }

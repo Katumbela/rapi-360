@@ -175,10 +175,10 @@ const Header = (props) => {
 
         <NavLink>Cadastro</NavLink>
 
-        <NavLink>Prêmios R360</NavLink>
+        <NavLink>Prêmio R360</NavLink>
 
         <button className="btn rec btn-sm btn-danger">
-          <i className="bi bi-megaphone me-2"></i> Reclamar
+          <i className="bi bi-megaphone me-1"></i> Reclamar
         </button>
       </div>
     </>
