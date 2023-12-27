@@ -87,24 +87,27 @@
   border-bottom: 1px solid #d9d9d9;
 }
 
-.menu-sm ul {
+.menu-sm a {
   margin-top: auto;
   margin-bottom: auto;
 }
 
-.menu-sm ul li {
+.menu-sm a {
   display: inline-flex;
   padding: 0.3rem 0.5rem;
   text-decoration: none;
-  list-style-type: none;
 }
 
-.menu-sm ul li:hover {
-    background: #a3d0a3;
+.menu-sm a:hover {
+    background: #00c64fd7;
     color: white !important;
     cursor: pointer;
 }
-.menu-sm ul li a {
+.menu-sm  a {
   text-decoration: none;
   color: rgb(80, 80, 80);
+}
+
+.menu-sm .rec {
+  float: right;
 }

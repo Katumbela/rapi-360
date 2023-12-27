@@ -170,23 +170,16 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-      <div className="menu-sm overflow-x-auto">
-        <ul>
-          <li>
-            <NavLink>Entrar</NavLink>
-          </li>
-          <li>
-            <NavLink>Cadastro</NavLink>
-          </li>
-          <li>
-            <NavLink>Prêmios R360</NavLink>
-          </li>
-                <li>
-                  <button className="btn  btn-sm btn-danger">
-                    <i className="bi bi-megaphone me-2"></i> Reclamar
-                  </button>
-                </li>
-        </ul>
+      <div className="menu-sm d-flex justify-content-between overflow-x-auto">
+        <NavLink>Entrar</NavLink>
+
+        <NavLink>Cadastro</NavLink>
+
+        <NavLink>Prêmios R360</NavLink>
+
+        <button className="btn rec btn-sm btn-danger">
+          <i className="bi bi-megaphone me-2"></i> Reclamar
+        </button>
       </div>
     </>
   );
