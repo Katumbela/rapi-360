@@ -69,7 +69,7 @@ const Banner = () => {
       <div className="banner shadow-md">
         <div className="body-banner text-center container">
           <h4 className="f-reg  titulo">
-            O <b className="text-danger">Reputa</b> <b className="text-success">360</b> te aproxima das marcas que têm a confiança do
+            O <b className="text-">Reputa</b> <b className="text-">360</b> te aproxima das marcas que têm a confiança do
             consumidor!
           </h4>
           <p className="f-14  text-secondary">

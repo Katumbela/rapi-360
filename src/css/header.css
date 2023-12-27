@@ -111,3 +111,31 @@
 .menu-sm .rec {
   float: right;
 }
+
+
+@media (max-width: 690px) {
+  .nav {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    background: #fff;
+  }
+
+  .menu-sm {
+    position: fixed;
+    left: 0;
+    top: 4.1rem;
+    background: white;
+    z-index: 9;
+    right: 0;
+    width: 100%;
+    box-shadow: 2px 1px 9px #d9d9d9;
+  } 
+
+  .banner
+  {
+    margin-top: 6rem!important;
+  }
+}
