@@ -30,6 +30,7 @@ import b3 from "../../imgs/blog/3.png";
 import b4 from "../../imgs/blog/4.png";
 import africa from "../../imgs/africa.png";
 import AbreviarTexto from "../abreviarTexto";
+import ScrollToTopLink from "../scrollTopLink";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -90,10 +91,10 @@ const Banner = () => {
             <div className="q rounded-2">
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </div>
-            <NavLink to={'/pt/descontos'} className="q text-decoration-none rounded-2">
+            <ScrollToTopLink to={'/pt/descontos'} className="q text-decoration-none rounded-2">
               <span>Cupons de Desconto</span>{" "}
               <i className="bi bi-ticket-perforated"></i>
-            </NavLink>
+            </ScrollToTopLink>
             <div className="q rounded-2">
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
@@ -207,9 +208,9 @@ const Banner = () => {
             </span>
             <br />
             <br />
-            <NavLink to={'/pt/ranking'} className="btn rounded-1 btn-outline-success">
+            <ScrollToTopLink to={'/pt/ranking'} className="btn rounded-1 btn-outline-success">
               Ver Ranking Completo
-            </NavLink>
+            </ScrollToTopLink>
           </div>
           <div className="col-12 col-lg-8 my-lg-0 my-5">
             <div className="tabss w-100   overflow-x-auto">
@@ -476,9 +477,9 @@ const Banner = () => {
 
               <br />
               <br />
-              <NavLink to={'/pt/descontos'} className="btn rounded-1 btn-outline-success">
+              <ScrollToTopLink to={'/pt/descontos'} className="btn rounded-1 btn-outline-success">
                 Ver Todos os Descontos
-              </NavLink>
+              </ScrollToTopLink>
             </div>
           </div>
         </div>

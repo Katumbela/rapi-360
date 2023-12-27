@@ -9,6 +9,7 @@ import Loader from "./loader";
 import icone from "../imgs/icone.png";
 import logo from "../imgs/logo-d.png";
 import icon from "../imgs/icon.png";
+import ScrollToTopLink from "./scrollTopLink";
 // import sendEmail from '../pages/server';
 
 function Footer() {
@@ -62,14 +63,14 @@ function Footer() {
               <h5 className="text-dark">Para empresas</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink rounded-1 text-white  btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink rounded-1 text-white  btn btn-success" to="/pt/login">
                     Área da empresa
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
                 <li>
-                  <NavLink className="footerlink" to="/pt/login">
+                  <ScrollToTopLink className="footerlink" to="/pt/cadastro/empresa">
                     Cadastrar empresa
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
               </ul>
             </div>
@@ -77,19 +78,19 @@ function Footer() {
               <h5 className="text-dark">Para consumidor</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink rounded-1 text-white btn btn-success" to="/pt/login">
                     Área do consumidor
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
                 <li>
-                  <NavLink className="footerlink" to="/pt/aquisitores">
+                  <ScrollToTopLink className="footerlink" to="/pt/ranking">
                     Rankings
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
                 <li>
-                  <NavLink className="footerlink" to="/pt/aquisitores">
+                  <ScrollToTopLink className="footerlink" to="/pt/descontos">
                     Buscar descontos
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
               </ul>
             </div>
@@ -97,19 +98,19 @@ function Footer() {
               <h5 className="text-dark">Central de Ajuda</h5>
               <ul>
                 <li>
-                  <NavLink className="footerlink btn btn-outline-danger rounded-1 " to="/pt/politicas">
+                  <ScrollToTopLink className="footerlink btn btn-outline-danger rounded-1 " to="/pt/politicas">
                     Reclamar de uma empresa
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
                 <li>
-                  <NavLink className="footerlink" to="/pt/reembolso">
+                  <ScrollToTopLink className="footerlink" to="/pt/reembolso">
                    Quero trocar minha senha
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
                 <li>
-                  <NavLink className="footerlink" to="/pt/seguro">
+                  <ScrollToTopLink className="footerlink" to="/pt/seguro">
                     Blog R360
-                  </NavLink>
+                  </ScrollToTopLink>
                 </li>
               </ul>
             </div>
@@ -138,9 +139,9 @@ function Footer() {
           </div>
           <img src={icon} className="logo-blogg" alt="" />
           <div className="pol">
-          <NavLink className="footerlink" to="/pt/politicas">
+          <ScrollToTopLink className="footerlink" to="/pt/politicas">
                     Termos & Políticas
-                  </NavLink>
+                  </ScrollToTopLink>
 
           </div>
         </div>
