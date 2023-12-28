@@ -277,7 +277,7 @@ const Banner = () => {
                       </span>
                     </div>
                     <br />
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
+                    <ScrollToTopLink to={'/pt/empresa/unitel'} title={'Clique para ver empresa'} className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
                       <h5 className="my-auto text-success">
                         <b>1º</b>
                       </h5>
@@ -290,7 +290,7 @@ const Banner = () => {
                           <span className="my-auto text-secondary">R360</span>
                         </p>
                       </div>
-                    </div>
+                    </ScrollToTopLink>
                     <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
                       <h5 className="my-auto text-success">
                         <b>2º</b>

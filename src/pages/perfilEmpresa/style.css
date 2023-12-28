@@ -1,0 +1,55 @@
+.foto-perfil-empresa img {
+    height: 6em;
+    width: 6em;
+    border-radius: 90px !important;
+    border: 3px solid white;
+    box-shadow: 1px 2px 3px #bababa;
+    position: absolute;
+    bottom: -2.8rem;
+    left: 10%;
+}
+
+@media (max-width: 790px) {
+    .foto-perfil-empresa  {
+        left: 0 !important;
+       right: 0 !important;
+       text-align: center !important;
+       align-items: center;
+       align-self: center;
+       width: 100%;
+       position: absolute;
+       bottom: -.1rem;
+       align-content: center;
+    }
+    .foto-perfil-empresa img {
+        left: 0 !important;
+       right: 0 !important;
+       height:5em;
+       width: 5em;
+       position: relative !important;
+    }
+    .banner_perfil {
+        height: 8rem !important;
+    }
+    .text-center-md {
+        text-align: center;
+    }
+}
+
+
+.border-b {
+    border: 1px solid #d9d9d9;
+}
+.border-b-t {
+    border-top: 1.5px solid #d9d9d9;
+    border-bottom: 1.5px solid #d9d9d9;
+}
+
+.opcoes p {
+    cursor: pointer;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.opcoes p:hover {
+    color: rgb(0, 91, 210);
+}
