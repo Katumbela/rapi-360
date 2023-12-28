@@ -165,7 +165,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   }, []);
 
   return (
-    <div className="w-100">
+    <div className="w-100 bg-light">
       {/*  */}
       {/* <Navba/> */}
       <Header
@@ -180,8 +180,8 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           <img src={unitel} alt="" />
         </div>
       </div>
-      <div className=" border-bb">
-        <div className="dados-empresa  mt-4 py-3 mt-md-0 container">
+      <div className=" bg-white border-bb">
+        <div className="dados-empresa mt-4 py-3 mt-md-0 container">
           <div className="row">
             <div className="col-12 col-md-2"></div>
             <div className="col-12 col-md-8">
@@ -203,14 +203,37 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
             </div>
           </div>
         </div>
-        <div className="opcoes border-b-t py-2">
-            <div className="d-flex justify-content-center my-auto gap-4 overflow-x-auto">
-                <p className="text-primary gap-2 d-flex"><i className="bi bi-house"></i>Pagina Inicial</p>
-                <p className="text-secondary gap-2 d-flex"><i className="bi bi-megaphone"></i>Reclamações</p>
-                <p className="text-secondary gap-2 d-flex"><i className="bi bi-file-earmark-person"></i>Sobre</p>
+        <div className="opcoes bg-white border-b-t py-2">
+          <div className="d-flex justify-content-center my-auto gap-4 overflow-x-auto">
+            <p className="text-primary gap-2 d-flex">
+              <i className="bi bi-house"></i>Pagina Inicial
+            </p>
+            <p className="text-secondary gap-2 d-flex">
+              <i className="bi bi-megaphone"></i>Reclamações
+            </p>
+            <p className="text-secondary gap-2 d-flex">
+              <i className="bi bi-file-earmark-person"></i>Sobre
+            </p>
+          </div>
+        </div>
+      </div>
+
+<br />
+<br />
+      <div className="tabela-infoo container-fluid">
+        <div className="row">
+            <div className="col-12 col-sm-6 col-lg-4 my-3">
+                <h5 className="f-reg"><b>UNITEL SA é confiável ?</b></h5>
+            </div>
+            <div className="col-12 col-sm-6 col-lg-4 my-3">
+                <h5 className="f-reg"><b>O que estão falando sobre UNITEL SA </b></h5>
+            </div>
+            <div className="col-12 col-sm-6 col-lg-4 my-3">
+                <h5 className="f-reg"><b>Veja mais informações sobre UNITEL SA</b></h5>
             </div>
         </div>
       </div>
+
       <div className="s">
         <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
           <br />
