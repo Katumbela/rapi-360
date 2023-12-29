@@ -2,21 +2,20 @@ import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 
-import { UserContext } from "./userContext";
+import { UserContext } from "../userContext";
 
 import { NavLink } from "react-router-dom";
-import "../css/login.css";
-import logo from "../imgs/icone.png";
-import logo2 from "../imgs/logo-d.png";
+import "../../css/login.css";
+import logo from "../../imgs/icone.png";
+import logo2 from "../../imgs/logo-d.png";
 import axios from "axios";
-import Header from "../components/header";
-import Footer from "../components/footer";
-import ScrollToTopLink from "../components/scrollTopLink";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 
-const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
+const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
 
-  document.title = `Cadastro de consumidor | Reputação 360`;
+  document.title = `Cadastrar Sua Empresa | Reputação 360`;
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -94,14 +93,14 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             <div className="col-12  ">
               <div className="text-center">
                 <br />
-                <h2><b>Olá, crie uma conta no Reputação 360</b></h2>
+                <h2>
+                  <b>Cadastre sua empresa no Reputação 360</b>
+                </h2>
                 <p className="fw-light fw-400 fw-thin f-16">
-                  Com você logado conseguimos oferecer um serviço melhor e mais
-                  personalizado. Navegue logado e ajude outros milhões de
-                  consumidores.
+                  Obtenha ou gere leads e comunique se com seus consumidores no
+                  melhor lugar.
                 </p>
                 <br />
-                
               </div>
               <div className="container my-auto form-c form">
                 <center>
@@ -120,11 +119,11 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                     </div>
                   ) : (
                     <>
-                      <div className="text-dark">
-                        <div className="text-start mb-3 headc">
-                          <b className="text-dark">
+                      <div className="text-dark p-3">
+                        <div className="text-start mb-4 headc">
+                          {/* <b className="text-dark">
                             Preencha o formulário abaixo
-                          </b>
+                          </b> */}
 
                           <p>
                             <b className="text-danger">*</b>{" "}
@@ -133,16 +132,16 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             </span>
                           </p>
                         </div>
-                        <div className="titul">
+                        {/* <div className="titul">
                           <div className="d-flex gap-2">
                             <i className="bi text-success bi-person-circle"></i>{" "}
                             <b>Dados pessoais</b>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row text-start">
                           <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Nome completo
+                              Nome da empresa <b className="text-danger">*</b>
                             </label>
                             <input
                               type="text"
@@ -150,7 +149,38 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               placeholder="Digite seu nome e sobrenome"
                             />
                           </div>
+                          <div className="col-12 col-lg-6 my-2">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Nome fantasia
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control rounded-1"
+                              placeholder="Digite um outro nome (opcional) "
+                            />
+                          </div>
                           <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              E-mail da empresa <b className="text-danger">*</b>
+                            </label>
+                            <input
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite seu melhor email"
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Outro E-mail <b className="text-danger">*</b>
+                            </label>
+                            <input
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite outro email"
+                            />
+                          </div>
                           <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
                               <b className="text-danger">*</b> Nº BI/ NIF/
@@ -163,51 +193,70 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             />
                           </div>
                           <br />
-                          <div className="col-12 col-lg-6 my-2">
+                          <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Data de
-                              Nascimento
+                              Site da empresa <b className="text-danger">*</b>
                             </label>
                             <input
-                              type="date"
+                              type="link"
                               className="form-control rounded-1"
+                              placeholder="www.reputa360.ao"
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-12">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Endereço da empresa
+                              <b className="text-danger">*</b>
+                            </label>
+                            <input
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite o endereço atual da empresa"
                             />
                           </div>
                           <br />
                           <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
-                              Gênero
+                              Província
                             </label>
                             <select
                               name=""
                               id=""
                               className="form-control rounded-1"
                             >
-                              <option value="Masculino">Masculino</option>
-                              <option value="Feminino">Feminino</option>
-                              <option value="Outro">Outro</option>
+                              <option value="Bengo">Bengo</option>
+                              <option value="Benguela">Benguela</option>
+                              <option value="Bié">Bié</option>
+                              <option value="Cabinda">Cabinda</option>
+                              <option value="Cuando Cubango">
+                                Cuando Cubango
+                              </option>
+                              <option value="Cuanza Norte">Cuanza Norte</option>
+                              <option value="Cuanza Sul">Cuanza Sul</option>
+                              <option value="Cunene">Cunene</option>
+                              <option value="Huambo">Huambo</option>
+                              <option value="Huíla">Huíla</option>
+                              <option value="Luanda">Luanda</option>
+                              <option value="Lunda Norte">Lunda Norte</option>
+                              <option value="Lunda Sul">Lunda Sul</option>
+                              <option value="Malanje">Malanje</option>
+                              <option value="Moxico">Moxico</option>
+                              <option value="Namibe">Namibe</option>
+                              <option value="Uíge">Uíge</option>
+                              <option value="Zaire">Zaire</option>
                             </select>
                           </div>
+
                           <br />
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Província
+                              <b className="text-danger">*</b> Cidade / Município
                             </label>
                             <input
                               type="text"
                               className="form-control rounded-1"
-                              placeholder="Digite sua provincia de residência"
-                            />
-                          </div>
-                          <br />
-                          <div className="col-12 my-2 col-lg-6">
-                            <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Cidade
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control rounded-1"
-                              placeholder="Digite sua cidade atual"
+                              placeholder="Digite o município / cidade atual"
                             />
                           </div>
                           <br />
@@ -223,7 +272,7 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           <br />
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> E-mail
+                            Nome do responsável 1 <b className="text-danger">*</b>
                             </label>
                             <input
                               type="email"
@@ -235,7 +284,7 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           <br />
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Telefone
+                            Nome do responsável 1 <b className="text-danger">*</b> 
                             </label>
                             <input
                               type="tel"
@@ -245,9 +294,9 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           </div>
 
                           <br />
-                          <div className="col-12 my-2 col-lg-6">
+                          <div className="col-12 my-2 col-lg-12">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Crie uma senha
+                               Crie uma senha <b className="text-danger">*</b>
                             </label>
                             <input
                               type="password"
@@ -257,12 +306,10 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             />
                           </div>
                           <br />
-                          <br />
                         </div>
                       </div>
                       <br />
-                      <br />
-                      <button className="d-flex text-white w-100  btn btn-success justify-content-center rounded-1">
+                      <button className="d-flex mb-4 text-white px-5 btn btn-primary justify-content-center rounded-1">
                         <span>Cadastrar</span>
                       </button>
                     </>
@@ -271,10 +318,10 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
               </div>
               <br />
               <br />
-              <div className="container form-c my-auto form">
+              {/* <div className="container form-c my-auto form">
                 <center>
                   <>
-                  <br />
+                    <br />
                     <div className="pb-2">
                       <b className="text-dark">
                         É uma empresa e quer responder reclamações?
@@ -285,15 +332,12 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                         consumidores
                       </span>
                     </div>
-                    <ScrollToTopLink  to={'/pt/cadastro/empresa'}
-                      className="d-flex gap-2 text-decoration-none w-100 btn-google btn btn-outline-primary"
-                      
-                    >
-                      <span >Cadastre sua empresa</span> <i className="bi my-auto bi-arrow-right-short"></i>
-                    </ScrollToTopLink>
+                    <button className="d-flex  w-100 btn-google btn btn-outline-primary">
+                      <span>Área da empresa</span>
+                    </button>
                   </>
                 </center>
-              </div>
+              </div> */}
               <br />
               <div className="text-center">
                 <span>
@@ -303,13 +347,13 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             </div>
           </div>
         </div>
-      <br />
-      <br />
-      <br />
+        <br />
+        <br />
+        <br />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
 
-export default CadastroConsumidor;
+export default CadastroEmpresa;

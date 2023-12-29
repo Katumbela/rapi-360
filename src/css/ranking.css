@@ -46,7 +46,8 @@ text-decoration: underline !important;
   
 
   .card-cadastro {
-    border: .8px solid #d9d9d9;
+    border: 1.2px solid #d9d9d9;
+    transition: all .15s ease;
   }
 
   .card-cadastro button {
@@ -57,4 +58,21 @@ text-decoration: underline !important;
 
   .headc {
     border-bottom: 1px solid #d9d9d9;
+  }
+
+
+
+
+  .c-c-c:hover {
+    background-color: #00ff590b!important;
+    border-radius: 10px;
+    transition: all .1s ease-in;
+    border-color: #009d37fd;
+  }
+
+  .c-c-e:hover {
+    background-color: #005bf80a!important;
+    border-radius: 10px;
+    transition: all .1s ease-in;
+    border-color: #005bf8e1;
   }

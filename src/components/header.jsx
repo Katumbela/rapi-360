@@ -6,7 +6,30 @@ import logosm from "../imgs/logo-sm.png";
 import "../css/header.css";
 import { NavLink } from "react-router-dom";
 import firebase from "firebase/compat/app";
+import AbreviarTexto from "./abreviarTexto";
 
+import bom from "../imgs/bom.png";
+import mau from "../imgs/mau.png";
+import arreiou from "../imgs/arreiou.jpeg";
+import bomm from "../imgs/bomm.webp";
+import maxi from "../imgs/maxi.png";
+import naorecomendado from "../imgs/naorecomendado.webp";
+import otimo from "../imgs/otimo.webp";
+import xyami from "../imgs/xyami.jpeg";
+import shoprite from "../imgs/shoprite.jpeg";
+import unitel from "../imgs/unitel.png";
+import r360 from "../imgs/r360.png";
+import ruim from "../imgs/ruim.webp";
+import icon from "../imgs/icon.png";
+import desconto from "../imgs/descontos.webp";
+import desc from "../imgs/desc.png";
+import blog from "../imgs/blog.png";
+import b1 from "../imgs/blog/1.png";
+import b2 from "../imgs/blog/2.png";
+import b3 from "../imgs/blog/3.png";
+import b4 from "../imgs/blog/4.png";
+import africa from "../imgs/africa.png";
+import ScrollToTopLink from "./scrollTopLink";
 const Header = (props) => {
   const [use, setUser] = useState([]);
 
@@ -86,54 +109,95 @@ const Header = (props) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([
+    "Sugestão 1",
+    "Sugestão 2",
+    "Sugestão 3",
+  ]); // Adicione sugestões reais aqui
+
+  // const handleInputChange = (e) => {
+  //   setSearchTerm(e.target.value);
+  //   setShowSuggestions(true);
+  // };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchTerm(suggestion);
+    setShowSuggestions(false);
+    // Adicione lógica para lidar com a seleção da sugestão (por exemplo, redirecionamento)
+  };
+
+  // const handleBlur = () => {
+  //   // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
+  //   setTimeout(() => {
+  //     setShowSuggestions(true);
+  //   }, 200);
+  // };
+
+  // const handleInputClick = () => {
+  //   // Exibir sugestões ao clicar no input
+  //   setShowSuggestions(true);
+  // };
+
+  useEffect(() => {
+    const handleOverflow = () => {
+      // Adicione a classe para ocultar a rolagem vertical do corpo
+      document.body.style.overflowY = showSuggestions ? "hidden" : "auto";
+    };
+
+    // Adicione um ouvinte de evento quando showSuggestions muda
+    handleOverflow();
+
+    // Limpe o ouvinte de evento ao desmontar o componente
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [showSuggestions]);
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    setShowSuggestions(true);
+  };
+
+  const handleBlur = () => {
+    // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
+    setTimeout(() => {
+      setShowSuggestions(false);
+    }, 200);
+  };
+
+  const handleInputClick = () => {
+    // Exibir sugestões ao clicar no input
+    setShowSuggestions(true);
+  };
+
   return (
     // <div className={`navbar ${visible ? 'navbar-show' : 'navbar-hide'}`}>
-    <>
-      {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="/">Navbar scroll</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarScroll">
-                        <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{"--bs-scroll-height": " 100px;"}}>
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/">Link</a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Link
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="/">Action</a></li>
-                                    <li><a className="dropdown-item" href="/">Another action</a></li>
-                                    <li><a className="dropdown-item" href="/">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link disabled" aria-disabled="true">Link</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav> */}
-      <div className="nav bg-white py-2">
+
+    <div className={` ${showSuggestions === true ? "nav-fixo" : ""}`}>
+      <div onClick={handleBlur} className={` ${showSuggestions === true ? "backdrop" : ""}`}></div>
+      <div
+        className={`nav bg-white py-2`}
+      >
         <div className="d-flex container-lg container-fluid justify-content-between">
           <div className="logo">
             <NavLink to="/pt">
               <img src={iconn} alt="" className="logo-md" />
             </NavLink>
-          </div>
+          </div>{" "}
           <div className="pesquisa pesquisa-md">
-            <img src={logosm} alt="" className="logo-sm" />
+            <NavLink to="/pt">
+              <img src={logosm} alt="" className="logo-sm" />
+            </NavLink>
             <input
               type="search"
               name=""
               placeholder="Pesquise por empresa, NIF ou site"
               id=""
+              value={searchTerm}
+              onChange={handleInputChange}
+              onClick={handleInputClick}
             />
             <i className="bi bi-search"></i>
           </div>
@@ -175,7 +239,9 @@ const Header = (props) => {
 
         <NavLink to={"/pt/cadastro"}>Cadastro</NavLink>
 
-        <NavLink><span className="premio-md">Prêmios</span></NavLink>
+        <NavLink>
+          <span className="premio-md">Prêmios</span>
+        </NavLink>
 
         <NavLink to={"/pt/reclamar"}>
           <button className="btn rec btn-sm btn-danger">
@@ -183,7 +249,148 @@ const Header = (props) => {
           </button>
         </NavLink>
       </div>
-    </>
+      {showSuggestions && (
+        <div className="suggestions container-fluid py-sm-3">
+          <br />
+          <h5 className="f-reg">
+            <b>As empresas mais buscadas do R360 nas últimas 24h</b>
+          </h5>
+          <br />
+          <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
+            <ScrollToTopLink
+              to={"/pt/empresa/unitel"}
+              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+            >
+              <img src={shoprite} alt="" className="logo-empresa" />
+              <div className="bod">
+                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
+
+                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                  <AbreviarTexto
+                    texto={"Angola, Luanda - Talatona"}
+                    largura={"300"}
+                    className="my-auto text-secondary"
+                  ></AbreviarTexto>
+                </p>
+                <hr />
+
+                <div className="d-flex gap-2 justify-content-center">
+                  <img src={otimo} alt="" className="icon-empresa" />
+                  <h4 className="f-reg my-auto">
+                    <b>8.0 </b>
+                  </h4>
+                  <span className="text-secondary f-12 mt-auto">/ 10</span>
+                </div>
+              </div>
+            </ScrollToTopLink>
+            <ScrollToTopLink
+              to={"/pt/empresa/unitel"}
+              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+            >
+              <img src={unitel} alt="" className="logo-empresa" />
+              <div className="bod">
+                <AbreviarTexto texto={"UNITEL SA"} largura={"200"} />
+
+                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                  <AbreviarTexto
+                    texto={"Angola, Luanda - Talatona"}
+                    largura={"300"}
+                    className="my-auto text-secondary"
+                  ></AbreviarTexto>
+                </p>
+                <hr />
+
+                <div className="d-flex gap-2 justify-content-center">
+                  <img src={r360} alt="" className="icon-empresa" />
+                  <h4 className="f-reg my-auto">
+                    <b>8.0 </b>
+                  </h4>
+                  <span className="text-secondary f-12 mt-auto">/ 10</span>
+                </div>
+              </div>
+            </ScrollToTopLink>
+            <ScrollToTopLink
+              to={"/pt/empresa/unitel"}
+              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+            >
+              <img src={arreiou} alt="" className="logo-empresa" />
+              <div className="bod">
+                <AbreviarTexto texto={"ARREIOU TÁ BARATO"} largura={"200"} />
+
+                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                  <AbreviarTexto
+                    texto={"Angola, Luanda - Talatona"}
+                    largura={"300"}
+                    className="my-auto text-secondary"
+                  ></AbreviarTexto>
+                </p>
+                <hr />
+
+                <div className="d-flex gap-2 justify-content-center">
+                  <img src={otimo} alt="" className="icon-empresa" />
+                  <h4 className="f-reg my-auto">
+                    <b>8.0 </b>
+                  </h4>
+                  <span className="text-secondary f-12 mt-auto">/ 10</span>
+                </div>
+              </div>
+            </ScrollToTopLink>
+            <ScrollToTopLink
+              to={"/pt/empresa/unitel"}
+              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+            >
+              <img src={shoprite} alt="" className="logo-empresa" />
+              <div className="bod">
+                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
+
+                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                  <AbreviarTexto
+                    texto={"Angola, Luanda - Talatona"}
+                    largura={"300"}
+                    className="my-auto text-secondary"
+                  ></AbreviarTexto>
+                </p>
+                <hr />
+
+                <div className="d-flex gap-2 justify-content-center">
+                  <img src={otimo} alt="" className="icon-empresa" />
+                  <h4 className="f-reg my-auto">
+                    <b>8.0 </b>
+                  </h4>
+                  <span className="text-secondary f-12 mt-auto">/ 10</span>
+                </div>
+              </div>
+            </ScrollToTopLink>
+            <ScrollToTopLink
+              to={"/pt/empresa/unitel"}
+              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+            >
+              <img src={shoprite} alt="" className="logo-empresa" />
+              <div className="bod">
+                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
+
+                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                  <AbreviarTexto
+                    texto={"Angola, Luanda - Talatona"}
+                    largura={"300"}
+                    className="my-auto text-secondary"
+                  ></AbreviarTexto>
+                </p>
+                <hr />
+
+                <div className="d-flex gap-2 justify-content-center">
+                  <img src={otimo} alt="" className="icon-empresa" />
+                  <h4 className="f-reg my-auto">
+                    <b>8.0 </b>
+                  </h4>
+                  <span className="text-secondary f-12 mt-auto">/ 10</span>
+                </div>
+              </div>
+            </ScrollToTopLink>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

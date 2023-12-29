@@ -80,10 +80,10 @@ const Banner = () => {
 
           <br />
           <div className="quadros w-md-75 w-lg-75 mx-auto">
-            <div className="qq hover btn rounded-2 btn-outline-primary">
+            <ScrollToTopLink to={'/pt/reclamar'} className="qq text-decoration-none hover btn rounded-2 btn-outline-primary">
               <span>Pesquise uma empresa </span>{" "}
               <i className="bi bi-search"></i>
-            </div>
+            </ScrollToTopLink>
             <ScrollToTopLink to={'/pt/cadastro/empresa'} className="q text-decoration-none rounded-2">
               <span>Cadastre uma empresa</span>{" "}
               <i className="bi bi-building-add"></i>

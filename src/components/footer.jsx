@@ -68,7 +68,7 @@ function Footer() {
                   </ScrollToTopLink>
                 </li>
                 <li>
-                  <ScrollToTopLink className="footerlink" to="/pt/cadastro/empresa">
+                  <ScrollToTopLink  className="footerlink" to="/pt/cadastro/empresa">
                     Cadastrar empresa
                   </ScrollToTopLink>
                 </li>
@@ -98,17 +98,17 @@ function Footer() {
               <h5 className="text-dark">Central de Ajuda</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink btn-sm btn btn-outline-danger rounded-1 " to="/pt/politicas">
+                  <ScrollToTopLink className="footerlink btn-sm btn btn-outline-danger rounded-1 " to="/pt/reclamar">
                     Reclamar de uma empresa
                   </ScrollToTopLink>
                 </li>
                 <li>
-                  <ScrollToTopLink className="footerlink" to="/pt/reembolso">
+                  <ScrollToTopLink className="footerlink" to="/pt/senha">
                    Quero trocar minha senha
                   </ScrollToTopLink>
                 </li>
                 <li>
-                  <ScrollToTopLink className="footerlink" to="/pt/seguro">
+                  <ScrollToTopLink className="footerlink" to="/pt/blog">
                     Blog R360
                   </ScrollToTopLink>
                 </li>

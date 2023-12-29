@@ -196,9 +196,9 @@ const Cadastro = ({ cart, nomee, emaill }) => {
 
         <div className="container">
           <div className="row">
-            <div className="col-12 col-sm-1"></div>
-            <div className="col-12 col-sm-5 my-3">
-              <div className="card-cadastro bg-white p-4">
+            <div className="col-12 col-sm-1 col-lg-2"></div>
+            <div className="col-12 col-sm-5 col-lg-4 my-3">
+              <div className="card-cadastro c-c-c bg-white p-4">
                 <center>
                   <img src={userSignup} className="logo" alt="" />
                 </center>
@@ -214,15 +214,15 @@ const Cadastro = ({ cart, nomee, emaill }) => {
                   <br />
                   <NavLink
                     to={"/pt/cadastro/consumidor"}
-                    className="btn btn-outline-success w-100 rounded-1"
+                    className="btn mt-auto btn-outline-success w-100 rounded-1"
                   >
                     Fazer cadastro
                   </NavLink>
                 </center>
               </div>
             </div>
-            <div className="col-12 col-sm-5 my-3">
-              <div className="card-cadastro bg-white p-4">
+            <div className="col-12 col-sm-5 col-lg-4 my-3">
+              <div className="card-cadastro c-c-e bg-white p-4">
                 <center>
                   <img src={company} className="logo" alt="" />
                 </center>
@@ -245,7 +245,7 @@ const Cadastro = ({ cart, nomee, emaill }) => {
               </div>
             </div>
 
-            <div className="col-12 col-sm-1"></div>
+            <div className="col-12 col-sm-1  col-lg-2"></div>
           </div>
         </div>
 
