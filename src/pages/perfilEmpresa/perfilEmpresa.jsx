@@ -492,6 +492,21 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               ))}
             </div>
             <br />
+      <br />
+
+      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h5>Publicidade</h5>
+
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+      <br />
           </div>
           <div className="col-12 col-sm-6 col-lg-3 my-3">
             <h6 className="f-reg">

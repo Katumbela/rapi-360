@@ -307,7 +307,7 @@ const Banner = () => {
                       .map((empresa, index) => (
                         <ScrollToTopLink
                           key={empresa.id}
-                          to={`/pt/empresa/${empresa.nome}`}
+                          to={`/pt/empresa/${empresa.id}`}
                           title={"Clique para ver empresa"}
                           className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                         >
@@ -394,7 +394,7 @@ const Banner = () => {
                       .map((empresa, index) => (
                         <ScrollToTopLink
                           key={empresa.id}
-                          to={`/pt/empresa/${empresa.nome}`}
+                          to={`/pt/empresa/${empresa.id}`}
                           title={"Clique para ver empresa"}
                           className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                         >
