@@ -28,13 +28,23 @@ import b1 from "../../imgs/blog/1.png";
 import b2 from "../../imgs/blog/2.png";
 import b3 from "../../imgs/blog/3.png";
 import b4 from "../../imgs/blog/4.png";
+import regular from "../../imgs/regular.png";
 import africa from "../../imgs/africa.png";
 import AbreviarTexto from "../abreviarTexto";
 import ScrollToTopLink from "../scrollTopLink";
+import dadosEmpresas from "../../model/empresas";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
   const [cursos, setCursos] = useState([]);
+
+  const melhoresEmpresasOrdenadas = dadosEmpresas
+    .sort((a, b) => b.avaliacao - a.avaliacao)
+    .filter((empresa) => empresa.avaliacao >= 6);
+
+  const pioresEmpresasOrdenadas = dadosEmpresas
+    .sort((a, b) => a.avaliacao - b.avaliacao)
+    .filter((empresa) => empresa.avaliacao < 6);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,28 +80,37 @@ const Banner = () => {
       <div className="banner shadow-md">
         <div className="body-banner text-center container">
           <h4 className="f-reg  titulo">
-            O <b className="text-">Reputa</b> <b className="text-">360</b> te aproxima das marcas que têm a confiança do
-            consumidor!
+            O <b className="text-">Reputa</b> <b className="text-">360</b> te
+            aproxima das marcas que têm a confiança do consumidor!
           </h4>
           <p className="f-14  text-secondary">
-            Compre de modo mais <b className="text-success">seguro</b>, pesquisando empresas e buscando uma
-            solução para algum problema.
+            Compre de modo mais <b className="text-success">seguro</b>,
+            pesquisando empresas e buscando uma solução para algum problema.
           </p>
 
           <br />
           <div className="quadros w-md-75 w-lg-75 mx-auto">
-            <ScrollToTopLink to={'/pt/reclamar'} className="qq text-decoration-none hover btn rounded-2 btn-outline-primary">
+            <ScrollToTopLink
+              to={"/pt/reclamar"}
+              className="qq text-decoration-none hover btn rounded-2 btn-outline-primary"
+            >
               <span>Pesquise uma empresa </span>{" "}
               <i className="bi bi-search"></i>
             </ScrollToTopLink>
-            <ScrollToTopLink to={'/pt/cadastro/empresa'} className="q text-decoration-none rounded-2">
+            <ScrollToTopLink
+              to={"/pt/cadastro/empresa"}
+              className="q text-decoration-none rounded-2"
+            >
               <span>Cadastre uma empresa</span>{" "}
               <i className="bi bi-building-add"></i>
             </ScrollToTopLink>
             <div className="q rounded-2">
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </div>
-            <ScrollToTopLink to={'/pt/descontos'} className="q text-decoration-none rounded-2">
+            <ScrollToTopLink
+              to={"/pt/descontos"}
+              className="q text-decoration-none rounded-2"
+            >
               <span>Cupons de Desconto</span>{" "}
               <i className="bi bi-ticket-perforated"></i>
             </ScrollToTopLink>
@@ -99,7 +118,10 @@ const Banner = () => {
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
             </div>
-            <ScrollToTopLink to={'/pt/reclamar'} className="q text-decoration-none rounded-2">
+            <ScrollToTopLink
+              to={"/pt/reclamar"}
+              className="q text-decoration-none rounded-2"
+            >
               <span>Faça uma Reclamação</span>{" "}
               <i className="bi bi-megaphone"></i>
             </ScrollToTopLink>
@@ -208,7 +230,10 @@ const Banner = () => {
             </span>
             <br />
             <br />
-            <ScrollToTopLink to={'/pt/ranking'} className="btn rounded-1 btn-outline-success">
+            <ScrollToTopLink
+              to={"/pt/ranking"}
+              className="btn rounded-1 btn-outline-success"
+            >
               Ver Ranking Completo
             </ScrollToTopLink>
           </div>
@@ -270,85 +295,87 @@ const Banner = () => {
               <div className="row">
                 <div className="melhores col-12 col-md-6">
                   <div className="card-best bg-white border-lightt p-2 rounded-1">
-                    <div className="bg-success d-flex  gap-2 head-texts rounded-1 p-3">
+                    <div className="bg-success d-flex gap-2 head-texts rounded-1 p-3">
                       <img src={bom} alt="" />
                       <span className="my-auto text-white">
                         <b>Top 5 Melhores empresas mais bem avaliadas</b>
                       </span>
                     </div>
                     <br />
-                    <ScrollToTopLink to={'/pt/empresa/unitel'} title={'Clique para ver empresa'} className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>1º</b>
-                      </h5>
-                      <img src={unitel} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>UNITEL SA</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={r360} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">R360</span>
-                        </p>
-                      </div>
-                    </ScrollToTopLink>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>2º</b>
-                      </h5>
-                      <img src={xyami} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>XYAMI SHOPPING</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={r360} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">R360</span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>3º</b>
-                      </h5>
-                      <img src={shoprite} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>SHOPRITE</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={otimo} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">
-                            Muito Bom
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>4º</b>
-                      </h5>
-                      <img src={maxi} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>Maxi Compras</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={bomm} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">Bom</span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>5º</b>
-                      </h5>
-                      <img src={arreiou} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>ARREIOU TA BARATO</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={bomm} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">Bom</span>
-                        </p>
-                      </div>
-                    </div>
+                    {melhoresEmpresasOrdenadas
+                      .slice(0, 5)
+                      .map((empresa, index) => (
+                        <ScrollToTopLink
+                          key={empresa.id}
+                          to={`/pt/empresa/${empresa.nome}`}
+                          title={"Clique para ver empresa"}
+                          className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                        >
+                          <h5 className="my-auto text-success">
+                            <b>{`${index + 1}º`}</b>
+                          </h5>
+                          <img
+                            src={empresa.logo}
+                            className="logo-empresa"
+                            alt=""
+                          />
+                          <div className="de my-auto">
+                            <b>{empresa.nome}</b>
+                            <p className="d-flex mt-1 my-auto gap-2 f-14">
+                              {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <img
+                                  src={regular}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <img
+                                  src={otimo}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <img
+                                  src={ruim}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <img
+                                  src={naorecomendado}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : null}
+                              {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <b className="my-auto text-secondary">
+                                  REGULAR
+                                </b>
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <b className="my-auto text-secondary">ÓTIMO</b>
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <b className="my-auto text-secondary">
+                                  MUITO RUÍM
+                                </b>
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <b className="my-auto text-secondary">
+                                  NÃO RECOMENDADO
+                                </b>
+                              ) : (
+                                <b className="my-auto text-secondary">
+                                  SEM DADOS{" "}
+                                </b>
+                              )}
+                            </p>
+                          </div>
+                        </ScrollToTopLink>
+                      ))}
                   </div>
                 </div>
                 <div className="piores mt-5 mt-md-0 col-12 col-md-6">
@@ -362,95 +389,80 @@ const Banner = () => {
                       </span>
                     </div>
                     <br />
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>1º</b>
-                      </h5>
-                      <img src={arreiou} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>ARREIOU TA BARATO</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
+                    {pioresEmpresasOrdenadas
+                      .slice(0, 5)
+                      .map((empresa, index) => (
+                        <ScrollToTopLink
+                          key={empresa.id}
+                          to={`/pt/empresa/${empresa.nome}`}
+                          title={"Clique para ver empresa"}
+                          className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                        >
+                          <h5 className="my-auto text-success">
+                            <b>{`${index + 1}º`}</b>
+                          </h5>
                           <img
-                            src={naorecomendado}
-                            className="icon-empresa"
+                            src={empresa.logo}
+                            className="logo-empresa"
                             alt=""
                           />
-                          <span className="my-auto text-secondary">
-                            Não Recomendado
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>2º</b>
-                      </h5>
-                      <img src={maxi} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>Maxi Compras</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={ruim} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">
-                            Muito Péssimo
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>3º</b>
-                      </h5>
-                      <img src={unitel} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>UNITEL SA</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img
-                            src={naorecomendado}
-                            className="icon-empresa"
-                            alt=""
-                          />
-                          <span className="my-auto text-secondary">
-                            Não Recomendado
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>4º</b>
-                      </h5>
-                      <img src={xyami} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>XYAMI SHOPPING</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={ruim} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">
-                            Muito Péssimo
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="empresa my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1">
-                      <h5 className="my-auto text-success">
-                        <b>5º</b>
-                      </h5>
-                      <img src={shoprite} className="logo-empresa" alt="" />
-                      <div className="de my-auto">
-                        <b>SHOPRITE</b>
-
-                        <p className="d-flex mt-1 my-auto gap-2 f-14">
-                          <img src={ruim} className="icon-empresa" alt="" />
-                          <span className="my-auto text-secondary">
-                            Muito Péssimo
-                          </span>
-                        </p>
-                      </div>
-                    </div>
+                          <div className="de my-auto">
+                            <b>{empresa.nome}</b>
+                            <p className="d-flex mt-1 my-auto gap-2 f-14">
+                              {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <img
+                                  src={regular}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <img
+                                  src={otimo}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <img
+                                  src={ruim}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <img
+                                  src={naorecomendado}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : null}
+                              {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <b className="my-auto text-secondary">
+                                  REGULAR
+                                </b>
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <b className="my-auto text-secondary">ÓTIMO</b>
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <b className="my-auto text-secondary">
+                                  MUITO RUÍM
+                                </b>
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <b className="my-auto text-secondary">
+                                  NÃO RECOMENDADO
+                                </b>
+                              ) : (
+                                <b className="my-auto text-secondary">
+                                  SEM DADOS{" "}
+                                </b>
+                              )}
+                            </p>
+                          </div>
+                        </ScrollToTopLink>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -477,7 +489,10 @@ const Banner = () => {
 
               <br />
               <br />
-              <ScrollToTopLink to={'/pt/descontos'} className="btn rounded-1 btn-outline-success">
+              <ScrollToTopLink
+                to={"/pt/descontos"}
+                className="btn rounded-1 btn-outline-success"
+              >
                 Ver Todos os Descontos
               </ScrollToTopLink>
             </div>
