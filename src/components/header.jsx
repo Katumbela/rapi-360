@@ -28,6 +28,7 @@ import b1 from "../imgs/blog/1.png";
 import b2 from "../imgs/blog/2.png";
 import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
+import regular from '../imgs/regular.png';
 import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
 import dadosEmpresas from "../model/empresas";
@@ -277,7 +278,22 @@ const Header = (props) => {
                 <hr />
 
                 <div className="d-flex gap-2 justify-content-center">
-                  <img src={otimo} alt="" className="icon-empresa" />
+                {empresa.avaliacao >= 5.0 &&
+                    empresa.avaliacao <= 6.9 ? (
+                      <img src={regular} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao >= 7.0 &&
+                    empresa.avaliacao <= 10.0 ? (
+                      <img src={otimo} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao >= 3.0 &&
+                    empresa.avaliacao <= 4.9 ? (
+                      <img src={ruim} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao <= 2.9 ? (
+                      <img
+                        src={naorecomendado}
+                        alt=""
+                        className="icon-empresa"
+                      />
+                    ) : null}
                   <h4 className="f-reg my-auto">
                     <b>{empresa.avaliacao} </b>
                   </h4>

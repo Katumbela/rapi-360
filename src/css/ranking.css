@@ -76,3 +76,40 @@ text-decoration: underline !important;
     transition: all .1s ease-in;
     border-color: #005bf8e1;
   }
+
+  .border-1 {
+    border: 1px solid #d9d9d9;
+  }
+
+  .logo-reputacao {
+    height: 3em;
+    width: 3em;
+  }
+
+  .regular {
+    background: rgba(255, 166, 0, 0.149);
+  }
+  .pessimo {
+    background: rgba(255, 14, 14, 0.234);
+  }
+
+  .nao-recomendado {
+    background: rgba(136, 0, 240, 0.193);
+  }
+  .otimo {
+    background: rgba(0, 177, 21, 0.162);
+  }
+
+  .progress {
+    height: 1rem;
+    border-radius: 20px !important;
+    border: 1px solid #d9d9d9;
+  }
+
+  .progress .progress-bar {
+    height: .95rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 20px !important;
+  }
+

@@ -232,7 +232,9 @@ const Cadastro = ({ cart, nomee, emaill }) => {
                   </h3>
 
                   <p>
-                  Cadastre sua empresa no Reputação 360. Responda suas reclamações e trabalhe sua reputação, ou reclame de outras empresas.
+                    Cadastre sua empresa no Reputação 360. Responda suas
+                    reclamações e trabalhe sua reputação, ou reclame de outras
+                    empresas.
                   </p>
                   <br />
                   <NavLink

@@ -1,6 +1,6 @@
 import "../../App.css";
 // Bootstrap CSS
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, ProgressBar } from "react-bootstrap";
 // Bootstrap Bundle JS
 import logo from "../../imgs/icone.png";
 import Header from "../../components/header";
@@ -51,18 +51,24 @@ import b2 from "../../imgs/blog/2.png";
 import b3 from "../../imgs/blog/3.png";
 import b4 from "../../imgs/blog/4.png";
 import africa from "../../imgs/africa.png";
+import regular from "../../imgs/regular.png";
 import AbreviarTexto from "../../components/abreviarTexto";
 import dadosEmpresas from "../../model/empresas";
 import ScrollToTopLink from "../../components/scrollTopLink";
+import Reclamacoes from "../../model/reclamacoes";
 
 const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
 
   const { empresaid } = useParams();
 
-  const empres = dadosEmpresas.filter(p => p.id == empresaid);
+  const empres = dadosEmpresas.filter((p) => p.id == empresaid);
   const empresaEscolhida = empres[0];
   console.log(empresaEscolhida);
+
+  const rec = Reclamacoes.filter((p) => p.empresaid == empresaid);
+  const reclamacoesEmpresa = rec;
+  console.log(reclamacoesEmpresa);
 
   document.title = `Empresa ${empresaEscolhida.nome} | Reputação 360`;
 
@@ -173,6 +179,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
     }
   }, []);
 
+  // Mapeia a nota da empresa para a largura da barra de progresso
+  const larguraProgressBar = (empresaEscolhida.avaliacao / 10) * 100;
+
   return (
     <div className="w-100 bg-light">
       {/*  */}
@@ -206,7 +215,10 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               </div>
             </div>
             <div className="col-12 text-center-md d-flex mt-3 mt-md-auto col-md-2">
-              <ScrollToTopLink to={`/pt/reclamar/${empresaEscolhida.id}`} className="btn btn-danger m-auto  gap-2 d-flex">
+              <ScrollToTopLink
+                to={`/pt/reclamar/${empresaEscolhida.id}`}
+                className="btn btn-danger m-auto  gap-2 d-flex"
+              >
                 <i className="bi bi-megaphone"></i> Reclamar
               </ScrollToTopLink>
             </div>
@@ -227,19 +239,332 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         </div>
       </div>
 
-<br />
-<br />
+      <br />
+      <br />
       <div className="tabela-infoo container-fluid">
         <div className="row">
-            <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h6 className="f-reg"><b>{empresaEscolhida.nome} é confiável ?</b></h6>
+          <div className="col-12 col-sm-6 col-lg-3 my-3">
+            <h6 className="f-reg">
+              <b>{empresaEscolhida.nome} é confiável ?</b>
+            </h6>
+
+            <br />
+            <div className="card-sobre-empresa border-1 bg-white ">
+              <div className="p-3">
+                <b className="text-dark m-3 f-reg">Reputação</b>
+              </div>
+
+              <div className="aval ">
+                <div
+                  className={` p-4 ${
+                    empresaEscolhida.avaliacao >= 5.0 &&
+                    empresaEscolhida.avaliacao <= 6.9
+                      ? "regular"
+                      : ""
+                  } ${
+                    empresaEscolhida.avaliacao >= 7.0 &&
+                    empresaEscolhida.avaliacao <= 10.0
+                      ? "otimo"
+                      : ""
+                  } ${
+                    empresaEscolhida.avaliacao >= 3.0 &&
+                    empresaEscolhida.avaliacao <= 4.9
+                      ? "pessimo"
+                      : ""
+                  }  ${
+                    empresaEscolhida.avaliacao <= 2.9 ? "nao-recomendado" : ""
+                  } `}
+                >
+                  <div className="d-flex">
+                    {empresaEscolhida.avaliacao >= 5.0 &&
+                    empresaEscolhida.avaliacao <= 6.9 ? (
+                      <img src={regular} alt="" className="logo-reputacao" />
+                    ) : empresaEscolhida.avaliacao >= 7.0 &&
+                      empresaEscolhida.avaliacao <= 10.0 ? (
+                      <img src={otimo} alt="" className="logo-reputacao" />
+                    ) : empresaEscolhida.avaliacao >= 3.0 &&
+                      empresaEscolhida.avaliacao <= 4.9 ? (
+                      <img src={ruim} alt="" className="logo-reputacao" />
+                    ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                      <img
+                        src={naorecomendado}
+                        alt=""
+                        className="logo-reputacao"
+                      />
+                    ) : null}
+
+                    <div className="container">
+                      <h5>
+                        {empresaEscolhida.avaliacao >= 5.0 &&
+                        empresaEscolhida.avaliacao <= 6.9 ? (
+                          <b className="f-reg">REGULAR</b>
+                        ) : empresaEscolhida.avaliacao >= 7.0 &&
+                          empresaEscolhida.avaliacao <= 10.0 ? (
+                          <b className="f-reg">ÓTIMO</b>
+                        ) : empresaEscolhida.avaliacao >= 3.0 &&
+                          empresaEscolhida.avaliacao <= 4.9 ? (
+                          <b className="f-reg">MUITO RUÍM</b>
+                        ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                          <b className="f-reg">NÃO RECOMENDADO</b>
+                        ) : (
+                          <b className="f-reg">SEM DADOS </b>
+                        )}
+                      </h5>
+                      <div className="d-flex gap-2">
+                        <h2 className="f-reg">{empresaEscolhida.avaliacao}</h2>
+                        <span className="my-auto text-secondary"> / 10</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mx-auto my-2 border-1 rounded-1 text-center bg-white p-3">
+                    <span className="f-12">Reclamações</span>
+                    <b className="d-flex gap-2 f-reg mx-auto justify-content-center">
+                      <i className="bi bi-megaphone"></i> 3496
+                    </b>
+                  </div>
+                  {empresaEscolhida.avaliacao <= 2.9 && (
+                    <>
+                      <hr />
+                      <div className="d-flex gap-2">
+                        <i className="bi f-reg bi-exclamation-circle"></i>
+                        <p>
+                          A empresa se enquadra como Não Recomendada pois não
+                          responde a pelo menos 50% das reclamações recebidas no
+                          Reputação 360.
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+              <br />
+              <div className="p-3">
+                <b className="f-re">Voltariam a fazer negócios</b>
+                <br />
+                <div className="d-flex mt-2 gap-2">
+                  <div
+                    className="progress my-auto w-100"
+                    role="progressbar"
+                    aria-valuenow="100"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <div
+                      className="progress-bar bg-success"
+                      style={{ width: "60%" }}
+                    ></div>
+                  </div>
+                  <span className="f-reg my-auto">60%</span>
+                </div>
+              </div>
+
+              <div className="p-3">
+                <b className="f-re">Nota de consumidores</b>
+                <br />
+                <div className="d-flex mt-2 gap-2">
+                  <div
+                    className="progress my-auto w-100"
+                    role="progressbar"
+                    aria-valuenow={larguraProgressBar}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <div
+                      className={`progress-bar ${
+                        empresaEscolhida.avaliacao <= 4
+                          ? "bg-danger"
+                          : "bg-success"
+                      }  `}
+                      style={{ width: `${larguraProgressBar}%` }}
+                    ></div>
+                  </div>
+                  <span className="f-reg my-auto">
+                    {empresaEscolhida.avaliacao}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h6 className="f-reg"><b>O que estão falando sobre {empresaEscolhida.nome} </b></h6>
+            <br />
+            <br />
+            <hr />
+            <br />
+
+            <br />
+            <div className="card-sobre-empresa border-1 bg-white p-3">
+              <b className="text-dark f-reg">
+                Quem viu {empresaEscolhida.nome} também viu:
+              </b>
+              <br />
+              <br />
+
+              <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
+                {dadosEmpresas.map((empresa) => (
+                  <a
+                    key={empresa.id}
+                    href={`/pt/empresa/${empresa.id}`}
+                    className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                  >
+                    <img src={empresa.logo} alt="" className="logo-empresa" />
+                    <div className="bod">
+                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
+
+                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                        <AbreviarTexto
+                          texto={empresa.localizacao}
+                          largura={"300"}
+                          className="my-auto text-secondary"
+                        ></AbreviarTexto>
+                      </p>
+                      <hr />
+
+                      <div className="d-flex gap-2 justify-content-center">
+                      {empresa.avaliacao >= 5.0 &&
+                    empresa.avaliacao <= 6.9 ? (
+                      <img src={regular} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao >= 7.0 &&
+                    empresa.avaliacao <= 10.0 ? (
+                      <img src={otimo} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao >= 3.0 &&
+                    empresa.avaliacao <= 4.9 ? (
+                      <img src={ruim} alt="" className="icon-empresa" />
+                    ) : empresa.avaliacao <= 2.9 ? (
+                      <img
+                        src={naorecomendado}
+                        alt=""
+                        className="icon-empresa"
+                      />
+                    ) : null}
+                        <h4 className="f-reg my-auto">
+                          <b>{empresa.avaliacao} </b>
+                        </h4>
+                        <span className="text-secondary f-12 mt-auto">
+                          / 10
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
-            <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h6 className="f-reg"><b>Veja mais informações sobre {empresaEscolhida.nome}</b></h6>
+            <br />
+          </div>
+          <div className="col-12 col-sm-6 col-lg-6 my-3">
+            <h6 className="f-reg">
+              <b>O que estão falando sobre {empresaEscolhida.nome} </b>
+            </h6>
+
+            <br />
+            <div className="card-sobre-empresa border-1 bg-white p-3">
+              <b className="text-dark f-reg">Reclamações de clientes </b>
+
+              {/* O que estao falando desta empresa, card */}
+              {reclamacoesEmpresa.map((reclamacao) => (
+                <>
+                  <div className="p-3 bg-light my-3 border- rounded-2">
+                    <a href="#" className="text-decoration-none f-16">
+                      {reclamacao.assunto}
+                    </a>
+                    <p className="text-secondary mt-2">
+                      {reclamacao.reclamacao}
+                    </p>
+                    <div className="d-flex gap-3 justiify-content-start">
+                      <div
+                        className={`d-flex my-auto gap-2 ${
+                          reclamacao.status == "respondido"
+                            ? " bg-success"
+                            : " bg-danger"
+                        } w-auto rounded-pill px-3 py-1 text-white `}
+                      >
+                        {reclamacao.status == "respondido" ? (
+                          <>
+                            <i className="bi bi-emoji-laughing"></i> Respondido
+                          </>
+                        ) : (
+                          <>
+                            <i className="bi bi-emoji-frown"></i> Não respondido
+                          </>
+                        )}
+                      </div>
+                      <span className="text-secondary my-auto">Há 7h</span>
+                    </div>
+                  </div>
+                </>
+              ))}
             </div>
+            <br />
+          </div>
+          <div className="col-12 col-sm-6 col-lg-3 my-3">
+            <h6 className="f-reg">
+              <b>Veja mais informações sobre {empresaEscolhida.nome}</b>
+            </h6>
+            <br />
+            <div className="card-sobre-empresa border-1 bg-white p-3">
+              <b className="text-dark f-reg">Sobre</b>
+
+              <p className="text-secondary f-14">{empresaEscolhida.sobre}</p>
+              <b>
+                NIF: <b className="text-success">{empresaEscolhida.nif}</b>{" "}
+              </b>
+              <center className="mt-2">
+                <span className="text-secondary f-12">
+                  Informações cadastradas pela empresa
+                </span>
+              </center>
+              <hr />
+              <center>
+                <span className="d-flex gap-2 justify-content-center  f-14">
+                  <i className="bi bi-calendar"></i> Cadastrado há 2 anos{" "}
+                </span>
+              </center>
+            </div>
+            <br />
+
+            <div className="card-sobre-empresa border-1 bg-white p-3">
+              <b className="text-dark f-reg">Informações de contacto</b>
+              <br />
+              <br />
+              <b>Site:</b>
+              <h5 className="p-2 info-empresa bg-light rounded-2 text-decoration-none">
+                {" "}
+                <a
+                  className=" text-decoration-none"
+                  href={`https://${empresaEscolhida.site}`}
+                >
+                  {empresaEscolhida.site}
+                </a>
+              </h5>
+
+              <br />
+              <b>Whatsapp:</b>
+              <h5 className="p-2 info-empresa bg-light rounded-2 text-decoration-none">
+                {" "}
+                <a
+                  className=" text-decoration-none"
+                  href={"tel:" + empresaEscolhida.whatsapp}
+                >
+                  {empresaEscolhida.whatsapp}
+                </a>
+              </h5>
+
+              <hr />
+              <center>
+                <span className="d-flex gap-3 justify-content-center  f-14">
+                  <a href={"https://facebook.com/" + empresaEscolhida.fb}>
+                    {" "}
+                    <i className="bi bi-facebook f-20"></i>{" "}
+                  </a>
+                  <a href={"https://instagram.com/" + empresaEscolhida.insta}>
+                    {" "}
+                    <i className="bi bi-instagram f-20"></i>{" "}
+                  </a>
+                  <a href={"https://youtube.com/" + empresaEscolhida.fb}>
+                    {" "}
+                    <i className="bi bi-youtube f-20"></i>{" "}
+                  </a>
+                </span>
+              </center>
+            </div>
+          </div>
         </div>
       </div>
 
