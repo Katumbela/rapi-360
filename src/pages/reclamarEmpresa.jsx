@@ -231,7 +231,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                 </p>
               </div>
             </div>
-            <a href="/pt/reclamar" className="my-auto text-decoration-none">
+            <a href="/pt/reclamar" className="my-auto alterar text-decoration-none">
               Alterar empresa
             </a>
           </div>

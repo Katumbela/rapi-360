@@ -217,7 +217,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
             <div className="col-12 text-center-md d-flex mt-3 mt-md-auto col-md-2">
               <ScrollToTopLink
                 to={`/pt/reclamar/${empresaEscolhida.id}`}
-                className="btn btn-danger m-auto  gap-2 d-flex"
+                className="btn btn-danger m-auto rec-b  gap-2 d-flex"
               >
                 <i className="bi bi-megaphone"></i> Reclamar
               </ScrollToTopLink>
@@ -385,68 +385,74 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               </div>
             </div>
             <br />
-            <br />
-            <hr />
-            <br />
-
-            <br />
-            <div className="card-sobre-empresa border-1 bg-white p-3">
-              <b className="text-dark f-reg">
-                Quem viu {empresaEscolhida.nome} também viu:
-              </b>
+            <div className="quem-viu-md">
               <br />
+              <hr />
               <br />
 
-              <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-                {dadosEmpresas.map((empresa) => (
-                  <a
-                    key={empresa.id}
-                    href={`/pt/empresa/${empresa.id}`}
-                    className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                  >
-                    <img src={empresa.logo} alt="" className="logo-empresa" />
-                    <div className="bod">
-                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
+              <br />
+              <div className="card-sobre-empresa border-1 bg-white p-3">
+                <b className="text-dark f-reg">
+                  Quem viu {empresaEscolhida.nome} também viu:
+                </b>
+                <br />
+                <br />
 
-                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                        <AbreviarTexto
-                          texto={empresa.localizacao}
-                          largura={"300"}
-                          className="my-auto text-secondary"
-                        ></AbreviarTexto>
-                      </p>
-                      <hr />
+                <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
+                  {dadosEmpresas.map((empresa) => (
+                    <a
+                      key={empresa.id}
+                      href={`/pt/empresa/${empresa.id}`}
+                      className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                    >
+                      <img src={empresa.logo} alt="" className="logo-empresa" />
+                      <div className="bod">
+                        <AbreviarTexto texto={empresa.nome} largura={"200"} />
 
-                      <div className="d-flex gap-2 justify-content-center">
-                      {empresa.avaliacao >= 5.0 &&
-                    empresa.avaliacao <= 6.9 ? (
-                      <img src={regular} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 7.0 &&
-                    empresa.avaliacao <= 10.0 ? (
-                      <img src={otimo} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 3.0 &&
-                    empresa.avaliacao <= 4.9 ? (
-                      <img src={ruim} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <img
-                        src={naorecomendado}
-                        alt=""
-                        className="icon-empresa"
-                      />
-                    ) : null}
-                        <h4 className="f-reg my-auto">
-                          <b>{empresa.avaliacao} </b>
-                        </h4>
-                        <span className="text-secondary f-12 mt-auto">
-                          / 10
-                        </span>
+                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                          <AbreviarTexto
+                            texto={empresa.localizacao}
+                            largura={"300"}
+                            className="my-auto text-secondary"
+                          ></AbreviarTexto>
+                        </p>
+                        <hr />
+
+                        <div className="d-flex gap-2 justify-content-center">
+                          {empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                            <img
+                              src={regular}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : empresa.avaliacao >= 7.0 &&
+                            empresa.avaliacao <= 10.0 ? (
+                            <img src={otimo} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao >= 3.0 &&
+                            empresa.avaliacao <= 4.9 ? (
+                            <img src={ruim} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao <= 2.9 ? (
+                            <img
+                              src={naorecomendado}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : null}
+                          <h4 className="f-reg my-auto">
+                            <b>{empresa.avaliacao} </b>
+                          </h4>
+                          <span className="text-secondary f-12 mt-auto">
+                            / 10
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                ))}
+                    </a>
+                  ))}
+                </div>
               </div>
+              <br />
             </div>
-            <br />
           </div>
           <div className="col-12 col-sm-6 col-lg-6 my-3">
             <h6 className="f-reg">
@@ -492,21 +498,21 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               ))}
             </div>
             <br />
-      <br />
+            <br />
 
-      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-        <br />
-        <br />
-        <br />
-        <br />
-        <h5>Publicidade</h5>
+            <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
+              <br />
+              <br />
+              <br />
+              <br />
+              <h5>Publicidade</h5>
 
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-      <br />
+              <br />
+              <br />
+              <br />
+              <br />
+            </div>
+            <br />
           </div>
           <div className="col-12 col-sm-6 col-lg-3 my-3">
             <h6 className="f-reg">
@@ -578,6 +584,76 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   </a>
                 </span>
               </center>
+            </div>
+
+
+            <div className="quem-viu-sm">
+              <br />
+              <hr />
+              <br />
+
+              <br />
+              <div className="card-sobre-empresa border-1 bg-white p-3">
+                <b className="text-dark f-reg">
+                  Quem viu {empresaEscolhida.nome} também viu:
+                </b>
+                <br />
+                <br />
+
+                <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
+                  {dadosEmpresas.map((empresa) => (
+                    <a
+                      key={empresa.id}
+                      href={`/pt/empresa/${empresa.id}`}
+                      className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                    >
+                      <img src={empresa.logo} alt="" className="logo-empresa" />
+                      <div className="bod">
+                        <AbreviarTexto texto={empresa.nome} largura={"200"} />
+
+                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                          <AbreviarTexto
+                            texto={empresa.localizacao}
+                            largura={"300"}
+                            className="my-auto text-secondary"
+                          ></AbreviarTexto>
+                        </p>
+                        <hr />
+
+                        <div className="d-flex gap-2 justify-content-center">
+                          {empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                            <img
+                              src={regular}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : empresa.avaliacao >= 7.0 &&
+                            empresa.avaliacao <= 10.0 ? (
+                            <img src={otimo} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao >= 3.0 &&
+                            empresa.avaliacao <= 4.9 ? (
+                            <img src={ruim} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao <= 2.9 ? (
+                            <img
+                              src={naorecomendado}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : null}
+                          <h4 className="f-reg my-auto">
+                            <b>{empresa.avaliacao} </b>
+                          </h4>
+                          <span className="text-secondary f-12 mt-auto">
+                            / 10
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <br />
             </div>
           </div>
         </div>
