@@ -24,6 +24,7 @@ import CadastroConsumidor from "./cadastroConsumidor";
 import ReclamarBuscar from "./reclamarBusca";
 import PerfilEmpresa from "./perfilEmpresa/perfilEmpresa";
 import CadastroEmpresa from "./cadastroEmpresa/cadastroEmpresa";
+import ReclamarEmpresa from "./reclamarEmpresa";
 
 
 const RotasPT = (props) => {
@@ -44,6 +45,7 @@ const RotasPT = (props) => {
                     <Route element={<Contactar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/contactar" exact />
                     <Route element={<Ranking  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/ranking" exact />
                     <Route element={<ReclamarBuscar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/reclamar" exact />
+                    <Route element={<ReclamarEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/reclamar/:empresa" exact />
                     <Route element={<PerfilEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/empresa/:empresaid" exact />
                     <Route element={<Descontos  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/descontos" exact />
                     <Route element={<Cadastro  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro" exact />

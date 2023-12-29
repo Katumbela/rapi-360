@@ -128,4 +128,23 @@
     .suggestions {
         padding-top: 0rem!important;
     }
+
+.logo-rec {
+    height: 6em !important;
+    width: 6em !important;
+    border-radius: 90px!important;
+    border: 2px solid #00aa1f!important;
+}
+}
+
+.logo-rec {
+    height: 4em;
+    width: 4em;
+    border-radius: 90px!important;
+    border: 2px solid #00aa1f!important;
+}
+
+.auth {
+    background: #0276ea13;
+    cursor: pointer;
 }
