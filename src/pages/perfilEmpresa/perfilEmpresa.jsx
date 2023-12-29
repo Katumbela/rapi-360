@@ -14,7 +14,7 @@ import firebase from "firebase/compat/app";
 import { db } from "../firebase";
 import okupa from "../../imgs/arobot.png";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import v1 from "../../imgs/anims/av1.mp4";
 import peq_eng from "../../imgs/banner-p.png";
 import arduino from "../../imgs/arduino.jpeg";
@@ -52,10 +52,19 @@ import b3 from "../../imgs/blog/3.png";
 import b4 from "../../imgs/blog/4.png";
 import africa from "../../imgs/africa.png";
 import AbreviarTexto from "../../components/abreviarTexto";
+import dadosEmpresas from "../../model/empresas";
+import ScrollToTopLink from "../../components/scrollTopLink";
 
 const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
-  document.title = `Empresa Unitel Perfil | Reputação 360`;
+
+  const { empresaid } = useParams();
+
+  const empres = dadosEmpresas.filter(p => p.id == empresaid);
+  const empresaEscolhida = empres[0];
+  console.log(empresaEscolhida);
+
+  document.title = `Empresa ${empresaEscolhida.nome} | Reputação 360`;
 
   useEffect(() => {
     // Adicione um listener para o estado da autenticação
@@ -148,7 +157,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   }, []);
 
   const backgroundStyle = {
-    backgroundImage: `url(${bannerUnitel})`,
+    backgroundImage: `url(${empresaEscolhida.banner})`,
     backgroundSize: "100% auto",
     backgroundPosition: "center center",
     // filter: "brightness(75%)",
@@ -177,7 +186,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
       <div className="banner_perfil l" style={backgroundStyle}>
         <div className="foto-perfil-empresa">
-          <img src={unitel} alt="" />
+          <img src={empresaEscolhida.logo} alt="" />
         </div>
       </div>
       <div className=" bg-white border-bb">
@@ -185,7 +194,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           <div className="row">
             <div className="col-12 col-md-2"></div>
             <div className="col-12 col-md-8">
-              <b className="f-20 f-reg">UNITEL SA</b>
+              <b className="f-20 f-reg">{empresaEscolhida.nome}</b>
               <br />
               <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
                 <p className="d-flex text-secondary gap-2">
@@ -197,9 +206,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               </div>
             </div>
             <div className="col-12 text-center-md d-flex mt-3 mt-md-auto col-md-2">
-              <button className="btn btn-danger m-auto  gap-2 d-flex">
+              <ScrollToTopLink to={`/pt/reclamar/${empresaEscolhida.id}`} className="btn btn-danger m-auto  gap-2 d-flex">
                 <i className="bi bi-megaphone"></i> Reclamar
-              </button>
+              </ScrollToTopLink>
             </div>
           </div>
         </div>
@@ -223,13 +232,13 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
       <div className="tabela-infoo container-fluid">
         <div className="row">
             <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h5 className="f-reg"><b>UNITEL SA é confiável ?</b></h5>
+                <h6 className="f-reg"><b>{empresaEscolhida.nome} é confiável ?</b></h6>
             </div>
             <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h5 className="f-reg"><b>O que estão falando sobre UNITEL SA </b></h5>
+                <h6 className="f-reg"><b>O que estão falando sobre {empresaEscolhida.nome} </b></h6>
             </div>
             <div className="col-12 col-sm-6 col-lg-4 my-3">
-                <h5 className="f-reg"><b>Veja mais informações sobre UNITEL SA</b></h5>
+                <h6 className="f-reg"><b>Veja mais informações sobre {empresaEscolhida.nome}</b></h6>
             </div>
         </div>
       </div>

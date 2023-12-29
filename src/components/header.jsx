@@ -30,6 +30,7 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
+import dadosEmpresas from "../model/empresas";
 const Header = (props) => {
   const [use, setUser] = useState([]);
 
@@ -176,10 +177,11 @@ const Header = (props) => {
     // <div className={`navbar ${visible ? 'navbar-show' : 'navbar-hide'}`}>
 
     <div className={` ${showSuggestions === true ? "nav-fixo" : ""}`}>
-      <div onClick={handleBlur} className={` ${showSuggestions === true ? "backdrop" : ""}`}></div>
       <div
-        className={`nav bg-white py-2`}
-      >
+        onClick={handleBlur}
+        className={` ${showSuggestions === true ? "backdrop" : ""}`}
+      ></div>
+      <div className={`nav bg-white py-2`}>
         <div className="d-flex container-lg container-fluid justify-content-between">
           <div className="logo">
             <NavLink to="/pt">
@@ -257,17 +259,17 @@ const Header = (props) => {
           </h5>
           <br />
           <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-            <ScrollToTopLink
-              to={"/pt/empresa/unitel"}
-              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-            >
-              <img src={shoprite} alt="" className="logo-empresa" />
+       
+            {dadosEmpresas.map((empresa) => (
+            <a onClick={handleBlur} key={empresa.id} href={`/pt/empresa/${empresa.id}`} className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm">
+              
+              <img src={empresa.logo} alt="" className="logo-empresa" />
               <div className="bod">
-                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
+                <AbreviarTexto texto={empresa.nome} largura={"200"} />
 
                 <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                   <AbreviarTexto
-                    texto={"Angola, Luanda - Talatona"}
+                    texto={empresa.localizacao}
                     largura={"300"}
                     className="my-auto text-secondary"
                   ></AbreviarTexto>
@@ -277,116 +279,13 @@ const Header = (props) => {
                 <div className="d-flex gap-2 justify-content-center">
                   <img src={otimo} alt="" className="icon-empresa" />
                   <h4 className="f-reg my-auto">
-                    <b>8.0 </b>
+                    <b>{empresa.avaliacao} </b>
                   </h4>
                   <span className="text-secondary f-12 mt-auto">/ 10</span>
                 </div>
               </div>
-            </ScrollToTopLink>
-            <ScrollToTopLink
-              to={"/pt/empresa/unitel"}
-              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-            >
-              <img src={unitel} alt="" className="logo-empresa" />
-              <div className="bod">
-                <AbreviarTexto texto={"UNITEL SA"} largura={"200"} />
-
-                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                  <AbreviarTexto
-                    texto={"Angola, Luanda - Talatona"}
-                    largura={"300"}
-                    className="my-auto text-secondary"
-                  ></AbreviarTexto>
-                </p>
-                <hr />
-
-                <div className="d-flex gap-2 justify-content-center">
-                  <img src={r360} alt="" className="icon-empresa" />
-                  <h4 className="f-reg my-auto">
-                    <b>8.0 </b>
-                  </h4>
-                  <span className="text-secondary f-12 mt-auto">/ 10</span>
-                </div>
-              </div>
-            </ScrollToTopLink>
-            <ScrollToTopLink
-              to={"/pt/empresa/unitel"}
-              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-            >
-              <img src={arreiou} alt="" className="logo-empresa" />
-              <div className="bod">
-                <AbreviarTexto texto={"ARREIOU TÁ BARATO"} largura={"200"} />
-
-                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                  <AbreviarTexto
-                    texto={"Angola, Luanda - Talatona"}
-                    largura={"300"}
-                    className="my-auto text-secondary"
-                  ></AbreviarTexto>
-                </p>
-                <hr />
-
-                <div className="d-flex gap-2 justify-content-center">
-                  <img src={otimo} alt="" className="icon-empresa" />
-                  <h4 className="f-reg my-auto">
-                    <b>8.0 </b>
-                  </h4>
-                  <span className="text-secondary f-12 mt-auto">/ 10</span>
-                </div>
-              </div>
-            </ScrollToTopLink>
-            <ScrollToTopLink
-              to={"/pt/empresa/unitel"}
-              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-            >
-              <img src={shoprite} alt="" className="logo-empresa" />
-              <div className="bod">
-                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                  <AbreviarTexto
-                    texto={"Angola, Luanda - Talatona"}
-                    largura={"300"}
-                    className="my-auto text-secondary"
-                  ></AbreviarTexto>
-                </p>
-                <hr />
-
-                <div className="d-flex gap-2 justify-content-center">
-                  <img src={otimo} alt="" className="icon-empresa" />
-                  <h4 className="f-reg my-auto">
-                    <b>8.0 </b>
-                  </h4>
-                  <span className="text-secondary f-12 mt-auto">/ 10</span>
-                </div>
-              </div>
-            </ScrollToTopLink>
-            <ScrollToTopLink
-              to={"/pt/empresa/unitel"}
-              className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-            >
-              <img src={shoprite} alt="" className="logo-empresa" />
-              <div className="bod">
-                <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                  <AbreviarTexto
-                    texto={"Angola, Luanda - Talatona"}
-                    largura={"300"}
-                    className="my-auto text-secondary"
-                  ></AbreviarTexto>
-                </p>
-                <hr />
-
-                <div className="d-flex gap-2 justify-content-center">
-                  <img src={otimo} alt="" className="icon-empresa" />
-                  <h4 className="f-reg my-auto">
-                    <b>8.0 </b>
-                  </h4>
-                  <span className="text-secondary f-12 mt-auto">/ 10</span>
-                </div>
-              </div>
-            </ScrollToTopLink>
+            </a>
+          ))}
           </div>
         </div>
       )}
