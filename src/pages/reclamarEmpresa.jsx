@@ -222,7 +222,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     <b className="my-auto text-secondary">ÓTIMO</b>
                   ) : empresaEscolhida.avaliacao >= 3.0 &&
                     empresaEscolhida.avaliacao <= 4.9 ? (
-                    <b className="my-auto text-secondary">MUITO RUÍM</b>
+                    <b className="my-auto text-secondary">RUÍM</b>
                   ) : empresaEscolhida.avaliacao <= 2.9 ? (
                     <b className="my-auto text-secondary">NÃO RECOMENDADO</b>
                   ) : (

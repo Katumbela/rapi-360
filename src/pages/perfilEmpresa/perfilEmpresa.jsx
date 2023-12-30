@@ -303,7 +303,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                           <b className="f-reg">ÓTIMO</b>
                         ) : empresaEscolhida.avaliacao >= 3.0 &&
                           empresaEscolhida.avaliacao <= 4.9 ? (
-                          <b className="f-reg">MUITO RUÍM</b>
+                          <b className="f-reg">RUÍM</b>
                         ) : empresaEscolhida.avaliacao <= 2.9 ? (
                           <b className="f-reg">NÃO RECOMENDADO</b>
                         ) : (
@@ -373,8 +373,11 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       className={`progress-bar ${
                         empresaEscolhida.avaliacao <= 4
                           ? "bg-danger"
+                          : empresaEscolhida.avaliacao >= 5.0 &&
+                            empresaEscolhida.avaliacao <= 6.9
+                          ? "bg-warning"
                           : "bg-success"
-                      }  `}
+                      } `}
                       style={{ width: `${larguraProgressBar}%` }}
                     ></div>
                   </div>
@@ -496,6 +499,25 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   </div>
                 </>
               ))}
+
+              {reclamacoesEmpresa.lenght}
+
+              <center>
+                {reclamacoesEmpresa == "" && (
+                  <>
+                    <br />
+                    <br />
+                    <br />
+                    <i className="bi bi-megaphone"></i> <br />
+                    <span className="text-secondary">
+                      Sem reclamações ou avaliações{" "}
+                    </span>
+
+                    <br />
+                    <br />
+                  </>
+                )}
+              </center>
             </div>
             <br />
             <br />
@@ -585,7 +607,6 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 </span>
               </center>
             </div>
-
 
             <div className="quem-viu-sm">
               <br />

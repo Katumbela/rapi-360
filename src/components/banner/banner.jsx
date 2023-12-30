@@ -114,10 +114,10 @@ const Banner = () => {
               <span>Cupons de Desconto</span>{" "}
               <i className="bi bi-ticket-perforated"></i>
             </ScrollToTopLink>
-            <div className="q rounded-2">
+            <ScrollToTopLink to={'/pt/central-de-ajuda'} className="q text-decoration-none rounded-2">
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
-            </div>
+            </ScrollToTopLink>
             <ScrollToTopLink
               to={"/pt/reclamar"}
               className="q text-decoration-none rounded-2"
@@ -361,7 +361,7 @@ const Banner = () => {
                               ) : empresa.avaliacao >= 3.0 &&
                                 empresa.avaliacao <= 4.9 ? (
                                 <b className="my-auto text-secondary">
-                                  MUITO RUÍM
+                                  RUÍM
                                 </b>
                               ) : empresa.avaliacao <= 2.9 ? (
                                 <b className="my-auto text-secondary">
@@ -448,7 +448,7 @@ const Banner = () => {
                               ) : empresa.avaliacao >= 3.0 &&
                                 empresa.avaliacao <= 4.9 ? (
                                 <b className="my-auto text-secondary">
-                                  MUITO RUÍM
+                                  RUÍM
                                 </b>
                               ) : empresa.avaliacao <= 2.9 ? (
                                 <b className="my-auto text-secondary">

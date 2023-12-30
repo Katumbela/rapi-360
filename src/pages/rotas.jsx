@@ -25,6 +25,7 @@ import ReclamarBuscar from "./reclamarBusca";
 import PerfilEmpresa from "./perfilEmpresa/perfilEmpresa";
 import CadastroEmpresa from "./cadastroEmpresa/cadastroEmpresa";
 import ReclamarEmpresa from "./reclamarEmpresa";
+import CentralAjuda from "./centralAjuda";
 
 
 const RotasPT = (props) => {
@@ -49,6 +50,7 @@ const RotasPT = (props) => {
                     <Route element={<PerfilEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/empresa/:empresaid" exact />
                     <Route element={<Descontos  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/descontos" exact />
                     <Route element={<Cadastro  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro" exact />
+                    <Route element={<CentralAjuda  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/central-de-ajuda" exact />
                     <Route element={<CadastroConsumidor  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro/consumidor" exact />
                     <Route element={<CadastroEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro/empresa" exact />
                     <Route element={<Faqs  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/faqs" exact />

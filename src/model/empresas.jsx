@@ -70,6 +70,34 @@ const dadosEmpresas = [
       sobre: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis a nemo deserunt ratione id quam eum unde mollitia, molestiae labore fuga quas soluta? Itaque officiis tempore asperiores excepturi commodi? Sunt.",
       logo: arreiou
     },
+    {
+      id: 4,
+      nome: 'XYAMI SHOPPING',
+      localizacao: 'Angola, Luanda - Talatona',
+      avaliacao: '6.1',
+      nif: "0012234324",
+      banner: banner,  site: 'www.xyami.com',
+      whatsapp: '+244 928 134 249',
+      fb: "arreiou",
+      insta: "mega.arreiou",
+      youtube: "arreiou",
+      sobre: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis a nemo deserunt ratione id quam eum unde mollitia, molestiae labore fuga quas soluta? Itaque officiis tempore asperiores excepturi commodi? Sunt.",
+      logo: xyami
+    },
+    {
+      id: 5,
+      nome: 'MAXI DESCONTOS',
+      localizacao: 'Angola, Luanda - Talatona',
+      avaliacao: '2.7',
+      nif: "0012234324",
+      banner: banner,  site: 'www.maxi.com',
+      whatsapp: '+244 928 134 249',
+      fb: "arreiou",
+      insta: "mega.arreiou",
+      youtube: "arreiou",
+      sobre: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis a nemo deserunt ratione id quam eum unde mollitia, molestiae labore fuga quas soluta? Itaque officiis tempore asperiores excepturi commodi? Sunt.",
+      logo: maxi
+    },
     // Adicione mais empresas conforme necessário
   ];
   

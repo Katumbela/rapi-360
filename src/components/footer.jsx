@@ -103,8 +103,8 @@ function Footer() {
                   </ScrollToTopLink>
                 </li>
                 <li>
-                  <ScrollToTopLink className="footerlink" to="/pt/senha">
-                   Quero trocar minha senha
+                  <ScrollToTopLink className="footerlink" to="/pt/central-de-ajuda">
+                   Preciso de ajuda
                   </ScrollToTopLink>
                 </li>
                 <li>

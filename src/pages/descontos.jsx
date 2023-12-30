@@ -40,6 +40,7 @@ import shoprite from "../imgs/shoprite.jpeg";
 import unitel from "../imgs/unitel.png";
 import r360 from "../imgs/r360.png";
 import ruim from "../imgs/ruim.webp";
+import regular from "../imgs/regular.png";
 import icon from "../imgs/icon.png";
 import desconto from "../imgs/descontos.webp";
 import desc from "../imgs/desc.png";
@@ -50,6 +51,7 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import AbreviarTexto from "../components/abreviarTexto";
+import dadosEmpresas from "../model/empresas";
 
 const Descontos = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -186,7 +188,8 @@ const Descontos = ({ cart, nomee, emaill }) => {
           </h2>
           <div className="container">
             <span className="f-16 container">
-              Economize aproveitando ofertas, promoções e cupons de empresas confiáveis
+              Economize aproveitando ofertas, promoções e cupons de empresas
+              confiáveis
             </span>
             <br />
           </div>
@@ -197,7 +200,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
         <div className="container">
           <div className="lista-lojas container lista-descontos">
             <div className="d-flex flex-wrap justify-content-center gap-4">
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
+              {/* <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
                 <img src={arreiou} alt="" className="logo-empresa" />
                 <div className="bod">
                   <br />
@@ -212,347 +215,139 @@ const Descontos = ({ cart, nomee, emaill }) => {
                   </button>
                 </div>
               </div>
+              */}
 
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={xyami} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Xyami Shopping"} largura={"200"} />
+                  
+                       {dadosEmpresas.map((empresa) => (
+                          <div  key={empresa.id}
+                          className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
+                          <img src={empresa.logo} alt="" className="logo-empresa" />
+                          <div className="bod">
+                            <br />
+                            <AbreviarTexto texto={empresa.nome} largura={"200"} />
+          
+                            <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
+                                
+                                  {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <img
+                                  src={regular}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <img
+                                  src={otimo}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <img
+                                  src={ruim}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <img
+                                  src={naorecomendado}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : null}
+                              {empresa.avaliacao >= 5.0 &&
+                              empresa.avaliacao <= 6.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  REGULAR
+                                </b>
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <b className="my-auto f-12 text-secondary">ÓTIMO</b>
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  RUÍM
+                                </b>
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <AbreviarTexto className="my-auto f-12 text-secondary"  texto={'NÃO RECOMENDADO'} largura={90}/>
+                                  
+                              ) : (
+                                <b className="my-auto f-12 text-secondary">
+                                  SEM DADOS{" "}
+                                </b>
+                              )}
+                            </p>
+                            <a href={`https://${empresa.site}`} className="btn mt-2 btn-sm btn-outline-success">
+                              Acessar <i className="bi bi-arrow-right-short"></i>
+                            </a>
+                          </div>
+                        </div>
+                       
+                        // <div
+                        //   key={empresa.id}
+                         
+                        //   className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                        // >
+                        //   <img
+                        //     src={empresa.logo}
+                        //     alt=""
+                        //     className="logo-empresa"
+                        //   />
+                        //   <div className="bod">
+                        //     <AbreviarTexto
+                        //       texto={empresa.nome}
+                        //       largura={"200"}
+                        //     />
 
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={r360} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
+                        //     <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                        //       <AbreviarTexto
+                        //         texto={empresa.localizacao}
+                        //         largura={"300"}
+                        //         className="my-auto text-secondary"
+                        //       ></AbreviarTexto>
+                        //     </p>
+                        //     <hr />
 
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm">
-                <img src={shoprite} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={"Shoprite Shopping"} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    <img src={bom} className="icon-empresa" alt="" />
-                    <span className="my-auto text-secondary">R360</span>
-                  </p>
-                  <button className="btn mt-2 btn-sm btn-outline-success">
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </button>
-                </div>
-              </div>
+                        //     <div className="d-flex gap-2 justify-content-center">
+                        //       {empresa.avaliacao >= 5.0 &&
+                        //       empresa.avaliacao <= 6.9 ? (
+                        //         <img
+                        //           src={regular}
+                        //           alt=""
+                        //           className="icon-empresa"
+                        //         />
+                        //       ) : empresa.avaliacao >= 7.0 &&
+                        //         empresa.avaliacao <= 10.0 ? (
+                        //         <img
+                        //           src={otimo}
+                        //           alt=""
+                        //           className="icon-empresa"
+                        //         />
+                        //       ) : empresa.avaliacao >= 3.0 &&
+                        //         empresa.avaliacao <= 4.9 ? (
+                        //         <img
+                        //           src={ruim}
+                        //           alt=""
+                        //           className="icon-empresa"
+                        //         />
+                        //       ) : empresa.avaliacao <= 2.9 ? (
+                        //         <img
+                        //           src={naorecomendado}
+                        //           alt=""
+                        //           className="icon-empresa"
+                        //         />
+                        //       ) : null}
+                        //       <h4 className="f-reg my-auto">
+                        //         <b>{empresa.avaliacao} </b>
+                        //       </h4>
+                        //       <span className="text-secondary f-12 mt-auto">
+                        //         / 10
+                        //       </span>
+                        //     </div>
+                        //   </div>
+                        // </div>
+                      ))}
             </div>
           </div>
         </div>
@@ -567,7 +362,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
         </div>
 
         <br />
-        
+
         <br />
 
         <Footer />
