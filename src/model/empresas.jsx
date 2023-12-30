@@ -27,6 +27,7 @@ import banner_icon from "../imgs/icon.png";
 
 const dadosEmpresas = [
     {
+      selo: false,
       id: 1,
       nome: 'Shoprite Shopping',
       localizacao: 'Angola, Luanda - Talatona',
@@ -42,6 +43,7 @@ const dadosEmpresas = [
       logo: shoprite
     },
     {
+      selo: true,
       id: 2,
       nome: 'UNITEL SA',
       localizacao: 'Angola, Luanda - Talatona',
@@ -57,6 +59,7 @@ const dadosEmpresas = [
       logo: unitel
     },
     {
+      selo: false,
       id: 3,
       nome: 'ARREIOU TÁ BARATO',
       localizacao: 'Angola, Luanda - Talatona',
@@ -71,6 +74,7 @@ const dadosEmpresas = [
       logo: arreiou
     },
     {
+      selo: false,
       id: 4,
       nome: 'XYAMI SHOPPING',
       localizacao: 'Angola, Luanda - Talatona',
@@ -85,6 +89,7 @@ const dadosEmpresas = [
       logo: xyami
     },
     {
+      selo: false,
       id: 5,
       nome: 'MAXI DESCONTOS',
       localizacao: 'Angola, Luanda - Talatona',
