@@ -19,6 +19,9 @@ import xyami from "../../imgs/xyami.jpeg";
 import shoprite from "../../imgs/shoprite.jpeg";
 import unitel from "../../imgs/unitel.png";
 import r360 from "../../imgs/r360.png";
+import sdq from "../../imgs/logo_s.png";
+import gk from "../../imgs/gokside.png";
+import pleno from "../../imgs/pleno.png";
 import ruim from "../../imgs/ruim.webp";
 import logo from "../../imgs/icon.png";
 import desconto from "../../imgs/descontos.webp";
@@ -325,42 +328,73 @@ const Banner = () => {
                           <div className="de my-auto">
                             <b>{empresa.nome}</b>
                             <p className="d-flex mt-1 my-auto gap-2 f-14">
-                    {empresa.selo ? (
-                      <img src={r360} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <img src={regular} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <img src={otimo} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <img src={ruim} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <img
-                        src={naorecomendado}
-                        alt=""
-                        className="icon-empresa"
-                      />
-                    ) : null}
+                              {empresa.selo ? (
+                                <img
+                                  src={r360}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 5.0 &&
+                                empresa.avaliacao <= 6.9 ? (
+                                <img
+                                  src={regular}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <img
+                                  src={otimo}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <img
+                                  src={ruim}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <img
+                                  src={naorecomendado}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : null}
 
-                    {empresa.selo ? (
-                      <b className="my-auto f-12 text-secondary"> R360</b>
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <b className="my-auto f-12 text-secondary">REGULAR</b>
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <b className="my-auto f-12 text-secondary">ÓTIMO</b>
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <b className="my-auto f-12 text-secondary">RUÍM</b>
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <AbreviarTexto
-                        className="my-auto f-12 text-secondary"
-                        texto={"NÃO RECOMENDADO"}
-                        largura={90}
-                      />
-                    ) : (
-                      <b className="my-auto f-12 text-secondary">SEM DADOS </b>
-                    )}
-                  </p>
+                              {empresa.selo ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  {" "}
+                                  R360
+                                </b>
+                              ) : empresa.avaliacao >= 5.0 &&
+                                empresa.avaliacao <= 6.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  REGULAR
+                                </b>
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  ÓTIMO
+                                </b>
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  RUÍM
+                                </b>
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <AbreviarTexto
+                                  className="my-auto f-12 text-secondary"
+                                  texto={"NÃO RECOMENDADO"}
+                                  largura={90}
+                                />
+                              ) : (
+                                <b className="my-auto f-12 text-secondary">
+                                  SEM DADOS{" "}
+                                </b>
+                              )}
+                            </p>
                           </div>
                         </ScrollToTopLink>
                       ))}
@@ -396,43 +430,74 @@ const Banner = () => {
                           />
                           <div className="de my-auto">
                             <b>{empresa.nome}</b>
-                               <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
-                    {empresa.selo ? (
-                      <img src={r360} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <img src={regular} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <img src={otimo} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <img src={ruim} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <img
-                        src={naorecomendado}
-                        alt=""
-                        className="icon-empresa"
-                      />
-                    ) : null}
+                            <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
+                              {empresa.selo ? (
+                                <img
+                                  src={r360}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 5.0 &&
+                                empresa.avaliacao <= 6.9 ? (
+                                <img
+                                  src={regular}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <img
+                                  src={otimo}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <img
+                                  src={ruim}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <img
+                                  src={naorecomendado}
+                                  alt=""
+                                  className="icon-empresa"
+                                />
+                              ) : null}
 
-                    {empresa.selo ? (
-                      <b className="my-auto f-12 text-secondary"> R360</b>
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <b className="my-auto f-12 text-secondary">REGULAR</b>
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <b className="my-auto f-12 text-secondary">ÓTIMO</b>
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <b className="my-auto f-12 text-secondary">RUÍM</b>
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <AbreviarTexto
-                        className="my-auto f-12 text-secondary"
-                        texto={"NÃO RECOMENDADO"}
-                        largura={90}
-                      />
-                    ) : (
-                      <b className="my-auto f-12 text-secondary">SEM DADOS </b>
-                    )}
-                  </p>
+                              {empresa.selo ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  {" "}
+                                  R360
+                                </b>
+                              ) : empresa.avaliacao >= 5.0 &&
+                                empresa.avaliacao <= 6.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  REGULAR
+                                </b>
+                              ) : empresa.avaliacao >= 7.0 &&
+                                empresa.avaliacao <= 10.0 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  ÓTIMO
+                                </b>
+                              ) : empresa.avaliacao >= 3.0 &&
+                                empresa.avaliacao <= 4.9 ? (
+                                <b className="my-auto f-12 text-secondary">
+                                  RUÍM
+                                </b>
+                              ) : empresa.avaliacao <= 2.9 ? (
+                                <AbreviarTexto
+                                  className="my-auto f-12 text-secondary"
+                                  texto={"NÃO RECOMENDADO"}
+                                  largura={90}
+                                />
+                              ) : (
+                                <b className="my-auto f-12 text-secondary">
+                                  SEM DADOS{" "}
+                                </b>
+                              )}
+                            </p>
                           </div>
                         </ScrollToTopLink>
                       ))}
@@ -478,71 +543,78 @@ const Banner = () => {
       <div className="aba-lojas-online container">
         <h2>
           <b>
-            Lojas online com selo R360 (
+            Lojas online com selo R360 ({" "}
             <b className="text-success">Reputação 360 </b> )
           </b>
         </h2>
         <br />
         <div className="lista-lojas">
           <div className="d-flex scroll-md gap-4">
-            {dadosEmpresas.map((empresa) => (
-              empresa.selo === true && (
-                <div
-                key={empresa.id}
-                className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm"
-              >
-                <img src={empresa.logo} alt="" className="logo-empresa" />
-                <div className="bod">
-                  <br />
-                  <AbreviarTexto texto={empresa.nome} largura={"200"} />
-
-                  <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                    {empresa.selo ? (
-                      <img src={r360} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <img src={regular} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <img src={otimo} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <img src={ruim} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <img
-                        src={naorecomendado}
-                        alt=""
-                        className="icon-empresa"
-                      />
-                    ) : null}
-
-                    {empresa.selo ? (
-                      <b className="my-auto f-12 text-secondary"> R360</b>
-                    ) : empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
-                      <b className="my-auto f-12 text-secondary">REGULAR</b>
-                    ) : empresa.avaliacao >= 7.0 &&
-                      empresa.avaliacao <= 10.0 ? (
-                      <b className="my-auto f-12 text-secondary">ÓTIMO</b>
-                    ) : empresa.avaliacao >= 3.0 && empresa.avaliacao <= 4.9 ? (
-                      <b className="my-auto f-12 text-secondary">RUÍM</b>
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <AbreviarTexto
-                        className="my-auto f-12 text-secondary"
-                        texto={"NÃO RECOMENDADO"}
-                        largura={90}
-                      />
-                    ) : (
-                      <b className="my-auto f-12 text-secondary">SEM DADOS </b>
-                    )}
-                  </p>
-                  <a
-                    href={`https://${empresa.site}`}
-                    className="btn mt-2 btn-sm btn-outline-success"
+            {dadosEmpresas.map(
+              (empresa) =>
+                empresa.selo === true && (
+                  <div
+                    key={empresa.id}
+                    className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm"
                   >
-                    Acessar <i className="bi bi-arrow-right-short"></i>
-                  </a>
-                </div>
-              </div>
-              )
-            ))}
+                    <img src={empresa.logo} alt="" className="logo-empresa" />
+                    <div className="bod">
+                      <br />
+                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
+
+                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
+                        {empresa.selo ? (
+                          <img src={r360} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                          <img src={regular} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 7.0 &&
+                          empresa.avaliacao <= 10.0 ? (
+                          <img src={otimo} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 3.0 &&
+                          empresa.avaliacao <= 4.9 ? (
+                          <img src={ruim} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao <= 2.9 ? (
+                          <img
+                            src={naorecomendado}
+                            alt=""
+                            className="icon-empresa"
+                          />
+                        ) : null}
+
+                        {empresa.selo ? (
+                          <b className="my-auto f-12 text-secondary"> R360</b>
+                        ) : empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                          <b className="my-auto f-12 text-secondary">REGULAR</b>
+                        ) : empresa.avaliacao >= 7.0 &&
+                          empresa.avaliacao <= 10.0 ? (
+                          <b className="my-auto f-12 text-secondary">ÓTIMO</b>
+                        ) : empresa.avaliacao >= 3.0 &&
+                          empresa.avaliacao <= 4.9 ? (
+                          <b className="my-auto f-12 text-secondary">RUÍM</b>
+                        ) : empresa.avaliacao <= 2.9 ? (
+                          <AbreviarTexto
+                            className="my-auto f-12 text-secondary"
+                            texto={"NÃO RECOMENDADO"}
+                            largura={90}
+                          />
+                        ) : (
+                          <b className="my-auto f-12 text-secondary">
+                            SEM DADOS{" "}
+                          </b>
+                        )}
+                      </p>
+                      <a
+                        href={`https://${empresa.site}`}
+                        className="btn mt-2 btn-sm btn-outline-success"
+                      >
+                        Acessar <i className="bi bi-arrow-right-short"></i>
+                      </a>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>
@@ -786,6 +858,23 @@ const Banner = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+
+      <div className="partners text- bg-white my-3 py-5 text-center">
+        <center>
+          <h2 className="f-reg">PARCEIROS</h2>
+        </center>
+
+        <br />
+        <center  className="d-flex partners gap-4 justify-content-center">
+          <img src={gk} alt="" />
+          <img src={pleno} alt="" />
+          <img src={sdq} alt="" />
+        </center>
+      </div>
+      <br />
+      <br />
       <br />
       <br />
 

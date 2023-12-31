@@ -23,6 +23,10 @@ text-decoration: underline !important;
 
 
 @media (max-width: 600px) {
+
+  .partners img {
+    height: 3.5em;
+  }
   
     .s{
         margin-top: 5.5rem;
@@ -113,3 +117,8 @@ text-decoration: underline !important;
     border-radius: 20px !important;
   }
 
+
+
+  .partners img {
+    height: 4.5em;
+  }
