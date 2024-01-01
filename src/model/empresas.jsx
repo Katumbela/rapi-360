@@ -21,8 +21,8 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import banner_unitel from "../imgs/banner_unitel.png";
-import banner from "../imgs/ban.png";
-import banner_icon from "../imgs/icon.png";
+import banner from "../imgs/banner2.png";
+import banner_icon from "../imgs/banner2.png";
 
 
 const dadosEmpresas = [
