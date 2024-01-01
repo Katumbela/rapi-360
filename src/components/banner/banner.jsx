@@ -108,9 +108,9 @@ const Banner = () => {
               <span>Cadastre uma empresa</span>{" "}
               <i className="bi bi-building-add"></i>
             </ScrollToTopLink>
-            <div className="q rounded-2">
+            <a href="https://pleno.ao" target="__blank" className="text-decoration-none q rounded-2">
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
-            </div>
+            </a>
             <ScrollToTopLink
               to={"/pt/descontos"}
               className="q text-decoration-none rounded-2"
