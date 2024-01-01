@@ -8,16 +8,17 @@ import 'firebase/compat/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCuqnZWjMwR1KgpQP-00hIxu0UolERraPo",
-  authDomain: "d-aluguel.firebaseapp.com",
-  projectId: "d-aluguel",
-  storageBucket: "d-aluguel.appspot.com",
-  messagingSenderId: "239044836735",
-  appId: "1:239044836735:web:ae14f0512c41b25bd32e4a",
-  measurementId: "G-PF293YZ0SP"
+  apiKey: "AIzaSyDXKbx634X3Q8dcMiXjHseVzQiAFMvmSdY",
+  authDomain: "reputa360.firebaseapp.com",
+  projectId: "reputa360",
+  storageBucket: "reputa360.appspot.com",
+  messagingSenderId: "37758184858",
+  appId: "1:37758184858:web:1d40d66b1441f2bf6f9e23",
+  measurementId: "G-9MR1JLWZ81"
 };
 
 

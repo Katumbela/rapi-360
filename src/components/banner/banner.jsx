@@ -10,7 +10,6 @@ import CardCurso from "../card_serv/card_serv";
 import getCursosData from "../../pages/lista_cursos";
 import bom from "../../imgs/bom.png";
 import mau from "../../imgs/mau.png";
-import Slide from 'react-rev';
 import arreiou from "../../imgs/arreiou.jpeg";
 import bomm from "../../imgs/bomm.webp";
 import maxi from "../../imgs/maxi.png";

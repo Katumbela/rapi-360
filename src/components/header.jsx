@@ -28,7 +28,7 @@ import b1 from "../imgs/blog/1.png";
 import b2 from "../imgs/blog/2.png";
 import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
-import regular from '../imgs/regular.png';
+import regular from "../imgs/regular.png";
 import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
 import dadosEmpresas from "../model/empresas";
@@ -113,34 +113,8 @@ const Header = (props) => {
 
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([
-    "Sugestão 1",
-    "Sugestão 2",
-    "Sugestão 3",
-  ]); // Adicione sugestões reais aqui
 
-  // const handleInputChange = (e) => {
-  //   setSearchTerm(e.target.value);
-  //   setShowSuggestions(true);
-  // };
-
-  const handleSuggestionClick = (suggestion) => {
-    setSearchTerm(suggestion);
-    setShowSuggestions(false);
-    // Adicione lógica para lidar com a seleção da sugestão (por exemplo, redirecionamento)
-  };
-
-  // const handleBlur = () => {
-  //   // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
-  //   setTimeout(() => {
-  //     setShowSuggestions(true);
-  //   }, 200);
-  // };
-
-  // const handleInputClick = () => {
-  //   // Exibir sugestões ao clicar no input
-  //   setShowSuggestions(true);
-  // };
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const handleOverflow = () => {
@@ -158,7 +132,23 @@ const Header = (props) => {
   }, [showSuggestions]);
 
   const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+
+    // Filtrar empresas com base no termo de pesquisa
+    const results = dadosEmpresas.filter((empresa) => {
+      const lowerCasedTerm = searchTerm.toLowerCase();
+      return (
+        empresa.nome.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.site.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.nif.includes(searchTerm)
+      );
+    });
+
+    // Atualizar os resultados da pesquisa
+    setSearchResults(results);
+
+    // Exibir as sugestões
     setShowSuggestions(true);
   };
 
@@ -194,7 +184,7 @@ const Header = (props) => {
               <img src={logosm} alt="" className="logo-sm" />
             </NavLink>
             <input
-              type="search"
+              type="text"
               name=""
               placeholder="Pesquise por empresa, NIF ou site"
               id=""
@@ -260,48 +250,106 @@ const Header = (props) => {
           </h5>
           <br />
           <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-       
-            {dadosEmpresas.map((empresa) => (
-            <a onClick={handleBlur} key={empresa.id} href={`/pt/empresa/${empresa.id}`} className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm">
-              
-              <img src={empresa.logo} alt="" className="logo-empresa" />
-              <div className="bod">
-                <AbreviarTexto texto={empresa.nome} largura={"200"} />
+            {searchResults != "" ? (
+              searchResults.map((empresa) => (
+                <a
+                  onClick={handleBlur}
+                  key={empresa.id}
+                  href={`/pt/empresa/${empresa.id}`}
+                  className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                >
+                  <img src={empresa.logo} alt="" className="logo-empresa" />
+                  <div className="bod">
+                    <AbreviarTexto texto={empresa.nome} largura={"200"} />
 
-                <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                  <AbreviarTexto
-                    texto={empresa.localizacao}
-                    largura={"300"}
-                    className="my-auto text-secondary"
-                  ></AbreviarTexto>
+                    <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                      <AbreviarTexto
+                        texto={empresa.localizacao}
+                        largura={"300"}
+                        className="my-auto text-secondary"
+                      ></AbreviarTexto>
+                    </p>
+                    <hr />
+
+                    <div className="d-flex gap-2 justify-content-center">
+                      {empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
+                        <img src={regular} alt="" className="icon-empresa" />
+                      ) : empresa.avaliacao >= 7.0 &&
+                        empresa.avaliacao <= 10.0 ? (
+                        <img src={otimo} alt="" className="icon-empresa" />
+                      ) : empresa.avaliacao >= 3.0 &&
+                        empresa.avaliacao <= 4.9 ? (
+                        <img src={ruim} alt="" className="icon-empresa" />
+                      ) : empresa.avaliacao <= 2.9 ? (
+                        <img
+                          src={naorecomendado}
+                          alt=""
+                          className="icon-empresa"
+                        />
+                      ) : null}
+                      <h4 className="f-reg my-auto">
+                        <b>{empresa.avaliacao} </b>
+                      </h4>
+                      <span className="text-secondary f-12 mt-auto">/ 10</span>
+                    </div>
+                  </div>
+                </a>
+              ))
+            ) : showSuggestions ? (
+              searchTerm !== "" ? (
+                <p className="text-center py-3 w-100 mx-auto f-14">
+                  Nenhum resultado encontrado, parece que esta empresa ainda não está cadastrado. <a href="/pt/solicitar-cadastro">Solicite o cadastro</a> desta empresa
                 </p>
-                <hr />
+              ) : (
+                dadosEmpresas.slice(0, 8).map((empresa) => (
+                  <a
+                    onClick={handleBlur}
+                    key={empresa.id}
+                    href={`/pt/empresa/${empresa.id}`}
+                    className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                  >
+                    <img src={empresa.logo} alt="" className="logo-empresa" />
+                    <div className="bod">
+                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
 
-                <div className="d-flex gap-2 justify-content-center">
-                {empresa.avaliacao >= 5.0 &&
-                    empresa.avaliacao <= 6.9 ? (
-                      <img src={regular} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 7.0 &&
-                    empresa.avaliacao <= 10.0 ? (
-                      <img src={otimo} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao >= 3.0 &&
-                    empresa.avaliacao <= 4.9 ? (
-                      <img src={ruim} alt="" className="icon-empresa" />
-                    ) : empresa.avaliacao <= 2.9 ? (
-                      <img
-                        src={naorecomendado}
-                        alt=""
-                        className="icon-empresa"
-                      />
-                    ) : null}
-                  <h4 className="f-reg my-auto">
-                    <b>{empresa.avaliacao} </b>
-                  </h4>
-                  <span className="text-secondary f-12 mt-auto">/ 10</span>
-                </div>
-              </div>
-            </a>
-          ))}
+                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                        <AbreviarTexto
+                          texto={empresa.localizacao}
+                          largura={"300"}
+                          className="my-auto text-secondary"
+                        ></AbreviarTexto>
+                      </p>
+                      <hr />
+
+                      <div className="d-flex gap-2 justify-content-center">
+                        {empresa.avaliacao >= 5.0 &&
+                        empresa.avaliacao <= 6.9 ? (
+                          <img src={regular} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 7.0 &&
+                          empresa.avaliacao <= 10.0 ? (
+                          <img src={otimo} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 3.0 &&
+                          empresa.avaliacao <= 4.9 ? (
+                          <img src={ruim} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao <= 2.9 ? (
+                          <img
+                            src={naorecomendado}
+                            alt=""
+                            className="icon-empresa"
+                          />
+                        ) : null}
+                        <h4 className="f-reg my-auto">
+                          <b>{empresa.avaliacao} </b>
+                        </h4>
+                        <span className="text-secondary f-12 mt-auto">
+                          / 10
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ))
+              )
+            ) : null}
           </div>
         </div>
       )}
