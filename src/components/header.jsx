@@ -113,10 +113,7 @@ const Header = (props) => {
   }, [prevScrollPos]);
 
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [searchResults, setSearchResults] = useState([]);
-
+  
   useEffect(() => {
     const handleOverflow = () => {
       // Adicione a classe para ocultar a rolagem vertical do corpo
@@ -132,6 +129,11 @@ const Header = (props) => {
     };
   }, [showSuggestions]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);

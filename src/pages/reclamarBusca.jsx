@@ -18,6 +18,8 @@ import { NavLink } from "react-router-dom";
 import v1 from "../imgs/anims/av1.mp4";
 import peq_eng from "../imgs/banner-p.png";
 import arduino from "../imgs/arduino.jpeg";
+import notFound from "../imgs/not-found.png";
+import regular from "../imgs/regular.png";
 import eletronica from "../imgs/eletronica.jpeg";
 import a1 from "../imgs/anims/a1.jpg";
 import a2 from "../imgs/anims/a2.jpg";
@@ -50,6 +52,8 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import AbreviarTexto from "../components/abreviarTexto";
+import dadosEmpresas from "../model/empresas";
+import ScrollToTopLink from "../components/scrollTopLink";
 
 const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -165,6 +169,30 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
     }
   }, []);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+
+    // Filtrar empresas com base no termo de pesquisa
+    const results = dadosEmpresas.filter((empresa) => {
+      const lowerCasedTerm = searchTerm.toLowerCase();
+      return (
+        empresa.nome.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.site.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.nif.includes(searchTerm)
+      );
+    });
+
+    // Atualizar os resultados da pesquisa
+    setSearchResults(results);
+
+    // Exibir as sugestões
+  };
+
   return (
     <div className="w-100">
       {/*  */}
@@ -184,6 +212,8 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
           <div className="container">
             <span className="f-16 container">
               Busque pela empresa que deseja reclamar
+              {searchResults.length}
+
             </span>
             <br />
             <br />
@@ -192,10 +222,84 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
               <input
                 type="search"
                 name=""
+                value={searchTerm}
+                onChange={handleInputChange}
                 placeholder="Pesquise por empresa, NIF ou site"
                 id=""
               />
               <i className="bi bi-search"></i>
+            </div>
+            <div className="res-pesquisa pesquisa pesquisa-md pesq-busca">
+              {searchResults.length > 0 && searchTerm !== "" ? (
+                searchResults.map((empresa, index) => (
+                  <ScrollToTopLink
+                    key={empresa.id}
+                    to={`/pt/empresa/${empresa.id}`}
+                    title={"Clique para ver empresa"}
+                    className="empresa w-100 text-decoration-none my-1 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                  >
+                    <img src={empresa.logo} className="logo-empresa" alt="" />
+                    <div className="de my-auto">
+                      <b>{empresa.nome}</b>
+                      <p className="d-flex mt-1 my-auto gap-2 f-14">
+                        {empresa.selo ? (
+                          <img src={r360} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                          <img src={regular} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 7.0 &&
+                          empresa.avaliacao <= 10.0 ? (
+                          <img src={otimo} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao >= 3.0 &&
+                          empresa.avaliacao <= 4.9 ? (
+                          <img src={ruim} alt="" className="icon-empresa" />
+                        ) : empresa.avaliacao <= 2.9 ? (
+                          <img
+                            src={naorecomendado}
+                            alt=""
+                            className="icon-empresa"
+                          />
+                        ) : null}
+
+                        {empresa.selo ? (
+                          <b className="my-auto f-12 text-secondary"> R360</b>
+                        ) : empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                          <b className="my-auto f-12 text-secondary">REGULAR</b>
+                        ) : empresa.avaliacao >= 7.0 &&
+                          empresa.avaliacao <= 10.0 ? (
+                          <b className="my-auto f-12 text-secondary">ÓTIMO</b>
+                        ) : empresa.avaliacao >= 3.0 &&
+                          empresa.avaliacao <= 4.9 ? (
+                          <b className="my-auto f-12 text-secondary">RUÍM</b>
+                        ) : empresa.avaliacao <= 2.9 ? (
+                          <AbreviarTexto
+                            className="my-auto f-12 text-secondary"
+                            texto={"NÃO RECOMENDADO"}
+                            largura={90}
+                          />
+                        ) : (
+                          <b className="my-auto f-12 text-secondary">
+                            SEM DADOS{" "}
+                          </b>
+                        )}
+                      </p>
+                    </div>
+                  </ScrollToTopLink>
+                ))
+              ) : (
+                <>
+                  <p className="text-center py-3 w-100 mx-auto f-14">
+                    <img src={notFound} style={{ height: "8em" }} alt="" />
+                    <p>
+                      Nenhum resultado encontrado, parece que esta empresa ainda
+                      não está cadastrada.{" "}
+                      <a href="/pt/solicitar-cadastro">Solicite o cadastro</a>{" "}
+                      desta empresa
+                    </p>
+                  </p>
+                </>
+              ) }
             </div>
           </div>
         </center>

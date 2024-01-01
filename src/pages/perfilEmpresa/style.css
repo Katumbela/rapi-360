@@ -148,3 +148,40 @@
     background: #0276ea13;
     cursor: pointer;
 }
+
+.res-pesquisa {
+    border: none!important;
+    display: flex!important;
+    justify-content: start!important;
+    flex-direction: column!important;
+    gap: 0px!important;
+    padding: 0!important;
+    overflow-y: auto;
+}
+
+.card-solucao {
+    background: white;
+    width: 20rem;
+    padding: 2rem 1rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    
+}
+
+.card-solucao img {
+    height: 3em;
+}
+
+.card-solucao ul li {
+    margin-top: 1rem;
+    font-size: 14px;
+    list-style-type: none;
+    position: relative;
+}
+
+.card-solucao ul li i {
+    font-size: 25px;
+    position: absolute;
+    left: -1.5rem;
+    top: -.5rem;
+}

@@ -194,22 +194,12 @@ const Banner = () => {
         </div>
       </div> */}
 
-      {/* <div
-        className="modal fade"
-        id="modal2"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <video width="640" height="360" controls>
-              <source src={v2} type="video/mp4" />
-              Seu navegador não suporta o elemento de vídeo.
-            </video>
-          </div>
-        </div>
-      </div> */}
+<br />
+<center>
+  <ScrollToTopLink to={'/pt/empresa/produtos'} className={'btn btn-success '} >
+    Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
+  </ScrollToTopLink>
+</center>
 
       <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
         <br />
