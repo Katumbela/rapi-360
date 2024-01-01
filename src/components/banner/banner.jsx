@@ -10,6 +10,7 @@ import CardCurso from "../card_serv/card_serv";
 import getCursosData from "../../pages/lista_cursos";
 import bom from "../../imgs/bom.png";
 import mau from "../../imgs/mau.png";
+import Slide from 'react-rev';
 import arreiou from "../../imgs/arreiou.jpeg";
 import bomm from "../../imgs/bomm.webp";
 import maxi from "../../imgs/maxi.png";
@@ -20,6 +21,7 @@ import shoprite from "../../imgs/shoprite.jpeg";
 import unitel from "../../imgs/unitel.png";
 import r360 from "../../imgs/r360.png";
 import sdq from "../../imgs/logo_s.png";
+import eduka from "../../imgs/eduka.png";
 import gk from "../../imgs/gokside.png";
 import pleno from "../../imgs/pleno.png";
 import ruim from "../../imgs/ruim.webp";
@@ -519,13 +521,11 @@ const Banner = () => {
           </div>
           <div className="col-12 tt col-md-7">
             <div className="my-auto">
-              <h3 className="fw-bold">Encontre os melhores descontos</h3>
-              <br />
-              <span>
+              <h2 className="fw-bold">Encontre os melhores descontos</h2>
+              <h5 className="text-secondary">
                 Compre com desconto e em segurança nas empresas mais confiáveis.
-              </span>
+              </h5>
 
-              <br />
               <br />
               <ScrollToTopLink
                 to={"/pt/descontos"}
@@ -867,7 +867,7 @@ const Banner = () => {
         </center>
 
         <br />
-        <center  className="d-flex partners gap-4 justify-content-center">
+        <center className="d-flex partners gap-4 justify-content-center">
           <img src={gk} alt="" />
           <img src={pleno} alt="" />
           <img src={sdq} alt="" />
@@ -875,6 +875,38 @@ const Banner = () => {
       </div>
       <br />
       <br />
+
+      <br />
+      <div className="desconto container">
+        <div className="row flex-row-reverse">
+          <div className="col-12 imm col-md-5">
+            <img src={eduka} alt="" className=" my-auto -100" />
+          </div>
+          <div className="col-12 tt col-md-7">
+            <div className="my-auto">
+              <h2 className="fw-bold f-reg">R360 EDUKA</h2>
+
+              <span>
+                Aqui, você e sua equipe adquirem conhecimento e insights
+                atualizados para colocar a mão na massa e enfrentar os desafios
+                reais de um time de atendimento. Construa uma carreira de
+                sucesso com o RA Educa!
+              </span>
+
+              <br />
+              <br />
+              <ScrollToTopLink disabled
+                to={"/pt/descontos"}
+                className="btn rounded-1 disabled btn-outline-success"
+              >
+                Brevemente Disponível
+              </ScrollToTopLink>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
       <br />
       <br />
 
