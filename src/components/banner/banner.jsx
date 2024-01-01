@@ -37,6 +37,7 @@ import africa from "../../imgs/africa.png";
 import AbreviarTexto from "../abreviarTexto";
 import ScrollToTopLink from "../scrollTopLink";
 import dadosEmpresas from "../../model/empresas";
+import articles from "../../model/artigos";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -108,7 +109,11 @@ const Banner = () => {
               <span>Cadastre uma empresa</span>{" "}
               <i className="bi bi-building-add"></i>
             </ScrollToTopLink>
-            <a href="https://pleno.ao" target="__blank" className="text-decoration-none q rounded-2">
+            <a
+              href="https://pleno.ao"
+              target="__blank"
+              className="text-decoration-none q rounded-2"
+            >
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </a>
             <ScrollToTopLink
@@ -194,12 +199,15 @@ const Banner = () => {
         </div>
       </div> */}
 
-<br />
-<center>
-  <ScrollToTopLink to={'/pt/empresa/produtos'} className={'btn btn-success '} >
-    Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
-  </ScrollToTopLink>
-</center>
+      <br />
+      <center>
+        <ScrollToTopLink
+          to={"/pt/empresa/produtos"}
+          className={"btn btn-success "}
+        >
+          Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
+        </ScrollToTopLink>
+      </center>
 
       <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
         <br />
@@ -624,7 +632,7 @@ const Banner = () => {
 
         <div className="lista-blog">
           <div className="d-flex overflow-x-auto scroll-md gap-4">
-            <div className="card-blog rounded-1 border-lightt shadow-sm">
+            {/* <div className="card-blog rounded-1 border-lightt shadow-sm">
               <img src={b1} alt="" className="logo-blog" />
               <div className="bod px-3 pb-3">
                 <br />
@@ -642,64 +650,26 @@ const Banner = () => {
                   Ler mais <i className="bi bi-arrow-right-short"></i>
                 </a>
               </div>
-            </div>
-            <div className="card-blog rounded-1 border-lightt shadow-sm">
-              <img src={b2} alt="" className="logo-blog" />
-              <div className="bod px-3 pb-3">
-                <br />
-                <AbreviarTexto
-                  texto={
-                    "'Financas em dia com , kwhewwhechjwbebcmegwmg wehggwe mugewmgduge2ufweg egwhjc  hegwfjgwehh evchj.egwfhgwefwe'"
-                  }
-                  largura={"350"}
-                />
+            </div> */}
+            {articles.map((artigo) => (
+              <div className="card-blog rounded-1 border-lightt shadow-sm">
+                <img src={artigo.coverImage} alt="" className="logo-blog" />
+                <div className="bod px-3 pb-3">
+                  <br />
+                  <AbreviarTexto
+                    texto={artigo.title}
+                    largura={"390"}
+                  />
 
-                <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
-                  <span className="my-auto text-secondary">23/12/2023</span>
-                </p>
-                <a className=" ">
-                  Ler mais <i className="bi bi-arrow-right-short"></i>
-                </a>
+                  <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
+                    <span className="my-auto text-secondary">{artigo.date}</span>
+                  </p>
+                  <a href={'/pt/blog/'+artigo.id} className=" ">
+                    Ler matéria <i className="bi bi-arrow-right-short"></i>
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="card-blog rounded-1 border-lightt shadow-sm">
-              <img src={b3} alt="" className="logo-blog" />
-              <div className="bod px-3 pb-3">
-                <br />
-                <AbreviarTexto
-                  texto={
-                    "'Arreiou Ta Barato, kwhewwhechjwbebcmegwmg wehggwe mugewmgduge2ufweg egwhjc  hegwfjgwehh evchj.egwfhgwefwe'"
-                  }
-                  largura={"350"}
-                />
-
-                <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
-                  <span className="my-auto text-secondary">23/12/2023</span>
-                </p>
-                <a className=" ">
-                  Ler mais <i className="bi bi-arrow-right-short"></i>
-                </a>
-              </div>
-            </div>
-            <div className="card-blog rounded-1 border-lightt shadow-sm">
-              <img src={b4} alt="" className="logo-blog" />
-              <div className="bod px-3 pb-3">
-                <br />
-                <AbreviarTexto
-                  texto={
-                    "'Redes sociais , kwhewwhechjwbebcmegwmg wehggwe mugewmgduge2ufweg egwhjc  hegwfjgwehh evchj.egwfhgwefwe'"
-                  }
-                  largura={"350"}
-                />
-
-                <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
-                  <span className="my-auto text-secondary">23/12/2023</span>
-                </p>
-                <a className=" ">
-                  Ler mais <i className="bi bi-arrow-right-short"></i>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -884,7 +854,8 @@ const Banner = () => {
 
               <br />
               <br />
-              <ScrollToTopLink disabled
+              <ScrollToTopLink
+                disabled
                 to={"/pt/descontos"}
                 className="btn rounded-1 disabled btn-outline-success"
               >

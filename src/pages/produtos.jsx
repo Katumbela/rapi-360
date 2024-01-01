@@ -201,8 +201,8 @@ const Produtos = ({ cart, nomee, emaill }) => {
 
         <br />
 
-        <div itemID="solucoes" id="solucoes" className=" bg-light my-3 py-4 text-center">
-          <h3 className="f-reg">Soluções do Reputa 360 para empresas</h3>
+        <div itemID="solucoes" id="solucoes" className=" bg-light my-3 py-5 text-center">
+          <h2 className="f-reg">Soluções do Reputa 360 para empresas</h2>
           <br />
           <br />
           <div className="lista-solucoes flex-wrap d-flex gap-5 justify-content-center text-start">

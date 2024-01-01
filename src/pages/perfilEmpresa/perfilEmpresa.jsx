@@ -226,9 +226,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         </div>
         <div className="opcoes bg-white border-b-t py-2">
           <div className="d-flex justify-content-center my-auto gap-4 overflow-x-auto">
-            <p className="text-primary gap-2 d-flex">
+            <ScrollToTopLink to={'/pt/'} className="text-primary text-decoration-none gap-2 d-flex">
               <i className="bi bi-house"></i>Pagina Inicial
-            </p>
+            </ScrollToTopLink>
             <p className="text-secondary gap-2 d-flex">
               <i className="bi bi-megaphone"></i>Reclamações
             </p>
