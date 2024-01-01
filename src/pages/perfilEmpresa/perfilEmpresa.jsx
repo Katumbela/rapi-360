@@ -202,7 +202,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         <div className="dados-empresa mt-4 py-3 mt-md-0 container">
           <div className="row">
             <div className="col-12 col-md-2"></div>
-            <div className="col-12 col-md-8">
+            <div className="col-12 pt-4 pt-sm-0 col-md-8">
               <b className="f-20 f-reg">{empresaEscolhida.nome}</b>
               <br />
               <div className="d-flex gap-4 f-14 mt-2 flex-wrap">

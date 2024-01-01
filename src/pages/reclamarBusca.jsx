@@ -193,6 +193,24 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
     // Exibir as sugestões
   };
 
+
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
+
+  const handleInputClick = () => {
+    // Exibir sugestões ao clicar no input
+    setShowSuggestions(true);
+  };
+
+
+  const handleBlur = () => {
+    // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
+    setTimeout(() => {
+      setShowSuggestions(false);
+    }, 200);
+  };
+
+
   return (
     <div className="w-100">
       {/*  */}
@@ -220,9 +238,11 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
             <div className="pesquisa pesq-busca pesquisa-md">
               {/* <img src={logosm} alt="" className="logo-sm" /> */}
               <input
-                type="search"
+                type="text"
                 name=""
                 value={searchTerm}
+                onClick={handleInputClick}
+                onBlur={handleBlur}
                 onChange={handleInputChange}
                 placeholder="Pesquise por empresa, NIF ou site"
                 id=""
@@ -287,7 +307,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                     </div>
                   </ScrollToTopLink>
                 ))
-              ) : (
+              ) : showSuggestions && searchTerm !== "" ? (
                 <>
                   <p className="text-center py-3 w-100 mx-auto f-14">
                     <img src={notFound} style={{ height: "8em" }} alt="" />
@@ -299,7 +319,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                     </p>
                   </p>
                 </>
-              ) }
+              ) : null }
             </div>
           </div>
         </center>

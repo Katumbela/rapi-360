@@ -162,6 +162,8 @@ const Header = (props) => {
     }, 200);
   };
 
+  
+
   const handleInputClick = () => {
     // Exibir sugestões ao clicar no input
     setShowSuggestions(true);

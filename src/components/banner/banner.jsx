@@ -826,7 +826,7 @@ const Banner = () => {
         </center>
 
         <br />
-        <center className="d-flex partners gap-4 justify-content-center">
+        <center className="d-flex flex-wrap partners gap-4 justify-content-center">
           <img src={gk} alt="" />
           <img src={pleno} alt="" />
           <img src={sdq} alt="" />
