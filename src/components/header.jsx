@@ -9,6 +9,7 @@ import firebase from "firebase/compat/app";
 import AbreviarTexto from "./abreviarTexto";
 
 import bom from "../imgs/bom.png";
+import notFound from "../imgs/not-found.png";
 import mau from "../imgs/mau.png";
 import arreiou from "../imgs/arreiou.jpeg";
 import bomm from "../imgs/bomm.webp";
@@ -246,9 +247,25 @@ const Header = (props) => {
         <div className="suggestions container-fluid py-sm-3">
           <br />
           <h5 className="f-reg">
-            <b>As empresas mais buscadas do R360 nas últimas 24h</b>
+            {showSuggestions ? (
+              searchTerm !== "" ? (
+                <></>
+              ) : (
+                <>
+                  <b>As empresas mais buscadas do R360 nas últimas 24h</b>
+                  <br />
+                  <br />
+                </>
+              )
+            ) : null}
           </h5>
-          <br />
+          {(searchResults !== "") & (searchTerm !== "") ? (
+            <>
+              Resultados para: <b className="f-reg">{searchTerm}</b>
+              <br />
+              <br />
+            </>
+          ) : null}
           <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
             {searchResults != "" ? (
               searchResults.map((empresa) => (
@@ -298,7 +315,16 @@ const Header = (props) => {
             ) : showSuggestions ? (
               searchTerm !== "" ? (
                 <p className="text-center py-3 w-100 mx-auto f-14">
-                  Nenhum resultado encontrado, parece que esta empresa ainda não está cadastrado. <a href="/pt/solicitar-cadastro">Solicite o cadastro</a> desta empresa
+                  <img src={notFound} style={{ height: "8em" }} alt="" />
+                  <p>
+                    {" "}
+                    Nenhum resultado encontrado, parece que esta empresa ainda
+                    não está cadastrado.{" "}
+                    <a href="/pt/solicitar-cadastro">
+                      Solicite o cadastro
+                    </a>{" "}
+                    desta empresa
+                  </p>
                 </p>
               ) : (
                 dadosEmpresas.slice(0, 8).map((empresa) => (
