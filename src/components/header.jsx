@@ -133,7 +133,7 @@ const Header = (props) => {
 
   const [searchResults, setSearchResults] = useState([]);
 
-  
+
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
@@ -231,19 +231,19 @@ const Header = (props) => {
         </div>
       </div>
       <div className="menu-sm d-flex justify-content-between overflow-x-auto">
-        <NavLink to={"/pt/login"}>Entrar</NavLink>
+        <ScrollToTopLink to={"/pt/login"}>Entrar</ScrollToTopLink>
 
-        <NavLink to={"/pt/cadastro"}>Cadastro</NavLink>
+        <ScrollToTopLink to={"/pt/cadastro"}>Cadastro</ScrollToTopLink>
 
-        <NavLink>
-          <span className="premio-md">Prêmios</span>
-        </NavLink>
+        <ScrollToTopLink to={'/pt/empresa/produtos'} >
+          <span className="premio-md">Produtos</span>
+        </ScrollToTopLink>
 
-        <NavLink to={"/pt/reclamar"}>
+        <ScrollToTopLink to={"/pt/reclamar"}>
           <button className="btn rec btn-sm btn-danger">
             <i className="bi bi-megaphone me-1"></i> Reclamar
           </button>
-        </NavLink>
+        </ScrollToTopLink>
       </div>
       {showSuggestions && (
         <div className="suggestions container-fluid py-sm-3">

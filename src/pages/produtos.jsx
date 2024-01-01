@@ -162,7 +162,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
         cart={cart}
       />
 
-      <div className="s">
+      <div className="s l">
         <div className="desconto container">
           <div className="row flex-row-reverse">
             <div className="col-12 imm col-md-6">

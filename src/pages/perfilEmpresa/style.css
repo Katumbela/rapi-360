@@ -9,7 +9,14 @@
     left: 10%;
 }
 
+@media (max-width: 630px) {
+
+    .conheca{
+        display: none;
+    }
+}
 @media (max-width: 790px) {
+
     .foto-perfil-empresa  {
         left: 0 !important;
        right: 0 !important;

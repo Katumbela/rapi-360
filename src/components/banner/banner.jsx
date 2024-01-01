@@ -203,7 +203,7 @@ const Banner = () => {
       <center>
         <ScrollToTopLink
           to={"/pt/empresa/produtos"}
-          className={"btn btn-success "}
+          className={"btn conheca btn-success "}
         >
           Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
         </ScrollToTopLink>
