@@ -50,6 +50,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       const empresaRef = firebase.firestore().collection("empresa");
       await empresaRef.add({
         ...formData,
+        conta: 'empresa',
         userId: user.uid, // Adicione o UID do usuário, se necessário
       });
 
