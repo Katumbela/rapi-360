@@ -11,9 +11,12 @@ import logo2 from "../imgs/logo-d.png";
 import axios from "axios";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import ScrollToTopLink from "../components/scrollTopLink";
 
 const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
+
+  document.title = `Entrar para sua conta | Reputação 360`;
 
   const [user, setUser] = useState(null);
 
@@ -153,23 +156,23 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
               <center>
                 <>
                   <div className="pb-2">
-                    <b className="text-dark">Você é uma empresa?</b>
+                    <b className="text-dark">Não tem uma conta ?</b>
                   </div>
-                  <button
+                  <ScrollToTopLink to={'/pt/cadastro'}
                     className="d-flex  w-100 btn-google btn btn-outline-primary"
-                    onClick={handleLoginWithGoogle}
+                 
                   >
-                    <span>Acessar área da empresa</span>
-                  </button>
+                    <span>Faça seu cadastro</span>
+                  </ScrollToTopLink>
                 </>
               </center>
             </div>
             <br />
-            <div className="text-center">
+            {/* <div className="text-center">
               <span>
                 Não tem uma conta ? <a href="/pt/cadastro">Cadastre-se</a>{" "}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

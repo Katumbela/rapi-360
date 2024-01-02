@@ -15,6 +15,9 @@ import Footer from "../components/footer";
 const SolicitarCadastro = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
 
+
+  document.title = `Solicitar cadastro de uma empresa | Reputação 360`;
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {

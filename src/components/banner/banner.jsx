@@ -849,7 +849,7 @@ const Banner = () => {
                 Aqui, você e sua equipe adquirem conhecimento e insights
                 atualizados para colocar a mão na massa e enfrentar os desafios
                 reais de um time de atendimento. Construa uma carreira de
-                sucesso com o RA Educa!
+                sucesso com o R360 Eduka!
               </span>
 
               <br />

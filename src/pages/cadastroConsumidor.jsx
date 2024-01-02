@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-
 import { UserContext } from "./userContext";
-
 import { NavLink } from "react-router-dom";
 import "../css/login.css";
 import logo from "../imgs/icone.png";
@@ -12,6 +10,8 @@ import axios from "axios";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import ScrollToTopLink from "../components/scrollTopLink";
+import { db } from "./firebase";
+import Swal from "sweetalert2";
 
 const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
@@ -25,60 +25,76 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
     });
   }, []);
 
-  const handleLoginWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
+  
+  
+  const handleRegister = async (userData) => {
+    try {
+      // Check if the email is already registered
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(
+        userData.email,
+        userData.password
+      );
 
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        // login bem-sucedido, faça algo aqui
-        setUser(result.user);
-
-        setEmaill(result.user.email);
-
-        const userData = {
-          name: result.user.displayName,
-          email: result.user.email,
-          pictureUrl: result.user.pictureUrl,
-          photo: result.user.photoURL,
-          uid: result.user.uid,
-          tel: result.user.phoneNumber,
-        };
-
-        localStorage.setItem("users", JSON.stringify(userData));
-        setNomee(result.user.displayName);
-        handleLogin(result);
-        window.location.href = "/pt";
-      })
-      .catch((error) => {
-        // erro no login, faça algo aqui
+      // Send user data to Firestore if the registration is successful
+      await db.collection("cliente").add({
+        uid: userCredential.user.uid,
+        ...userData,
       });
+
+      console.log("User registered successfully!");
+
+      // Show success alert
+      Swal.fire({
+        icon: 'success',
+        title: 'Uhaa , Cadastrado!',
+        text: 'Seu cadastro foi efectuado com sucesso.',
+      });
+
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log("Email is already registered. Please log in.");
+
+        // Show error alert
+        Swal.fire({
+          icon: 'warning',
+          title: 'Opah !',
+          text: 'Parece que seu email já se encontra em uso, faça login.',
+        });
+      } else {
+        console.error(error);
+
+        // Show generic error alert
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Failed',
+          text: 'An error occurred during registration. Please try again later.',
+        });
+      }
+    }
   };
 
-  const handleLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(null);
 
-        setEmaill("");
-        setNomee("");
-        const userData = {
-          name: "",
-          email: "",
-          pictureUrl: "",
-          tel: "",
-        };
 
-        localStorage.setItem("users", JSON.stringify(userData));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // Collect form data
+    const formData = {
+      name: e.target.elements.name.value,
+      bi: e.target.elements.bi.value,
+      // birthdate: e.target.elements.birthdate.value,
+      phone: e.target.elements.phone.value,
+      // province: e.target.elements.province.value,
+      city: e.target.elements.address.value,
+      email: e.target.elements.email.value,
+      password: e.target.elements.password.value,
+    };
+
+    // Call backend to register user
+    handleRegister(formData);
   };
-
   return (
     <>
       <Header
@@ -94,32 +110,20 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             <div className="col-12  ">
               <div className="text-center">
                 <br />
-                <h2><b>Olá, crie uma conta no Reputação 360</b></h2>
+                <h2>
+                  <b>Olá, crie uma conta no Reputação 360</b>
+                </h2>
                 <p className="fw-light fw-400 fw-thin f-16">
                   Com você logado conseguimos oferecer um serviço melhor e mais
                   personalizado. Navegue logado e ajude outros milhões de
                   consumidores.
                 </p>
                 <br />
-                
               </div>
               <div className="container my-auto form-c form">
                 <center>
-                  {user ? (
-                    <div>
-                      <p className="text-primary">
-                        Você está logado como <b> {user.displayName}</b> <br />
-                        <span className="text-secondary">
-                          Email: {user.email}
-                        </span>
-                      </p>
-
-                      <button className="btn btn-danger" onClick={handleLogout}>
-                        Sair
-                      </button>
-                    </div>
-                  ) : (
-                    <>
+                   
+                    <form onSubmit={handleFormSubmit}>
                       <div className="text-dark">
                         <div className="text-start mb-3 headc">
                           <b className="text-dark">
@@ -147,6 +151,8 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             <input
                               type="text"
                               className="form-control rounded-1"
+                              name="name"
+                              required
                               placeholder="Digite seu nome e sobrenome"
                             />
                           </div>
@@ -158,22 +164,24 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             </label>
                             <input
                               type="text"
+                              required
+                              name="bi"
                               className="form-control rounded-1"
                               placeholder="###########"
                             />
                           </div>
                           <br />
-                          <div className="col-12 col-lg-6 my-2">
+                          {/* <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Data de
                               Nascimento
                             </label>
                             <input
+                            name="birthdate"
                               type="date"
                               className="form-control rounded-1"
                             />
-                          </div>
-                          <br />
+                          </div> */}
+                          {/* <br />
                           <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
                               Gênero
@@ -188,24 +196,43 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               <option value="Outro">Outro</option>
                             </select>
                           </div>
+                          <br /> */}
+
                           <br />
                           <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              <b className="text-danger">*</b> Telefone
+                            </label>
+                            <input
+                              type="tel"
+                              className="form-control rounded-1"
+                              name="phone"
+
+                              placeholder="Digite seu telefone atual"
+                            />
+                          </div>
+
+                          <br />
+                          {/* <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
                               <b className="text-danger">*</b> Província
                             </label>
                             <input
                               type="text"
                               className="form-control rounded-1"
+                              name="province"
                               placeholder="Digite sua provincia de residência"
                             />
                           </div>
-                          <br />
+                          <br /> */}
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Cidade
+                              <b className="text-danger">*</b> Endereço
                             </label>
                             <input
                               type="text"
+                              name="address"
+                              required
                               className="form-control rounded-1"
                               placeholder="Digite sua cidade atual"
                             />
@@ -226,31 +253,22 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               <b className="text-danger">*</b> E-mail
                             </label>
                             <input
+                            required
                               type="email"
+                              name="email"
                               className="form-control rounded-1"
                               placeholder="Digite seu melhor email"
                             />
                           </div>
 
-                          <br />
-                          <div className="col-12 my-2 col-lg-6">
-                            <label htmlFor="" className="text-secondary f-12">
-                              <b className="text-danger">*</b> Telefone
-                            </label>
-                            <input
-                              type="tel"
-                              className="form-control rounded-1"
-                              placeholder="Digite seu telefone atual"
-                            />
-                          </div>
-
-                          <br />
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
                               <b className="text-danger">*</b> Crie uma senha
                             </label>
                             <input
                               type="password"
+                              required
+                              name="password"
                               className="form-control rounded-1"
                               placeholder="Crie uma senha (min 8 caracteres)"
                               minLength={8}
@@ -265,8 +283,8 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                       <button className="d-flex text-white w-100  btn btn-success justify-content-center rounded-1">
                         <span>Cadastrar</span>
                       </button>
-                    </>
-                  )}
+                    </form>
+                  
                 </center>
               </div>
               <br />
@@ -274,7 +292,7 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
               <div className="container form-c my-auto form">
                 <center>
                   <>
-                  <br />
+                    <br />
                     <div className="pb-2">
                       <b className="text-dark">
                         É uma empresa e quer responder reclamações?
@@ -285,11 +303,12 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                         consumidores
                       </span>
                     </div>
-                    <ScrollToTopLink  to={'/pt/cadastro/empresa'}
+                    <ScrollToTopLink
+                      to={"/pt/cadastro/empresa"}
                       className="d-flex gap-2 text-decoration-none w-100 btn-google btn btn-outline-primary"
-                      
                     >
-                      <span >Cadastre sua empresa</span> <i className="bi my-auto bi-arrow-right-short"></i>
+                      <span>Cadastre sua empresa</span>{" "}
+                      <i className="bi my-auto bi-arrow-right-short"></i>
                     </ScrollToTopLink>
                   </>
                 </center>
@@ -303,11 +322,11 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             </div>
           </div>
         </div>
-      <br />
-      <br />
-      <br />
+        <br />
+        <br />
+        <br />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
