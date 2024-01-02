@@ -14,7 +14,7 @@ const AvaliacaoComponent = ({ onAvaliacaoChange }) => {
       botoes.push(
         <button
           key={i}
-          className={`btn btn-${avaliacao === i ? 'primary' : 'light'}`}
+          className={`btn btn-${avaliacao === i ? avaliacao < 3 ? 'danger' : avaliacao >= 3 && avaliacao <=6 ? 'warning' : 'success' : 'light'}`}
           onClick={() => handleAvaliacaoClick(i)}
         >
           {i}
@@ -28,7 +28,7 @@ const AvaliacaoComponent = ({ onAvaliacaoChange }) => {
     <div className="avaliacao-component">
       {/* <p>Escolha sua avaliação:</p> */}
       <div className="botoes-avaliacao">{renderBotoesAvaliacao()}</div>
-      <p className='mt-2'>Avaliação selecionada: {avaliacao !== null ? avaliacao : 'Nenhuma avaliação selecionada'}</p>
+      <p className='mt-2'>Nota: {avaliacao !== null ? avaliacao+'.0' : 'Nenhuma avaliação selecionada'}</p>
     </div>
   );
 };

@@ -62,14 +62,11 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   const empresaEscolhida = empres[0];
   console.log(empresaEscolhida);
 
-
   const [avaliacaoUsuario, setAvaliacaoUsuario] = useState(null);
 
   const handleAvaliacaoChange = (avaliacao) => {
     setAvaliacaoUsuario(avaliacao);
   };
-
-
 
   document.title = `Reclamar de ${empresaEscolhida.nome} | Reputação 360`;
 
@@ -231,7 +228,10 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                 </p>
               </div>
             </div>
-            <a href="/pt/reclamar" className="my-auto alterar text-decoration-none">
+            <a
+              href="/pt/reclamar"
+              className="my-auto alterar text-decoration-none"
+            >
               Alterar empresa
             </a>
           </div>
@@ -256,15 +256,64 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
               <>
                 <div className="text-dark py-2">
                   <div className="text-center mb-3 headc">
-                    <h2 className="text-dark">Vamos começar. <b className="text-success">Conte sua história</b></h2>
+                    <h2 className="text-dark">
+                      Vamos começar.{" "}
+                      <b className="text-success">Conte sua história</b>
+                    </h2>
 
                     <p>
-                     
                       <span className="text-secondary f-14">
-                      Descreva o seu problema com a empresa.
+                        Descreva o seu problema com a empresa.
                       </span>
                     </p>
                   </div>
+
+                    <div className="titul mt-3">
+                      <div className="d-flex f-reg gap-2">
+                        <i className="bi text-success bi-star"></i>
+                        <b>
+                          Classifique a história / Empresa{" "}
+                          <span className="text-danger">*</span>
+                        </b>
+                      </div>
+                    </div>
+
+                    <br />
+                    <div className="col-12 text-center my-2">
+                      <AvaliacaoComponent
+                        className=""
+                        onAvaliacaoChange={handleAvaliacaoChange}
+                      />
+
+                    </div>
+                    <hr />
+                    <div className="col-12 my-2 ">
+                      <div className="titul mt-3">
+                        <div className="d-flex f-reg gap-2">
+                          <i className="bi text-success bi-hand-thumbs-up"></i>
+                          <b>
+                            Solicitaria novamente esta Empresa{" "}
+                            <span className="text-danger">*</span>
+                          </b>
+                        </div>
+                      </div>{" "}
+                      <label htmlFor="" className="text-secondary f-12">
+                        Para o caso de resolverem o seu problema, pode voltar a
+                        responder mais tarde
+                      </label>
+                      <br />
+                      <br />
+                      <div className="d-flex justify-content-around">
+                        <label htmlFor="sim" className="f-18">
+                          <input type="radio" checked name="negocio" id="sim" />{" "}
+                          Sim
+                        </label>
+                        <label htmlFor="nao" className="f-18">
+                          <input type="radio" name="negocio" id="nao" /> Não
+                        </label>
+                      </div>
+                    </div>
+                    <hr />
                   <div className="titul">
                     <div className="d-flex gap-2">
                       <i className="bi text- f-reg bi-megaphone"></i>{" "}
@@ -273,7 +322,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                   </div>
                   <div className="row text-start">
                     <div className="col-12  my-2">
-                      
                       <input
                         type="text"
                         className="form-control rounded-1"
@@ -283,36 +331,65 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     <br />
                     <div className="col-12 col-lg-12 my-2">
                       <label htmlFor="" className=" f-reg">
-                         Conte sua história
+                        Conte sua história
                       </label>
-                     <textarea name="" id="" placeholder={`Descreva sua experiênciar com produtos ou serviços da ${empresaEscolhida.nome}`} className="w-100 form-control mt-1" cols="30" rows="3" maxLength={1000}></textarea>
-                        <div className="alert alert-info alert-sm f-12 p-2 mt-2">
-                        Nunca inclua dados pessoais no texto. A empresa receberá seus dados junto com a reclamação.
-                        </div>
+                      <textarea
+                        name=""
+                        id=""
+                        placeholder={`Descreva sua experiênciar com produtos ou serviços da ${empresaEscolhida.nome}`}
+                        className="w-100 form-control mt-1"
+                        cols="30"
+                        rows="3"
+                        maxLength={1000}
+                      ></textarea>
+                      <div className="alert alert-info alert-sm f-12 p-2 mt-2">
+                        Nunca inclua dados pessoais no texto. A empresa receberá
+                        seus dados junto com a reclamação.
+                      </div>
                     </div>
-                    <br />
-                    <div className="col-12 my-2">
+                    {/* <br /> */}
+                    {/* <div className="col-12 my-2">
                       <label htmlFor="" className="f-16 f-reg ">
-                      Qual o telefone que a empresa pode entrar em contato?
-                      </label> <br />
-                      <span className="f-12 mb-1 text-secondary">Fique tranquilo, só a empresa poderá ver seu contacto</span>
-                     
-                      <input type="tel" className="form-control mt-1 rounded-1" placeholder="244 921 234 567"/>
+                        Qual o telefone que a empresa pode entrar em contato?
+                      </label>{" "}
+                      <br />
+                      <span className="f-12 mb-1 text-secondary">
+                        Fique tranquilo, só a empresa poderá ver seu contacto
+                      </span>
+                      <input
+                        type="tel"
+                        className="form-control mt-1 rounded-1"
+                        placeholder="244 921 234 567"
+                      />
+                    </div> */}
+                    {/* <br />
+                    <div className="col-12 f-12 my-0">
+                      <label
+                        htmlFor="auth"
+                        className=" px-3 py-2 d-flex gap-3 auth cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          name=""
+                          className="input-check"
+                          id="auth"
+                        />
+                        <b>
+                          Autorizo receber notificações do Reputação 360 Aqui
+                          pelo Whatsapp
+                        </b>
+                      </label>
+                      <br />
                     </div>
-                    <br />
-                    <div className="col-12  my-3">
-                     <label htmlFor="auth" className=" px-3 py-2 d-flex gap-3 auth cursor-pointer">
-                     <input type="checkbox" name="" className="input-check" id="auth" />
-                     <b>Autorizo receber notificações do Reputação 360 Aqui pelo Whatsapp</b>
-                     </label>
-                    <br />
-                    </div>
-                    <hr />
+                    <hr /> */}
 
                     <div className="titul mt-3">
                       <div className="d-flex f-reg gap-2">
                         <i className="bi text-success bi-archive"></i>
-                        <b>Anexos  <span className="text-secondary">(Opcional)</span></b>
+                        <b>
+                          Anexos{" "}
+                          <span className="text-secondary">(Opcional)</span>
+                        </b>
                       </div>
                     </div>
 
@@ -321,54 +398,10 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                       <label htmlFor="" className="text-secondary f-12">
                         No máximo 3 ficheiros
                       </label>
-                      <input 
-                        type="file"
-                        className="form-control rounded-1"
-                        
-                      />
-                    <br />
-                    </div>
-
-<hr />
-                    <div className="titul mt-3">
-                      <div className="d-flex f-reg gap-2">
-                        <i className="bi text-success bi-star"></i>
-                        <b>Classifique a história / Empresa  <span className="text-danger">*</span></b>
-                      </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    <div className="col-12 text-center my-2">
-                     <AvaliacaoComponent className="" onAvaliacaoChange={handleAvaliacaoChange} />
-
-                    
-                    <br />
-</div>
-<hr />
-                    <div className="col-12 my-2 ">
-                     
-                    <div className="titul mt-3">
-                      <div className="d-flex f-reg gap-2">
-                        <i className="bi text-success bi-hand-thumbs-up"></i>
-                        <b>Solicitaria novamente esta Empresa  <span className="text-danger">*</span></b>
-                      </div>
-                    </div> <label htmlFor="" className="text-secondary f-12">
-                        Para o caso de resolverem o seu problema, pode voltar a responder mais tarde 
-                      </label>
+                      <input type="file" className="form-control rounded-1" />
                       <br />
-                      <br />
-                      <div className="d-flex justify-content-around">
-
-                     <label htmlFor="sim" className="f-18">
-                        <input type="radio" checked name="negocio" id="sim" /> Sim
-                     </label>
-                     <label htmlFor="nao" className="f-18">
-                        <input type="radio" name="negocio" id="nao" /> Não
-                     </label>
-                      </div>
                     </div>
-                    <br />
+
                   </div>
                 </div>
                 <br />
