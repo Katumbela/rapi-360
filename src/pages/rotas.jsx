@@ -28,6 +28,7 @@ import ReclamarEmpresa from "./reclamarEmpresa";
 import CentralAjuda from "./centralAjuda";
 import Produtos from "./produtos";
 import Blog from "./blog";
+import SolicitarCadastro from "./solicitarCadastro";
 
 
 const RotasPT = (props) => {
@@ -59,6 +60,7 @@ const RotasPT = (props) => {
                     <Route element={<CadastroEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro/empresa" exact />
                     <Route element={<Faqs  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/faqs" exact />
                     <Route element={<Login cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/login" exact />
+                    <Route element={<SolicitarCadastro cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/solicitar-cadastro" exact />
                     <Route element={<NotFoundPage/>}/>
                     <Route element={<SubmitP  nomee={nomee} emaill={emaill} cart={cart} handleClick={handleClick} />} path="/pt/add-artigo" exact />
                     <Route element={<CriarConta />} path="/pt/criar_conta" exact />
