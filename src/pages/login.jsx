@@ -13,6 +13,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import ScrollToTopLink from "../components/scrollTopLink";
 import Swal from "sweetalert2";
+import { db } from "./firebase";
 
 const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
@@ -21,11 +22,51 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
   const [user, setUser] = useState(null);
 
+
+  // verificar login do usuario
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        try {
+          // Consultar o Firestore para obter o documento do usuário com base no e-mail
+          const querySnapshot = await db.collection("cliente").where("email", "==", user.email).get();
+  
+          if (!querySnapshot.empty) {
+            // Se houver um documento correspondente, obter os dados
+            const userData = {
+              name: user.displayName ,
+              email: user.email,
+              pictureUrl: user.photoURL,
+              uid: user.uid,
+              tel: user.phoneNumber ? user.phoneNumber : querySnapshot.docs[0].get("phone"),
+              // Adicione outros campos conforme necessário
+              bi: querySnapshot.docs[0].get("bi"),
+              nome: querySnapshot.docs[0].get("name"),
+              city: querySnapshot.docs[0].get("city"),
+              // Adicione outros campos conforme necessário
+            };
+  
+            // Atualizar o estado do usuário com os dados
+            setUser(userData);
+  
+            // Salvar dados no localStorage
+            localStorage.setItem("users", JSON.stringify(userData));
+          } else {
+            console.warn("Documento não encontrado no Firestore para o e-mail do usuário.");
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados do Firestore:", error);
+        }
+      } else {
+        // Se o usuário não estiver logado, defina o estado do usuário como null
+        setUser(null);
+      }
     });
+  
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
   }, []);
+  
 
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -172,7 +213,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                 {user ? (
                   <div>
                     <p className="text-primary">
-                      Você está logado como <b> {user.displayName}</b> <br />
+                      Você está logado como <b></b> <br />
                       <span className="text-secondary">
                         Email: {user.email}
                       </span>

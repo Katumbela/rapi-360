@@ -33,13 +33,57 @@ import regular from "../imgs/regular.png";
 import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
 import dadosEmpresas from "../model/empresas";
+import { db } from "../pages/firebase";
 const Header = (props) => {
   const [ph, setPh] = useState("");
   const [user, setUser] = useState(null);
 
+  // verificar login do usuario
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        try {
+          // Consultar o Firestore para obter o documento do usuário com base no e-mail
+          const querySnapshot = await db
+            .collection("cliente")
+            .where("email", "==", user.email)
+            .get();
+
+          if (!querySnapshot.empty) {
+            // Se houver um documento correspondente, obter os dados
+            const userData = {
+              name: user.displayName
+                ? user.displayName
+                : querySnapshot.docs[0].get("name"),
+              email: user.email,
+              pictureUrl: user.photoURL,
+              uid: user.uid,
+              tel: user.phoneNumber
+                ? user.phoneNumber
+                : querySnapshot.docs[0].get("phone"),
+              // Adicione outros campos conforme necessário
+              bi: querySnapshot.docs[0].get("bi"),
+              city: querySnapshot.docs[0].get("city"),
+              // Adicione outros campos conforme necessário
+            };
+
+            // Atualizar o estado do usuário com os dados
+            setUser(userData);
+
+            // Salvar dados no localStorage
+            localStorage.setItem("users", JSON.stringify(userData));
+          } else {
+            console.warn(
+              "Documento não encontrado no Firestore para o e-mail do usuário."
+            );
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados do Firestore:", error);
+        }
+      } else {
+        // Se o usuário não estiver logado, defina o estado do usuário como null
+        setUser(null);
+      }
     });
 
     // Cleanup the subscription when the component unmounts
@@ -222,7 +266,11 @@ const Header = (props) => {
                   <span className="btn d-flex gap-2">
                     {" "}
                     <i className="bi tex-success bi-person-circle"></i>{" "}
-                    <AbreviarTexto texto={user.displayName} largura={100} />{" "}
+                    <AbreviarTexto
+                      className="text-success f-reg"
+                      texto={user.name}
+                      largura={100}
+                    />{" "}
                   </span>
                 ) : (
                   <NavLink className={"btn btn-outline-success"} to="/pt/login">
@@ -254,7 +302,19 @@ const Header = (props) => {
         </div>
       </div>
       <div className="menu-sm d-flex justify-content-between overflow-x-auto">
-        <ScrollToTopLink to={"/pt/login"}>Entrar</ScrollToTopLink>
+        {user ? (
+          <span className="btn text-success f-reg d-flex gap-2">
+            {" "}
+            {/* <i className="bi tex-success bi-person-circle"></i>{" "} */}
+            <AbreviarTexto
+              className="text-success f-reg"
+              texto={user.name}
+              largura={100}
+            />{" "}
+          </span>
+        ) : (
+          <ScrollToTopLink to={"/pt/login"}>Entrar</ScrollToTopLink>
+        )}
 
         <ScrollToTopLink to={"/pt/cadastro"}>Cadastro</ScrollToTopLink>
 
