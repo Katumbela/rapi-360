@@ -244,7 +244,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                 onClick={handleInputClick}
                 onBlur={handleBlur}
                 onChange={handleInputChange}
-                placeholder="Pesquise por empresa, NIF ou site"
+                placeholder="Busque por nome, NIF ou site"
                 id=""
               />
               <i className="bi bi-search"></i>

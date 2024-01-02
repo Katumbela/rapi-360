@@ -38,8 +38,9 @@ const Header = (props) => {
   const [ph, setPh] = useState("");
   const [user, setUser] = useState(null);
 
-  // verificar login do usuario
-  useEffect(() => {
+
+useEffect(() => {
+     // verificar login do usuario
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         try {
@@ -251,7 +252,7 @@ const Header = (props) => {
             <input
               type="text"
               name=""
-              placeholder="Pesquise por empresa, NIF ou site"
+              placeholder="Busque por nome, NIF ou site"
               id=""
               value={searchTerm}
               onChange={handleInputChange}

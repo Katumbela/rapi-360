@@ -55,7 +55,10 @@ import dadosEmpresas from "../model/empresas";
 import AvaliacaoComponent from "../components/avaliacaoComponent";
 
 const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
-  const { user, handleLogout } = useContext(UserContext);
+  // const { user, handleLogout } = useContext(UserContext);
+
+  const [user, setUser] = useState("");
+
   const { empresa } = useParams();
 
   const empres = dadosEmpresas.filter((p) => p.id == empresa);
@@ -128,8 +131,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     }
   };
 
-  const [use, setUser] = useState([]);
-
   useEffect(() => {
     // Obtém o valor de 'users' do local storage quando o componente for montado
     const userString = localStorage.getItem("users");
@@ -179,6 +180,59 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       videoRef.current.play();
     }
   }, []);
+
+
+useEffect(() => {
+  // verificar login do usuario
+ const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+   if (user) {
+     try {
+       // Consultar o Firestore para obter o documento do usuário com base no e-mail
+       const querySnapshot = await db
+         .collection("cliente")
+         .where("email", "==", user.email)
+         .get();
+
+       if (!querySnapshot.empty) {
+         // Se houver um documento correspondente, obter os dados
+         const userData = {
+           name: user.displayName
+             ? user.displayName
+             : querySnapshot.docs[0].get("name"),
+           email: user.email,
+           pictureUrl: user.photoURL,
+           uid: user.uid,
+           tel: user.phoneNumber
+             ? user.phoneNumber
+             : querySnapshot.docs[0].get("phone"),
+           // Adicione outros campos conforme necessário
+           bi: querySnapshot.docs[0].get("bi"),
+           city: querySnapshot.docs[0].get("city"),
+           // Adicione outros campos conforme necessário
+         };
+
+         // Atualizar o estado do usuário com os dados
+         setUser(userData);
+
+         // Salvar dados no localStorage
+         localStorage.setItem("users", JSON.stringify(userData));
+       } else {
+         console.warn(
+           "Documento não encontrado no Firestore para o e-mail do usuário."
+         );
+       }
+     } catch (error) {
+       console.error("Erro ao buscar dados do Firestore:", error);
+     }
+   } else {
+     // Se o usuário não estiver logado, defina o estado do usuário como null
+     setUser(null);
+   }
+ });
+
+ // Cleanup the subscription when the component unmounts
+ return () => unsubscribe();
+}, []);
 
   return (
     <div className="w-100">
@@ -241,23 +295,12 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         <br />
         <div className="container my-auto form-c form">
           <center>
-            {user ? (
-              <div>
-                <p className="text-primary">
-                  Você está logado como <b> {user.displayName}</b> <br />
-                  <span className="text-secondary">Email: {user.email}</span>
-                </p>
-
-                <button className="btn btn-danger" onClick={handleLogout}>
-                  Sair
-                </button>
-              </div>
-            ) : (
+            
               <>
                 <div className="text-dark py-2">
                   <div className="text-center mb-3 headc">
                     <h2 className="text-dark">
-                      Vamos começar.{" "}
+                      Vamos começar{" "+user?.name ? user?.name.split(" ")[0] : ''}.{" "}
                       <b className="text-success">Conte sua história</b>
                     </h2>
 
@@ -292,7 +335,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                         <div className="d-flex f-reg gap-2">
                           <i className="bi text-success bi-hand-thumbs-up"></i>
                           <b>
-                            Solicitaria novamente esta Empresa{" "}
+                            Solicitaria novamente esta Empresa{" "+user?.name ? user?.name.split(" ")[0] : ''}
                             <span className="text-danger">*</span>
                           </b>
                         </div>
@@ -325,13 +368,13 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                       <input
                         type="text"
                         className="form-control rounded-1"
-                        placeholder="Escolha um titulo para sua historia"
+                        placeholder={"Escolha um titulo para sua historia "+user?.name ? user?.name.split(" ")[0] : ''}
                       />
                     </div>
                     <br />
                     <div className="col-12 col-lg-12 my-2">
                       <label htmlFor="" className=" f-reg">
-                        Conte sua história
+                        Conte sua história, {" "+user?.name ? user?.name.split(" ")[0] : ''}
                       </label>
                       <textarea
                         name=""
@@ -410,7 +453,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                   <span>Enviar Reclamação</span>
                 </button>
               </>
-            )}
+            
           </center>
         </div>
         <br />
