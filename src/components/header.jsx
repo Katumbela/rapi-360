@@ -34,50 +34,48 @@ import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
 import dadosEmpresas from "../model/empresas";
 const Header = (props) => {
-  const [use, setUser] = useState([]);
-
   const [ph, setPh] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Adicione um listener para o estado da autenticação
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        // Se não houver usuário autenticado, redirecione para a página de login
+      setUser(user);
+    });
+
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []);
+
+  const handleLoginWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // login bem-sucedido, faça algo aqui
+        setUser(result.user);
+
+        // setEmaill(result.user.email);
 
         const userData = {
-          name: "",
-          email: "",
-          pictureUrl: "",
-          tel: "",
-          uid: "",
+          name: result.user.displayName,
+          email: result.user.email,
+          pictureUrl: result.user.pictureUrl,
+          photo: result.user.photoURL,
+          uid: result.user.uid,
+          tel: result.user.phoneNumber,
         };
 
         localStorage.setItem("users", JSON.stringify(userData));
-      }
-    });
-
-    // Retorne uma função de limpeza para remover o listener quando o componente for desmontado
-    return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    // Obtém o valor de 'users' do local storage quando o componente for montado
-    const userString = localStorage.getItem("users");
-    if (userString) {
-      const user = JSON.parse(userString);
-      setUser(user);
-      setPh(user.photo);
-    } else {
-      const userData = {
-        name: "",
-        email: "",
-        pictureUrl: "",
-        tel: "",
-        uid: "",
-      };
-      setUser(userData);
-    }
-  }, []);
+        // setNomee(result.user.displayName);
+        // handleLogin(result);
+        window.location.href = "/pt";
+      })
+      .catch((error) => {
+        // erro no login, faça algo aqui
+      });
+  };
 
   const { nomee, emaill, cart } = props;
 
@@ -113,7 +111,7 @@ const Header = (props) => {
   }, [prevScrollPos]);
 
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
+
   useEffect(() => {
     const handleOverflow = () => {
       // Adicione a classe para ocultar a rolagem vertical do corpo
@@ -132,7 +130,6 @@ const Header = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [searchResults, setSearchResults] = useState([]);
-
 
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
@@ -162,11 +159,31 @@ const Header = (props) => {
     }, 200);
   };
 
-  
-
   const handleInputClick = () => {
     // Exibir sugestões ao clicar no input
     setShowSuggestions(true);
+  };
+
+
+  const handleLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(null);
+
+        const userData = {
+          name: "",
+          email: "",
+          pictureUrl: "",
+          tel: "",
+        };
+
+        localStorage.setItem("users", JSON.stringify(userData));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -202,23 +219,21 @@ const Header = (props) => {
           <div className="item-menu menu-md">
             <ul>
               <li>
-                <NavLink className={"btn btn-outline-success"} to="/pt/login">
-                  {" "}
-                  Entrar
-                </NavLink>
+                {user ? (
+                  <span className="btn d-flex gap-2"> <i className="bi tex-success bi-person-circle"></i> <AbreviarTexto texto={user.displayName} largura={100}/> </span>
+                ) : (
+                  <NavLink className={"btn btn-outline-success"} to="/pt/login">
+                    {" "}
+                    Entrar
+                  </NavLink>
+                )}
               </li>
 
-              {use.name !== "" ? (
+              {user ? (
                 <li>
-                  <NavLink to="/pt/add-artigo"> Add Artigo</NavLink>
-                </li>
-              ) : (
-                <span></span>
-              )}
-
-              {use.name !== "" ? (
-                <li>
-                  <NavLink to="/pt/perfil">{use.name?.split(" ")[0]}</NavLink>
+                  <NavLink onClick={handleLogout} className={"my-auto btn btn-outline-danger"}>
+                  Sair 
+                  </NavLink>
                 </li>
               ) : (
                 <li>
@@ -237,7 +252,7 @@ const Header = (props) => {
 
         <ScrollToTopLink to={"/pt/cadastro"}>Cadastro</ScrollToTopLink>
 
-        <ScrollToTopLink to={'/pt/empresa/produtos'} >
+        <ScrollToTopLink to={"/pt/empresa/produtos"}>
           <span className="premio-md">Produtos</span>
         </ScrollToTopLink>
 

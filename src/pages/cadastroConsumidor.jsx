@@ -47,8 +47,17 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       Swal.fire({
         icon: 'success',
         title: 'Uhaa , Cadastrado!',
-        text: 'Seu cadastro foi efectuado com sucesso.',
+        text: 'Seu cadastro foi efectuado com sucesso, e você foi logado automáticamente.',
       });
+      document.getElementsByTagName('name').value = ''; // Replace 'nomeCompleto' with the actual name attribute of the input field
+      document.getElementsByTagName('bi').value = ''; // Replace 'numeroBI' with the actual name attribute of the input field
+      // document.getElementsByTagName('dataNascimento').value = ''; // Replace 'dataNascimento' with the actual name attribute of the input field
+      document.getElementsByTagName('phone').value = ''; // Replace 'telefone' with the actual name attribute of the input field
+      // document.getElementsByTagName('provincia').value = ''; // Replace 'provincia' with the actual name attribute of the input field
+      document.getElementsByTagName('address').value = ''; // Replace 'cidade' with the actual name attribute of the input field
+      document.getElementsByTagName('email').value = ''; // Replace 'email' with the actual name attribute of the input field
+      document.getElementsByTagName('password').value = ''; // Replace 'senha' with the actual name attribute of the input field
+
 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
@@ -60,6 +69,15 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
           title: 'Opah !',
           text: 'Parece que seu email já se encontra em uso, faça login.',
         });
+        document.getElementsByTagName('name').value = ''; // Replace 'nomeCompleto' with the actual name attribute of the input field
+        document.getElementsByTagName('bi').value = ''; // Replace 'numeroBI' with the actual name attribute of the input field
+        // document.getElementsByTagName('dataNascimento').value = ''; // Replace 'dataNascimento' with the actual name attribute of the input field
+        document.getElementsByTagName('phone').value = ''; // Replace 'telefone' with the actual name attribute of the input field
+        // document.getElementsByTagName('provincia').value = ''; // Replace 'provincia' with the actual name attribute of the input field
+        document.getElementsByTagName('address').value = ''; // Replace 'cidade' with the actual name attribute of the input field
+        document.getElementsByTagName('email').value = ''; // Replace 'email' with the actual name attribute of the input field
+        document.getElementsByTagName('password').value = ''; // Replace 'senha' with the actual name attribute of the input field
+  
       } else {
         console.error(error);
 

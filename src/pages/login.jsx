@@ -53,7 +53,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         window.location.href = "/pt";
       })
       .catch((error) => {
-        // erro no login, faça algo aqui
+        alert(error)
       });
   };
 
@@ -141,12 +141,24 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                         <br />
                       </div>
                     </div>
-                    <button
-                      className="d-flex w-100 rounded-1 justify-content-center btn btn-primary"
-                      
-                    >
+                    <button className="d-flex w-100 rounded-1 justify-content-center btn btn-primary">
                       <span>Entrar</span>
                     </button>
+
+                    <br />
+                    <br />
+
+                    <div className="google-btn" onClick={handleLoginWithGoogle}>
+                      <div className="google-icon-wrapper">
+                        <img
+                          className="google-icon"
+                          src="https://steelbluemedia.com/wp-content/uploads/2019/06/new-google-favicon-512.png"
+                        />
+                      </div>
+                      <p className="btn-text">
+                        <b>Login com google</b>
+                      </p>
+                    </div>
                   </>
                 )}
               </center>
@@ -158,9 +170,9 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                   <div className="pb-2">
                     <b className="text-dark">Não tem uma conta ?</b>
                   </div>
-                  <ScrollToTopLink to={'/pt/cadastro'}
+                  <ScrollToTopLink
+                    to={"/pt/cadastro"}
                     className="d-flex  w-100 btn-google btn btn-outline-primary"
-                 
                   >
                     <span>Faça seu cadastro</span>
                   </ScrollToTopLink>
