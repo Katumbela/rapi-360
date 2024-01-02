@@ -164,7 +164,6 @@ const Header = (props) => {
     setShowSuggestions(true);
   };
 
-
   const handleLogout = () => {
     firebase
       .auth()
@@ -220,7 +219,11 @@ const Header = (props) => {
             <ul>
               <li>
                 {user ? (
-                  <span className="btn d-flex gap-2"> <i className="bi tex-success bi-person-circle"></i> <AbreviarTexto texto={user.displayName} largura={100}/> </span>
+                  <span className="btn d-flex gap-2">
+                    {" "}
+                    <i className="bi tex-success bi-person-circle"></i>{" "}
+                    <AbreviarTexto texto={user.displayName} largura={100} />{" "}
+                  </span>
                 ) : (
                   <NavLink className={"btn btn-outline-success"} to="/pt/login">
                     {" "}
@@ -231,8 +234,11 @@ const Header = (props) => {
 
               {user ? (
                 <li>
-                  <NavLink onClick={handleLogout} className={"my-auto btn btn-outline-danger"}>
-                  Sair 
+                  <NavLink
+                    onClick={handleLogout}
+                    className={"my-auto btn btn-outline-danger"}
+                  >
+                    Sair
                   </NavLink>
                 </li>
               ) : (

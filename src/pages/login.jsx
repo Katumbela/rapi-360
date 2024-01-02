@@ -12,6 +12,7 @@ import axios from "axios";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import ScrollToTopLink from "../components/scrollTopLink";
+import Swal from "sweetalert2";
 
 const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
@@ -53,7 +54,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         window.location.href = "/pt";
       })
       .catch((error) => {
-        alert(error)
+        alert(error);
       });
   };
 
@@ -77,6 +78,74 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       })
       .catch((error) => {
         console.log(error);
+      });
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleLoginWithEmailAndPassword = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        // Login bem-sucedido, faça algo aqui
+        setEmaill(result.user.email);
+        setNomee(result.user.displayName);
+
+        const userData = {
+          name: result.user.displayName,
+          email: result.user.email,
+          // Adicione outros dados do usuário conforme necessário
+        };
+
+        localStorage.setItem("users", JSON.stringify(userData));
+        window.location.href = "/pt";
+      })
+      .catch((error) => {
+        if (
+          error.code === "auth/invalid-login-credentials" ||
+          error.code === "auth/invalid-email"
+        ) {
+          // Verificar se o usuário existe
+          firebase
+            .auth()
+            .fetchSignInMethodsForEmail(email)
+            .then((signInMethods) => {
+              if (signInMethods.includes("google.com")) {
+                // Usuário registrado com Google, mostre a mensagem apropriada
+                Swal.fire({
+                  icon: "info",
+                  title: "Conta registrada com Google",
+                  text: "Esta conta foi registrada com o Google. Faça login com o Google.",
+                });
+              } else {
+                // Usuário registrado com e-mail e senha, mostre a mensagem de erro padrão
+                Swal.fire({
+                  icon: "error",
+                  title: "Ops!",
+                  text: error.message,
+                });
+              }
+            })
+            .catch((fetchError) => {
+              console.error(fetchError);
+            });
+        } else {
+          // Erro padrão
+          Swal.fire({
+            icon: "error",
+            title: "Erro de sistema!",
+            text: "Ocorreu um erro no sistema, por favor tente novamente mais tarde.",
+          });
+        }
       });
   };
 
@@ -119,12 +188,14 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                       <div className=" text-start">
                         <div className="col-12">
                           <label htmlFor="" className="text-secondary f-12">
-                            Email ou Telefone{" "}
+                            Email ou Telefone
                           </label>
                           <input
-                            type="text"
+                            type="email"
                             className="form-control rounded-1"
-                            placeholder="Digite o email ou telefone"
+                            placeholder="Digite o email"
+                            value={email}
+                            onChange={handleChangeEmail}
                           />
                         </div>
                         <br />
@@ -133,18 +204,24 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             Palavra passe
                           </label>
                           <input
-                            type="text"
+                            type="password"
                             className="form-control rounded-1"
                             placeholder="Digite sua palavra passe"
+                            value={password}
+                            onChange={handleChangePassword}
                           />
                         </div>
                         <br />
                       </div>
                     </div>
-                    <button className="d-flex w-100 rounded-1 justify-content-center btn btn-primary">
+
+                    {/* Botão de login */}
+                    <button
+                      className="d-flex w-100 rounded-1 justify-content-center btn btn-primary"
+                      onClick={handleLoginWithEmailAndPassword}
+                    >
                       <span>Entrar</span>
                     </button>
-
                     <br />
                     <br />
 
