@@ -30,8 +30,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
     enderecoEmpresa: "",
     provincia: "",
     cidade: "",
-    responsavel1Email: "",
-    responsavel1Telefone: "",
+    nomeResponsavel: "",
     senha: "",
   });
 
@@ -78,7 +77,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         Swal.fire({
           icon: "error",
           title: "Ops!",
-          text: "Ocorreu um erro ao cadastrar a empresa. Por favor, tente novamente.",
+          text: " Por favor, preencha todos os campos e tente novamente.",
         });
       }
 
@@ -133,209 +132,252 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           </div>
                         </div> */}
 
-                      <div className="row text-start">
-                        <div className="col-12 col-lg-6 my-2">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Nome da empresa <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control rounded-1"
-                            placeholder="Digite seu nome e sobrenome"
-                            name="nomeEmpresa"
-                            value={formData.nomeEmpresa}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                nomeEmpresa: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <div className="col-12 col-lg-6 my-2">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Nome fantasia
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control rounded-1"
-                            placeholder="Digite um outro nome (opcional) "
-                            name="nomeFantasia"
-                            value={formData.nomeFantasia}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                nomeFantasia: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            E-mail da empresa <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control rounded-1"
-                            placeholder="Digite seu melhor email"
-                            name="emailEmpresa"
-                            value={formData.emailEmpresa}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                emailEmpresa: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Outro E-mail <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control rounded-1"
-                            placeholder="Digite outro email"
-                            name="outroEmail"
-                            value={formData.outroEmail}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                outroEmail: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <div className="col-12 col-lg-6 my-2">
-                          <label htmlFor="" className="text-secondary f-12">
-                            <b className="text-danger">*</b> Nº BI/ NIF/
-                            Passport
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control rounded-1"
-                            placeholder="###########"
-                          />
-                        </div>
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Site da empresa <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="link"
-                            className="form-control rounded-1"
-                            placeholder="www.reputa360.ao"
-                          />
-                        </div>
-                        <br />
-                        <div className="col-12 my-2 col-lg-12">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Endereço da empresa
-                            <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control rounded-1"
-                            placeholder="Digite o endereço atual da empresa"
-                          />
-                        </div>
-                        <br />
-                        <div className="col-12 col-lg-6 my-2">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Província
-                          </label>
-                          <select
-                            name=""
-                            id=""
-                            className="form-control rounded-1"
-                          >
-                            <option value="Bengo">Bengo</option>
-                            <option value="Benguela">Benguela</option>
-                            <option value="Bié">Bié</option>
-                            <option value="Cabinda">Cabinda</option>
-                            <option value="Cuando Cubango">
-                              Cuando Cubango
-                            </option>
-                            <option value="Cuanza Norte">Cuanza Norte</option>
-                            <option value="Cuanza Sul">Cuanza Sul</option>
-                            <option value="Cunene">Cunene</option>
-                            <option value="Huambo">Huambo</option>
-                            <option value="Huíla">Huíla</option>
-                            <option value="Luanda">Luanda</option>
-                            <option value="Lunda Norte">Lunda Norte</option>
-                            <option value="Lunda Sul">Lunda Sul</option>
-                            <option value="Malanje">Malanje</option>
-                            <option value="Moxico">Moxico</option>
-                            <option value="Namibe">Namibe</option>
-                            <option value="Uíge">Uíge</option>
-                            <option value="Zaire">Zaire</option>
-                          </select>
-                        </div>
-
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            <b className="text-danger">*</b> Cidade / Município
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control rounded-1"
-                            placeholder="Digite o município / cidade atual"
-                          />
-                        </div>
-                        <br />
-
-                        <br />
-                        <div className="titul mt-3">
-                          <div className="d-flex gap-2">
-                            <i className="bi text-success bi-shield-lock-fill"></i>
-                            <b>Dados de acesso</b>
+                        <div className="row text-start">
+                          <div className="col-12 col-lg-6 my-2">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Nome da empresa <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="text"
+                              className="form-control rounded-1"
+                              placeholder="Digite seu nome e sobrenome"
+                              name="nomeEmpresa"
+                              value={formData.nomeEmpresa}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  nomeEmpresa: e.target.value,
+                                })
+                              }
+                            />
                           </div>
-                        </div>
+                          <div className="col-12 col-lg-6 my-2">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Nome fantasia
+                            </label>
+                            <input required
+                              type="text"
+                              className="form-control rounded-1"
+                              placeholder="Digite um outro nome (opcional) "
+                              name="nomeFantasia"
+                              value={formData.nomeFantasia}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  nomeFantasia: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              E-mail da empresa <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite seu melhor email"
+                              name="emailEmpresa"
+                              value={formData.emailEmpresa}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  emailEmpresa: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Outro E-mail <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite outro email"
+                              name="outroEmail"
+                              value={formData.outroEmail}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  outroEmail: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <div className="col-12 col-lg-6 my-2">
+                            <label htmlFor="" className="text-secondary f-12">
+                              <b className="text-danger">*</b> Nº BI/ NIF/
+                              Passport
+                            </label>
+                            <input required
+                              type="text"
+                              className="form-control rounded-1"
+                              placeholder="###########"
+                              name="numeroBI"
+                              value={formData.numeroBI}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  numeroBI: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Site da empresa <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="link"
+                              className="form-control rounded-1"
+                              placeholder="www.reputa360.ao"
+                              name="siteEmpresa"
+                              value={formData.siteEmpresa}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  siteEmpresa: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-12">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Endereço da empresa{" "}
+                              <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite o endereço atual da empresa"
+                              name="enderecoEmpresa"
+                              value={formData.enderecoEmpresa}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  enderecoEmpresa: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
+                          <div className="col-12 col-lg-6 my-2">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Província
+                            </label>
+                            <select
+                              name="provincia"
+                              id=""
+                              className="form-control rounded-1"
+                              value={formData.provincia}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  provincia: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="Bengo">Bengo</option>
+                              <option value="Benguela">Benguela</option>
+                              <option value="Bié">Bié</option>
+                              <option value="Cabinda">Cabinda</option>
+                              <option value="Cuando Cubango">
+                                Cuando Cubango
+                              </option>
+                              <option value="Cuanza Norte">Cuanza Norte</option>
+                              <option value="Cuanza Sul">Cuanza Sul</option>
+                              <option value="Cunene">Cunene</option>
+                              <option value="Huambo">Huambo</option>
+                              <option value="Huíla">Huíla</option>
+                              <option value="Luanda">Luanda</option>
+                              <option value="Lunda Norte">Lunda Norte</option>
+                              <option value="Lunda Sul">Lunda Sul</option>
+                              <option value="Malanje">Malanje</option>
+                              <option value="Moxico">Moxico</option>
+                              <option value="Namibe">Namibe</option>
+                              <option value="Uíge">Uíge</option>
+                              <option value="Zaire">Zaire</option>
+                            </select>
+                          </div>
 
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Nome do responsável 1{" "}
-                            <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control rounded-1"
-                            placeholder="Digite seu melhor email"
-                          />
-                        </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              <b className="text-danger">*</b> Cidade /
+                              Município
+                            </label>
+                            <input required
+                              type="text"
+                              className="form-control rounded-1"
+                              placeholder="Digite o município / cidade atual"
+                              name="cidade"
+                              value={formData.cidade}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  cidade: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
 
-                        <br />
-                        <div className="col-12 my-2 col-lg-6">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Nome do responsável 1{" "}
-                            <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="tel"
-                            className="form-control rounded-1"
-                            placeholder="Digite seu telefone atual"
-                          />
-                        </div>
+                          <br />
+                          <div className="titul mt-3">
+                            <div className="d-flex gap-2">
+                              <i className="bi text-success bi-shield-lock-fill"></i>
+                              <b>Dados de acesso</b>
+                            </div>
+                          </div>
 
-                        <br />
-                        <div className="col-12 my-2 col-lg-12">
-                          <label htmlFor="" className="text-secondary f-12">
-                            Crie uma senha <b className="text-danger">*</b>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control rounded-1"
-                            placeholder="Crie uma senha (min 8 caracteres)"
-                            minLength={8}
-                          />
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Nome do responsável 1{" "}
+                              <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="email"
+                              className="form-control rounded-1"
+                              placeholder="Digite o nome completo"
+                              name="nomeResponsavel"
+                              value={formData.nomeResponsavel}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  nomeResponsavel: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+
+                          <br />
+                          <div className="col-12 my-2 col-lg-6">
+                            <label htmlFor="" className="text-secondary f-12">
+                              Crie uma senha <b className="text-danger">*</b>
+                            </label>
+                            <input required
+                              type="password"
+                              className="form-control rounded-1"
+                              placeholder="Crie uma senha (min 8 caracteres)"
+                              minLength={8}
+                              name="senha"
+                              value={formData.senha}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  senha: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <br />
                         </div>
-                        <br />
-                      </div>
                     </div>
                     <br />
                     <button
