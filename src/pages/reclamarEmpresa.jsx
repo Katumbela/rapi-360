@@ -368,13 +368,13 @@ useEffect(() => {
                       <input
                         type="text"
                         className="form-control rounded-1"
-                        placeholder={"Escolha um titulo para sua historia "+user?.name ? user?.name.split(" ")[0] : ''}
+                        placeholder={"Escolha um titulo para sua historia "+user.name ? user?.name.split(" ")[0] : ''}
                       />
                     </div>
                     <br />
                     <div className="col-12 col-lg-12 my-2">
                       <label htmlFor="" className=" f-reg">
-                        Conte sua história, {" "+user?.name ? user?.name.split(" ")[0] : ''}
+                        Conte sua história, {" "+user.name ? user?.name.split(" ")[0] : ''}
                       </label>
                       <textarea
                         name=""

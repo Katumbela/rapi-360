@@ -125,7 +125,17 @@ const SolicitarCadastro = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                       <div className=" text-start">
                         <div className="col-12">
                           <label htmlFor="" className="text-secondary f-12">
-                            Indique o website da empresa{" "}
+                            Nome da empresa/entidade{" "}
+                          </label>
+                          <input
+                            type="link"
+                            className="form-control rounded-1"
+                          />
+                        </div>
+                        <br />
+                        <div className="col-12">
+                          <label htmlFor="" className="text-secondary f-12">
+                            Website da empresa/entidade{" "}
                           </label>
                           <input
                             type="link"

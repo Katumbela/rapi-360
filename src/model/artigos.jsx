@@ -1,4 +1,4 @@
-import blog from "../imgs/blog.png";
+import blog from "../imgs/banner2.png";
 import b1 from "../imgs/blog/1.png";
 import b2 from "../imgs/blog/2.png";
 import b3 from "../imgs/blog/3.png";
