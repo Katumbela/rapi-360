@@ -300,7 +300,7 @@ useEffect(() => {
                 <div className="text-dark py-2">
                   <div className="text-center mb-3 headc">
                     <h2 className="text-dark">
-                      Vamos começar{" "+user?.name ? user?.name.split(" ")[0] : ''}.{" "}
+                      Vamos começar.{" "}
                       <b className="text-success">Conte sua história</b>
                     </h2>
 
@@ -335,7 +335,7 @@ useEffect(() => {
                         <div className="d-flex f-reg gap-2">
                           <i className="bi text-success bi-hand-thumbs-up"></i>
                           <b>
-                            Solicitaria novamente esta Empresa{" "+user?.name ? user?.name.split(" ")[0] : ''}
+                            Solicitaria novamente esta Empresa
                             <span className="text-danger">*</span>
                           </b>
                         </div>
@@ -368,13 +368,13 @@ useEffect(() => {
                       <input
                         type="text"
                         className="form-control rounded-1"
-                        placeholder={"Escolha um titulo para sua historia "+user.name ? user?.name.split(" ")[0] : ''}
+                        placeholder={"Escolha um titulo para sua historia "}
                       />
                     </div>
                     <br />
                     <div className="col-12 col-lg-12 my-2">
                       <label htmlFor="" className=" f-reg">
-                        Conte sua história, {" "+user.name ? user?.name.split(" ")[0] : ''}
+                        Conte sua história,
                       </label>
                       <textarea
                         name=""
