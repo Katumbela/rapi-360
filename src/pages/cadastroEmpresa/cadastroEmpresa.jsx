@@ -22,14 +22,11 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const [formData, setFormData] = useState({
     // Inicialize os campos do formulário com os names apropriados
     nomeEmpresa: "",
-    nomeFantasia: "",
     emailEmpresa: "",
-    outroEmail: "",
     numeroBI: "",
     siteEmpresa: "",
     enderecoEmpresa: "",
-    provincia: "",
-    cidade: "",
+    sobre: "",
     nomeResponsavel: "",
     senha: "",
   });
@@ -152,7 +149,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               }
                             />
                           </div>
-                          <div className="col-12 col-lg-6 my-2">
+                          {/* <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
                               Nome fantasia
                             </label>
@@ -170,7 +167,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               }
                             />
                           </div>
-                          <br />
+                          <br /> */}
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
                               E-mail da empresa <b className="text-danger">*</b>
@@ -190,7 +187,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             />
                           </div>
                           <br />
-                          <div className="col-12 my-2 col-lg-6">
+                          {/* <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
                               Outro E-mail <b className="text-danger">*</b>
                             </label>
@@ -207,7 +204,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                                 })
                               }
                             />
-                          </div>
+                          </div> */}
                           <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
                               <b className="text-danger">*</b> Nº BI/ NIF/
@@ -249,6 +246,25 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           <br />
                           <div className="col-12 my-2 col-lg-12">
                             <label htmlFor="" className="text-secondary f-12">
+                             Sobre a empresa{" "}
+                              <b className="text-danger">*</b>
+                            </label>
+                            <textarea required
+                              className="form-control rounded-1"
+                              placeholder="Forneça uma breve descrição da empresa"
+                              name="enderecoEmpresa"
+                              value={formData.sobre}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  sobre: e.target.value,
+                                })
+                              }
+                            ></textarea>
+                          </div>
+                          <br />
+                          <div className="col-12 my-2 col-lg-12">
+                            <label htmlFor="" className="text-secondary f-12">
                               Endereço da empresa{" "}
                               <b className="text-danger">*</b>
                             </label>
@@ -267,7 +283,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             />
                           </div>
                           <br />
-                          <div className="col-12 col-lg-6 my-2">
+                          {/* <div className="col-12 col-lg-6 my-2">
                             <label htmlFor="" className="text-secondary f-12">
                               Província
                             </label>
@@ -326,7 +342,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               }
                             />
                           </div>
-                          <br />
+                          <br /> */}
 
                           <br />
                           <div className="titul mt-3">
@@ -339,7 +355,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           <br />
                           <div className="col-12 my-2 col-lg-6">
                             <label htmlFor="" className="text-secondary f-12">
-                              Nome do responsável 1{" "}
+                              Nome do responsável{" "}
                               <b className="text-danger">*</b>
                             </label>
                             <input required

@@ -154,8 +154,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     anexos: [], // Certifique-se de inicializar como um array vazio
   });
 
-  
-
   const handleAvaliacaoChange = (avaliacao) => {
     setFormData({
       ...formData,
@@ -166,7 +164,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   const handleSolicitacaoChange = (solicitacao) => {
     setFormData({
       ...formData,
-      solicitarNovamente: solicitacao === "sim",
+      solicitarNovamente: solicitacao,
     });
   };
 
@@ -183,7 +181,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       historia: e.target.value,
     });
   };
-  
+
   const handleAnexosChange = (e) => {
     const files = e.target.files;
     setFormData({
@@ -195,7 +193,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     try {
       // Verificar se os campos obrigatórios estão preenchidos
       if (
-        formData.classificacao === 0 ||
         formData.solicitarNovamente === null ||
         formData.titulo.trim() === "" ||
         formData.historia.trim() === ""
@@ -207,9 +204,9 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         });
         return; // Interrompe o envio se algum campo estiver vazio
       }
-  
+
       const reclamacaoRef = firebase.firestore().collection("reclamacoes");
-  
+
       // Upload de arquivos para o Storage
       const anexosURLs = await Promise.all(
         formData.anexos.map(async (anexo) => {
@@ -219,23 +216,23 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
           return fileRef.getDownloadURL();
         })
       );
-  
+
       // Adiciona URLs dos anexos aos dados da reclamação
       const reclamacaoData = {
         ...formData,
         anexos: anexosURLs,
         // Adicione outros campos necessários, como data, usuário, etc.
       };
-  
+
       // Adiciona a reclamação ao Firestore
       await reclamacaoRef.add(reclamacaoData);
-  
+
       Swal.fire({
         icon: "success",
         title: "Reclamação enviada com sucesso!",
         text: `Sua reclamação foi registrada com sucesso, ${user.name}!`,
       });
-  
+
       // Limpa os campos do formulário após o envio bem-sucedido
       setFormData({
         classificacao: 0,
@@ -248,7 +245,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       console.error("Erro ao enviar reclamação:", error);
     }
   };
-  
+
   return (
     <div className="w-100">
       <Header
@@ -359,10 +356,23 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                   <br />
                   <div className="d-flex justify-content-around">
                     <label htmlFor="sim" className="f-18">
-                      <input type="radio" checked name="negocio" id="sim" /> Sim
+                      <input
+                        type="radio"
+                        checked={formData.solicitarNovamente === "sim"}
+                        onChange={() => handleSolicitacaoChange("sim")}
+                        id="sim"
+                      />
+                      Sim
                     </label>
+
                     <label htmlFor="nao" className="f-18">
-                      <input type="radio" name="negocio" id="nao" /> Não
+                      <input
+                        type="radio"
+                        checked={formData.solicitarNovamente === "nao"}
+                        onChange={() => handleSolicitacaoChange("nao")}
+                        id="nao"
+                      />
+                      Não
                     </label>
                   </div>
                 </div>
@@ -378,7 +388,9 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     <input
                       type="text"
                       className="form-control rounded-1"
-                      placeholder={"Escolha um titulo para sua historia "}
+                      placeholder="Escolha um título para sua história"
+                      value={formData.titulo}
+                      onChange={handleTituloChange}
                     />
                   </div>
                   <br />
@@ -389,12 +401,15 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     <textarea
                       name=""
                       id=""
-                      placeholder={`Descreva sua experiênciar com produtos ou serviços da ${empresaEscolhida.nome}`}
+                      placeholder={`Descreva sua experiência com produtos ou serviços da ${empresaEscolhida.nome}`}
                       className="w-100 form-control mt-1"
                       cols="30"
                       rows="3"
                       maxLength={1000}
+                      value={formData.historia}
+                      onChange={handleHistoriaChange}
                     ></textarea>
+
                     <div className="alert alert-info alert-sm f-12 p-2 mt-2">
                       Nunca inclua dados pessoais no texto. A empresa receberá
                       seus dados junto com a reclamação.
@@ -429,21 +444,24 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
               <br />
               <br />
 
-              {
-                user ? (
-                  <button onClick={handleEnviarReclamacao} className="d-flex text-white w-100  btn btn-success justify-content-center rounded-1">
+              {user ? (
+                <button
+                  onClick={handleEnviarReclamacao}
+                  className="d-flex text-white w-100  btn btn-success justify-content-center rounded-1"
+                >
                   <span>Enviar Reclamação</span>
                 </button>
-                )
-                :(
-                  <>
-                 <center>
-                  <i className="bi bi-exclamation-triangle"></i>
-                  <p className="text-secondary">Faça login ou cadastre se para fazer uma reclamação ou avaliação!</p></center>
-                  </>
-                )
-              }
-            
+              ) : (
+                <>
+                  <center>
+                    <i className="bi bi-exclamation-triangle"></i>
+                    <p className="text-secondary">
+                      Faça login ou cadastre se para fazer uma reclamação ou
+                      avaliação!
+                    </p>
+                  </center>
+                </>
+              )}
             </>
           </center>
         </div>

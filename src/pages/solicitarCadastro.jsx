@@ -26,59 +26,6 @@ const SolicitarCadastro = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
     });
   }, []);
 
-  const handleLoginWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        // login bem-sucedido, faça algo aqui
-        setUser(result.user);
-
-        setEmaill(result.user.email);
-
-        const userData = {
-          name: result.user.displayName,
-          email: result.user.email,
-          pictureUrl: result.user.pictureUrl,
-          photo: result.user.photoURL,
-          uid: result.user.uid,
-          tel: result.user.phoneNumber,
-        };
-
-        localStorage.setItem("users", JSON.stringify(userData));
-        setNomee(result.user.displayName);
-        handleLogin(result);
-        window.location.href = "/pt";
-      })
-      .catch((error) => {
-        // erro no login, faça algo aqui
-      });
-  };
-
-  const handleLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(null);
-
-        setEmaill("");
-        setNomee("");
-        const userData = {
-          name: "",
-          email: "",
-          pictureUrl: "",
-          tel: "",
-        };
-
-        localStorage.setItem("users", JSON.stringify(userData));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <>
@@ -106,20 +53,7 @@ const SolicitarCadastro = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             </div>
             <div className="container pb-5 my-auto form">
               <center>
-                {user ? (
-                  <div>
-                    <p className="text-primary">
-                      Você está logado como <b> {user.displayName}</b> <br />
-                      <span className="text-secondary">
-                        Email: {user.email}
-                      </span>
-                    </p>
-
-                    <button className="btn btn-danger" onClick={handleLogout}>
-                      Sair
-                    </button>
-                  </div>
-                ) : (
+               
                   <>
                     <div>
                       <div className=" text-start">
@@ -160,7 +94,6 @@ const SolicitarCadastro = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                       <span>Enviar solicitação</span>
                     </button>
                   </>
-                )}
               </center>
             </div>
             <br />
