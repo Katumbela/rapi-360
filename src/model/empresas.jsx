@@ -59,7 +59,7 @@ const dadosEmpresas = [
       logo: unitel
     },
     {
-      selo: false,
+      selo: true,
       id: 3,
       nome: 'ARREIOU TÁ BARATO',
       localizacao: 'Angola, Luanda - Talatona',
