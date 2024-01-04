@@ -78,6 +78,19 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
 
   const [players, setPlayers] = useState([]);
 
+  // Função auxiliar para obter o nome do mês
+  const getMonthName = (monthIndex) => {
+    const monthNames = [
+      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ];
+    return monthNames[monthIndex];
+  };
+  
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getDate()} de ${getMonthName(currentDate.getMonth())} de ${currentDate.getFullYear()}`;
+
+
   // Função para buscar os jogadores ordenados por pontuação
   const fetchPlayers = async () => {
     try {
@@ -151,6 +164,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     solicitarNovamente: null,
     titulo: "",
     historia: "",
+  quando: formattedDate,
     anexos: [], // Certifique-se de inicializar como um array vazio
   });
 
@@ -221,6 +235,10 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       const reclamacaoData = {
         ...formData,
         anexos: anexosURLs,
+        empresaId: empresaEscolhida.id,
+        nomeEmpresa: empresaEscolhida.nome,
+        cliente: user.name,
+        emailCliente: user.email,
         // Adicione outros campos necessários, como data, usuário, etc.
       };
 
