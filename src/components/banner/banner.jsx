@@ -42,6 +42,7 @@ import obterDadosDoFirebase from "../../model/empresas2";
 import EmpresaLoader from "../empLoader";
 import ProfileCard from "../PerfilEmp";
 import Pub from "../publicidade";
+import Pub2 from "../publicidade2";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -241,7 +242,6 @@ const Banner = () => {
             </ScrollToTopLink>
           </div>
         </div>
-      </div>
 
       <br />
       <center>
@@ -252,7 +252,8 @@ const Banner = () => {
           Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
         </ScrollToTopLink>
       </center>
-<Pub />
+      </div>
+<Pub2 />
 
       <div className="ranking-emp bg-light py-4 ">
      <div className="container">

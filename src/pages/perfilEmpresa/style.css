@@ -207,29 +207,71 @@
 } */
 
 .publicidad {
-  display: flex !important;
-  height: 300px;
-  max-height: 500px;
-  gap: 0px;
-  width: 100%;
-  overflow: hidden;
-  background: rgb(255, 255, 255) !important;
-}
-
-.publicidad img {
-  aspect-ratio: 4/3;
-  object-fit: contain;
-  width: 90% !important;
-}
-
-.pubb {
-  border: 1px solid #bababa;
-  padding: .5rem 0;
-  margin: 2.6rem 0;
-}
-
-@media (max-width: 690px) {
-  .publicidad {
-    flex-wrap: wrap;
+    display: flex !important;
+    height: 300px;
+    max-height: 500px;
+    gap: 0px;
+    width: 100%;
+    overflow: hidden;
+    background: rgb(255, 255, 255) !important;
   }
-}
+  
+  .publicidad img {
+    aspect-ratio: 4/3;
+    object-fit: contain;
+    width: 90% !important;
+  }
+  
+  .pubb {
+    border: 1px solid #bababa;
+    padding: .5rem 0;
+    margin: 2.6rem 0;
+  }
+  
+  @media (max-width: 690px) {
+    .publicidad {
+      flex-wrap: wrap;
+    }
+  }
+
+  .publicidad2 {
+    display: flex !important;
+    height: 200px;
+    max-height: 360px;
+    gap: 0px;
+    width: 100%;
+    overflow: hidden;
+    background: rgb(255, 255, 255) !important;
+  }
+  
+  .publicidad2 img {
+    width: 100% !important;
+  }
+  
+  .publicidad2 .logo-pleno {
+    width: 7em !important;
+  }
+  
+  .pubb2 {
+    border: 1px solid #bababa;
+    padding: .5rem 0;
+    margin: 2.6rem 0;
+  }
+  
+  @media (max-width: 690px) {
+    .publicidad2 {
+      flex-wrap: wrap;
+    }
+  }
+    
+
+
+
+  .text-pleno {
+    color: orangered;
+  }
+  .btn-pleno {
+    color: white;
+    border-radius: 12px!important;
+    background: orangered;
+  }
