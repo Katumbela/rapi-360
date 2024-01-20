@@ -110,7 +110,9 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
       // Enviar dados para a coleção "empresa" no Firestore
       const empresaRef = firebase.firestore().collection("empresa");
-      await empresaRef.add({
+
+      // Adiciona a empresa ao Firestore e obtém a referência do documento
+      const empresaDocRef = await empresaRef.add({
         ...formData,
         conta: "empresa",
         insta: "",
@@ -123,12 +125,48 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         quando: formattedDate,
       });
 
+      // Obtém o docId da empresa recém-adicionada
+      const empresaDocId = empresaDocRef.id;
+
       // Mostrar mensagem de sucesso usando o SweetAlert
       Swal.fire({
         icon: "success",
         title: "Cadastro bem-sucedido!",
         text: "Sua empresa foi cadastrada com sucesso!",
       });
+
+      const reclamacaoRef = firebase.firestore().collection("reclamacoes");
+
+      // Upload de arquivos para o Storage
+      const anexosURLs = await Promise.all(
+        formData.anexos.map(async (anexo) => {
+          const storageRef = firebase.storage().ref();
+          const fileRef = storageRef.child(`reclamacoes/${anexo.name}`); // Pasta "reclamacoes"
+          await fileRef.put(anexo);
+          return fileRef.getDownloadURL();
+        })
+      );
+
+      // Adiciona URLs dos anexos aos dados da reclamação
+      const reclamacaoData = {
+        anexos: [],
+        empresaId: empresaDocId,
+        nomeEmpresa: formData.nomeEmpresa,
+        cliente: "Reputação 360",
+        emailCliente: "info@reputacao360.online",
+        status: "respondido",
+        classificacao: 9.0,
+        historia:
+          " assim que aparecerão as reclamações ou avaliações de seus clientes.By: Reputação 360",
+        quando: formattedDate,
+        titulo: "Avaliação da sua empresa",
+        solicitarNovamente: "sim",
+        // Adicione outros campos necessários, como data, usuário, etc.
+      };
+
+      // Adiciona a reclamação ao Firestore
+      await reclamacaoRef.add(reclamacaoData);
+
       setLoading(false);
 
       // Limpar os campos do formulário após o sucesso
