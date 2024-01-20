@@ -722,11 +722,23 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
       <b className="text-dark f-reg">Reclamações de clientes </b>
 
       {/* O que estão falando desta empresa, card */}
-      {reclamacoesEmpresa?.length !== 0 ? (
+      {empresaEscolhida  ? (
         <>
-          {reclamacoesEmpresa.slice(0, reclamacoesParaExibir).map((reclamacao, index) => (
+          {  reclamacoesEmpresa?.length != 0 ? reclamacoesEmpresa.slice(0, reclamacoesParaExibir).map((reclamacao, index) => (
             <ReclamacaoItem key={index} reclamacao={reclamacao} />
-          ))}
+          )) : <>
+          <center>
+            <br />
+            <br />
+            <i className="bi bi-megaphone f-24 text-secondary"></i> <br />
+            <br />
+            <span className="text-secondary f-14 w-75">Não há ainda reclamações ou avaliações para esta empresa</span>
+          <br />
+          <a href={`/pt/reclamar/${empresaEscolhida?.id}`}>Seja o primeiro a avaliar</a>
+          </center>
+          <br />
+
+          </>}
           {reclamacoesEmpresa.length > reclamacoesParaExibir && (
             <div className="text-center my-3">
               <button className="btn btn-link" onClick={handleVerMais}>

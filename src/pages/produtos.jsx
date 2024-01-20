@@ -228,10 +228,10 @@ const Produtos = ({ cart, nomee, emaill }) => {
               </ul>
               <br />
               <center>
-                <button className="btn btn-primary disable" disabled>
+                <a href="/pt/cadastro/empresa" className="btn btn-primary disable" >
                   {" "}
-                  Indisponível
-                </button>
+                  Cadastrar empresa
+                </a>
               </center>
             </div>
             <div className="card-solucao">
@@ -312,10 +312,10 @@ const Produtos = ({ cart, nomee, emaill }) => {
               </ul>
               <br />
               <center>
-                <button className="btn btn-primary disable" disabled>
+                <a href="/pt/central-de-ajuda" className="btn btn-primary disable" >
                   {" "}
-                  Indisponível
-                </button>
+                  Contacte-nos
+                </a>
               </center>
             </div>
             <div className="card-solucao">

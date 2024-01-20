@@ -50,6 +50,7 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import AbreviarTexto from "../components/abreviarTexto";
+import Pub2 from "../components/publicidade2";
 
 const Cadastro = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -253,7 +254,7 @@ const Cadastro = ({ cart, nomee, emaill }) => {
 
         <br />
 
-        <Pub />
+        <Pub2 />
 
         <br />
 
