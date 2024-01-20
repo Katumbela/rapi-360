@@ -41,6 +41,7 @@ import articles from "../../model/artigos";
 import obterDadosDoFirebase from "../../model/empresas2";
 import EmpresaLoader from "../empLoader";
 import ProfileCard from "../PerfilEmp";
+import Pub from "../publicidade";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -251,15 +252,7 @@ const Banner = () => {
           Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
         </ScrollToTopLink>
       </center>
-
-      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-        <br />
-        <br />
-        <h5>Publicidade</h5>
-
-        <br />
-        <br />
-      </div>
+<Pub />
 
       <div className="ranking-emp bg-light py-4 ">
      <div className="container">
@@ -927,15 +920,7 @@ const Banner = () => {
 
       <br />
       <br />
-
-      <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-        <br />
-        <br />
-        <h5>Publicidade</h5>
-
-        <br />
-        <br />
-      </div>
+<Pub />
       <br />
       <br />
     </>

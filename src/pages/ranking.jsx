@@ -53,6 +53,7 @@ import AbreviarTexto from "../components/abreviarTexto";
 import obterDadosDoFirebase from "../model/empresas2";
 import EmpresaLoader from "../components/empLoader";
 import { format } from "date-fns";
+import Pub from "../components/publicidade";
 
 const Ranking = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -554,12 +555,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
 
           <br />
 
-          <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-            <br />
-            <h5>Publicidade</h5>
-
-            <br />
-          </div>
+          <Pub />
 
           <br />
 

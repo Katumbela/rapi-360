@@ -253,12 +253,7 @@ const Cadastro = ({ cart, nomee, emaill }) => {
 
         <br />
 
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
 
         <br />
 

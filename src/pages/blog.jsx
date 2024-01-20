@@ -55,6 +55,7 @@ import AbreviarTexto from "../components/abreviarTexto";
 import dadosEmpresas from "../model/empresas";
 import ScrollToTopLink from "../components/scrollTopLink";
 import articles from "../model/artigos";
+import Pub from "../components/publicidade";
 
 const Blog = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -235,12 +236,7 @@ const Blog = ({ cart, nomee, emaill }) => {
             </div>
             <div className="col-12 col-md-5">
                 
-        <div className="publicidade h-100 text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
             </div>
         </div>
    
@@ -299,12 +295,7 @@ const Blog = ({ cart, nomee, emaill }) => {
         <br />
         <br />
         <br />
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
 
 
         <Footer />

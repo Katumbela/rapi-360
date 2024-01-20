@@ -57,6 +57,7 @@ import Swal from "sweetalert2";
 import ScrollToTopLink from "../components/scrollTopLink";
 import EmpresaLoader from "../components/empLoader";
 import Loader from "../components/loader";
+import Pub from "../components/publicidade";
 
 const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   // const { user, handleLogout } = useContext(UserContext);
@@ -623,12 +624,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         </div>
         <br />
 
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
 
         <br />
 

@@ -59,6 +59,7 @@ import EmpresaLoader from "../../components/empLoader";
 import ProfileCard from "../../components/PerfilEmp";
 import Comment from "../../components/skeletons/comment";
 import ReclamacaoItem from "../../components/reclamacaoComponent/reclamacaoComponent";
+import Pub from "../../components/publicidade";
 
 const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -766,18 +767,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
             <br />
             <br />
 
-            <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-              <br />
-              <br />
-              <br />
-              <br />
-              <h5>Publicidade</h5>
-
-              <br />
-              <br />
-              <br />
-              <br />
-            </div>
+            <Pub />
             <br />
           </div>
           <div className="col-12 col-sm-6 col-lg-3 my-3">
@@ -953,12 +943,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
       </div>
 
       <div className="s">
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
 
         <br />
 

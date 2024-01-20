@@ -53,6 +53,7 @@ import africa from "../imgs/africa.png";
 import AbreviarTexto from "../components/abreviarTexto";
 import obterDadosDoFirebase from "../model/empresas2";
 import ProfileCard from "../components/PerfilEmp";
+import Pub from "../components/publicidade";
 // import dadosEmpresas from "../model/empresas";
 
 const Descontos = ({ cart, nomee, emaill }) => {
@@ -300,12 +301,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
 
         <br />
 
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
+        <Pub />
 
         <br />
 
