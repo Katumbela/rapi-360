@@ -122,7 +122,7 @@ function Footer() {
               <i className="bi bi-facebook text-success"></i>
             </a>
             <a target="__blank"
-              href="https://www.linkedin.com/company/reputacao360"
+              href="https://www.linkedin.com/company/reputa360"
               className="navlink"
             >
               <i className="bi mx-1 bi-linkedin text-success"></i>

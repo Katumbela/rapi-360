@@ -55,6 +55,7 @@ import AbreviarTexto from "../components/abreviarTexto";
 // import dadosEmpresas from "../model/empresas";
 import ScrollToTopLink from "../components/scrollTopLink";
 import obterDadosDoFirebase from "../model/empresas2";
+import Pub from "../components/publicidade";
 
 const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
