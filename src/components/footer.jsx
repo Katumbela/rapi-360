@@ -134,7 +134,7 @@ function Footer() {
           </div>
           <img src={icon} className="logo-blogg" alt="" />
           <div className="pol">
-          <ScrollToTopLink className="footerlink" to="/pt/politicas">
+          <ScrollToTopLink className="link" to="/pt/politicas">
                     Termos & Políticas
                   </ScrollToTopLink>
 
