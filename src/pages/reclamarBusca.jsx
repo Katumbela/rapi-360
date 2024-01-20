@@ -52,12 +52,31 @@ import b3 from "../imgs/blog/3.png";
 import b4 from "../imgs/blog/4.png";
 import africa from "../imgs/africa.png";
 import AbreviarTexto from "../components/abreviarTexto";
-import dadosEmpresas from "../model/empresas";
+// import dadosEmpresas from "../model/empresas";
 import ScrollToTopLink from "../components/scrollTopLink";
+import obterDadosDoFirebase from "../model/empresas2";
 
 const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
   document.title = `Busque a empresa a reclamar | Reputação 360`;
+
+
+  const [dadosEmpresas, setDadosEmpresas] = useState([]);
+
+  useEffect(() => {
+    const ordenarEmpresas = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+
+        setDadosEmpresas(dadosEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    ordenarEmpresas();
+  }, []);
+  
 
   useEffect(() => {
     // Adicione um listener para o estado da autenticação
@@ -231,11 +250,10 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
         <br />
         <br />
         <center className="container">
-          <h2 className="f-reg">Fazer Reclamação</h2>
+          <h2 className="f-reg">Fazer Reclamação ou avaliar</h2>
           <div className="container">
             <span className="f-16 container">
-              Busque pela empresa que deseja reclamar
-              {searchResults.length}
+              Busque pela empresa que deseja reclamar ou um serviço a avaliar
 
             </span>
             <br />
@@ -264,7 +282,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                     className="empresa w-100 text-decoration-none my-1 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                   >
                     <img src={empresa.logo} className="logo-empresa" alt="" />
-                    <div className="de my-auto">
+                    <div className="de text-start my-auto">
                       <b>{empresa.nomeEmpresa}</b>
                       <p className="d-flex mt-1 my-auto gap-2 f-14">
                         {empresa.selo ? (

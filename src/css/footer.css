@@ -91,7 +91,7 @@
   color: #0066be !important;
 }
 
-footer .form-control {
+footer .form-control, select {
   background: #fff !important;
 }
 

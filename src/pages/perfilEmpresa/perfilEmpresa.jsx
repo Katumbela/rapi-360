@@ -56,6 +56,9 @@ import ScrollToTopLink from "../../components/scrollTopLink";
 import Reclamacoes from "../../model/reclamacoes";
 import obterDadosDoFirebase from "../../model/empresas2";
 import EmpresaLoader from "../../components/empLoader";
+import ProfileCard from "../../components/PerfilEmp";
+import Comment from "../../components/skeletons/comment";
+import ReclamacaoItem from "../../components/reclamacaoComponent/reclamacaoComponent";
 
 const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
@@ -68,7 +71,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   useEffect(() => {
     const pegarEmpresa = async () => {
       try {
-        const empresasRef = db.collection("empresa");
+        const empresasRef = db.collection('empresa');
         const empresaSnapshot = await empresasRef.doc(empresaid).get();
         const empresaData = empresaSnapshot.data();
 
@@ -78,27 +81,60 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
             ...empresaData,
           });
 
-          // Supondo que as reclamações estejam em uma coleção "reclamacoes" dentro do documento da empresa
-          const reclamacoesRef = empresasRef
-            .doc(empresaid)
-            .collection("reclamacoes");
-          const reclamacoesSnapshot = await reclamacoesRef.get();
-          const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          // Supondo que as reclamações estejam em uma coleção "reclamacoes"
+          const reclamacoesRef = db.collection('reclamacoes');
+          const reclamacoesSnapshot = await reclamacoesRef
+            .where('empresaId', '==', empresaid)
+            .get();
 
-          setReclamacoesEmpresa(reclamacoesData);
+          try {
+            const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+
+            setReclamacoesEmpresa(reclamacoesData);
+          } catch (error) {
+            console.error('Erro ao obter reclamações:', error.message);
+          }
         } else {
-          console.error("Empresa não encontrada.");
+          console.error('Empresa não encontrada.');
         }
       } catch (error) {
-        console.error("Erro ao pegar empresa:", error.message);
+        console.error('Erro ao pegar empresa:', error.message);
       }
     };
 
     pegarEmpresa();
   }, [empresaid]);
+
+  // Função para calcular a média das classificações
+  const calcularMediaClassificacoes = () => {
+    const totalClassificacoes = reclamacoesEmpresa.reduce(
+      (total, reclamacao) => total + reclamacao.classificacao,
+      0
+    );
+
+    const mediaClassificacoes =
+      reclamacoesEmpresa.length > 0
+        ? totalClassificacoes / reclamacoesEmpresa.length
+        : 0;
+
+    return mediaClassificacoes.toFixed(1);
+  };
+
+  useEffect(() => {
+    if (empresaEscolhida && reclamacoesEmpresa.length > 0) {
+      const novaAvaliacao = calcularMediaClassificacoes();
+
+      // Adiciona a avaliação ao objeto empresaEscolhida
+      setEmpresaEscolhida((prevEmpresa) => ({
+        ...prevEmpresa,
+        avaliacao: novaAvaliacao,
+      }));
+    }
+  }, [reclamacoesEmpresa, empresaEscolhida]);
+
 
   // const empres = dadosEmpresas.filter((p) => p.id === empresaid);
   // const empresaEscolhida = empres[0];
@@ -235,6 +271,35 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   // Mapeia a nota da empresa para a largura da barra de progresso
   const larguraProgressBar = (empresaEscolhida?.avaliacao / 10) * 100;
 
+
+
+  // Função para calcular os percentuais de pessoas que solicitariam novamente e não solicitariam
+  const calcularPercentuaisSolicitariamNovamente = () => {
+    const totalReclamacoes = reclamacoesEmpresa.length;
+
+    const solicitariamNovamente = reclamacoesEmpresa.filter(
+      (reclamacao) => reclamacao.solicitarNovamente === 'sim'
+    ).length;
+
+    const naoSolicitariamNovamente = reclamacoesEmpresa.filter(
+      (reclamacao) => reclamacao.solicitarNovamente === 'nao'
+    ).length;
+
+    const percentualSolicitariam = (solicitariamNovamente / totalReclamacoes) * 100;
+    const percentualNaoSolicitariam = (naoSolicitariamNovamente / totalReclamacoes) * 100;
+
+    return {
+      percentualSolicitariam,
+      percentualNaoSolicitariam,
+    };
+  };
+
+  const mediaClassificacoes = calcularMediaClassificacoes();
+  const percentuaisSolicitariam = calcularPercentuaisSolicitariamNovamente();
+
+
+
+
   return (
     <div className="w-100 bg-light">
       {/*  */}
@@ -255,35 +320,32 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         <div className="dados-empresa mt-4 py-3 mt-md-0 container">
           <div className="row">
             <div className="col-12 col-md-2"></div>
-            <div className="col-12 pt-4 pt-sm-0 col-md-8">
-              {
-                empresaEscolhida?.nomeEmpresa != null ?
-                (
-                  <>
-                  <b className="f-20 f-reg">{empresaEscolhida?.nomeEmpresa}</b>
-              <br />
-              <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
-                <p className="d-flex text-secondary gap-2">
-                  <i className="bi bi-calendar"></i> Desde{" "}
-                  {empresaEscolhida?.quando} no <b>R360</b>
-                </p>
-
-                {empresaEscolhida?.selo === true ? (
-                  <p className="d-flex text-secondary gap-2">
-                    <img src={r360} alt="" className="icon-empresa" />{" "}
-                    <span className="text-secondary">
-                      Certificado pelo <b>R360</b>
-                    </span>
-                  </p>
-                ) : null}
-              </div>
-                  </>
-                )
-                :
+            <div className="col-12 ps-md-4  pt-sm-0 col-md-8">
+              {empresaEscolhida?.nomeEmpresa != null ? (
                 <>
-                <EmpresaLoader />
+                
+                  <b className="f-20 mt-5 f-reg">{empresaEscolhida?.nomeEmpresa}</b>
+                  <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
+                    <p className="d-flex text-secondary gap-2">
+                      <i className="bi bi-calendar"></i> 
+                      {empresaEscolhida?.quando} 
+                    </p>
+
+                    {empresaEscolhida?.selo === true ? (
+                      <p className="d-flex text-secondary gap-2">
+                        <img src={r360} alt="" className="icon-empresa" />{" "}
+                        <span className="text-secondary">
+                          Certificado pelo <b>R360</b>
+                        </span>
+                      </p>
+                    ) : null}
+                  </div>
                 </>
-              }
+              ) : (
+                <>
+                  <EmpresaLoader />
+                </>
+              )}
             </div>
             <div className="col-12 text-center-md d-flex mt-3 mt-md-auto col-md-2">
               <ScrollToTopLink
@@ -393,7 +455,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   <div className="mx-auto my-2 border-1 rounded-1 text-center bg-white p-3">
                     <span className="f-12">Reclamações</span>
                     <b className="d-flex gap-2 f-reg mx-auto justify-content-center">
-                      <i className="bi bi-megaphone"></i> 3496
+                      <i className="bi bi-megaphone"></i> {reclamacoesEmpresa?.length}
                     </b>
                   </div>
                   {empresaEscolhida?.avaliacao <= 2.9 && (
@@ -424,14 +486,54 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     aria-valuemax="100"
                   >
                     <div
-                      className="progress-bar bg-success"
-                      style={{ width: "60%" }}
+                      className={`progress-bar ${
+                        percentuaisSolicitariam.percentualSolicitariam.toFixed(1) <= 40
+                          ? "bg-danger"
+                          : percentuaisSolicitariam.percentualSolicitariam.toFixed(1) >= 50.0 &&
+                          percentuaisSolicitariam.percentualSolicitariam.toFixed(1) <= 69.0
+                          ? "bg-warning"
+                          : "bg-success"
+                      } `}
+                      style={{ width: percentuaisSolicitariam.percentualSolicitariam.toFixed(1)+"%" }}
                     ></div>
                   </div>
-                  <span className="f-reg my-auto">60%</span>
+                 {
+                  empresaEscolhida?.avaliacao != null ?
+                  <span className="f-reg my-auto">{percentuaisSolicitariam.percentualSolicitariam}%</span>
+                  :
+                  <span className="f-reg my-auto">0 %</span>
+                 }
                 </div>
               </div>
 
+              <div className="p-3">
+                <b className="f-re">Não voltariam a fazer negócios</b>
+                <br />
+                <div className="d-flex mt-2 gap-2">
+                  <div
+                    className="progress my-auto w-100"
+                    role="progressbar"
+                    aria-valuenow={larguraProgressBar}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <div
+                      className={`progress-bar ${
+                        percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) <= 40
+                          ? "bg-danger"
+                          : percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) >= 50.0 &&
+                          percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) <= 69.0
+                          ? "bg-warning"
+                          : "bg-success"
+                      } `}
+                      style={{ width: `${percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1)}%` }}
+                    ></div>
+                  </div>
+                  <span className="f-reg my-auto">
+                    {percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1)}
+                  </span>
+                </div>
+              </div>
               <div className="p-3">
                 <b className="f-re">Nota de consumidores</b>
                 <br />
@@ -476,59 +578,83 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 <br />
 
                 <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-                  {dadosEmpresas.map((empresa) => (
-                    <a
-                      key={empresa?.id}
-                      href={`/pt/empresa/${empresa?.id}`}
-                      className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                    >
-                      <img src={empresa.logo} alt="" className="logo-empresa" />
-                      <div className="bod">
-                        <AbreviarTexto
-                          texto={empresa?.nomeEmpresa}
-                          largura={"200"}
-                        />
-
-                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                          <AbreviarTexto
-                            texto={empresa?.enderecoEmpresa}
-                            largura={"300"}
-                            className="my-auto text-secondary"
-                          ></AbreviarTexto>
-                        </p>
-                        <hr />
-
-                        <div className="d-flex gap-2 justify-content-center">
-                          {empresa?.avaliacao >= 5.0 &&
-                          empresa?.avaliacao <= 6.9 ? (
+                  {dadosEmpresas.length != 0 ? (
+                    <>
+                      {dadosEmpresas
+                        .filter(
+                          (empresa) => empresa.id !== empresaEscolhida?.id
+                        )
+                        .map((empresa) => (
+                          <a
+                            key={empresa.id}
+                            href={`/pt/empresa/${empresa.id}`}
+                            className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                          >
                             <img
-                              src={regular}
+                              src={empresa.logo}
                               alt=""
-                              className="icon-empresa"
+                              className="logo-empresa"
                             />
-                          ) : empresa?.avaliacao >= 7.0 &&
-                            empresa?.avaliacao <= 10.0 ? (
-                            <img src={otimo} alt="" className="icon-empresa" />
-                          ) : empresa?.avaliacao >= 3.0 &&
-                            empresa?.avaliacao <= 4.9 ? (
-                            <img src={ruim} alt="" className="icon-empresa" />
-                          ) : empresa?.avaliacao <= 2.9 ? (
-                            <img
-                              src={naorecomendado}
-                              alt=""
-                              className="icon-empresa"
-                            />
-                          ) : null}
-                          <h4 className="f-reg my-auto">
-                            <b>{empresa?.avaliacao} </b>
-                          </h4>
-                          <span className="text-secondary f-12 mt-auto">
-                            / 10
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-                  ))}
+                            <div className="bod">
+                              <AbreviarTexto
+                                texto={empresa?.nomeEmpresa}
+                                largura={"200"}
+                              />
+
+                              <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                                <AbreviarTexto
+                                  texto={empresa?.enderecoEmpresa}
+                                  largura={"300"}
+                                  className="my-auto text-secondary"
+                                ></AbreviarTexto>
+                              </p>
+                              <hr />
+
+                              <div className="d-flex gap-2 justify-content-center">
+                                {empresa?.avaliacao >= 5.0 &&
+                                empresa?.avaliacao <= 6.9 ? (
+                                  <img
+                                    src={regular}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao >= 7.0 &&
+                                  empresa?.avaliacao <= 10.0 ? (
+                                  <img
+                                    src={otimo}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao >= 3.0 &&
+                                  empresa?.avaliacao <= 4.9 ? (
+                                  <img
+                                    src={ruim}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao <= 2.9 ? (
+                                  <img
+                                    src={naorecomendado}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : null}
+                                <h4 className="f-reg my-auto">
+                                  <b>{empresa?.avaliacao} </b>
+                                </h4>
+                                <span className="text-secondary f-12 mt-auto">
+                                  / 10
+                                </span>
+                              </div>
+                            </div>
+                          </a>
+                        ))}
+                    </>
+                  ) : (
+                    <div className="d-flex justify-content-start">
+                      <ProfileCard />
+                    </div>
+                  )}
                 </div>
               </div>
               <br />
@@ -544,39 +670,58 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <b className="text-dark f-reg">Reclamações de clientes </b>
 
               {/* O que estao falando desta empresa, card */}
-              {reclamacoesEmpresa.map((reclamacao) => (
-                <>
-                  <div className="p-3 bg-light my-3 border- rounded-2">
-                    <a href="#" className="text-decoration-none f-16">
-                      {reclamacao.assunto}
-                    </a>
-                    <p className="text-secondary mt-2">
-                      {reclamacao.reclamacao}
-                    </p>
-                    <div className="d-flex gap-3 justiify-content-start">
-                      <div
-                        className={`d-flex my-auto gap-2 ${
-                          reclamacao.status == "respondido"
-                            ? " bg-success"
-                            : " bg-danger"
-                        } w-auto rounded-pill px-3 py-1 text-white `}
-                      >
-                        {reclamacao.status == "respondido" ? (
-                          <>
-                            <i className="bi bi-emoji-laughing"></i> Respondido
-                          </>
-                        ) : (
-                          <>
-                            <i className="bi bi-emoji-frown"></i> Não respondido
-                          </>
-                        )}
-                      </div>
-                      <span className="text-secondary my-auto">Há 7h</span>
-                    </div>
-                  </div>
-                </>
-              ))}
 
+              {reclamacoesEmpresa?.length != 0 ? (
+                <>
+                  {reclamacoesEmpresa.map((reclamacao, index) => (
+                    <>
+                      {/* <div className="p-3 bg-light my-3 border- rounded-2">
+                        <a href="#" className="text-decoration-none f-16">
+                          {reclamacao.assunto}
+                        </a>
+                        <p className="text-secondary mt-2">
+                          {reclamacao.historia}
+                        </p>
+                        <div className="d-flex gap-3 justiify-content-start">
+                          <div
+                            className={`d-flex my-auto gap-2 ${
+                              reclamacao.status == "respondido"
+                                ? " bg-success"
+                                : " bg-danger"
+                            } w-auto rounded-pill f-10 px-3 py-1 text-white `}
+                          >
+                            {reclamacao.status == "respondido" ? (
+                              <>
+                                <i className="bi bi-emoji-laughing"></i>{" "}
+                                Respondido
+                              </>
+                            ) : (
+                              <>
+                                <i className="bi bi-emoji-frown"></i> Não
+                                respondido
+                              </>
+                            )}
+                          </div>
+                          <span className="text-secondary f-12 my-auto">
+                            {reclamacao.quando}
+                          </span>
+                        </div>
+                      </div> */}
+                       <ReclamacaoItem key={index} reclamacao={reclamacao} />
+       
+                    </>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <Comment className="w-100" />
+                  <br />
+                  <Comment className="w-100" />
+                  <br />
+                  <Comment className="w-100" />
+                  <br />
+                </>
+              )}
               {reclamacoesEmpresa.lenght}
 
               <center>
@@ -699,59 +844,69 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 <br />
 
                 <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-                  {dadosEmpresas.map((empresa) => (
-                    <a
-                      key={empresa.id}
-                      href={`/pt/empresa/${empresa.id}`}
-                      className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                    >
-                      <img src={empresa.logo} alt="" className="logo-empresa" />
-                      <div className="bod">
-                        <AbreviarTexto
-                          texto={empresa?.nomeEmpresa}
-                          largura={"200"}
+                  {dadosEmpresas
+                    .filter((empresa) => empresa.id !== empresaEscolhida?.id)
+                    .map((empresa) => (
+                      <a
+                        key={empresa.id}
+                        href={`/pt/empresa/${empresa.id}`}
+                        className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                      >
+                        <img
+                          src={empresa.logo}
+                          alt=""
+                          className="logo-empresa"
                         />
-
-                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                        <div className="bod">
                           <AbreviarTexto
-                            texto={empresa?.enderecoEmpresa}
-                            largura={"300"}
-                            className="my-auto text-secondary"
-                          ></AbreviarTexto>
-                        </p>
-                        <hr />
+                            texto={empresa?.nomeEmpresa}
+                            largura={"200"}
+                          />
 
-                        <div className="d-flex gap-2 justify-content-center">
-                          {empresa?.avaliacao >= 5.0 &&
-                          empresa?.avaliacao <= 6.9 ? (
-                            <img
-                              src={regular}
-                              alt=""
-                              className="icon-empresa"
-                            />
-                          ) : empresa?.avaliacao >= 7.0 &&
-                            empresa?.avaliacao <= 10.0 ? (
-                            <img src={otimo} alt="" className="icon-empresa" />
-                          ) : empresa?.avaliacao >= 3.0 &&
-                            empresa?.avaliacao <= 4.9 ? (
-                            <img src={ruim} alt="" className="icon-empresa" />
-                          ) : empresa?.avaliacao <= 2.9 ? (
-                            <img
-                              src={naorecomendado}
-                              alt=""
-                              className="icon-empresa"
-                            />
-                          ) : null}
-                          <h4 className="f-reg my-auto">
-                            <b>{empresa?.avaliacao} </b>
-                          </h4>
-                          <span className="text-secondary f-12 mt-auto">
-                            / 10
-                          </span>
+                          <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                            <AbreviarTexto
+                              texto={empresa?.enderecoEmpresa}
+                              largura={"300"}
+                              className="my-auto text-secondary"
+                            ></AbreviarTexto>
+                          </p>
+                          <hr />
+
+                          <div className="d-flex gap-2 justify-content-center">
+                            {empresa?.avaliacao >= 5.0 &&
+                            empresa?.avaliacao <= 6.9 ? (
+                              <img
+                                src={regular}
+                                alt=""
+                                className="icon-empresa"
+                              />
+                            ) : empresa?.avaliacao >= 7.0 &&
+                              empresa?.avaliacao <= 10.0 ? (
+                              <img
+                                src={otimo}
+                                alt=""
+                                className="icon-empresa"
+                              />
+                            ) : empresa?.avaliacao >= 3.0 &&
+                              empresa?.avaliacao <= 4.9 ? (
+                              <img src={ruim} alt="" className="icon-empresa" />
+                            ) : empresa?.avaliacao <= 2.9 ? (
+                              <img
+                                src={naorecomendado}
+                                alt=""
+                                className="icon-empresa"
+                              />
+                            ) : null}
+                            <h4 className="f-reg my-auto">
+                              <b>{empresa?.avaliacao} </b>
+                            </h4>
+                            <span className="text-secondary f-12 mt-auto">
+                              / 10
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  ))}
+                      </a>
+                    ))}
                 </div>
               </div>
               <br />

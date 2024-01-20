@@ -55,11 +55,14 @@ import dadosEmpresas from "../model/empresas";
 import AvaliacaoComponent from "../components/avaliacaoComponent";
 import Swal from "sweetalert2";
 import ScrollToTopLink from "../components/scrollTopLink";
+import EmpresaLoader from "../components/empLoader";
+import Loader from "../components/loader";
 
 const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   // const { user, handleLogout } = useContext(UserContext);
 
   const [user, setUser] = useState("");
+  const [load, setLoader] = useState(false);
 
   const { empresa } = useParams();
 
@@ -105,7 +108,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     pegarEmpresa();
   }, [empresa]);
 
-
   // const [avaliacaoUsuario, setAvaliacaoUsuario] = useState(null);
 
   // const handleAvaliacaoChange = (avaliacao) => {
@@ -121,15 +123,26 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   // Função auxiliar para obter o nome do mês
   const getMonthName = (monthIndex) => {
     const monthNames = [
-      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      "janeiro",
+      "fevereiro",
+      "março",
+      "abril",
+      "maio",
+      "junho",
+      "julho",
+      "agosto",
+      "setembro",
+      "outubro",
+      "novembro",
+      "dezembro",
     ];
     return monthNames[monthIndex];
   };
-  
-  const currentDate = new Date();
-  const formattedDate = `${currentDate.getDate()} de ${getMonthName(currentDate.getMonth())} de ${currentDate.getFullYear()}`;
 
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getDate()} de ${getMonthName(
+    currentDate.getMonth()
+  )} de ${currentDate.getFullYear()}`;
 
   // Função para buscar os jogadores ordenados por pontuação
   const fetchPlayers = async () => {
@@ -204,7 +217,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     solicitarNovamente: null,
     titulo: "",
     historia: "",
-  quando: formattedDate,
+    
     anexos: [], // Certifique-se de inicializar como um array vazio
   });
 
@@ -244,6 +257,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     });
   };
   const handleEnviarReclamacao = async () => {
+    setLoader(true);
     try {
       // Verificar se os campos obrigatórios estão preenchidos
       if (
@@ -251,6 +265,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         formData.titulo.trim() === "" ||
         formData.historia.trim() === ""
       ) {
+        setLoader(false);
         Swal.fire({
           icon: "warning",
           title: "Campos obrigatórios não preenchidos",
@@ -279,6 +294,8 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         nomeEmpresa: empresaEscolhida?.nomeEmpresa,
         cliente: user.name,
         emailCliente: user.email,
+        status: "nao-respondido",
+        quando: formattedDate,
         // Adicione outros campos necessários, como data, usuário, etc.
       };
 
@@ -291,6 +308,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         text: `Sua reclamação foi registrada com sucesso, ${user.name}!`,
       });
 
+      setLoader(false);
       // Limpa os campos do formulário após o envio bem-sucedido
       setFormData({
         classificacao: 0,
@@ -300,6 +318,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         anexos: [],
       });
     } catch (error) {
+      setLoader(false);
       console.error("Erro ao enviar reclamação:", error);
     }
   };
@@ -317,38 +336,61 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         <div className="bg-white  pt-5 mt-sm-5 mt-md-0 pt-lg-3 rounded-3 container pb-3">
           <div className="d-flex justify-content-between mt-sm-5 mt-md-0 gap-3">
             <div className="d-flex gap-3">
-              <img src={empresaEscolhida?.logo} alt="" className="logo-rec" />
-              <div className="my-auto">
-                <h5 className="f-reg">{empresaEscolhida?.nomeEmpresa}</h5>
-                <p className="d-flex mt-1 my-auto gap-2 f-14">
-                  {empresaEscolhida?.avaliacao >= 5.0 &&
-                  empresaEscolhida?.avaliacao <= 6.9 ? (
-                    <img src={regular} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida?.avaliacao >= 7.0 &&
-                    empresaEscolhida?.avaliacao <= 10.0 ? (
-                    <img src={otimo} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida?.avaliacao >= 3.0 &&
-                    empresaEscolhida?.avaliacao <= 4.9 ? (
-                    <img src={ruim} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida?.avaliacao <= 2.9 ? (
-                    <img src={naorecomendado} alt="" className="icon-empresa" />
-                  ) : null}
-                  {empresaEscolhida?.avaliacao >= 5.0 &&
-                  empresaEscolhida?.avaliacao <= 6.9 ? (
-                    <b className="my-auto text-secondary">REGULAR</b>
-                  ) : empresaEscolhida?.avaliacao >= 7.0 &&
-                    empresaEscolhida?.avaliacao <= 10.0 ? (
-                    <b className="my-auto text-secondary">ÓTIMO</b>
-                  ) : empresaEscolhida?.avaliacao >= 3.0 &&
-                    empresaEscolhida?.avaliacao <= 4.9 ? (
-                    <b className="my-auto text-secondary">RUÍM</b>
-                  ) : empresaEscolhida?.avaliacao <= 2.9 ? (
-                    <b className="my-auto text-secondary">NÃO RECOMENDADO</b>
-                  ) : (
-                    <b className="my-auto text-secondary">SEM DADOS </b>
-                  )}
-                </p>
-              </div>
+              {empresaEscolhida?.nomeEmpresa != null ? (
+                <>
+                  <img
+                    src={empresaEscolhida?.logo}
+                    alt=""
+                    className="logo-rec"
+                  />
+                  <div className="my-auto">
+                    <ScrollToTopLink
+                      to={"/pt/empresa/" + empresaEscolhida.id}
+                      className={"text-decoration-none"}
+                    >
+                      <h5 className="f-reg">{empresaEscolhida?.nomeEmpresa}</h5>
+                    </ScrollToTopLink>
+                    <p className="d-flex mt-1 my-auto gap-2 f-14">
+                      {empresaEscolhida?.avaliacao >= 5.0 &&
+                      empresaEscolhida?.avaliacao <= 6.9 ? (
+                        <img src={regular} alt="" className="icon-empresa" />
+                      ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                        empresaEscolhida?.avaliacao <= 10.0 ? (
+                        <img src={otimo} alt="" className="icon-empresa" />
+                      ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                        empresaEscolhida?.avaliacao <= 4.9 ? (
+                        <img src={ruim} alt="" className="icon-empresa" />
+                      ) : empresaEscolhida?.avaliacao <= 2.9 ? (
+                        <img
+                          src={naorecomendado}
+                          alt=""
+                          className="icon-empresa"
+                        />
+                      ) : null}
+                      {empresaEscolhida?.avaliacao >= 5.0 &&
+                      empresaEscolhida?.avaliacao <= 6.9 ? (
+                        <b className="my-auto text-secondary">REGULAR</b>
+                      ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                        empresaEscolhida?.avaliacao <= 10.0 ? (
+                        <b className="my-auto text-secondary">ÓTIMO</b>
+                      ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                        empresaEscolhida?.avaliacao <= 4.9 ? (
+                        <b className="my-auto text-secondary">RUÍM</b>
+                      ) : empresaEscolhida?.avaliacao <= 2.9 ? (
+                        <b className="my-auto text-secondary">
+                          NÃO RECOMENDADO
+                        </b>
+                      ) : (
+                        <b className="my-auto text-secondary">SEM DADOS </b>
+                      )}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <EmpresaLoader />
+                </>
+              )}
             </div>
             <a
               href="/pt/reclamar"
@@ -504,19 +546,26 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
 
               {user ? (
                 <button
+                  disabled={load}
                   onClick={handleEnviarReclamacao}
                   className="d-flex text-white w-100  btn btn-success justify-content-center rounded-1"
                 >
-                  <span>Enviar Reclamação</span>
+                  {load ? (
+                    <>
+                      <Loader />
+                    </>
+                  ) : (
+                    <span>Enviar Reclamação</span>
+                  )}
                 </button>
               ) : (
                 <>
                   <center>
                     <i className="bi bi-exclamation-triangle"></i>
                     <p className="text-secondary">
-                      Faça <ScrollToTopLink to={'/pt/login'} >
-                      login</ScrollToTopLink> ou cadastre se para fazer uma reclamação ou
-                      avaliação!
+                      Faça{" "}
+                      <ScrollToTopLink to={"/pt/login"}>login</ScrollToTopLink>{" "}
+                      ou cadastre se para fazer uma reclamação ou avaliação!
                     </p>
                   </center>
                 </>

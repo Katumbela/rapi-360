@@ -109,6 +109,20 @@ const Banner = () => {
     setSearchTerm("");
   };
 
+
+const categorias = [
+  'Todos',
+  'Supermercados',
+  'Bancos',
+  'Telefonia, TV & Internet',
+  'Beleza & Estética',
+  'Seguradoras',
+  'Sites & Portais',
+  'Softwares',
+  'E-commerce',
+];
+
+
   return (
     <>
       <div className="banner shadow-md">

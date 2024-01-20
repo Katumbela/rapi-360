@@ -75,7 +75,7 @@
   display: none;
 }
 
-.form .form-control {
+.form .form-control, select {
   background: #ffffff2c !important;
 }
 

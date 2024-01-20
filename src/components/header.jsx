@@ -205,6 +205,28 @@ const Header = (props) => {
 
   const [searchResults, setSearchResults] = useState([]);
 
+  // const handleInputChange = (e) => {
+  //   const searchTerm = e.target.value;
+  //   setSearchTerm(searchTerm);
+  
+  //   // Filtrar empresas com base no termo de pesquisa
+  //   const results = dadosEmpresas.filter((empresa) => {
+  //     const lowerCasedTerm = searchTerm.toLowerCase();
+  //     return (
+  //       empresa.nomeEmpresa && empresa.nomeEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+  //       empresa.site && empresa.siteEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+  //       empresa.nif && empresa.numeroBI.includes(searchTerm)
+  //     );
+  //   });
+  
+  //   // Atualizar os resultados da pesquisa
+  //   setSearchResults(results);
+  
+  //   // Exibir as sugestões
+  //   setShowSuggestions(true);
+  // };
+
+
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
@@ -212,10 +234,14 @@ const Header = (props) => {
     // Filtrar empresas com base no termo de pesquisa
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
+      const nomeEmpresaLowerCase = empresa.nomeEmpresa ? empresa.nomeEmpresa.toLowerCase() : '';
+      const siteEmpresaLowerCase = empresa.siteEmpresa ? empresa.siteEmpresa.toLowerCase() : '';
+      const numeroBI = empresa.numeroBI ? empresa.numeroBI : '';
+  
       return (
-        empresa.nomeEmpresa && empresa.nomeEmpresa.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.site && empresa.siteEmpresa.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.nif && empresa.numeroBI.includes(searchTerm)
+        nomeEmpresaLowerCase.includes(lowerCasedTerm) ||
+        siteEmpresaLowerCase.includes(lowerCasedTerm) ||
+        numeroBI.includes(searchTerm)
       );
     });
   
@@ -225,6 +251,7 @@ const Header = (props) => {
     // Exibir as sugestões
     setShowSuggestions(true);
   };
+  
   
   const handleBlur = () => {
     // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões

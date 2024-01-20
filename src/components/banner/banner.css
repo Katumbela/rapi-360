@@ -138,9 +138,12 @@
 }
 
 .form-control:focus-within,
+select:focus-within,
+select:focus-visible,
+select:focus,
 .form-control:focus-visible,
 .form-control:focus {
-  border-color: #04d700;
+  border-color: #04d700!important;
 }
 
 .q {

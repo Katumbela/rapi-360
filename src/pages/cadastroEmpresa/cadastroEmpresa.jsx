@@ -142,6 +142,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         sobre: "",
         nomeResponsavel: "",
         senha: "",
+        categoria: "",
       });
       setLogoFile(null);
       setCapaFile(null);
@@ -149,6 +150,13 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       setLoading(false);
       console.error("Erro ao cadastrar empresa:", error);
     }
+  };
+
+  const handleCategoriaChange = (event) => {
+    setFormData({
+      ...formData,
+      categoria: event.target.value,
+    });
   };
 
   return (
@@ -355,6 +363,44 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                               })
                             }
                           />
+                        </div>
+                        <br />
+                        <br />
+                        <div className="col-12 my-2 col-md-12">
+                          <label htmlFor="" className="text-secondary f-12">
+                            Categoria da empresa / Negócio
+                            <b className="text-danger">*</b>
+                          </label>
+                          <select
+                            id="categoria"
+                            name="categoria"
+                            className="form-select"
+                            value={formData.categoria}
+                            onChange={handleCategoriaChange}
+                          >
+                            {/* Opções do select */}
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Educacao">Educação & EdTech</option>
+                            <option value="Startup">Startup</option>
+                            <option value="supermercados">Supermercados</option>
+                            <option value="bancos">Bancos</option>
+                            <option value="telefoniaETV">
+                              Telefonia, TV & Internet
+                            </option>
+                            <option value="belezaEEstetica">
+                              Beleza & Estética
+                            </option>
+                            <option value="seguradoras">Seguradoras</option>
+                            <option value="sitesEPortais">
+                              Sites & Portais
+                            </option>
+                            <option value="LojaOnline">Loja Online</option>
+                            <option value="Pagina">Pagina </option>
+                            <option value="softwares">Softwares</option>
+                            <option value="Saas">Saas</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="Outro">Outro</option>
+                          </select>
                         </div>
                         <br />
 

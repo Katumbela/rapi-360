@@ -24,7 +24,7 @@
   color: white;
 }
 
-.form-control {
+.form-control, select {
   box-shadow: none!important ;
   border-width: 2px!important;
   color: #262301!important;

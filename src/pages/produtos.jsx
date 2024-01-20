@@ -180,7 +180,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
                     Todo mundo pesquisa antes de comprar, inclusive quem compra
                     da sua empresa!
                   </b>{" "}
-                  Saiba como o Reputa 360 pode ajudar a sua empresa a gerar
+                  Saiba como o Reputação 360 pode ajudar a sua empresa a gerar
                   mais credibilidade, confiança e ter uma boa reputação online.
                 </span>
 
@@ -202,7 +202,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
         <br />
 
         <div itemID="solucoes" id="solucoes" className=" bg-light my-3 py-5 text-center">
-          <h2 className="f-reg">Soluções do Reputa 360 para empresas</h2>
+          <h2 className="f-reg">Soluções do Reputação 360 para empresas</h2>
           <br />
           <br />
           <div className="lista-solucoes flex-wrap d-flex gap-5 justify-content-center text-start">
@@ -214,7 +214,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
               <ul>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
-                  Tenha o selo de verificação do Reputa 360
+                  Tenha o selo de verificação do Reputação 360
                 </li>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
@@ -246,7 +246,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
                 </li>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
-                  Gerencie o Reputa 360, redes sociais e outros canais
+                  Gerencie o Reputação 360, redes sociais e outros canais
                 </li>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
@@ -270,7 +270,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
               <ul>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
-                  Responda o Reputa 360 com sua ferramenta de CRM
+                  Responda o Reputação 360 com sua ferramenta de CRM
                 </li>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
@@ -330,7 +330,7 @@ const Produtos = ({ cart, nomee, emaill }) => {
                 </li>
                 <li>
                   <i className="bi bi-check text-success f-22"></i>
-                  Aprenda sobre reputação, confiança e Reputa 360 com o R360 Educa!
+                  Aprenda sobre reputação, confiança e Reputação 360 com o R360 Educa!
                 </li>
               </ul>
               <br />
