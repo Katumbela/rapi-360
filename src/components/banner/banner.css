@@ -276,3 +276,11 @@ select:focus,
 .desconto .imm {
   text-align: end ;
 }
+
+
+.categoria-button {
+  max-width: 200px; /* ou qualquer valor que se adeque ao seu layout */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
