@@ -55,7 +55,7 @@ const Header = (props) => {
 
     ordenarEmpresas();
   }, []);
-  
+
   useEffect(() => {
     // verificar login do usuario
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
@@ -209,7 +209,7 @@ const Header = (props) => {
   // const handleInputChange = (e) => {
   //   const searchTerm = e.target.value;
   //   setSearchTerm(searchTerm);
-  
+
   //   // Filtrar empresas com base no termo de pesquisa
   //   const results = dadosEmpresas.filter((empresa) => {
   //     const lowerCasedTerm = searchTerm.toLowerCase();
@@ -219,41 +219,43 @@ const Header = (props) => {
   //       empresa.nif && empresa.numeroBI.includes(searchTerm)
   //     );
   //   });
-  
+
   //   // Atualizar os resultados da pesquisa
   //   setSearchResults(results);
-  
+
   //   // Exibir as sugestões
   //   setShowSuggestions(true);
   // };
 
-
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-  
+
     // Filtrar empresas com base no termo de pesquisa
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
-      const nomeEmpresaLowerCase = empresa.nomeEmpresa ? empresa.nomeEmpresa.toLowerCase() : '';
-      const siteEmpresaLowerCase = empresa.siteEmpresa ? empresa.siteEmpresa.toLowerCase() : '';
-      const numeroBI = empresa.numeroBI ? empresa.numeroBI : '';
-  
+      const nomeEmpresaLowerCase = empresa.nomeEmpresa
+        ? empresa.nomeEmpresa.toLowerCase()
+        : "";
+      const siteEmpresaLowerCase = empresa.siteEmpresa
+        ? empresa.siteEmpresa.toLowerCase()
+        : "";
+      const numeroBI = empresa.numeroBI ? empresa.numeroBI : "";
+
       return (
         nomeEmpresaLowerCase.includes(lowerCasedTerm) ||
         siteEmpresaLowerCase.includes(lowerCasedTerm) ||
         numeroBI.includes(searchTerm)
       );
     });
-  
+
     // Atualizar os resultados da pesquisa
     setSearchResults(results);
-  
+
     // Exibir as sugestões
     setShowSuggestions(true);
   };
-  
-  
+
   const handleBlur = () => {
     // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
     setTimeout(() => {
@@ -285,6 +287,12 @@ const Header = (props) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const [menuAberto, setMenuAberto] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuAberto(!menuAberto);
   };
 
   return (
@@ -359,7 +367,44 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-      <div className="menu-sm d-flex justify-content-between overflow-x-auto">
+
+      <div className={`menu-sm d-flex justify-content-between`}>
+        <ScrollToTopLink to={"/pt/reclamar"}>
+          <button className="btn rec btn-sm btn-danger">
+            <i className="bi bi-megaphone me-1"></i> Reclamar
+          </button>
+        </ScrollToTopLink>
+
+        <button className="burger b1" onClick={toggleMenu}>
+          Menu <i className="bi bi-list"></i>
+        </button>
+      </div>
+
+      <div className={`menu-ssm ${menuAberto ? "aberto" : ""}`}>
+        <div className="w-100  text-endd">
+          <button className="burger " onClick={toggleMenu}>
+            <i className="bi bi-x"></i>
+          </button>
+        </div>
+
+        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/cadastro"}>
+          Descontos
+        </ScrollToTopLink>
+
+        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/cadastro"}>
+          Ranking
+        </ScrollToTopLink>
+
+        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/#blog"}>
+          Blog
+        </ScrollToTopLink>
+
+        <ScrollToTopLink
+          className={"text-decoration-none"}
+          to={"/pt/empresa/produtos"}
+        >
+          <span className="premio-md">Produtos</span>
+        </ScrollToTopLink>
         {user ? (
           <span className="btn text-success f-reg d-flex gap-2">
             {" "}
@@ -371,20 +416,19 @@ const Header = (props) => {
             />{" "}
           </span>
         ) : (
-          <ScrollToTopLink to={"/pt/login"}>Entrar</ScrollToTopLink>
+          <>
+            <ScrollToTopLink to={"/pt/login"}>
+              <button className="btn rec btn-sm w-100 btn-outline-success">
+                Login
+              </button>
+            </ScrollToTopLink>
+            <ScrollToTopLink to={"/pt/cadastro"}>
+              <button className="btn rec btn-sm btn-success w-100">
+                Cadastro
+              </button>
+            </ScrollToTopLink>
+          </>
         )}
-
-        <ScrollToTopLink to={"/pt/cadastro"}>Cadastro</ScrollToTopLink>
-
-        <ScrollToTopLink to={"/pt/empresa/produtos"}>
-          <span className="premio-md">Produtos</span>
-        </ScrollToTopLink>
-
-        <ScrollToTopLink to={"/pt/reclamar"}>
-          <button className="btn rec btn-sm btn-danger">
-            <i className="bi bi-megaphone me-1"></i> Reclamar
-          </button>
-        </ScrollToTopLink>
       </div>
       {showSuggestions && (
         <div className="suggestions container-fluid py-sm-3">
@@ -472,75 +516,74 @@ const Header = (props) => {
                     desta empresa
                   </p>
                 </p>
-              ) : 
-              dadosEmpresas.length != 0 ? (
+              ) : dadosEmpresas.length != 0 ? (
                 <>
-                {
-                     dadosEmpresas.map((empresa) => (
-                      <a
-                        onClick={handleBlur}
-                        key={empresa.id}
-                        href={`/pt/empresa/${empresa.id}`}
-                        className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                      >
-                        <img src={empresa.logo} alt="" className="logo-empresa" />
-                        <div className="bod">
+                  {dadosEmpresas.map((empresa) => (
+                    <a
+                      onClick={handleBlur}
+                      key={empresa.id}
+                      href={`/pt/empresa/${empresa.id}`}
+                      className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                    >
+                      <img src={empresa.logo} alt="" className="logo-empresa" />
+                      <div className="bod">
+                        <AbreviarTexto
+                          texto={empresa.nomeEmpresa}
+                          largura={"190"}
+                        />
+
+                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                           <AbreviarTexto
-                            texto={empresa.nomeEmpresa}
-                            largura={"190"}
-                          />
-    
-                          <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                            <AbreviarTexto
-                              texto={empresa.enderecoEmpresa}
-                              largura={"300"}
-                              className="my-auto text-secondary"
-                            ></AbreviarTexto>
-                          </p>
-                          <hr />
-    
-                          <div className="d-flex gap-2 justify-content-center">
-                            {empresa.avaliacao >= 5.0 &&
-                            empresa.avaliacao <= 6.9 ? (
-                              <img src={regular} alt="" className="icon-empresa" />
-                            ) : empresa.avaliacao >= 7.0 &&
-                              empresa.avaliacao <= 10.0 ? (
-                              <img src={otimo} alt="" className="icon-empresa" />
-                            ) : empresa.avaliacao >= 3.0 &&
-                              empresa.avaliacao <= 4.9 ? (
-                              <img src={ruim} alt="" className="icon-empresa" />
-                            ) : empresa.avaliacao <= 2.9 ? (
-                              <img
-                                src={naorecomendado}
-                                alt=""
-                                className="icon-empresa"
-                              />
-                            ) : null}
-                            <h4 className="f-reg my-auto">
-                              <b>{empresa.avaliacao} </b>
-                            </h4>
-                            <span className="text-secondary f-12 mt-auto">
-                              / 10
-                            </span>
-                          </div>
+                            texto={empresa.enderecoEmpresa}
+                            largura={"300"}
+                            className="my-auto text-secondary"
+                          ></AbreviarTexto>
+                        </p>
+                        <hr />
+
+                        <div className="d-flex gap-2 justify-content-center">
+                          {empresa.avaliacao >= 5.0 &&
+                          empresa.avaliacao <= 6.9 ? (
+                            <img
+                              src={regular}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : empresa.avaliacao >= 7.0 &&
+                            empresa.avaliacao <= 10.0 ? (
+                            <img src={otimo} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao >= 3.0 &&
+                            empresa.avaliacao <= 4.9 ? (
+                            <img src={ruim} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao <= 2.9 ? (
+                            <img
+                              src={naorecomendado}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : null}
+                          <h4 className="f-reg my-auto">
+                            <b>{empresa.avaliacao} </b>
+                          </h4>
+                          <span className="text-secondary f-12 mt-auto">
+                            / 10
+                          </span>
                         </div>
-                      </a>
-                    ))
-                }
+                      </div>
+                    </a>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <div className="d-flex gap-3">
+                    <ProfileCard />
+                    <ProfileCard />
+                    <ProfileCard />
+                    <ProfileCard />
+                  </div>
                 </>
               )
-              : 
-             
-            <>
-            <div className="d-flex gap-3">
-
-            <ProfileCard />
-            <ProfileCard />
-            <ProfileCard />
-            <ProfileCard />
-            </div>
-            </>
-            ): null}
+            ) : null}
           </div>
         </div>
       )}
