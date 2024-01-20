@@ -13,7 +13,7 @@ import 'firebase/compat/firestore';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDXKbx634X3Q8dcMiXjHseVzQiAFMvmSdY",
-  authDomain: "reputa360.firebaseapp.com",
+  authDomain: "reputacao360.online",
   projectId: "reputa360",
   storageBucket: "reputa360.appspot.com",
   messagingSenderId: "37758184858",
