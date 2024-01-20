@@ -57,53 +57,53 @@ const Banner = () => {
   const [dadosEmpresass, setDadosEmpresas] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
 
-
   // Adicione o estado para armazenar todas as empresas
-const [todasEmpresas, setTodasEmpresas] = useState([]);
-const [melhoresEmpresasOrdenadas, setMelhoresEmpresasOrdenadas] = useState([]);
-const [pioresEmpresasOrdenadas, setPioresEmpresasOrdenadas] = useState([]);
-
-// ...
-
-const empresasFiltradasPorCategoria = todasEmpresas.filter((empresa) => {
-  return (
-    categoriaSelecionada === "" || empresa.categoria === categoriaSelecionada
+  const [todasEmpresas, setTodasEmpresas] = useState([]);
+  const [melhoresEmpresasOrdenadas, setMelhoresEmpresasOrdenadas] = useState(
+    []
   );
-});
+  const [pioresEmpresasOrdenadas, setPioresEmpresasOrdenadas] = useState([]);
 
-const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
-  .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
-  .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
+  // ...
 
-const pioresEmpresasPorCategoria = empresasFiltradasPorCategoria
-  .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
-  .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
+  const empresasFiltradasPorCategoria = todasEmpresas.filter((empresa) => {
+    return (
+      categoriaSelecionada === "" || empresa.categoria === categoriaSelecionada
+    );
+  });
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const dadosEmpresas = await obterDadosDoFirebase();
-      setTodasEmpresas(dadosEmpresas);
+  const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
+    .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
+    .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
 
-      // Convertendo avaliação para números antes de ordenar
-      const melhoresEmpresas = dadosEmpresas
-        .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
-        .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
+  const pioresEmpresasPorCategoria = empresasFiltradasPorCategoria
+    .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
+    .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
 
-      const pioresEmpresas = dadosEmpresas
-        .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
-        .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+        setTodasEmpresas(dadosEmpresas);
 
-      setMelhoresEmpresasOrdenadas(melhoresEmpresas);
-      setPioresEmpresasOrdenadas(pioresEmpresas);
-    } catch (error) {
-      console.error("Erro ao ordenar empresas:", error.message);
-    }
-  };
+        // Convertendo avaliação para números antes de ordenar
+        const melhoresEmpresas = dadosEmpresas
+          .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
+          .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
 
-  fetchData();
-}, [categoriaSelecionada]); // Adicione categoriaSelecionada como uma dependência
+        const pioresEmpresas = dadosEmpresas
+          .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
+          .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
 
+        setMelhoresEmpresasOrdenadas(melhoresEmpresas);
+        setPioresEmpresasOrdenadas(pioresEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    fetchData();
+  }, [categoriaSelecionada]); // Adicione categoriaSelecionada como uma dependência
 
   const handleClickCategoria = (categoria) => {
     setCategoriaSelecionada(categoria);
@@ -288,17 +288,22 @@ useEffect(() => {
             <div className="tabss w-100   overflow-x-auto">
               <ul className="w-100 overflow-x-auto">
                 {categorias.map((categoria) => (
-                 <li key={categoria}>
-                 <button
-                   className={`btn btn-sm ${
-                     categoria === categoriaSelecionada ? "btn-success" : "btn-outline-success"
-                   } categoria-button`}
-                   onClick={() => handleClickCategoria(categoria === 'Todos' ? '' : categoria)}
-                 >
-                   {categoria}
-                 </button>
-               </li>
-               
+                  <li key={categoria}>
+                    <button
+                      className={`btn btn-sm ${
+                        categoria === categoriaSelecionada
+                          ? "btn-success"
+                          : "btn-outline-success"
+                      } categoria-button`}
+                      onClick={() =>
+                        handleClickCategoria(
+                          categoria === "Todos" ? "" : categoria
+                        )
+                      }
+                    >
+                      {categoria}
+                    </button>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -419,15 +424,17 @@ useEffect(() => {
                         <EmpresaLoader className="w" />
                       </>
                     )}
-                    {melhoresEmpresasPorCategoria?.length <= 0 && (
-                      <>
-                      <center className="w-75 mx-auto my-3">
-                        <span className="text-secondary f-10 ">Não há ainda nenhuma empresa cadastrada nesta categoria</span>
-                      </center>
-                      </>
-                    )
-
-                    }
+                    {categoriaSelecionada != "" &&
+                      melhoresEmpresasPorCategoria?.length <= 0 && (
+                        <>
+                          <center className="w-75 mx-auto my-3">
+                            <span className="text-secondary f-10 ">
+                              Não há ainda nenhuma empresa cadastrada nesta
+                              categoria
+                            </span>
+                          </center>
+                        </>
+                      )}
                   </div>
                 </div>
                 <div className="piores mt-5 mt-md-0 col-12 col-md-6">
@@ -443,7 +450,7 @@ useEffect(() => {
                     <br />
                     {pioresEmpresasOrdenadas?.length != 0 ? (
                       <>
-                        {pioresEmpresasOrdenadas.map((empresa, index) => (
+                        {pioresEmpresasPorCategoria.map((empresa, index) => (
                           <ScrollToTopLink
                             key={empresa.id}
                             to={`/pt/empresa/${empresa.id}`}
@@ -542,6 +549,18 @@ useEffect(() => {
                         <EmpresaLoader className="w" />
                       </>
                     )}
+
+                    {categoriaSelecionada != "" &&
+                      pioresEmpresasPorCategoria?.length <= 0 && (
+                        <>
+                          <center className="w-75 mx-auto my-3">
+                            <span className="text-secondary f-10 ">
+                              Não há ainda nenhuma empresa cadastrada nesta
+                              categoria
+                            </span>
+                          </center>
+                        </>
+                      )}
                   </div>
                 </div>
               </div>

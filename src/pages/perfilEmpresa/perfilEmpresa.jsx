@@ -71,7 +71,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   useEffect(() => {
     const pegarEmpresa = async () => {
       try {
-        const empresasRef = db.collection('empresa');
+        const empresasRef = db.collection("empresa");
         const empresaSnapshot = await empresasRef.doc(empresaid).get();
         const empresaData = empresaSnapshot.data();
 
@@ -82,9 +82,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           });
 
           // Supondo que as reclamações estejam em uma coleção "reclamacoes"
-          const reclamacoesRef = db.collection('reclamacoes');
+          const reclamacoesRef = db.collection("reclamacoes");
           const reclamacoesSnapshot = await reclamacoesRef
-            .where('empresaId', '==', empresaid)
+            .where("empresaId", "==", empresaid)
             .get();
 
           try {
@@ -95,13 +95,13 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
             setReclamacoesEmpresa(reclamacoesData);
           } catch (error) {
-            console.error('Erro ao obter reclamações:', error.message);
+            console.error("Erro ao obter reclamações:", error.message);
           }
         } else {
-          console.error('Empresa não encontrada.');
+          console.error("Empresa não encontrada.");
         }
       } catch (error) {
-        console.error('Erro ao pegar empresa:', error.message);
+        console.error("Erro ao pegar empresa:", error.message);
       }
     };
 
@@ -123,6 +123,14 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
     return mediaClassificacoes.toFixed(1);
   };
 
+  const [reclamacoesRespondidas, setReclamacoesRespondidas] = useState(0);
+
+  const calcularReclamacoesRespondidas = () => {
+    return reclamacoesEmpresa.filter(
+      (reclamacao) => reclamacao.status === "respondido"
+    ).length;
+  };
+
   useEffect(() => {
     if (empresaEscolhida && reclamacoesEmpresa.length > 0) {
       const novaAvaliacao = calcularMediaClassificacoes();
@@ -132,9 +140,19 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         ...prevEmpresa,
         avaliacao: novaAvaliacao,
       }));
+
+      // Obtém o número de reclamações respondidas
+      const reclamacoesRespondidas = calcularReclamacoesRespondidas();
+
+      // Atualiza o estado com o número de reclamações respondidas
+      setReclamacoesRespondidas(reclamacoesRespondidas);
     }
   }, [reclamacoesEmpresa, empresaEscolhida]);
 
+  const TotalReclamacoesRespondidas = () => {
+    const totalReclamacoes = reclamacoesEmpresa.length;
+    return ((reclamacoesRespondidas / totalReclamacoes) * 100).toFixed(1);
+  };
 
   // const empres = dadosEmpresas.filter((p) => p.id === empresaid);
   // const empresaEscolhida = empres[0];
@@ -271,22 +289,22 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   // Mapeia a nota da empresa para a largura da barra de progresso
   const larguraProgressBar = (empresaEscolhida?.avaliacao / 10) * 100;
 
-
-
   // Função para calcular os percentuais de pessoas que solicitariam novamente e não solicitariam
   const calcularPercentuaisSolicitariamNovamente = () => {
     const totalReclamacoes = reclamacoesEmpresa.length;
 
     const solicitariamNovamente = reclamacoesEmpresa.filter(
-      (reclamacao) => reclamacao.solicitarNovamente === 'sim'
+      (reclamacao) => reclamacao.solicitarNovamente === "sim"
     ).length;
 
     const naoSolicitariamNovamente = reclamacoesEmpresa.filter(
-      (reclamacao) => reclamacao.solicitarNovamente === 'nao'
+      (reclamacao) => reclamacao.solicitarNovamente === "nao"
     ).length;
 
-    const percentualSolicitariam = (solicitariamNovamente / totalReclamacoes) * 100;
-    const percentualNaoSolicitariam = (naoSolicitariamNovamente / totalReclamacoes) * 100;
+    const percentualSolicitariam =
+      (solicitariamNovamente / totalReclamacoes) * 100;
+    const percentualNaoSolicitariam =
+      (naoSolicitariamNovamente / totalReclamacoes) * 100;
 
     return {
       percentualSolicitariam,
@@ -296,8 +314,16 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
   const mediaClassificacoes = calcularMediaClassificacoes();
   const percentuaisSolicitariam = calcularPercentuaisSolicitariamNovamente();
+  
+  const [reclamacoesParaExibir, setReclamacoesParaExibir] = useState(4);
 
+  const handleVerMais = () => {
+    setReclamacoesParaExibir((prevCount) => prevCount + 4);
+  };
 
+  const handleVerMenos = () => {
+    setReclamacoesParaExibir((prevCount) => Math.max(prevCount - 4, 4));
+  };
 
 
   return (
@@ -323,12 +349,13 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
             <div className="col-12 ps-md-4  pt-sm-0 col-md-8">
               {empresaEscolhida?.nomeEmpresa != null ? (
                 <>
-                
-                  <b className="f-20 mt-5 f-reg">{empresaEscolhida?.nomeEmpresa}</b>
+                  <b className="f-20 mt-5 f-reg">
+                    {empresaEscolhida?.nomeEmpresa}
+                  </b>
                   <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
                     <p className="d-flex text-secondary gap-2">
-                      <i className="bi bi-calendar"></i> 
-                      {empresaEscolhida?.quando} 
+                      <i className="bi bi-calendar"></i>
+                      {empresaEscolhida?.quando}
                     </p>
 
                     {empresaEscolhida?.selo === true ? (
@@ -409,11 +436,15 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       : ""
                   }  ${
                     empresaEscolhida?.avaliacao <= 2.9 ? "nao-recomendado" : ""
-                  } `}
+                  } 
+                
+                  `}
                 >
                   <div className="d-flex">
-                    {empresaEscolhida?.avaliacao >= 5.0 &&
-                    empresaEscolhida?.avaliacao <= 6.9 ? (
+                    {empresaEscolhida?.selo === true ? (
+                      <img src={r360} alt="" className="logo-reputacao" />
+                    ) : empresaEscolhida?.avaliacao >= 5.0 &&
+                      empresaEscolhida?.avaliacao <= 6.9 ? (
                       <img src={regular} alt="" className="logo-reputacao" />
                     ) : empresaEscolhida?.avaliacao >= 7.0 &&
                       empresaEscolhida?.avaliacao <= 10.0 ? (
@@ -431,8 +462,10 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
                     <div className="container">
                       <h5>
-                        {empresaEscolhida?.avaliacao >= 5.0 &&
-                        empresaEscolhida?.avaliacao <= 6.9 ? (
+                        {empresaEscolhida?.selo ? (
+                          <b className="f-reg f-16">R360</b>
+                        ) : empresaEscolhida?.avaliacao >= 5.0 &&
+                          empresaEscolhida?.avaliacao <= 6.9 ? (
                           <b className="f-reg">REGULAR</b>
                         ) : empresaEscolhida?.avaliacao >= 7.0 &&
                           empresaEscolhida?.avaliacao <= 10.0 ? (
@@ -455,7 +488,8 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   <div className="mx-auto my-2 border-1 rounded-1 text-center bg-white p-3">
                     <span className="f-12">Reclamações</span>
                     <b className="d-flex gap-2 f-reg mx-auto justify-content-center">
-                      <i className="bi bi-megaphone"></i> {reclamacoesEmpresa?.length}
+                      <i className="bi bi-megaphone"></i>{" "}
+                      {reclamacoesEmpresa?.length}
                     </b>
                   </div>
                   {empresaEscolhida?.avaliacao <= 2.9 && (
@@ -487,50 +521,64 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   >
                     <div
                       className={`progress-bar ${
-                        percentuaisSolicitariam.percentualSolicitariam.toFixed(1) <= 40
+                        percentuaisSolicitariam.percentualSolicitariam.toFixed(
+                          1
+                        ) <= 40
                           ? "bg-danger"
-                          : percentuaisSolicitariam.percentualSolicitariam.toFixed(1) >= 50.0 &&
-                          percentuaisSolicitariam.percentualSolicitariam.toFixed(1) <= 69.0
+                          : percentuaisSolicitariam.percentualSolicitariam.toFixed(
+                              1
+                            ) >= 50.0 &&
+                            percentuaisSolicitariam.percentualSolicitariam.toFixed(
+                              1
+                            ) <= 69.0
                           ? "bg-warning"
                           : "bg-success"
                       } `}
-                      style={{ width: percentuaisSolicitariam.percentualSolicitariam.toFixed(1)+"%" }}
+                      style={{
+                        width:
+                          percentuaisSolicitariam.percentualSolicitariam.toFixed(
+                            1
+                          ) + "%",
+                      }}
                     ></div>
                   </div>
-                 {
-                  empresaEscolhida?.avaliacao != null ?
-                  <span className="f-reg my-auto">{percentuaisSolicitariam.percentualSolicitariam}%</span>
-                  :
-                  <span className="f-reg my-auto">0 %</span>
-                 }
+                  {empresaEscolhida?.avaliacao != null ? (
+                    <span className="f-reg my-auto">
+                      {percentuaisSolicitariam.percentualSolicitariam}%
+                    </span>
+                  ) : (
+                    <span className="f-reg my-auto">0 </span>
+                  )}
                 </div>
               </div>
 
               <div className="p-3">
-                <b className="f-re">Não voltariam a fazer negócios</b>
+                <b className="f-re">Reclamações Respondidas</b>
                 <br />
                 <div className="d-flex mt-2 gap-2">
                   <div
                     className="progress my-auto w-100"
                     role="progressbar"
-                    aria-valuenow={larguraProgressBar}
+                    aria-valuenow={TotalReclamacoesRespondidas()}
                     aria-valuemin="0"
                     aria-valuemax="100"
                   >
                     <div
-                      className={`progress-bar ${
-                        percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) <= 40
-                          ? "bg-danger"
-                          : percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) >= 50.0 &&
-                          percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1) <= 69.0
-                          ? "bg-warning"
-                          : "bg-success"
-                      } `}
-                      style={{ width: `${percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1)}%` }}
+                      className={`progress-bar bg-success `}
+                      style={{
+                        width: `${TotalReclamacoesRespondidas()}%`,
+                      }}
                     ></div>
                   </div>
                   <span className="f-reg my-auto">
-                    {percentuaisSolicitariam.percentualNaoSolicitariam.toFixed(1)}
+                
+                    {empresaEscolhida?.avaliacao != null ? (
+                    <span className="f-reg my-auto">
+                          {TotalReclamacoesRespondidas()}%
+                    </span>
+                  ) : (
+                    <span className="f-reg my-auto">0 </span>
+                  )}
                   </span>
                 </div>
               </div>
@@ -556,10 +604,13 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       } `}
                       style={{ width: `${larguraProgressBar}%` }}
                     ></div>
-                  </div>
-                  <span className="f-reg my-auto">
-                    {empresaEscolhida?.avaliacao}
-                  </span>
+                  </div>{empresaEscolhida?.avaliacao != null ? (
+                    <span className="f-reg my-auto">
+                      {empresaEscolhida?.avaliacao}
+                    </span>
+                  ) : (
+                    <span className="f-reg my-auto">0 </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -667,79 +718,51 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
             <br />
             <div className="card-sobre-empresa border-1 bg-white p-3">
-              <b className="text-dark f-reg">Reclamações de clientes </b>
+      <b className="text-dark f-reg">Reclamações de clientes </b>
 
-              {/* O que estao falando desta empresa, card */}
-
-              {reclamacoesEmpresa?.length != 0 ? (
-                <>
-                  {reclamacoesEmpresa.map((reclamacao, index) => (
-                    <>
-                      {/* <div className="p-3 bg-light my-3 border- rounded-2">
-                        <a href="#" className="text-decoration-none f-16">
-                          {reclamacao.assunto}
-                        </a>
-                        <p className="text-secondary mt-2">
-                          {reclamacao.historia}
-                        </p>
-                        <div className="d-flex gap-3 justiify-content-start">
-                          <div
-                            className={`d-flex my-auto gap-2 ${
-                              reclamacao.status == "respondido"
-                                ? " bg-success"
-                                : " bg-danger"
-                            } w-auto rounded-pill f-10 px-3 py-1 text-white `}
-                          >
-                            {reclamacao.status == "respondido" ? (
-                              <>
-                                <i className="bi bi-emoji-laughing"></i>{" "}
-                                Respondido
-                              </>
-                            ) : (
-                              <>
-                                <i className="bi bi-emoji-frown"></i> Não
-                                respondido
-                              </>
-                            )}
-                          </div>
-                          <span className="text-secondary f-12 my-auto">
-                            {reclamacao.quando}
-                          </span>
-                        </div>
-                      </div> */}
-                       <ReclamacaoItem key={index} reclamacao={reclamacao} />
-       
-                    </>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <Comment className="w-100" />
-                  <br />
-                  <Comment className="w-100" />
-                  <br />
-                  <Comment className="w-100" />
-                  <br />
-                </>
-              )}
-              {reclamacoesEmpresa.lenght}
-
-              <center>
-                {reclamacoesEmpresa == "" && (
-                  <>
-                    <br />
-                    <br />
-                    <br />
-                    <i className="bi bi-megaphone"></i> <br />
-                    <span className="text-secondary">
-                      Sem reclamações ou avaliações{" "}
-                    </span>
-                    <br />
-                    <br />
-                  </>
-                )}
-              </center>
+      {/* O que estão falando desta empresa, card */}
+      {reclamacoesEmpresa?.length !== 0 ? (
+        <>
+          {reclamacoesEmpresa.slice(0, reclamacoesParaExibir).map((reclamacao, index) => (
+            <ReclamacaoItem key={index} reclamacao={reclamacao} />
+          ))}
+          {reclamacoesEmpresa.length > reclamacoesParaExibir && (
+            <div className="text-center my-3">
+              <button className="btn btn-link" onClick={handleVerMais}>
+                Ver mais reclamações
+              </button>
             </div>
+          )}
+          {reclamacoesParaExibir > 5 && (
+            <div className="text-center my-3">
+              <button className="btn btn-link" onClick={handleVerMenos}>
+                Ver menos reclamações
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          {[...Array(reclamacoesParaExibir)].map((_, index) => (
+            <Comment key={index} className="w-100" />
+          ))}
+          {reclamacoesParaExibir > 5 && (
+            <div className="text-center my-3">
+              <button className="btn btn-link" onClick={handleVerMenos}>
+                Ver menos reclamações
+              </button>
+            </div>
+          )}
+          {reclamacoesParaExibir <= 5 && (
+            <div className="text-center my-3">
+              <button className="btn btn-link" onClick={handleVerMais}>
+                Ver mais reclamações
+              </button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
             <br />
             <br />
 
@@ -778,7 +801,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <hr />
               <center>
                 <span className="d-flex gap-2 justify-content-center  f-14">
-                  <i className="bi bi-calendar"></i> Cadastrado há 2 anos{" "}
+                  <i className="bi bi-calendar"></i> {empresaEscolhida?.quando}
                 </span>
               </center>
             </div>
@@ -844,7 +867,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 <br />
 
                 <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-                {dadosEmpresas.length != 0 ? (
+                  {dadosEmpresas.length != 0 ? (
                     <>
                       {dadosEmpresas
                         .filter(

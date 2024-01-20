@@ -18,7 +18,7 @@ export default function ReclamacaoItem({ reclamacao }) {
   return (
     <div className="p-3 bg-light my-3 border-rounded-2">
       <p className="text-dark fw-bolder fw-bold f-14">Nota: {reclamacao.classificacao.toFixed(1)}</p>
-      <a className="text-decoration-none text-dark f-20">
+      <a className="text-decoration-none f-20">
        <b> {reclamacao.titulo}</b>
       </a>
       <p className="text-secondary mt-2">
