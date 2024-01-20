@@ -378,7 +378,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
         <br />
         <span className="text-secondary">{dataAtual}</span>
       </div>
-      <br />
+
       <div className="boddy">
         {
           empresasOrdenadasMelhorSolucao?.length != 0 
@@ -430,7 +430,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                   <br />
                   <span className="text-secondary">{dataAtual}</span>
                 </div>
-                <br />
+                
                 <div className="boddy">
                   {empresasOrdenadasVoltarAComprar?.length != 0 ? (
                     <>
@@ -442,7 +442,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                           <div className="d-flex">
                             <b className="my-auto">{index + 1}º</b>
                             <img
-                              src={r360}
+                              src={empresa?.logo}
                               className="icon-empresa my-auto mx-1"
                               alt=""
                             />
@@ -493,15 +493,15 @@ const Ranking = ({ cart, nomee, emaill }) => {
                   <br />
                   <span className="text-secondary">{dataAtual}</span>
                 </div>
-                <br />
+                
                 <div className="boddy">
-                  <div className="emp-rank my-4 d-flex justify-content-between">
+                  <div className="emp-rank my-4 d-fle">
                     {melhoresMediaEmpresas?.length != 0 ? (
                       <>
                         {melhoresMediaEmpresas.map((empresa, index) => (
                           <div
                             key={empresa.id}
-                            className="d-flex justify-content-between"
+                            className="d-flex my-3 justify-content-between"
                           >
                             <div className="d-flex">
                               <b className="my-auto">{index + 1}º</b>

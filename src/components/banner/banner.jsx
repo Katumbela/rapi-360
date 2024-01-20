@@ -732,11 +732,11 @@ const Banner = () => {
         <br />
         <br />
 
-        <center>
+        {/* <center>
           <button className="btn btn-success">
             Ver todas as materias <i className="bi bi-arrow-right-short"></i>
           </button>
-        </center>
+        </center> */}
       </div>
 
       <br />
@@ -780,7 +780,7 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
+                      <a href="/pt/login" className="f-14">
                         Acessar <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
@@ -796,7 +796,7 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
+                      <a href="/pt/cadastro/empresa" className="f-14">
                         Faça parte do R360{" "}
                         <i className="bi bi-arrow-right-short"></i>
                       </a>
@@ -813,8 +813,8 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
-                        Acesse o blog{" "}
+                      <a href="/pt/#blog" className="f-14">
+                        Ver matérias{" "}
                         <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
@@ -830,7 +830,7 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
+                      <a href="/pt/cadastro/empresa" className="f-14">
                         Saiba mais <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
@@ -846,8 +846,8 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
-                        Saiba mais <i className="bi bi-arrow-right-short"></i>
+                      <a href="/pt/cadastro/empresa" className="f-14">
+                        Acesse agora <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
                   </div>
@@ -862,8 +862,8 @@ const Banner = () => {
                       <br />
                       <br />
                       <br />
-                      <a href="#" className="f-14">
-                        Saiba mais <i className="bi bi-arrow-right-short"></i>
+                      <a href="/pt/cadastro/empresa" className="f-14">
+                        Acesse agora <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
                   </div>
