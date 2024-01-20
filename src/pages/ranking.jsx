@@ -391,7 +391,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
               <img src={r360} className="icon-empresa my-auto mx-1" alt="" />
               <div className="empresa my-auto">
                 <NavLink to={`/pt/empresa/${empresa.id}`} className={"text-decoration-none"}>
-                  <AbreviarTexto texto={empresa.nomeEmpresa} largura={"200"} />
+                  <AbreviarTexto texto={empresa.nomeEmpresa} largura={"190"} />
                 </NavLink>
                 <NavLink className={"text-secondary f-12 text-decoration-none"} to={`/pt/empresa/${empresa.id}`}>
                   Ver mais informações
@@ -425,8 +425,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
               <div className="card-ranking shadow-sm rounded-1 p-4">
                 <div className="headd">
                   <b className="f-reg">
-                    Melhores Índices de Voltar a Fazer Negócios
-                  </b>
+                    Melhores Índices de Voltar a Negociar                  </b>
                   <br />
                   <span className="text-secondary">{dataAtual}</span>
                 </div>
@@ -453,7 +452,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                               >
                                 <AbreviarTexto
                                   texto={empresa.nomeEmpresa}
-                                  largura={"200"}
+                                  largura={"190"}
                                 />
                               </NavLink>
                               <NavLink
@@ -517,7 +516,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                                 >
                                   <AbreviarTexto
                                     texto={empresa.nomeEmpresa}
-                                    largura={"200"}
+                                    largura={"190"}
                                   />
                                 </NavLink>
                                 <NavLink
@@ -589,7 +588,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -618,7 +617,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -647,7 +646,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -676,7 +675,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -705,7 +704,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -746,7 +745,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -775,7 +774,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -804,7 +803,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -833,7 +832,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink
@@ -862,7 +861,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                         >
                           <AbreviarTexto
                             texto={"Kero Nova vida"}
-                            largura={"200"}
+                            largura={"190"}
                           />
                         </NavLink>
                         <NavLink

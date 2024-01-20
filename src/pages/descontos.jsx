@@ -230,7 +230,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
                         <br />
                         <AbreviarTexto
                           texto={empresa.nomeEmpresa}
-                          largura={"200"}
+                          largura={"190"}
                         />
 
                         <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
