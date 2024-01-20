@@ -428,3 +428,9 @@
     background: linear-gradient(90deg, #f4f4f4f8, #f4f4f4f8), url(../imgs/africa.png) center center!important;
     background-size: cover;
   }
+
+  .card-ranking {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+  }

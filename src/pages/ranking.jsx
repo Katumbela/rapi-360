@@ -211,7 +211,53 @@ const Ranking = ({ cart, nomee, emaill }) => {
     }
   }, []);
 
-  const [empresasOrdenadasVoltarAComprar, setempresasOrdenadasVoltarAComprar] = useState([]);
+  const [empresasOrdenadasVoltarAComprar, setempresasOrdenadasVoltarAComprar] =
+    useState([]);
+  const [empresasOrdenadasMelhorSolucao, setEmpresasOrdenadasMelhorSolucao] =
+    useState([]);
+
+  useEffect(() => {
+    const ordenarEmpresas = async () => {
+      try {
+        const empresasComIndices = await Promise.all(
+          dadosEmpresas.map(async (empresa) => {
+            const reclamacoes = await buscarReclamacoesPorEmpresa(empresa.id);
+            const reclamacoesRespondidas = reclamacoes.filter(
+              (reclamacao) => reclamacao.status === "respondido"
+            );
+            const porcentagemSolucao =
+              (reclamacoesRespondidas.length / reclamacoes.length) * 100 || 0;
+    
+            // Garante que a porcentagem de solução é maior ou igual a 50%
+            if (porcentagemSolucao >= 50) {
+              return {
+                ...empresa,
+                porcentagemSolucao: porcentagemSolucao.toFixed(1) + " %",
+              };
+            } else {
+              return null; // Se a porcentagem é menor que 50%, não incluir na lista
+            }
+          })
+        );
+    
+        const empresasOrdenadas = empresasComIndices
+          .filter((empresa) => empresa !== null) // Remove as empresas com porcentagem < 50%
+          .sort((a, b) => {
+            const porcentagemA = parseFloat(a.porcentagemSolucao);
+            const porcentagemB = parseFloat(b.porcentagemSolucao);
+            return porcentagemB - porcentagemA;
+          })
+          .slice(0, 5);
+    
+        setEmpresasOrdenadasMelhorSolucao(empresasOrdenadas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+    
+
+    ordenarEmpresas();
+  }, [dadosEmpresas]);
 
   const buscarReclamacoesPorEmpresa = async (empresaId) => {
     try {
@@ -279,7 +325,6 @@ const Ranking = ({ cart, nomee, emaill }) => {
 
   const [dataAtual, setDataAtual] = useState("");
 
-
   useEffect(() => {
     const hoje = new Date();
     const dataFormatada = format(hoje, "dd/MM/yyyy");
@@ -320,175 +365,63 @@ const Ranking = ({ cart, nomee, emaill }) => {
         </center>
         <br />
 
-        <div className="publicidade text-white bg-secondary my-3 py-5 text-center">
-          <br />
-          <h5>Publicidade</h5>
-
-          <br />
-        </div>
 
         <br />
 
         <div className="listas-ranking container">
           <div className="row">
-            <div className="col-12 my-3 col-md-6 col-lg-4">
-              <div className="card-ranking  shadow-sm rounded-1 p-4">
-                <div className="headd ">
-                  <b className="f-reg ">Melhor índice de solução</b>
-                  <br />
-                  <span className="text-secondary">{dataAtual}</span>
-                </div>
-                <br />
-                <div className="boddy">
-                  <div className="emp-rank my-4 d-flex justify-content-between">
-                    <div className="d-flex">
-                      <b className="my-auto">1º</b>
-                      <img
-                        src={r360}
-                        className="icon-empresa my-auto mx-1"
-                        alt=""
-                      />
-                      <div className="empresa my-auto">
-                        <NavLink
-                          to="/pt/empresax"
-                          className={"text-decoration-none"}
-                        >
-                          <AbreviarTexto
-                            texto={"Kero Nova vida"}
-                            largura={"200"}
-                          />
-                        </NavLink>
-                        <NavLink
-                          className={"text-secondary f-12 text-decoration-none"}
-                        >
-                          Ver mais informações
-                        </NavLink>
-                      </div>
-                    </div>
-                    <div className="my-auto rate text-secondary f-14">
-                      <span>100.0 %</span>
-                    </div>
-                  </div>
-                  <div className="emp-rank my-4 d-flex justify-content-between">
-                    <div className="d-flex">
-                      <b className="my-auto">2º</b>
-                      <img
-                        src={r360}
-                        className="icon-empresa my-auto mx-1"
-                        alt=""
-                      />
-                      <div className="empresa my-auto">
-                        <NavLink
-                          to="/pt/empresax"
-                          className={"text-decoration-none"}
-                        >
-                          <AbreviarTexto
-                            texto={"Kero Nova vida"}
-                            largura={"200"}
-                          />
-                        </NavLink>
-                        <NavLink
-                          className={"text-secondary f-12 text-decoration-none"}
-                        >
-                          Ver mais informações
-                        </NavLink>
-                      </div>
-                    </div>
-                    <div className="my-auto rate text-secondary f-14">
-                      <span>100.0 %</span>
-                    </div>
-                  </div>
-                  <div className="emp-rank my-4 d-flex justify-content-between">
-                    <div className="d-flex">
-                      <b className="my-auto">3º</b>
-                      <img
-                        src={r360}
-                        className="icon-empresa my-auto mx-1"
-                        alt=""
-                      />
-                      <div className="empresa my-auto">
-                        <NavLink
-                          to="/pt/empresax"
-                          className={"text-decoration-none"}
-                        >
-                          <AbreviarTexto
-                            texto={"Kero Nova vida"}
-                            largura={"200"}
-                          />
-                        </NavLink>
-                        <NavLink
-                          className={"text-secondary f-12 text-decoration-none"}
-                        >
-                          Ver mais informações
-                        </NavLink>
-                      </div>
-                    </div>
-                    <div className="my-auto rate text-secondary f-14">
-                      <span>100.0 %</span>
-                    </div>
-                  </div>
-                  <div className="emp-rank my-4 d-flex justify-content-between">
-                    <div className="d-flex">
-                      <b className="my-auto">4º</b>
-                      <img
-                        src={r360}
-                        className="icon-empresa my-auto mx-1"
-                        alt=""
-                      />
-                      <div className="empresa my-auto">
-                        <NavLink
-                          to="/pt/empresax"
-                          className={"text-decoration-none"}
-                        >
-                          <AbreviarTexto
-                            texto={"Kero Nova vida"}
-                            largura={"200"}
-                          />
-                        </NavLink>
-                        <NavLink
-                          className={"text-secondary f-12 text-decoration-none"}
-                        >
-                          Ver mais informações
-                        </NavLink>
-                      </div>
-                    </div>
-                    <div className="my-auto rate text-secondary f-14">
-                      <span>100.0 %</span>
-                    </div>
-                  </div>
-                  <div className="emp-rank my-4 d-flex justify-content-between">
-                    <div className="d-flex">
-                      <b className="my-auto">5º</b>
-                      <img
-                        src={r360}
-                        className="icon-empresa my-auto mx-1"
-                        alt=""
-                      />
-                      <div className="empresa my-auto">
-                        <NavLink
-                          to="/pt/empresax"
-                          className={"text-decoration-none"}
-                        >
-                          <AbreviarTexto
-                            texto={"Kero Nova vida"}
-                            largura={"200"}
-                          />
-                        </NavLink>
-                        <NavLink
-                          className={"text-secondary f-12 text-decoration-none"}
-                        >
-                          Ver mais informações
-                        </NavLink>
-                      </div>
-                    </div>
-                    <div className="my-auto rate text-secondary f-14">
-                      <span>100.0 %</span>
-                    </div>
-                  </div>
-                </div>
+            <div className="col-12 my-3 col-md-6 col-lg-6 col-xl-4">
+            <div className="card-ranking shadow-sm rounded-1 p-4">
+      <div className="headd">
+        <b className="f-reg">Melhor índice de solução</b>
+        <br />
+        <span className="text-secondary">{dataAtual}</span>
+      </div>
+      <br />
+      <div className="boddy">
+        {
+          empresasOrdenadasMelhorSolucao?.length != 0 
+          ?
+          (
+            <>
+            {empresasOrdenadasMelhorSolucao.slice(0,6).map((empresa, index) => (
+          <div key={empresa.id} className="emp-rank my-4 d-flex justify-content-between">
+            <div className="d-flex">
+              <b className="my-auto">{index + 1}º</b>
+              <img src={r360} className="icon-empresa my-auto mx-1" alt="" />
+              <div className="empresa my-auto">
+                <NavLink to={`/pt/empresa/${empresa.id}`} className={"text-decoration-none"}>
+                  <AbreviarTexto texto={empresa.nomeEmpresa} largura={"200"} />
+                </NavLink>
+                <NavLink className={"text-secondary f-12 text-decoration-none"} to={`/pt/empresa/${empresa.id}`}>
+                  Ver mais informações
+                </NavLink>
               </div>
             </div>
-            <div className="col-12 my-3 col-md-6 col-lg-4">
+            <div className="my-auto rate text-secondary f-14">
+              <span>{empresa.porcentagemSolucao}</span>
+            </div>
+          </div>
+        ))}
+            </>
+          ):
+
+          (
+            <div className="flex-column d-flex gap-3">
+              <EmpresaLoader className="w-100" />
+
+              <EmpresaLoader />
+
+              <EmpresaLoader />
+              <EmpresaLoader />
+              <EmpresaLoader />
+            </div>
+          )
+          }
+      </div>
+    </div>
+            </div>
+            <div className="col-12 my-3 col-md-6 col-lg-6 col-xl-4">
               <div className="card-ranking shadow-sm rounded-1 p-4">
                 <div className="headd">
                   <b className="f-reg">
@@ -499,68 +432,61 @@ const Ranking = ({ cart, nomee, emaill }) => {
                 </div>
                 <br />
                 <div className="boddy">
-                  {
-                    empresasOrdenadasVoltarAComprar?.length != 0 ?
-
-                    (
-                      <>
-                       {empresasOrdenadasVoltarAComprar.map((empresa, index) => (
-                    <div
-                      key={empresa.id}
-                      className="emp-rank my-4 d-flex justify-content-between"
-                    >
-                      <div className="d-flex">
-                        <b className="my-auto">{index + 1}º</b>
-                        <img
-                          src={r360}
-                          className="icon-empresa my-auto mx-1"
-                          alt=""
-                        />
-                        <div className="empresa my-auto">
-                          <NavLink
-                            to={`/pt/empresa/${empresa.id}`}
-                            className={"text-decoration-none"}
-                          >
-                            <AbreviarTexto
-                              texto={empresa.nomeEmpresa}
-                              largura={"200"}
+                  {empresasOrdenadasVoltarAComprar?.length != 0 ? (
+                    <>
+                      {empresasOrdenadasVoltarAComprar.slice(0,6).map((empresa, index) => (
+                        <div
+                          key={empresa.id}
+                          className="emp-rank my-4 d-flex justify-content-between"
+                        >
+                          <div className="d-flex">
+                            <b className="my-auto">{index + 1}º</b>
+                            <img
+                              src={r360}
+                              className="icon-empresa my-auto mx-1"
+                              alt=""
                             />
-                          </NavLink>
-                          <NavLink
-                            className={
-                              "text-secondary f-12 text-decoration-none"
-                            }
-                            to={`/pt/empresa/${empresa.id}`}
-                          >
-                            Ver mais informações
-                          </NavLink>
+                            <div className="empresa my-auto">
+                              <NavLink
+                                to={`/pt/empresa/${empresa.id}`}
+                                className={"text-decoration-none"}
+                              >
+                                <AbreviarTexto
+                                  texto={empresa.nomeEmpresa}
+                                  largura={"200"}
+                                />
+                              </NavLink>
+                              <NavLink
+                                className={
+                                  "text-secondary f-12 text-decoration-none"
+                                }
+                                to={`/pt/empresa/${empresa.id}`}
+                              >
+                                Ver mais informações
+                              </NavLink>
+                            </div>
+                          </div>
+                          <div className="my-auto rate text-secondary f-14">
+                            <span>{empresa.porcentagemSatisfacao}</span>
+                          </div>
                         </div>
-                      </div>
-                      <div className="my-auto rate text-secondary f-14">
-                        <span>{empresa.porcentagemSatisfacao}</span>
-                      </div>
+                      ))}
+                    </>
+                  ) : (
+                    <div className="flex-column d-flex gap-3">
+                      <EmpresaLoader className="w-100" />
+
+                      <EmpresaLoader />
+
+                      <EmpresaLoader />
+                      <EmpresaLoader />
+                      <EmpresaLoader />
                     </div>
-                  ))}
-                      </>
-                    ):
-
-                    (
-                      <div className="flex-column d-flex gap-3">
-                        <EmpresaLoader className="w-100" />
-
-                        <EmpresaLoader />
-
-                        <EmpresaLoader />
-                        <EmpresaLoader />
-                        <EmpresaLoader />
-                      </div>
-                    )
-                  }
-                 
+                  )}
                 </div>
               </div>
             </div>
-            <div className="col-12 my-3 col-md-6 col-lg-4">
+            <div className="col-12 my-3 col-md-6 col-lg-6 col-xl-4">
               <div className="card-ranking  shadow-sm rounded-1 p-4">
                 <div className="headd ">
                   <b className="f-reg ">Melhores notas médias</b>
@@ -638,8 +564,8 @@ const Ranking = ({ cart, nomee, emaill }) => {
 
           <br />
 
-          <div className="row">
-            <div className="col-12 my-3 col-md-6 col-lg-4">
+          {/* <div className="row">
+            <div className="col-12 my-3 col-md-6 col-lg-6 col-xl-4">
               <div className="card-ranking  shadow-sm rounded-1 p-4">
                 <div className="headd ">
                   <b className="f-reg ">Piores empresas nos ultimos 30 dias</b>
@@ -796,7 +722,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                 </div>
               </div>
             </div>
-            <div className="col-12 my-3 col-md-6 col-lg-4">
+            <div className="col-12 my-3 col-md-6 col-lg-6 col-xl-4">
               <div className="card-ranking  shadow-sm rounded-1 p-4">
                 <div className="headd ">
                   <b className="f-reg ">Mais reclamadas nos últimos 6 meses</b>
@@ -953,7 +879,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <br />
         <br />
