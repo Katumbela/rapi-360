@@ -73,6 +73,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   const [empresaEscolhida, setEmpresaEscolhida] = useState(null);
   const [reclamacoesEmpresa, setReclamacoesEmpresa] = useState([]);
 
+ 
   useEffect(() => {
     const pegarEmpresa = async () => {
       try {
@@ -86,17 +87,22 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
             ...empresaData,
           });
 
-          // Supondo que as reclamações estejam em uma coleção "reclamacoes" dentro do documento da empresa
-          const reclamacoesRef = empresasRef
-            .doc(empresa)
-            .collection("reclamacoes");
-          const reclamacoesSnapshot = await reclamacoesRef.get();
-          const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          // Supondo que as reclamações estejam em uma coleção "reclamacoes"
+          const reclamacoesRef = db.collection("reclamacoes");
+          const reclamacoesSnapshot = await reclamacoesRef
+            .where("empresaId", "==", empresa)
+            .get();
 
-          setReclamacoesEmpresa(reclamacoesData);
+          try {
+            const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+
+            setReclamacoesEmpresa(reclamacoesData);
+          } catch (error) {
+            console.error("Erro ao obter reclamações:", error.message);
+          }
         } else {
           console.error("Empresa não encontrada.");
         }
@@ -107,6 +113,48 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
 
     pegarEmpresa();
   }, [empresa]);
+
+  // Função para calcular a média das classificações
+  const calcularMediaClassificacoes = () => {
+    const totalClassificacoes = reclamacoesEmpresa.reduce(
+      (total, reclamacao) => total + reclamacao.classificacao,
+      0
+    );
+
+    const mediaClassificacoes =
+      reclamacoesEmpresa.length > 0
+        ? totalClassificacoes / reclamacoesEmpresa.length
+        : 0;
+
+    return mediaClassificacoes.toFixed(1);
+  };
+
+  const [reclamacoesRespondidas, setReclamacoesRespondidas] = useState(0);
+
+  const calcularReclamacoesRespondidas = () => {
+    return reclamacoesEmpresa.filter(
+      (reclamacao) => reclamacao.status === "respondido"
+    ).length;
+  };
+
+  useEffect(() => {
+    if (empresaEscolhida && reclamacoesEmpresa.length > 0) {
+      const novaAvaliacao = calcularMediaClassificacoes();
+
+      // Adiciona a avaliação ao objeto empresaEscolhida
+      setEmpresaEscolhida((prevEmpresa) => ({
+        ...prevEmpresa,
+        avaliacao: novaAvaliacao,
+      }));
+
+      // Obtém o número de reclamações respondidas
+      const reclamacoesRespondidas = calcularReclamacoesRespondidas();
+
+      // Atualiza o estado com o número de reclamações respondidas
+      setReclamacoesRespondidas(reclamacoesRespondidas);
+    }
+  }, [reclamacoesEmpresa, empresaEscolhida]);
+
 
   // const [avaliacaoUsuario, setAvaliacaoUsuario] = useState(null);
 
