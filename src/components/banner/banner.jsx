@@ -40,6 +40,7 @@ import dadosEmpresas from "../../model/empresas";
 import articles from "../../model/artigos";
 import obterDadosDoFirebase from "../../model/empresas2";
 import EmpresaLoader from "../empLoader";
+import ProfileCard from "../PerfilEmp";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -260,8 +261,9 @@ const Banner = () => {
         <br />
       </div>
 
-      <div className="ranking-emp bg-light py-4 container">
-        <div className="row">
+      <div className="ranking-emp bg-light py-4 ">
+     <div className="container">
+     <div className="row">
           <div className="col-12 col-lg-4">
             <h3>
               <b>Ranking das empresas</b>
@@ -567,6 +569,7 @@ const Banner = () => {
             </div>
           </div>
         </div>
+     </div>
       </div>
 
       <br />
@@ -581,7 +584,7 @@ const Banner = () => {
             <div className="my-auto">
               <h2 className="fw-bold">Encontre os melhores descontos</h2>
               <h5 className="text-secondary">
-                Compre com desconto e em segurança nas empresas mais confiáveis.
+                Compre com desconto e em segurança nas empresas mais confiáveis e validadas pela R360 e clientes que já usaramseus serviços ou produtos
               </h5>
 
               <br />
@@ -607,8 +610,11 @@ const Banner = () => {
         </h2>
         <br />
         <div className="lista-lojas">
-          <div className="d-flex scroll-md gap-4">
-            {dadosEmpresass.map(
+         {
+          todasEmpresas?.length != 0 ?
+          (
+            <div className="d-flex scroll-md gap-4">
+            {todasEmpresas.map(
               (empresa) =>
                 empresa.selo === true && (
                   <div
@@ -677,13 +683,25 @@ const Banner = () => {
                 )
             )}
           </div>
+          )
+          :
+          (
+            <>
+
+            <div className="d-flex gap-4">
+
+            <ProfileCard />
+            <ProfileCard />
+            <ProfileCard />
+            </div>
+
+            </>
+          )
+         }
         </div>
       </div>
 
       <br />
-      <br />
-      <br />
-
       <br />
       <br />
 
@@ -862,7 +880,6 @@ const Banner = () => {
         </div>
       </div>
       <br />
-      <br />
 
       <div className="partners text- bg-white my-3 py-5 text-center">
         <center>
@@ -876,9 +893,6 @@ const Banner = () => {
           <img src={sdq} alt="" />
         </center>
       </div>
-      <br />
-      <br />
-
       <br />
       <div className="desconto container">
         <div className="row flex-row-reverse">
