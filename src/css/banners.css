@@ -317,6 +317,8 @@
     height: 1.6em;
     border-radius: 90px!important;
     width: 1.6em;
+    aspect-ratio: 3/2;
+    object-fit: contain;
     margin-top: auto;
     margin-bottom: auto;
 }

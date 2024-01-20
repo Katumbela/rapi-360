@@ -8,8 +8,8 @@ const ProfileCard = props => {
       width={450}
       height={400}
       viewBox="0 0 450 400"
-      backgroundColor="#f3f3f3"
-      foregroundColor="#ecebeb"
+      backgroundColor="#E0FFEF"
+      foregroundColor="#FFD2D2"
       {...props}
     >
       <rect x="172" y="53" rx="0" ry="0" width="2" height="300" />

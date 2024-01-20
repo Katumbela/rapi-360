@@ -844,69 +844,83 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 <br />
 
                 <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
-                  {dadosEmpresas
-                    .filter((empresa) => empresa.id !== empresaEscolhida?.id)
-                    .map((empresa) => (
-                      <a
-                        key={empresa.id}
-                        href={`/pt/empresa/${empresa.id}`}
-                        className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                      >
-                        <img
-                          src={empresa.logo}
-                          alt=""
-                          className="logo-empresa"
-                        />
-                        <div className="bod">
-                          <AbreviarTexto
-                            texto={empresa?.nomeEmpresa}
-                            largura={"200"}
-                          />
+                {dadosEmpresas.length != 0 ? (
+                    <>
+                      {dadosEmpresas
+                        .filter(
+                          (empresa) => empresa.id !== empresaEscolhida?.id
+                        )
+                        .map((empresa) => (
+                          <a
+                            key={empresa.id}
+                            href={`/pt/empresa/${empresa.id}`}
+                            className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                          >
+                            <img
+                              src={empresa.logo}
+                              alt=""
+                              className="logo-empresa"
+                            />
+                            <div className="bod">
+                              <AbreviarTexto
+                                texto={empresa?.nomeEmpresa}
+                                largura={"200"}
+                              />
 
-                          <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                            <AbreviarTexto
-                              texto={empresa?.enderecoEmpresa}
-                              largura={"300"}
-                              className="my-auto text-secondary"
-                            ></AbreviarTexto>
-                          </p>
-                          <hr />
+                              <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                                <AbreviarTexto
+                                  texto={empresa?.enderecoEmpresa}
+                                  largura={"300"}
+                                  className="my-auto text-secondary"
+                                ></AbreviarTexto>
+                              </p>
+                              <hr />
 
-                          <div className="d-flex gap-2 justify-content-center">
-                            {empresa?.avaliacao >= 5.0 &&
-                            empresa?.avaliacao <= 6.9 ? (
-                              <img
-                                src={regular}
-                                alt=""
-                                className="icon-empresa"
-                              />
-                            ) : empresa?.avaliacao >= 7.0 &&
-                              empresa?.avaliacao <= 10.0 ? (
-                              <img
-                                src={otimo}
-                                alt=""
-                                className="icon-empresa"
-                              />
-                            ) : empresa?.avaliacao >= 3.0 &&
-                              empresa?.avaliacao <= 4.9 ? (
-                              <img src={ruim} alt="" className="icon-empresa" />
-                            ) : empresa?.avaliacao <= 2.9 ? (
-                              <img
-                                src={naorecomendado}
-                                alt=""
-                                className="icon-empresa"
-                              />
-                            ) : null}
-                            <h4 className="f-reg my-auto">
-                              <b>{empresa?.avaliacao} </b>
-                            </h4>
-                            <span className="text-secondary f-12 mt-auto">
-                              / 10
-                            </span>
-                          </div>
-                        </div>
-                      </a>
-                    ))}
+                              <div className="d-flex gap-2 justify-content-center">
+                                {empresa?.avaliacao >= 5.0 &&
+                                empresa?.avaliacao <= 6.9 ? (
+                                  <img
+                                    src={regular}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao >= 7.0 &&
+                                  empresa?.avaliacao <= 10.0 ? (
+                                  <img
+                                    src={otimo}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao >= 3.0 &&
+                                  empresa?.avaliacao <= 4.9 ? (
+                                  <img
+                                    src={ruim}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa?.avaliacao <= 2.9 ? (
+                                  <img
+                                    src={naorecomendado}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : null}
+                                <h4 className="f-reg my-auto">
+                                  <b>{empresa?.avaliacao} </b>
+                                </h4>
+                                <span className="text-secondary f-12 mt-auto">
+                                  / 10
+                                </span>
+                              </div>
+                            </div>
+                          </a>
+                        ))}
+                    </>
+                  ) : (
+                    <div className="d-flex justify-content-start">
+                      <ProfileCard />
+                    </div>
+                  )}
                 </div>
               </div>
               <br />
