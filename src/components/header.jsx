@@ -35,6 +35,7 @@ import ScrollToTopLink from "./scrollTopLink";
 // import dadosEmpresas from "../model/empresas";
 import { db } from "../pages/firebase";
 import obterDadosDoFirebase from "../model/empresas2";
+import ProfileCard from "./PerfilEmp";
 const Header = (props) => {
   const [ph, setPh] = useState("");
   const [user, setUser] = useState(null);
@@ -471,59 +472,75 @@ const Header = (props) => {
                     desta empresa
                   </p>
                 </p>
-              ) : (
-                dadosEmpresas.map((empresa) => (
-                  <a
-                    onClick={handleBlur}
-                    key={empresa.id}
-                    href={`/pt/empresa/${empresa.id}`}
-                    className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
-                  >
-                    <img src={empresa.logo} alt="" className="logo-empresa" />
-                    <div className="bod">
-                      <AbreviarTexto
-                        texto={empresa.nomeEmpresa}
-                        largura={"200"}
-                      />
-
-                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
-                        <AbreviarTexto
-                          texto={empresa.enderecoEmpresa}
-                          largura={"300"}
-                          className="my-auto text-secondary"
-                        ></AbreviarTexto>
-                      </p>
-                      <hr />
-
-                      <div className="d-flex gap-2 justify-content-center">
-                        {empresa.avaliacao >= 5.0 &&
-                        empresa.avaliacao <= 6.9 ? (
-                          <img src={regular} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 7.0 &&
-                          empresa.avaliacao <= 10.0 ? (
-                          <img src={otimo} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 3.0 &&
-                          empresa.avaliacao <= 4.9 ? (
-                          <img src={ruim} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao <= 2.9 ? (
-                          <img
-                            src={naorecomendado}
-                            alt=""
-                            className="icon-empresa"
+              ) : 
+              dadosEmpresas.length != 0 ? (
+                <>
+                {
+                     dadosEmpresas.map((empresa) => (
+                      <a
+                        onClick={handleBlur}
+                        key={empresa.id}
+                        href={`/pt/empresa/${empresa.id}`}
+                        className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
+                      >
+                        <img src={empresa.logo} alt="" className="logo-empresa" />
+                        <div className="bod">
+                          <AbreviarTexto
+                            texto={empresa.nomeEmpresa}
+                            largura={"200"}
                           />
-                        ) : null}
-                        <h4 className="f-reg my-auto">
-                          <b>{empresa.avaliacao} </b>
-                        </h4>
-                        <span className="text-secondary f-12 mt-auto">
-                          / 10
-                        </span>
-                      </div>
-                    </div>
-                  </a>
-                ))
+    
+                          <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
+                            <AbreviarTexto
+                              texto={empresa.enderecoEmpresa}
+                              largura={"300"}
+                              className="my-auto text-secondary"
+                            ></AbreviarTexto>
+                          </p>
+                          <hr />
+    
+                          <div className="d-flex gap-2 justify-content-center">
+                            {empresa.avaliacao >= 5.0 &&
+                            empresa.avaliacao <= 6.9 ? (
+                              <img src={regular} alt="" className="icon-empresa" />
+                            ) : empresa.avaliacao >= 7.0 &&
+                              empresa.avaliacao <= 10.0 ? (
+                              <img src={otimo} alt="" className="icon-empresa" />
+                            ) : empresa.avaliacao >= 3.0 &&
+                              empresa.avaliacao <= 4.9 ? (
+                              <img src={ruim} alt="" className="icon-empresa" />
+                            ) : empresa.avaliacao <= 2.9 ? (
+                              <img
+                                src={naorecomendado}
+                                alt=""
+                                className="icon-empresa"
+                              />
+                            ) : null}
+                            <h4 className="f-reg my-auto">
+                              <b>{empresa.avaliacao} </b>
+                            </h4>
+                            <span className="text-secondary f-12 mt-auto">
+                              / 10
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    ))
+                }
+                </>
               )
-            ) : null}
+              : 
+             
+            <>
+            <div className="d-flex gap-3">
+
+            <ProfileCard />
+            <ProfileCard />
+            <ProfileCard />
+            <ProfileCard />
+            </div>
+            </>
+            ): null}
           </div>
         </div>
       )}
