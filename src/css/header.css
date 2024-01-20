@@ -154,10 +154,6 @@
     margin-top: 6rem!important;
   }
 }
-
-
-
-@media (max-width: 700px) {
 .menu-ssm.aberto {
   display: flex;
   flex-direction: column;
@@ -172,6 +168,14 @@
   z-index: 1000;
   transition: transform 0.3s ease-in-out;
 }
+
+.menu-ssm {
+  display: none ;
+}
+
+
+
+@media (max-width: 700px) {
 
   .burger {
     display: block;

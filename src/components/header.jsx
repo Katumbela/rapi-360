@@ -387,11 +387,11 @@ const Header = (props) => {
           </button>
         </div>
 
-        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/cadastro"}>
+        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/desconto"}>
           Descontos
         </ScrollToTopLink>
 
-        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/cadastro"}>
+        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/ranking"}>
           Ranking
         </ScrollToTopLink>
 
