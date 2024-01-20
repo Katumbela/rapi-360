@@ -1,89 +1,85 @@
 .foto-perfil-empresa img {
-    height: 7em;
-    width: 7em;
-    aspect-ratio: 6/3;
-    object-fit: contain;
-    background-color: white;
-    border-radius: 90px !important;
-    border: 3px solid white;
-    box-shadow: 1px 2px 3px #bababa;
-    position: absolute;
-    bottom: -2.8rem;
-    left: 10%;
+  height: 7em;
+  width: 7em;
+  aspect-ratio: 6/3;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 90px !important;
+  border: 3px solid white;
+  box-shadow: 1px 2px 3px #bababa;
+  position: absolute;
+  bottom: -2.8rem;
+  left: 10%;
 }
 
 @media (max-width: 630px) {
-
-    .conheca{
-        display: none;
-    }
+  .conheca {
+    display: none;
+  }
 }
 @media (max-width: 790px) {
-
-    .foto-perfil-empresa  {
-        left: 0 !important;
-       right: 0 !important;
-       text-align: center !important;
-       align-items: center;
-       align-self: center;
-       width: 100%;
-       position: absolute;
-       bottom: -.1rem;
-       align-content: center;
-    }
-    .foto-perfil-empresa img {
-        left: 0 !important;
-       right: 0 !important;
-       height:5em;
-       width: 5em;
-       position: relative !important;
-    }
-    .banner_perfil {
-        height: 8rem !important;
-    }
-    .text-center-md {
-        text-align: center;
-    }
-    .suggestions {
-        padding-top: 6.5rem!important;
-    }
+  .foto-perfil-empresa {
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    position: absolute;
+    bottom: -0.1rem;
+    align-content: center;
+  }
+  .foto-perfil-empresa img {
+    left: 0 !important;
+    right: 0 !important;
+    height: 5em;
+    width: 5em;
+    position: relative !important;
+  }
+  .banner_perfil {
+    height: 8rem !important;
+  }
+  .text-center-md {
+    text-align: center;
+  }
+  .suggestions {
+    padding-top: 6.5rem !important;
+  }
 }
-
 
 .border-b {
-    border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9;
 }
 .border-b-t {
-    border-top: 1.5px solid #d9d9d9;
-    border-bottom: 1.5px solid #d9d9d9;
+  border-top: 1.5px solid #d9d9d9;
+  border-bottom: 1.5px solid #d9d9d9;
 }
 
 .opcoes p {
-    cursor: pointer;
-    margin-top: auto;
-    margin-bottom: auto;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .opcoes p:hover {
-    color: rgb(0, 91, 210);
+  color: rgb(0, 91, 210);
 }
 
 .card-cadastro {
-    height: 100%;
-}
-
-::-webkit-scrollbar-thumb{
-    width: 10px;
-    height: 10px;
-    background: #d0d0d0;
-    border-radius: 0!important;
-}
-
-::-webkit-scrollbar-track {
-    background: white;
+  height: 100%;
 }
 
 ::-webkit-scrollbar-thumb {
+  width: 10px;
+  height: 10px;
+  background: #d0d0d0;
+  border-radius: 0 !important;
+}
 
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
 }
 /* 
 .suggestions {
@@ -96,112 +92,110 @@
     top: auto;
 } */
 .nav-fixo {
-    background-color: #ffffff;
-    position: fixed;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 9990;
-    top: 0;
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9990;
+  top: 0;
 }
 .suggestions {
-    background: white!important;
+  background: white !important;
 }
 
-
 .suggestions .listas-lojas .card-loja:hover {
-    box-shadow: 2px 2px 9px #d9d9d9!important;
-    transition: all .2s ease-in-out;
+  box-shadow: 2px 2px 9px #d9d9d9 !important;
+  transition: all 0.2s ease-in-out;
 }
 
 .suggestions .listas-lojas .card-loja {
-    transition: all .2s ease-in-out;
-    margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 1rem;
 }
-.suggestions .listas-lojas  {
-    background: white!important;
+.suggestions .listas-lojas {
+  background: white !important;
 }
 
 .backdrop {
-    background: rgba(0, 0, 0, 0.55);
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    right: 0;
+  background: rgba(0, 0, 0, 0.55);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  right: 0;
 }
 
-@media (min-width: 760px ) {
-    .suggestions {
-        padding-top: 0rem!important;
-    }
+@media (min-width: 760px) {
+  .suggestions {
+    padding-top: 0rem !important;
+  }
 
-.logo-rec {
+  .logo-rec {
     height: 6em !important;
     width: 6em !important;
-    border-radius: 90px!important;
-    border: 2px solid #00aa1f!important;
-}
+    border-radius: 90px !important;
+    border: 2px solid #00aa1f !important;
+  }
 }
 
 .logo-rec {
-    aspect-ratio: 6/3;
-    object-fit: contain;
-    height: 4em;
-    width: 4em;
-    border-radius: 90px!important;
-    border: 2px solid #00aa1f!important;
+  aspect-ratio: 6/3;
+  object-fit: contain;
+  height: 4em;
+  width: 4em;
+  border-radius: 90px !important;
+  border: 2px solid #00aa1f !important;
 }
 
 .auth {
-    background: #0276ea13;
-    cursor: pointer;
+  background: #0276ea13;
+  cursor: pointer;
 }
 
 .res-pesquisa {
-    border: none!important;
-    display: flex!important;
-    justify-content: start!important;
-    flex-direction: column!important;
-    gap: 0px!important;
-    padding: 0!important;
-    overflow-y: auto;
+  border: none !important;
+  display: flex !important;
+  justify-content: start !important;
+  flex-direction: column !important;
+  gap: 0px !important;
+  padding: 0 !important;
+  overflow-y: auto;
 }
 
 .card-solucao {
-    background: white;
-    width: 20rem;
-    padding: 2rem 1rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
-    
+  background: white;
+  width: 20rem;
+  padding: 2rem 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
 }
 
 .card-solucao img {
-    height: 3em;
+  height: 3em;
 }
 
 .card-solucao ul li {
-    margin-top: 1rem;
-    font-size: 14px;
-    list-style-type: none;
-    position: relative;
+  margin-top: 1rem;
+  font-size: 14px;
+  list-style-type: none;
+  position: relative;
 }
 
 .card-solucao ul li i {
-    font-size: 25px;
-    position: absolute;
-    left: -1.5rem;
-    top: -.5rem;
+  font-size: 25px;
+  position: absolute;
+  left: -1.5rem;
+  top: -0.5rem;
 }
 
 .bannerBlogg {
-    display: flex;
-    align-items: end;
-    position: relative;
+  display: flex;
+  align-items: end;
+  position: relative;
 }
 /* 
 .bannerBlogg .titt {
@@ -211,3 +205,31 @@
     right: 0;
     width: 100%;
 } */
+
+.publicidad {
+  display: flex !important;
+  height: 300px;
+  max-height: 500px;
+  gap: 0px;
+  width: 100%;
+  overflow: hidden;
+  background: rgb(255, 255, 255) !important;
+}
+
+.publicidad img {
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  width: 100% !important;
+}
+
+.pubb {
+  border: 1px solid #bababa;
+  padding: .5rem 0;
+  margin: 2.6rem 0;
+}
+
+@media (max-width: 690px) {
+  .publicidad {
+    flex-wrap: wrap;
+  }
+}

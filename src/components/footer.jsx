@@ -118,24 +118,19 @@ function Footer() {
         </div>
         <div className="d-flex flex-wrap text-success midias justify-content-between">
           <div className="d-flex gap-3 ms-4">
-            <a href="https://www.facebook.com/Arotec1/" className="navlink">
+            <a target="__blank" href="https://www.facebook.com/j.a.katombela/" className="navlink">
               <i className="bi bi-facebook text-success"></i>
             </a>
-            <a
-              href="https://www.linkedin.com/company/arotecangola"
+            <a target="__blank"
+              href="https://www.linkedin.com/company/reputacao360"
               className="navlink"
             >
               <i className="bi mx-1 bi-linkedin text-success"></i>
             </a>
-            <a href="https://www.instagram.com/arotec_ao/" className="navlink">
+            <a target="__blank" href="https://www.instagram.com/afonso.katumbela/" className="navlink">
               <i className="bi bi-instagram text-success"></i>
             </a>
-            <a
-              href="https://www.youtube.com/channel/UCL9FnK9VQGhVowB59P72CjA"
-              className="navlink"
-            >
-              <i className="bi ms-1 bi-youtube text-success"></i>
-            </a>
+          
           </div>
           <img src={icon} className="logo-blogg" alt="" />
           <div className="pol">

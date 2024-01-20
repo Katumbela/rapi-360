@@ -406,6 +406,8 @@ const Header = (props) => {
           <span className="premio-md">Produtos</span>
         </ScrollToTopLink>
         {user ? (
+          <>
+          
           <span className="btn text-success f-reg d-flex gap-2">
             {" "}
             {/* <i className="bi tex-success bi-person-circle"></i>{" "} */}
@@ -415,6 +417,14 @@ const Header = (props) => {
               largura={100}
             />{" "}
           </span>
+
+          <NavLink
+                    onClick={handleLogout}
+                    className={"my-auto btn btn-outline-danger"}
+                  >
+                    Sair
+                  </NavLink>
+          </>
         ) : (
           <>
             <ScrollToTopLink to={"/pt/login"}>
