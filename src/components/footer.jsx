@@ -56,7 +56,7 @@ function Footer() {
               <ul>
                 <li>Endereço: Luanda - Angola</li>
                 <li>Phone: +244 928 134 249</li>
-                <li>E-mail: info@reputa360.ao</li>
+                <li>E-mail: info@reputacao360.online</li>
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">

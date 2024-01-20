@@ -23,7 +23,7 @@ const Reembolso = ({ emaill, nomee, cart }) => {
           <h2>Política de Reembolso</h2><br />
 
           <p>
-            O site <a href="http://www.d-aluguel.ao">www.d-aluguel.ao</a> é de propriedade da empresa GOKSIDE INC, que é a controladora de seus dados pessoais.
+            O site <a href="http://reputacao360.online">reputacao360.online</a> é de propriedade da empresa GOKSIDE INC, que é a controladora de seus dados pessoais.
           </p>
 
           <p>As condições para reembolso são adicionadas ou prescritas pelo aquisitor no ato do aluguel, posto isto apòs o fechamento ou assinatura do aluguel em ambas as partes, já não serão aceites outras condições fora do contrato </p>

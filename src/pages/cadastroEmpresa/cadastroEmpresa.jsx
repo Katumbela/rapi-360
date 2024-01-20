@@ -291,7 +291,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             required
                             type="link"
                             className="form-control rounded-1"
-                            placeholder="www.reputa360.ao"
+                            placeholder="reputacao360.online"
                             name="siteEmpresa"
                             value={formData.siteEmpresa}
                             onChange={(e) =>

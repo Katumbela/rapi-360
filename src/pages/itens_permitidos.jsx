@@ -24,7 +24,7 @@ const Itens = ({ emaill, nomee, cart }) => {
                 <h2>Itens Permitidos e não permitidos</h2><br />
 
                 <p>
-                    O site <a href="http://www.d-aluguel.ao">www.d-aluguel.ao</a> é de propriedade da empresa GOKSIDE INC, que é a controladora de seus dados pessoais.
+                    O site <a href="http://reputacao360.online">reputacao360.online</a> é de propriedade da empresa GOKSIDE INC, que é a controladora de seus dados pessoais.
                 </p>
 
                 <p>
