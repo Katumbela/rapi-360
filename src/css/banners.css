@@ -308,6 +308,8 @@
     border-radius: 90px!important;
     border: 2px solid #00b23b;
     width: 3em;
+    aspect-ratio: 6/3;
+    object-fit: contain;
     margin-top: auto;
     margin-bottom: auto;
 }

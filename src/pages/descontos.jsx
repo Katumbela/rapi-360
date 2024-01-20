@@ -224,7 +224,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
                           <img src={empresa.logo} alt="" className="logo-empresa" />
                           <div className="bod">
                             <br />
-                            <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                            <AbreviarTexto texto={empresa.nomeEmpresa} largura={"200"} />
           
                             <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
                                 
@@ -278,7 +278,7 @@ const Descontos = ({ cart, nomee, emaill }) => {
                                 </b>
                               )}
                             </p>
-                            <a href={`https://${empresa.site}`} className="btn mt-2 btn-sm btn-outline-success">
+                            <a href={`https://${empresa.siteEmpresa}`} className="btn mt-2 btn-sm btn-outline-success">
                               Acessar <i className="bi bi-arrow-right-short"></i>
                             </a>
                           </div>
@@ -296,13 +296,13 @@ const Descontos = ({ cart, nomee, emaill }) => {
                         //   />
                         //   <div className="bod">
                         //     <AbreviarTexto
-                        //       texto={empresa.nome}
+                        //       texto={empresa.nomeEmpresa}
                         //       largura={"200"}
                         //     />
 
                         //     <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                         //       <AbreviarTexto
-                        //         texto={empresa.localizacao}
+                        //         texto={empresa.enderecoEmpresa}
                         //         largura={"300"}
                         //         className="my-auto text-secondary"
                         //       ></AbreviarTexto>

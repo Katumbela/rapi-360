@@ -54,6 +54,7 @@ import AbreviarTexto from "../components/abreviarTexto";
 import dadosEmpresas from "../model/empresas";
 import AvaliacaoComponent from "../components/avaliacaoComponent";
 import Swal from "sweetalert2";
+import ScrollToTopLink from "../components/scrollTopLink";
 
 const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   // const { user, handleLogout } = useContext(UserContext);
@@ -62,9 +63,48 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
 
   const { empresa } = useParams();
 
-  const empres = dadosEmpresas.filter((p) => p.id == empresa);
-  const empresaEscolhida = empres[0];
-  console.log(empresaEscolhida);
+  // const empres = dadosEmpresas.filter((p) => p.id == empresa);
+  // const empresaEscolhida = empres[0];
+  // console.log(empresaEscolhida);
+
+  const [empresaEscolhida, setEmpresaEscolhida] = useState(null);
+  const [reclamacoesEmpresa, setReclamacoesEmpresa] = useState([]);
+
+  useEffect(() => {
+    const pegarEmpresa = async () => {
+      try {
+        const empresasRef = db.collection("empresa");
+        const empresaSnapshot = await empresasRef.doc(empresa).get();
+        const empresaData = empresaSnapshot.data();
+
+        if (empresaData) {
+          setEmpresaEscolhida({
+            id: empresaSnapshot.id,
+            ...empresaData,
+          });
+
+          // Supondo que as reclamações estejam em uma coleção "reclamacoes" dentro do documento da empresa
+          const reclamacoesRef = empresasRef
+            .doc(empresa)
+            .collection("reclamacoes");
+          const reclamacoesSnapshot = await reclamacoesRef.get();
+          const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          setReclamacoesEmpresa(reclamacoesData);
+        } else {
+          console.error("Empresa não encontrada.");
+        }
+      } catch (error) {
+        console.error("Erro ao pegar empresa:", error.message);
+      }
+    };
+
+    pegarEmpresa();
+  }, [empresa]);
+
 
   // const [avaliacaoUsuario, setAvaliacaoUsuario] = useState(null);
 
@@ -72,7 +112,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   //   setAvaliacaoUsuario(avaliacao);
   // };
 
-  document.title = `Reclamar de ${empresaEscolhida.nome} | Reputação 360`;
+  document.title = `Reclamar de ${empresaEscolhida?.nomeEmpresa} | Reputação 360`;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -235,8 +275,8 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       const reclamacaoData = {
         ...formData,
         anexos: anexosURLs,
-        empresaId: empresaEscolhida.id,
-        nomeEmpresa: empresaEscolhida.nome,
+        empresaId: empresaEscolhida?.id,
+        nomeEmpresa: empresaEscolhida?.nomeEmpresa,
         cliente: user.name,
         emailCliente: user.email,
         // Adicione outros campos necessários, como data, usuário, etc.
@@ -277,32 +317,32 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         <div className="bg-white  pt-5 mt-sm-5 mt-md-0 pt-lg-3 rounded-3 container pb-3">
           <div className="d-flex justify-content-between mt-sm-5 mt-md-0 gap-3">
             <div className="d-flex gap-3">
-              <img src={empresaEscolhida.logo} alt="" className="logo-rec" />
+              <img src={empresaEscolhida?.logo} alt="" className="logo-rec" />
               <div className="my-auto">
-                <h5 className="f-reg">{empresaEscolhida.nome}</h5>
+                <h5 className="f-reg">{empresaEscolhida?.nomeEmpresa}</h5>
                 <p className="d-flex mt-1 my-auto gap-2 f-14">
-                  {empresaEscolhida.avaliacao >= 5.0 &&
-                  empresaEscolhida.avaliacao <= 6.9 ? (
+                  {empresaEscolhida?.avaliacao >= 5.0 &&
+                  empresaEscolhida?.avaliacao <= 6.9 ? (
                     <img src={regular} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida.avaliacao >= 7.0 &&
-                    empresaEscolhida.avaliacao <= 10.0 ? (
+                  ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                    empresaEscolhida?.avaliacao <= 10.0 ? (
                     <img src={otimo} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida.avaliacao >= 3.0 &&
-                    empresaEscolhida.avaliacao <= 4.9 ? (
+                  ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                    empresaEscolhida?.avaliacao <= 4.9 ? (
                     <img src={ruim} alt="" className="icon-empresa" />
-                  ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                  ) : empresaEscolhida?.avaliacao <= 2.9 ? (
                     <img src={naorecomendado} alt="" className="icon-empresa" />
                   ) : null}
-                  {empresaEscolhida.avaliacao >= 5.0 &&
-                  empresaEscolhida.avaliacao <= 6.9 ? (
+                  {empresaEscolhida?.avaliacao >= 5.0 &&
+                  empresaEscolhida?.avaliacao <= 6.9 ? (
                     <b className="my-auto text-secondary">REGULAR</b>
-                  ) : empresaEscolhida.avaliacao >= 7.0 &&
-                    empresaEscolhida.avaliacao <= 10.0 ? (
+                  ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                    empresaEscolhida?.avaliacao <= 10.0 ? (
                     <b className="my-auto text-secondary">ÓTIMO</b>
-                  ) : empresaEscolhida.avaliacao >= 3.0 &&
-                    empresaEscolhida.avaliacao <= 4.9 ? (
+                  ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                    empresaEscolhida?.avaliacao <= 4.9 ? (
                     <b className="my-auto text-secondary">RUÍM</b>
-                  ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                  ) : empresaEscolhida?.avaliacao <= 2.9 ? (
                     <b className="my-auto text-secondary">NÃO RECOMENDADO</b>
                   ) : (
                     <b className="my-auto text-secondary">SEM DADOS </b>
@@ -419,7 +459,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     <textarea
                       name=""
                       id=""
-                      placeholder={`Descreva sua experiência com produtos ou serviços da ${empresaEscolhida.nome}`}
+                      placeholder={`Descreva sua experiência com produtos ou serviços da ${empresaEscolhida?.nomeEmpresa}`}
                       className="w-100 form-control mt-1"
                       cols="30"
                       rows="3"
@@ -474,7 +514,8 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                   <center>
                     <i className="bi bi-exclamation-triangle"></i>
                     <p className="text-secondary">
-                      Faça login ou cadastre se para fazer uma reclamação ou
+                      Faça <ScrollToTopLink to={'/pt/login'} >
+                      login</ScrollToTopLink> ou cadastre se para fazer uma reclamação ou
                       avaliação!
                     </p>
                   </center>

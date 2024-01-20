@@ -32,15 +32,31 @@ import b4 from "../imgs/blog/4.png";
 import regular from "../imgs/regular.png";
 import africa from "../imgs/africa.png";
 import ScrollToTopLink from "./scrollTopLink";
-import dadosEmpresas from "../model/empresas";
+// import dadosEmpresas from "../model/empresas";
 import { db } from "../pages/firebase";
+import obterDadosDoFirebase from "../model/empresas2";
 const Header = (props) => {
   const [ph, setPh] = useState("");
   const [user, setUser] = useState(null);
 
+  const [dadosEmpresas, setDadosEmpresas] = useState([]);
 
-useEffect(() => {
-     // verificar login do usuario
+  useEffect(() => {
+    const ordenarEmpresas = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+
+        setDadosEmpresas(dadosEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    ordenarEmpresas();
+  }, []);
+  
+  useEffect(() => {
+    // verificar login do usuario
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         try {
@@ -88,6 +104,19 @@ useEffect(() => {
     });
 
     // Cleanup the subscription when the component unmounts
+
+    const ordenarEmpresas = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+
+        setDadosEmpresas(dadosEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    ordenarEmpresas();
+
     return () => unsubscribe();
   }, []);
 
@@ -179,24 +208,24 @@ useEffect(() => {
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-
+  
     // Filtrar empresas com base no termo de pesquisa
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
       return (
-        empresa.nome.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.site.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.nif.includes(searchTerm)
+        empresa.nomeEmpresa && empresa.nomeEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.site && empresa.siteEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.nif && empresa.numeroBI.includes(searchTerm)
       );
     });
-
+  
     // Atualizar os resultados da pesquisa
     setSearchResults(results);
-
+  
     // Exibir as sugestões
     setShowSuggestions(true);
   };
-
+  
   const handleBlur = () => {
     // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
     setTimeout(() => {
@@ -363,11 +392,14 @@ useEffect(() => {
                 >
                   <img src={empresa.logo} alt="" className="logo-empresa" />
                   <div className="bod">
-                    <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                    <AbreviarTexto
+                      texto={empresa.nomeEmpresa}
+                      largura={"200"}
+                    />
 
                     <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                       <AbreviarTexto
-                        texto={empresa.localizacao}
+                        texto={empresa.enderecoEmpresa}
                         largura={"300"}
                         className="my-auto text-secondary"
                       ></AbreviarTexto>
@@ -413,7 +445,7 @@ useEffect(() => {
                   </p>
                 </p>
               ) : (
-                dadosEmpresas.slice(0, 8).map((empresa) => (
+                dadosEmpresas.map((empresa) => (
                   <a
                     onClick={handleBlur}
                     key={empresa.id}
@@ -422,11 +454,14 @@ useEffect(() => {
                   >
                     <img src={empresa.logo} alt="" className="logo-empresa" />
                     <div className="bod">
-                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                      <AbreviarTexto
+                        texto={empresa.nomeEmpresa}
+                        largura={"200"}
+                      />
 
                       <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                         <AbreviarTexto
-                          texto={empresa.localizacao}
+                          texto={empresa.enderecoEmpresa}
                           largura={"300"}
                           className="my-auto text-secondary"
                         ></AbreviarTexto>

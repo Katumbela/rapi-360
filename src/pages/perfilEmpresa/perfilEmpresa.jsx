@@ -12,8 +12,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../userContext";
 import firebase from "firebase/compat/app";
 import { db } from "../firebase";
-import okupa from "../../imgs/arobot.png";
-import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
 import v1 from "../../imgs/anims/av1.mp4";
 import peq_eng from "../../imgs/banner-p.png";
@@ -53,24 +51,64 @@ import b4 from "../../imgs/blog/4.png";
 import africa from "../../imgs/africa.png";
 import regular from "../../imgs/regular.png";
 import AbreviarTexto from "../../components/abreviarTexto";
-import dadosEmpresas from "../../model/empresas";
+// import dadosEmpresas from "../../model/empresas";
 import ScrollToTopLink from "../../components/scrollTopLink";
 import Reclamacoes from "../../model/reclamacoes";
+import obterDadosDoFirebase from "../../model/empresas2";
+import EmpresaLoader from "../../components/empLoader";
 
 const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
 
   const { empresaid } = useParams();
 
-  const empres = dadosEmpresas.filter((p) => p.id == empresaid);
-  const empresaEscolhida = empres[0];
-  console.log(empresaEscolhida);
+  const [empresaEscolhida, setEmpresaEscolhida] = useState(null);
+  const [reclamacoesEmpresa, setReclamacoesEmpresa] = useState([]);
 
-  const rec = Reclamacoes.filter((p) => p.empresaid == empresaid);
-  const reclamacoesEmpresa = rec;
-  console.log(reclamacoesEmpresa);
+  useEffect(() => {
+    const pegarEmpresa = async () => {
+      try {
+        const empresasRef = db.collection("empresa");
+        const empresaSnapshot = await empresasRef.doc(empresaid).get();
+        const empresaData = empresaSnapshot.data();
 
-  document.title = `Empresa ${empresaEscolhida.nome} | Reputação 360`;
+        if (empresaData) {
+          setEmpresaEscolhida({
+            id: empresaSnapshot.id,
+            ...empresaData,
+          });
+
+          // Supondo que as reclamações estejam em uma coleção "reclamacoes" dentro do documento da empresa
+          const reclamacoesRef = empresasRef
+            .doc(empresaid)
+            .collection("reclamacoes");
+          const reclamacoesSnapshot = await reclamacoesRef.get();
+          const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          setReclamacoesEmpresa(reclamacoesData);
+        } else {
+          console.error("Empresa não encontrada.");
+        }
+      } catch (error) {
+        console.error("Erro ao pegar empresa:", error.message);
+      }
+    };
+
+    pegarEmpresa();
+  }, [empresaid]);
+
+  // const empres = dadosEmpresas.filter((p) => p.id === empresaid);
+  // const empresaEscolhida = empres[0];
+  // console.log(empresaEscolhida);
+
+  // const rec = Reclamacoes.filter((p) => p.id == empresaid);
+  // const reclamacoesEmpresa = rec;
+  // console.log(reclamacoesEmpresa);
+
+  document.title = `Empresa ${empresaEscolhida?.nomeEmpresa} | Reputação 360`;
 
   useEffect(() => {
     // Adicione um listener para o estado da autenticação
@@ -94,6 +132,21 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
     return unsubscribe;
   }, []);
 
+  const [dadosEmpresas, setDadosEmpresas] = useState([]);
+
+  useEffect(() => {
+    const ordenarEmpresas = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+
+        setDadosEmpresas(dadosEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    ordenarEmpresas();
+  }, []);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -163,7 +216,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   }, []);
 
   const backgroundStyle = {
-    backgroundImage: `url(${empresaEscolhida.banner})`,
+    backgroundImage: `url(${empresaEscolhida?.capa})`,
     backgroundSize: "100% auto",
     backgroundPosition: "center center",
     // filter: "brightness(75%)",
@@ -180,7 +233,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   }, []);
 
   // Mapeia a nota da empresa para a largura da barra de progresso
-  const larguraProgressBar = (empresaEscolhida.avaliacao / 10) * 100;
+  const larguraProgressBar = (empresaEscolhida?.avaliacao / 10) * 100;
 
   return (
     <div className="w-100 bg-light">
@@ -195,7 +248,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
       <div className="banner_perfil l" style={backgroundStyle}>
         <div className="foto-perfil-empresa">
-          <img src={empresaEscolhida.logo} alt="" />
+          <img src={empresaEscolhida?.logo} alt="" />
         </div>
       </div>
       <div className=" bg-white border-bb">
@@ -203,20 +256,38 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           <div className="row">
             <div className="col-12 col-md-2"></div>
             <div className="col-12 pt-4 pt-sm-0 col-md-8">
-              <b className="f-20 f-reg">{empresaEscolhida.nome}</b>
+              {
+                empresaEscolhida?.nomeEmpresa != null ?
+                (
+                  <>
+                  <b className="f-20 f-reg">{empresaEscolhida?.nomeEmpresa}</b>
               <br />
               <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
                 <p className="d-flex text-secondary gap-2">
-                  <i className="bi bi-calendar"></i> Há 3 anos no <b>R360</b>
+                  <i className="bi bi-calendar"></i> Desde{" "}
+                  {empresaEscolhida?.quando} no <b>R360</b>
                 </p>
-                <p className="d-flex text-secondary gap-2">
-                  <i className="bi bi-eye-fill"></i> +340 mil visualizações
-                </p>
+
+                {empresaEscolhida?.selo === true ? (
+                  <p className="d-flex text-secondary gap-2">
+                    <img src={r360} alt="" className="icon-empresa" />{" "}
+                    <span className="text-secondary">
+                      Certificado pelo <b>R360</b>
+                    </span>
+                  </p>
+                ) : null}
               </div>
+                  </>
+                )
+                :
+                <>
+                <EmpresaLoader />
+                </>
+              }
             </div>
             <div className="col-12 text-center-md d-flex mt-3 mt-md-auto col-md-2">
               <ScrollToTopLink
-                to={`/pt/reclamar/${empresaEscolhida.id}`}
+                to={`/pt/reclamar/${empresaEscolhida?.id}`}
                 className="btn btn-danger m-auto rec-b  gap-2 d-flex"
               >
                 <i className="bi bi-megaphone"></i> Reclamar
@@ -226,7 +297,10 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         </div>
         <div className="opcoes bg-white border-b-t py-2">
           <div className="d-flex justify-content-center my-auto gap-4 overflow-x-auto">
-            <ScrollToTopLink to={'/pt/'} className="text-primary text-decoration-none gap-2 d-flex">
+            <ScrollToTopLink
+              to={"/pt/"}
+              className="text-primary text-decoration-none gap-2 d-flex"
+            >
               <i className="bi bi-house"></i>Pagina Inicial
             </ScrollToTopLink>
             <p className="text-secondary gap-2 d-flex">
@@ -245,7 +319,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         <div className="row">
           <div className="col-12 col-sm-6 col-lg-3 my-3">
             <h6 className="f-reg">
-              <b>{empresaEscolhida.nome} é confiável ?</b>
+              <b>{empresaEscolhida?.nomeEmpresa} é confiável ?</b>
             </h6>
 
             <br />
@@ -257,35 +331,35 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <div className="aval ">
                 <div
                   className={` p-4 ${
-                    empresaEscolhida.avaliacao >= 5.0 &&
-                    empresaEscolhida.avaliacao <= 6.9
+                    empresaEscolhida?.avaliacao >= 5.0 &&
+                    empresaEscolhida?.avaliacao <= 6.9
                       ? "regular"
                       : ""
                   } ${
-                    empresaEscolhida.avaliacao >= 7.0 &&
-                    empresaEscolhida.avaliacao <= 10.0
+                    empresaEscolhida?.avaliacao >= 7.0 &&
+                    empresaEscolhida?.avaliacao <= 10.0
                       ? "otimo"
                       : ""
                   } ${
-                    empresaEscolhida.avaliacao >= 3.0 &&
-                    empresaEscolhida.avaliacao <= 4.9
+                    empresaEscolhida?.avaliacao >= 3.0 &&
+                    empresaEscolhida?.avaliacao <= 4.9
                       ? "pessimo"
                       : ""
                   }  ${
-                    empresaEscolhida.avaliacao <= 2.9 ? "nao-recomendado" : ""
+                    empresaEscolhida?.avaliacao <= 2.9 ? "nao-recomendado" : ""
                   } `}
                 >
                   <div className="d-flex">
-                    {empresaEscolhida.avaliacao >= 5.0 &&
-                    empresaEscolhida.avaliacao <= 6.9 ? (
+                    {empresaEscolhida?.avaliacao >= 5.0 &&
+                    empresaEscolhida?.avaliacao <= 6.9 ? (
                       <img src={regular} alt="" className="logo-reputacao" />
-                    ) : empresaEscolhida.avaliacao >= 7.0 &&
-                      empresaEscolhida.avaliacao <= 10.0 ? (
+                    ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                      empresaEscolhida?.avaliacao <= 10.0 ? (
                       <img src={otimo} alt="" className="logo-reputacao" />
-                    ) : empresaEscolhida.avaliacao >= 3.0 &&
-                      empresaEscolhida.avaliacao <= 4.9 ? (
+                    ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                      empresaEscolhida?.avaliacao <= 4.9 ? (
                       <img src={ruim} alt="" className="logo-reputacao" />
-                    ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                    ) : empresaEscolhida?.avaliacao <= 2.9 ? (
                       <img
                         src={naorecomendado}
                         alt=""
@@ -295,23 +369,23 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
                     <div className="container">
                       <h5>
-                        {empresaEscolhida.avaliacao >= 5.0 &&
-                        empresaEscolhida.avaliacao <= 6.9 ? (
+                        {empresaEscolhida?.avaliacao >= 5.0 &&
+                        empresaEscolhida?.avaliacao <= 6.9 ? (
                           <b className="f-reg">REGULAR</b>
-                        ) : empresaEscolhida.avaliacao >= 7.0 &&
-                          empresaEscolhida.avaliacao <= 10.0 ? (
+                        ) : empresaEscolhida?.avaliacao >= 7.0 &&
+                          empresaEscolhida?.avaliacao <= 10.0 ? (
                           <b className="f-reg">ÓTIMO</b>
-                        ) : empresaEscolhida.avaliacao >= 3.0 &&
-                          empresaEscolhida.avaliacao <= 4.9 ? (
+                        ) : empresaEscolhida?.avaliacao >= 3.0 &&
+                          empresaEscolhida?.avaliacao <= 4.9 ? (
                           <b className="f-reg">RUÍM</b>
-                        ) : empresaEscolhida.avaliacao <= 2.9 ? (
+                        ) : empresaEscolhida?.avaliacao <= 2.9 ? (
                           <b className="f-reg">NÃO RECOMENDADO</b>
                         ) : (
                           <b className="f-reg">SEM DADOS </b>
                         )}
                       </h5>
                       <div className="d-flex gap-2">
-                        <h2 className="f-reg">{empresaEscolhida.avaliacao}</h2>
+                        <h2 className="f-reg">{empresaEscolhida?.avaliacao}</h2>
                         <span className="my-auto text-secondary"> / 10</span>
                       </div>
                     </div>
@@ -322,7 +396,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       <i className="bi bi-megaphone"></i> 3496
                     </b>
                   </div>
-                  {empresaEscolhida.avaliacao <= 2.9 && (
+                  {empresaEscolhida?.avaliacao <= 2.9 && (
                     <>
                       <hr />
                       <div className="d-flex gap-2">
@@ -371,10 +445,10 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   >
                     <div
                       className={`progress-bar ${
-                        empresaEscolhida.avaliacao <= 4
+                        empresaEscolhida?.avaliacao <= 4
                           ? "bg-danger"
-                          : empresaEscolhida.avaliacao >= 5.0 &&
-                            empresaEscolhida.avaliacao <= 6.9
+                          : empresaEscolhida?.avaliacao >= 5.0 &&
+                            empresaEscolhida?.avaliacao <= 6.9
                           ? "bg-warning"
                           : "bg-success"
                       } `}
@@ -382,7 +456,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     ></div>
                   </div>
                   <span className="f-reg my-auto">
-                    {empresaEscolhida.avaliacao}
+                    {empresaEscolhida?.avaliacao}
                   </span>
                 </div>
               </div>
@@ -396,7 +470,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <br />
               <div className="card-sobre-empresa border-1 bg-white p-3">
                 <b className="text-dark f-reg">
-                  Quem viu {empresaEscolhida.nome} também viu:
+                  Quem viu {empresaEscolhida?.nomeEmpresa} também viu:
                 </b>
                 <br />
                 <br />
@@ -404,17 +478,20 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
                   {dadosEmpresas.map((empresa) => (
                     <a
-                      key={empresa.id}
-                      href={`/pt/empresa/${empresa.id}`}
+                      key={empresa?.id}
+                      href={`/pt/empresa/${empresa?.id}`}
                       className="card-loja text-decoration-none text-dark text-center rounded-1 border-lightt p-3 shadow-sm"
                     >
                       <img src={empresa.logo} alt="" className="logo-empresa" />
                       <div className="bod">
-                        <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                        <AbreviarTexto
+                          texto={empresa?.nomeEmpresa}
+                          largura={"200"}
+                        />
 
                         <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                           <AbreviarTexto
-                            texto={empresa.localizacao}
+                            texto={empresa?.enderecoEmpresa}
                             largura={"300"}
                             className="my-auto text-secondary"
                           ></AbreviarTexto>
@@ -422,20 +499,20 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                         <hr />
 
                         <div className="d-flex gap-2 justify-content-center">
-                          {empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
+                          {empresa?.avaliacao >= 5.0 &&
+                          empresa?.avaliacao <= 6.9 ? (
                             <img
                               src={regular}
                               alt=""
                               className="icon-empresa"
                             />
-                          ) : empresa.avaliacao >= 7.0 &&
-                            empresa.avaliacao <= 10.0 ? (
+                          ) : empresa?.avaliacao >= 7.0 &&
+                            empresa?.avaliacao <= 10.0 ? (
                             <img src={otimo} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao >= 3.0 &&
-                            empresa.avaliacao <= 4.9 ? (
+                          ) : empresa?.avaliacao >= 3.0 &&
+                            empresa?.avaliacao <= 4.9 ? (
                             <img src={ruim} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao <= 2.9 ? (
+                          ) : empresa?.avaliacao <= 2.9 ? (
                             <img
                               src={naorecomendado}
                               alt=""
@@ -443,7 +520,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                             />
                           ) : null}
                           <h4 className="f-reg my-auto">
-                            <b>{empresa.avaliacao} </b>
+                            <b>{empresa?.avaliacao} </b>
                           </h4>
                           <span className="text-secondary f-12 mt-auto">
                             / 10
@@ -459,7 +536,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           </div>
           <div className="col-12 col-sm-6 col-lg-6 my-3">
             <h6 className="f-reg">
-              <b>O que estão falando sobre {empresaEscolhida.nome} </b>
+              <b>O que estão falando sobre {empresaEscolhida?.nomeEmpresa} </b>
             </h6>
 
             <br />
@@ -512,7 +589,6 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     <span className="text-secondary">
                       Sem reclamações ou avaliações{" "}
                     </span>
-
                     <br />
                     <br />
                   </>
@@ -538,15 +614,16 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
           </div>
           <div className="col-12 col-sm-6 col-lg-3 my-3">
             <h6 className="f-reg">
-              <b>Veja mais informações sobre {empresaEscolhida.nome}</b>
+              <b>Veja mais informações sobre {empresaEscolhida?.nomeEmpresa}</b>
             </h6>
             <br />
             <div className="card-sobre-empresa border-1 bg-white p-3">
               <b className="text-dark f-reg">Sobre</b>
 
-              <p className="text-secondary f-14">{empresaEscolhida.sobre}</p>
+              <p className="text-secondary f-14">{empresaEscolhida?.sobre}</p>
               <b>
-                NIF: <b className="text-success">{empresaEscolhida.nif}</b>{" "}
+                NIF:{" "}
+                <b className="text-success">{empresaEscolhida?.numeroBI}</b>{" "}
               </b>
               <center className="mt-2">
                 <span className="text-secondary f-12">
@@ -571,9 +648,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 {" "}
                 <a
                   className=" text-decoration-none"
-                  href={`https://${empresaEscolhida.site}`}
+                  href={`https://${empresaEscolhida?.siteEmpresa}`}
                 >
-                  {empresaEscolhida.site}
+                  {empresaEscolhida?.siteEmpresa}
                 </a>
               </h5>
 
@@ -583,24 +660,24 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 {" "}
                 <a
                   className=" text-decoration-none"
-                  href={"tel:" + empresaEscolhida.whatsapp}
+                  href={"tel:" + empresaEscolhida?.whatsapp}
                 >
-                  {empresaEscolhida.whatsapp}
+                  {empresaEscolhida?.whatsapp}
                 </a>
               </h5>
 
               <hr />
               <center>
                 <span className="d-flex gap-3 justify-content-center  f-14">
-                  <a href={"https://facebook.com/" + empresaEscolhida.fb}>
+                  <a href={"https://facebook.com/" + empresaEscolhida?.fb}>
                     {" "}
                     <i className="bi bi-facebook f-20"></i>{" "}
                   </a>
-                  <a href={"https://instagram.com/" + empresaEscolhida.insta}>
+                  <a href={"https://instagram.com/" + empresaEscolhida?.insta}>
                     {" "}
                     <i className="bi bi-instagram f-20"></i>{" "}
                   </a>
-                  <a href={"https://youtube.com/" + empresaEscolhida.fb}>
+                  <a href={"https://youtube.com/" + empresaEscolhida?.fb}>
                     {" "}
                     <i className="bi bi-youtube f-20"></i>{" "}
                   </a>
@@ -616,7 +693,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <br />
               <div className="card-sobre-empresa border-1 bg-white p-3">
                 <b className="text-dark f-reg">
-                  Quem viu {empresaEscolhida.nome} também viu:
+                  Quem viu {empresaEscolhida?.nomeEmpresa} também viu:
                 </b>
                 <br />
                 <br />
@@ -630,11 +707,14 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     >
                       <img src={empresa.logo} alt="" className="logo-empresa" />
                       <div className="bod">
-                        <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                        <AbreviarTexto
+                          texto={empresa?.nomeEmpresa}
+                          largura={"200"}
+                        />
 
                         <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-12">
                           <AbreviarTexto
-                            texto={empresa.localizacao}
+                            texto={empresa?.enderecoEmpresa}
                             largura={"300"}
                             className="my-auto text-secondary"
                           ></AbreviarTexto>
@@ -642,20 +722,20 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                         <hr />
 
                         <div className="d-flex gap-2 justify-content-center">
-                          {empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
+                          {empresa?.avaliacao >= 5.0 &&
+                          empresa?.avaliacao <= 6.9 ? (
                             <img
                               src={regular}
                               alt=""
                               className="icon-empresa"
                             />
-                          ) : empresa.avaliacao >= 7.0 &&
-                            empresa.avaliacao <= 10.0 ? (
+                          ) : empresa?.avaliacao >= 7.0 &&
+                            empresa?.avaliacao <= 10.0 ? (
                             <img src={otimo} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao >= 3.0 &&
-                            empresa.avaliacao <= 4.9 ? (
+                          ) : empresa?.avaliacao >= 3.0 &&
+                            empresa?.avaliacao <= 4.9 ? (
                             <img src={ruim} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao <= 2.9 ? (
+                          ) : empresa?.avaliacao <= 2.9 ? (
                             <img
                               src={naorecomendado}
                               alt=""
@@ -663,7 +743,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                             />
                           ) : null}
                           <h4 className="f-reg my-auto">
-                            <b>{empresa.avaliacao} </b>
+                            <b>{empresa?.avaliacao} </b>
                           </h4>
                           <span className="text-secondary f-12 mt-auto">
                             / 10

@@ -19,6 +19,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
   document.title = `Cadastrar Sua Empresa | Reputação 360`;
   const [user, setUser] = useState(null);
+  const [load, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     // Inicialize os campos do formulário com os names apropriados
@@ -26,6 +27,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
     emailEmpresa: "",
     numeroBI: "",
     siteEmpresa: "",
+    whatsapp: "",
     enderecoEmpresa: "",
     sobre: "",
     nomeResponsavel: "",
@@ -48,78 +50,103 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   // Função auxiliar para obter o nome do mês
   const getMonthName = (monthIndex) => {
     const monthNames = [
-      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      "jan",
+      "fev",
+      "mar",
+      "abril",
+      "maio",
+      "junho",
+      "julho",
+      "agosto",
+      "set",
+      "out",
+      "nov",
+      "dez",
     ];
     return monthNames[monthIndex];
   };
 
   const currentDate = new Date();
-  const formattedDate = `${currentDate.getDate()} de ${getMonthName(currentDate.getMonth())} de ${currentDate.getFullYear()}`;
-
+  const formattedDate = `${currentDate.getDate()} de ${getMonthName(
+    currentDate.getMonth()
+  )} de ${currentDate.getFullYear()}`;
 
   const handleCadastroEmpresa = async () => {
+    setLoading(true);
     try {
       const { emailEmpresa, senha } = formData;
 
-        // Verificar se as imagens foram selecionadas
-        if (!logoFile || !capaFile) {
-          Swal.fire({
-            icon: "info",
-            title: "Imagens não selecionadas!",
-            text: "Por favor, selecione a logo e a capa da empresa.",
-          });
-          return;
-        }
+      // Verificar se as imagens foram selecionadas
+      if (!logoFile || !capaFile) {
+        setLoading(false);
+        Swal.fire({
+          icon: "info",
+          title: "Imagens não selecionadas!",
+          text: "Por favor, selecione a logo e a capa da empresa.",
+        });
+        return;
+      }
       // Verificar se o e-mail já está registrado no Firebase Authentication
       const userCredential = await firebase
         .auth()
         .createUserWithEmailAndPassword(emailEmpresa, senha);
-        const user = userCredential.user;
+      const user = userCredential.user;
 
-    
-        // Upload de logo e capa para o Storage
-        const logoFileName = `empresas/${uuidv4()}_${logoFile.name}`;
-        const capaFileName = `empresas/${uuidv4()}_${capaFile.name}`;
-    
-        const storageRef = firebase.storage().ref();
-    
-        // Upload de logo
-        const logoFileRef = storageRef.child(logoFileName);
-        await logoFileRef.put(logoFile);
-        const logoFileURL = await logoFileRef.getDownloadURL();
-    
-        // Upload de capa
-        const capaFileRef = storageRef.child(capaFileName);
-        await capaFileRef.put(capaFile);
-        const capaFileURL = await capaFileRef.getDownloadURL();
-    
-        // Enviar dados para a coleção "empresa" no Firestore
-        const empresaRef = firebase.firestore().collection("empresa");
-        await empresaRef.add({
-          ...formData,
-          conta: "empresa",
-          userId: user.uid,
-          logo: logoFileURL,
-          capa: capaFileURL,
-          quando: formattedDate,
-        });
-    
-        // Mostrar mensagem de sucesso usando o SweetAlert
-        Swal.fire({
-          icon: "success",
-          title: "Cadastro bem-sucedido!",
-          text: "Sua empresa foi cadastrada com sucesso!",
-        });
-    
-        // Limpar os campos do formulário após o sucesso
-        setFormData({
-          // ...
-        });
-        setLogoFile(null);
-        setCapaFile(null);
-      }catch (error) {
-      
+      // Upload de logo e capa para o Storage
+      const logoFileName = `empresas/${uuidv4()}_${logoFile.name}`;
+      const capaFileName = `empresas/${uuidv4()}_${capaFile.name}`;
+
+      const storageRef = firebase.storage().ref();
+
+      // Upload de logo
+      const logoFileRef = storageRef.child(logoFileName);
+      await logoFileRef.put(logoFile);
+      const logoFileURL = await logoFileRef.getDownloadURL();
+
+      // Upload de capa
+      const capaFileRef = storageRef.child(capaFileName);
+      await capaFileRef.put(capaFile);
+      const capaFileURL = await capaFileRef.getDownloadURL();
+
+      // Enviar dados para a coleção "empresa" no Firestore
+      const empresaRef = firebase.firestore().collection("empresa");
+      await empresaRef.add({
+        ...formData,
+        conta: "empresa",
+        insta: "",
+        youtube: "",
+        fb: "",
+        selo: false,
+        userId: user.uid,
+        logo: logoFileURL,
+        capa: capaFileURL,
+        quando: formattedDate,
+      });
+
+      // Mostrar mensagem de sucesso usando o SweetAlert
+      Swal.fire({
+        icon: "success",
+        title: "Cadastro bem-sucedido!",
+        text: "Sua empresa foi cadastrada com sucesso!",
+      });
+      setLoading(false);
+
+      // Limpar os campos do formulário após o sucesso
+      setFormData({
+        // ... nomeEmpresa: "",
+        emailEmpresa: "",
+        numeroBI: "",
+        siteEmpresa: "",
+        whatsapp: "",
+        enderecoEmpresa: "",
+        sobre: "",
+        nomeResponsavel: "",
+        senha: "",
+      });
+      setLogoFile(null);
+      setCapaFile(null);
+    } catch (error) {
+      setLoading(false);
       console.error("Erro ao cadastrar empresa:", error);
     }
   };
@@ -276,7 +303,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             required
                             className="form-control rounded-1"
                             placeholder="Forneça uma breve descrição da empresa"
-                            name="enderecoEmpresa"
+                            name="sobre"
                             value={formData.sobre}
                             onChange={(e) =>
                               setFormData({
@@ -287,7 +314,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                           ></textarea>
                         </div>
                         <br />
-                        <div className="col-12 my-2 col-lg-12">
+                        <div className="col-12 my-2 col-md-6">
                           <label htmlFor="" className="text-secondary f-12">
                             Endereço da empresa <b className="text-danger">*</b>
                           </label>
@@ -309,10 +336,33 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                         <br />
 
                         <br />
+                        <div className="col-12 my-2 col-md-6">
+                          <label htmlFor="" className="text-secondary f-12">
+                            Telefone (Whatsapp preferêncial){" "}
+                            <b className="text-danger">*</b>
+                          </label>
+                          <input
+                            required
+                            type="email"
+                            className="form-control rounded-1"
+                            placeholder="Digite o endereço atual da empresa"
+                            name="whatsapp"
+                            value={formData.whatsapp}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                whatsapp: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                        <br />
+
+                        <br />
                         <div className="titul mt-3">
                           <div className="d-flex gap-2">
                             <i className="bi text-success bi-shield-lock-fill"></i>
-                            <b>Dados de acesso</b>
+                            <b>Outros Dados</b>
                           </div>
                         </div>
 
@@ -363,10 +413,15 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                     </div>
                     <br />
                     <button
+                      disabled={load}
                       onClick={handleCadastroEmpresa}
                       className="d-flex mb-4 text-white px-5 btn btn-primary justify-content-center rounded-1"
                     >
-                      <span>Cadastrar</span>
+                      {load ? (
+                        <span>Cadastrando...</span>
+                      ) : (
+                        <span>Cadastrar</span>
+                      )}
                     </button>
                   </>
                 </center>

@@ -184,9 +184,9 @@ const Blog = ({ cart, nomee, emaill }) => {
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
       return (
-        empresa.nome.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.site.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.nif.includes(searchTerm)
+        empresa.nomeEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.siteEmpresa.toLowerCase().includes(lowerCasedTerm) ||
+        empresa.numeroBI.includes(searchTerm)
       );
     });
 

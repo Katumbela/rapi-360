@@ -176,23 +176,28 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-
+  
     // Filtrar empresas com base no termo de pesquisa
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
+      const nomeEmpresaLowerCase = empresa.nomeEmpresa ? empresa.nomeEmpresa.toLowerCase() : '';
+      const siteEmpresaLowerCase = empresa.siteEmpresa ? empresa.siteEmpresa.toLowerCase() : '';
+      const numeroBI = empresa.numeroBI ? empresa.numeroBI : '';
+  
       return (
-        empresa.nome.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.site.toLowerCase().includes(lowerCasedTerm) ||
-        empresa.nif.includes(searchTerm)
+        nomeEmpresaLowerCase.includes(lowerCasedTerm) ||
+        siteEmpresaLowerCase.includes(lowerCasedTerm) ||
+        numeroBI.includes(searchTerm)
       );
     });
-
+  
     // Atualizar os resultados da pesquisa
     setSearchResults(results);
-
+  
     // Exibir as sugestões
+    setShowSuggestions(true);
   };
-
+  
 
   const [showSuggestions, setShowSuggestions] = useState(false);
   
@@ -260,7 +265,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                   >
                     <img src={empresa.logo} className="logo-empresa" alt="" />
                     <div className="de my-auto">
-                      <b>{empresa.nome}</b>
+                      <b>{empresa.nomeEmpresa}</b>
                       <p className="d-flex mt-1 my-auto gap-2 f-14">
                         {empresa.selo ? (
                           <img src={r360} alt="" className="icon-empresa" />

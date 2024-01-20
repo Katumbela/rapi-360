@@ -2,50 +2,32 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebase';
 
 const fetchDataFromFirestore = async () => {
-  const projectosCollection = collection(db, 'projetos');
+  const empresasCollection = collection(db, 'empresas');
 
   try {
-
-    const querySnapshot = await getDocs(projectosCollection);
+    const querySnapshot = await getDocs(empresasCollection);
 
     const data = querySnapshot.docs.map((doc) => {
-      
-      const projecto = doc.data();
-      
-      // Obtendo o ID do documento diretamente
+      const empresa = doc.data();
       const docId = doc.id;
 
-      const fotoUrls = projecto.fotoUrls.map((url, index) => ({
-        index,
-        url,
-      }));
-
-      const imagens = projecto.imagens.map((imagem) => ({
-        name: imagem.name,
-        url: imagem.url,
-      }));
-
+      // Ajuste os campos conforme necessário
       return {
-        ano: projecto.ano,
-        descricao: projecto.descricao,
-        dia: projecto.dia,
-        email: projecto.email,
-        endereco: projecto.endereco,
-        fotoUrls,
-        // Usando o ID do documento
+        selo: empresa.selo,
+        id: empresa.id,
+        nome: empresa.nomeEmpresa,
+        localizacao: empresa.enderecoEmpresa,
+        avaliacao: empresa.avaliacao,
+        banner: empresa.banner,
+        site: empresa.siteEmpresa,
+        whatsapp: empresa.whatsapp,
+        fb: empresa.fb,
+        insta: empresa.insta,
+        youtube: empresa.youtube,
+        nif: empresa.nif,
+        sobre: empresa.sobre,
+        logo: empresa.logo,
         docId,
-        imagens,
-        marca: projecto.marca,
-        minimo: projecto.minimo,
-        modelo: projecto.modelo,
-        nome: projecto.nome,
-        oitoh: projecto.oitoh,
-        semana: projecto.semana,
-        uid: projecto.uid,
-        photo: projecto.photo,
-        tel: projecto.tel,
-        email: projecto.email,
-        ummes: projecto.ummes,
       };
     });
 
@@ -56,9 +38,9 @@ const fetchDataFromFirestore = async () => {
   }
 };
 
-const getCursosData = async () => {
-  const cursos = await fetchDataFromFirestore();
-  return cursos;
+const getEmpresasData = async () => {
+  const empresas = await fetchDataFromFirestore();
+  return empresas;
 };
 
-export default getCursosData;
+export default getEmpresasData;

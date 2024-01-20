@@ -38,18 +38,23 @@ import AbreviarTexto from "../abreviarTexto";
 import ScrollToTopLink from "../scrollTopLink";
 import dadosEmpresas from "../../model/empresas";
 import articles from "../../model/artigos";
+import obterDadosDoFirebase from "../../model/empresas2";
+import EmpresaLoader from "../empLoader";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
   const [cursos, setCursos] = useState([]);
 
-  const melhoresEmpresasOrdenadas = dadosEmpresas
-    .sort((a, b) => b.avaliacao - a.avaliacao)
-    .filter((empresa) => empresa.avaliacao >= 6);
+  // const melhoresEmpresasOrdenadas = dadosEmpresas.sort((a, b) => b.avaliacao - a.avaliacao).filter((empresa) => empresa.avaliacao >= 6);
 
-  const pioresEmpresasOrdenadas = dadosEmpresas
-    .sort((a, b) => a.avaliacao - b.avaliacao)
-    .filter((empresa) => empresa.avaliacao < 6);
+  // const pioresEmpresasOrdenadas = dadosEmpresas.sort((a, b) => a.avaliacao - b.avaliacao).filter((empresa) => empresa.avaliacao < 6);
+
+  const [melhoresEmpresasOrdenadas, setMelhoresEmpresasOrdenadas] = useState(
+    []
+  );
+  const [pioresEmpresasOrdenadas, setPioresEmpresasOrdenadas] = useState([]);
+
+  const [dadosEmpresass, setDadosEmpresas] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +62,30 @@ const Banner = () => {
       setCursos(data);
     };
 
+    // ordenarEmpresas();
+
+    const ordenarEmpresas = async () => {
+      try {
+        const dadosEmpresas = await obterDadosDoFirebase();
+
+        // Convertendo avaliação para números antes de ordenar
+        const melhoresEmpresas = dadosEmpresas
+          .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
+          .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
+
+        const pioresEmpresas = dadosEmpresas
+          .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
+          .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
+
+        setMelhoresEmpresasOrdenadas(melhoresEmpresas);
+        setPioresEmpresasOrdenadas(pioresEmpresas);
+        setDadosEmpresas(dadosEmpresas);
+      } catch (error) {
+        console.error("Erro ao ordenar empresas:", error.message);
+      }
+    };
+
+    ordenarEmpresas();
     fetchData();
   }, []); // o segundo argumento do useEffect é um array de dependências, coloque aqui qualquer dependência necessária
 
@@ -140,64 +169,6 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      {/* <div className="container-fluid container-lg">
-        <div className="row">
-          <div className="col-12 col-md-4 col-xl-3 col-xxl-2 pt-1">
-            <div className="shadow-md card-opt p-3">
-              <button
-                onClick={() => listarTudo()}
-                className="btn btn-primary w-100"
-              >
-                Listar tudo
-              </button>
-
-              <button className="btn my-3 btn-secondary w-100">
-                Ver por Categoria
-              </button>
-              <br />
-              <b>Endereço</b>
-              <div className="search-by">
-                <label htmlFor="d" className="">
-                  Buscar por endereço
-                </label>
-                <input
-                  type="text"
-                  value={searchTerm2}
-                  onChange={handleSearchInputChange2}
-                  className="form-control"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-12 container-xxl container-fluid col-md-8 col-xl-9 col-xxl-10">
-            {(searchTerm.length > 0 || searchTerm2.length > 0) && (
-              <div className="row">
-                {filteredEquipements.map((item) => (
-                  <CardCurso key={item.id} c={item} />
-                ))}
-              </div>
-            )}
-
-            // || filteredEquipements == 0 //
-
-            {filteredEquipements == 0 && (
-              <center>
-                <span className="mx-auto text-secondary">
-                  Não foi encontrado um outro resultado para o que procura!
-                </span>
-              </center>
-            )}
-
-            {searchTerm.length == "" && searchTerm2.length == "" && (
-              <div className="row mx-2">
-                {cursos.map((item) => (
-                  <CardCurso key={item.id} c={item} />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div> */}
 
       <br />
       <center>
@@ -307,96 +278,109 @@ const Banner = () => {
                       </span>
                     </div>
                     <br />
-                    {melhoresEmpresasOrdenadas
-                      .slice(0, 5)
-                      .map((empresa, index) => (
-                        <ScrollToTopLink
-                          key={empresa.id}
-                          to={`/pt/empresa/${empresa.id}`}
-                          title={"Clique para ver empresa"}
-                          className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
-                        >
-                          <h5 className="my-auto text-success">
-                            <b>{`${index + 1}º`}</b>
-                          </h5>
-                          <img
-                            src={empresa.logo}
-                            className="logo-empresa"
-                            alt=""
-                          />
-                          <div className="de my-auto">
-                            <b>{empresa.nome}</b>
-                            <p className="d-flex mt-1 my-auto gap-2 f-14">
-                              {empresa.selo ? (
-                                <img
-                                  src={r360}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 5.0 &&
-                                empresa.avaliacao <= 6.9 ? (
-                                <img
-                                  src={regular}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 7.0 &&
-                                empresa.avaliacao <= 10.0 ? (
-                                <img
-                                  src={otimo}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 3.0 &&
-                                empresa.avaliacao <= 4.9 ? (
-                                <img
-                                  src={ruim}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao <= 2.9 ? (
-                                <img
-                                  src={naorecomendado}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : null}
+                    {melhoresEmpresasOrdenadas?.length != 0 ? (
+                      <>
+                        {melhoresEmpresasOrdenadas
+                          .slice(0, 5)
+                          .map((empresa, index) => (
+                            <ScrollToTopLink
+                              key={empresa.id}
+                              to={`/pt/empresa/${empresa.id}`}
+                              title={"Clique para ver empresa"}
+                              className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                            >
+                              <h5 className="my-auto text-success">
+                                <b>{`${index + 1}º`}</b>
+                              </h5>
+                              <img
+                                src={empresa.logo}
+                                className="logo-empresa"
+                                alt=""
+                              />
+                              <div className="de my-auto">
+                                <b>{empresa.nomeEmpresa}</b>
+                                <p className="d-flex mt-1 my-auto gap-2 f-14">
+                                  {empresa.selo ? (
+                                    <img
+                                      src={r360}
+                                      alt=""
+                                      className="icon-empresa"
+                                    />
+                                  ) : empresa.avaliacao >= 5.0 &&
+                                    empresa.avaliacao <= 6.9 ? (
+                                    <img
+                                      src={regular}
+                                      alt=""
+                                      className="icon-empresa"
+                                    />
+                                  ) : empresa.avaliacao >= 7.0 &&
+                                    empresa.avaliacao <= 10.0 ? (
+                                    <img
+                                      src={otimo}
+                                      alt=""
+                                      className="icon-empresa"
+                                    />
+                                  ) : empresa.avaliacao >= 3.0 &&
+                                    empresa.avaliacao <= 4.9 ? (
+                                    <img
+                                      src={ruim}
+                                      alt=""
+                                      className="icon-empresa"
+                                    />
+                                  ) : empresa.avaliacao <= 2.9 ? (
+                                    <img
+                                      src={naorecomendado}
+                                      alt=""
+                                      className="icon-empresa"
+                                    />
+                                  ) : null}
 
-                              {empresa.selo ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  {" "}
-                                  R360
-                                </b>
-                              ) : empresa.avaliacao >= 5.0 &&
-                                empresa.avaliacao <= 6.9 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  REGULAR
-                                </b>
-                              ) : empresa.avaliacao >= 7.0 &&
-                                empresa.avaliacao <= 10.0 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  ÓTIMO
-                                </b>
-                              ) : empresa.avaliacao >= 3.0 &&
-                                empresa.avaliacao <= 4.9 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  RUÍM
-                                </b>
-                              ) : empresa.avaliacao <= 2.9 ? (
-                                <AbreviarTexto
-                                  className="my-auto f-12 text-secondary"
-                                  texto={"NÃO RECOMENDADO"}
-                                  largura={90}
-                                />
-                              ) : (
-                                <b className="my-auto f-12 text-secondary">
-                                  SEM DADOS{" "}
-                                </b>
-                              )}
-                            </p>
-                          </div>
-                        </ScrollToTopLink>
-                      ))}
+                                  {empresa.selo ? (
+                                    <b className="my-auto f-12 text-secondary">
+                                      {" "}
+                                      R360
+                                    </b>
+                                  ) : empresa.avaliacao >= 5.0 &&
+                                    empresa.avaliacao <= 6.9 ? (
+                                    <b className="my-auto f-12 text-secondary">
+                                      REGULAR
+                                    </b>
+                                  ) : empresa.avaliacao >= 7.0 &&
+                                    empresa.avaliacao <= 10.0 ? (
+                                    <b className="my-auto f-12 text-secondary">
+                                      ÓTIMO
+                                    </b>
+                                  ) : empresa.avaliacao >= 3.0 &&
+                                    empresa.avaliacao <= 4.9 ? (
+                                    <b className="my-auto f-12 text-secondary">
+                                      RUÍM
+                                    </b>
+                                  ) : empresa.avaliacao <= 2.9 ? (
+                                    <AbreviarTexto
+                                      className="my-auto f-12 text-secondary"
+                                      texto={"NÃO RECOMENDADO"}
+                                      largura={90}
+                                    />
+                                  ) : (
+                                    <b className="my-auto f-12 text-secondary">
+                                      SEM DADOS{" "}
+                                    </b>
+                                  )}
+                                </p>
+                              </div>
+                            </ScrollToTopLink>
+                          ))}
+                      </>
+                    ) : (
+                      <>
+                        <EmpresaLoader className="w" />
+
+                        <br />
+                        <EmpresaLoader className="w" />
+                        <br />
+                        <EmpresaLoader className="w" />
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="piores mt-5 mt-md-0 col-12 col-md-6">
@@ -410,96 +394,107 @@ const Banner = () => {
                       </span>
                     </div>
                     <br />
-                    {pioresEmpresasOrdenadas
-                      .slice(0, 5)
-                      .map((empresa, index) => (
-                        <ScrollToTopLink
-                          key={empresa.id}
-                          to={`/pt/empresa/${empresa.id}`}
-                          title={"Clique para ver empresa"}
-                          className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
-                        >
-                          <h5 className="my-auto text-success">
-                            <b>{`${index + 1}º`}</b>
-                          </h5>
-                          <img
-                            src={empresa.logo}
-                            className="logo-empresa"
-                            alt=""
-                          />
-                          <div className="de my-auto">
-                            <b>{empresa.nome}</b>
-                            <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
-                              {empresa.selo ? (
-                                <img
-                                  src={r360}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 5.0 &&
-                                empresa.avaliacao <= 6.9 ? (
-                                <img
-                                  src={regular}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 7.0 &&
-                                empresa.avaliacao <= 10.0 ? (
-                                <img
-                                  src={otimo}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao >= 3.0 &&
-                                empresa.avaliacao <= 4.9 ? (
-                                <img
-                                  src={ruim}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : empresa.avaliacao <= 2.9 ? (
-                                <img
-                                  src={naorecomendado}
-                                  alt=""
-                                  className="icon-empresa"
-                                />
-                              ) : null}
+                    {pioresEmpresasOrdenadas?.length != 0 ? (
+                      <>
+                        {pioresEmpresasOrdenadas.map((empresa, index) => (
+                          <ScrollToTopLink
+                            key={empresa.id}
+                            to={`/pt/empresa/${empresa.id}`}
+                            title={"Clique para ver empresa"}
+                            className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                          >
+                            <h5 className="my-auto text-success">
+                              <b>{`${index + 1}º`}</b>
+                            </h5>
+                            <img
+                              src={empresa.logo}
+                              className="logo-empresa"
+                              alt=""
+                            />
+                            <div className="de my-auto">
+                              <b>{empresa.nomeEmpresa}</b>
+                              <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
+                                {empresa.selo ? (
+                                  <img
+                                    src={r360}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa.avaliacao >= 5.0 &&
+                                  empresa.avaliacao <= 6.9 ? (
+                                  <img
+                                    src={regular}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa.avaliacao >= 7.0 &&
+                                  empresa.avaliacao <= 10.0 ? (
+                                  <img
+                                    src={otimo}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa.avaliacao >= 3.0 &&
+                                  empresa.avaliacao <= 4.9 ? (
+                                  <img
+                                    src={ruim}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : empresa.avaliacao <= 2.9 ? (
+                                  <img
+                                    src={naorecomendado}
+                                    alt=""
+                                    className="icon-empresa"
+                                  />
+                                ) : null}
 
-                              {empresa.selo ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  {" "}
-                                  R360
-                                </b>
-                              ) : empresa.avaliacao >= 5.0 &&
-                                empresa.avaliacao <= 6.9 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  REGULAR
-                                </b>
-                              ) : empresa.avaliacao >= 7.0 &&
-                                empresa.avaliacao <= 10.0 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  ÓTIMO
-                                </b>
-                              ) : empresa.avaliacao >= 3.0 &&
-                                empresa.avaliacao <= 4.9 ? (
-                                <b className="my-auto f-12 text-secondary">
-                                  RUÍM
-                                </b>
-                              ) : empresa.avaliacao <= 2.9 ? (
-                                <AbreviarTexto
-                                  className="my-auto f-12 text-secondary"
-                                  texto={"NÃO RECOMENDADO"}
-                                  largura={90}
-                                />
-                              ) : (
-                                <b className="my-auto f-12 text-secondary">
-                                  SEM DADOS{" "}
-                                </b>
-                              )}
-                            </p>
-                          </div>
-                        </ScrollToTopLink>
-                      ))}
+                                {empresa.selo ? (
+                                  <b className="my-auto f-12 text-secondary">
+                                    {" "}
+                                    R360
+                                  </b>
+                                ) : empresa.avaliacao >= 5.0 &&
+                                  empresa.avaliacao <= 6.9 ? (
+                                  <b className="my-auto f-12 text-secondary">
+                                    REGULAR
+                                  </b>
+                                ) : empresa.avaliacao >= 7.0 &&
+                                  empresa.avaliacao <= 10.0 ? (
+                                  <b className="my-auto f-12 text-secondary">
+                                    ÓTIMO
+                                  </b>
+                                ) : empresa.avaliacao >= 3.0 &&
+                                  empresa.avaliacao <= 4.9 ? (
+                                  <b className="my-auto f-12 text-secondary">
+                                    RUÍM
+                                  </b>
+                                ) : empresa.avaliacao <= 2.9 ? (
+                                  <AbreviarTexto
+                                    className="my-auto f-12 text-secondary"
+                                    texto={"NÃO RECOMENDADO"}
+                                    largura={90}
+                                  />
+                                ) : (
+                                  <b className="my-auto f-12 text-secondary">
+                                    SEM DADOS{" "}
+                                  </b>
+                                )}
+                              </p>
+                            </div>
+                          </ScrollToTopLink>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <EmpresaLoader className="w" />
+
+                        <br />
+                        <EmpresaLoader className="w" />
+                        <br />
+                        <EmpresaLoader className="w" />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -547,7 +542,7 @@ const Banner = () => {
         <br />
         <div className="lista-lojas">
           <div className="d-flex scroll-md gap-4">
-            {dadosEmpresas.map(
+            {dadosEmpresass.map(
               (empresa) =>
                 empresa.selo === true && (
                   <div
@@ -557,7 +552,10 @@ const Banner = () => {
                     <img src={empresa.logo} alt="" className="logo-empresa" />
                     <div className="bod">
                       <br />
-                      <AbreviarTexto texto={empresa.nome} largura={"200"} />
+                      <AbreviarTexto
+                        texto={empresa.nomeEmpresa}
+                        largura={"200"}
+                      />
 
                       <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
                         {empresa.selo ? (
@@ -603,7 +601,7 @@ const Banner = () => {
                         )}
                       </p>
                       <a
-                        href={`https://${empresa.site}`}
+                        href={`https://${empresa.siteEmpresa}`}
                         className="btn mt-2 btn-sm btn-outline-success"
                       >
                         Acessar <i className="bi bi-arrow-right-short"></i>
@@ -632,39 +630,19 @@ const Banner = () => {
 
         <div className="lista-blog">
           <div className="d-flex overflow-x-auto scroll-md gap-4">
-            {/* <div className="card-blog rounded-1 border-lightt shadow-sm">
-              <img src={b1} alt="" className="logo-blog" />
-              <div className="bod px-3 pb-3">
-                <br />
-                <AbreviarTexto
-                  texto={
-                    "'Informacoa oode kwhewwhechjwbebcmegwmg wehggwe mugewmgduge2ufweg egwhjc  hegwfjgwehh evchj.egwfhgwefwe'"
-                  }
-                  largura={"350"}
-                />
-
-                <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
-                  <span className="my-auto text-secondary">23/12/2023</span>
-                </p>
-                <a className=" ">
-                  Ler mais <i className="bi bi-arrow-right-short"></i>
-                </a>
-              </div>
-            </div> */}
             {articles.map((artigo) => (
               <div className="card-blog rounded-1 border-lightt shadow-sm">
                 <img src={artigo.coverImage} alt="" className="logo-blog" />
                 <div className="bod px-3 pb-3">
                   <br />
-                  <AbreviarTexto
-                    texto={artigo.title}
-                    largura={"390"}
-                  />
+                  <AbreviarTexto texto={artigo.title} largura={"390"} />
 
                   <p className="d-flex pb-2 mt-1 my-auto gap-2 f-14">
-                    <span className="my-auto text-secondary">{artigo.date}</span>
+                    <span className="my-auto text-secondary">
+                      {artigo.date}
+                    </span>
                   </p>
-                  <a href={'/pt/blog/'+artigo.id} className=" ">
+                  <a href={"/pt/blog/" + artigo.id} className=" ">
                     Ler matéria <i className="bi bi-arrow-right-short"></i>
                   </a>
                 </div>

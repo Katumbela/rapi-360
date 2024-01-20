@@ -25,6 +25,9 @@ import banner from "../imgs/banner2.png";
 import banner_icon from "../imgs/banner2.png";
 
 
+import { db } from "../pages/firebase";
+
+
 const dadosEmpresas = [
     {
       selo: false,
@@ -80,7 +83,8 @@ const dadosEmpresas = [
       localizacao: 'Angola, Luanda - Talatona',
       avaliacao: '6.1',
       nif: "0012234324",
-      banner: banner,  site: 'www.xyami.com',
+      banner: banner,  
+      site: 'www.xyami.com',
       whatsapp: '+244 928 134 249',
       fb: "arreiou",
       insta: "mega.arreiou",
@@ -108,3 +112,26 @@ const dadosEmpresas = [
   
   export default dadosEmpresas;
   
+
+
+// import { db } from "../pages/firebase";
+// Função para obter dados do Firebase
+// const dadosEmpresas = async () => {
+//   try {
+//     const empresasRef = db.collection('empresa');
+//     const snapshot = await empresasRef.get();
+//     const dadosEmpresas = snapshot.docs.map((doc) => ({
+//       id: doc.id,
+//       avaliacao: '9.9',
+//       ...doc.data(),
+//     }));
+
+//     console.log('Dados do Firebase:', dadosEmpresas);
+//     return dadosEmpresas;
+//   } catch (error) {
+//     console.error('Erro ao obter dados do Firebase:', error.message);
+//     return []; // ou retorne um valor padrão caso ocorra um erro
+//   }
+// };
+
+// export default dadosEmpresas;
