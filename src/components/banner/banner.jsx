@@ -185,13 +185,13 @@ const Banner = () => {
 
   return (
     <>
-      <div className="banner shadow-md">
+      <div className="banner bg-success shadow-md">
         <div className="body-banner text-center container">
           <h4 className="f-reg  titulo">
             O <b className="text-">Reputa</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
           </h4>
-          <p className="f-14  text-secondary">
+          <p className="f-14  text-`">
             Compre de modo mais <b className="text-success">seguro</b>,
             pesquisando empresas e buscando uma solução para algum problema.
           </p>

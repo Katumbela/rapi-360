@@ -364,10 +364,6 @@
         text-decoration: none;
   }
 
-  .bg-success {
-    background: #01a839!important;
-  }
-
   .africa-ban {
     height: 10.5em;
     width: 10.5em;
@@ -424,10 +420,9 @@
     position: relative;
     z-index: 1;
   }
-  .banner  {
-    background: linear-gradient(90deg, #f4f4f4f8, #f4f4f4f8), url(../imgs/africa.png) center center!important;
-    background-size: cover;
-  }
+.bg-success {
+    background: #00ff99!important;
+}
 
   .card-ranking {
     white-space: nowrap;
