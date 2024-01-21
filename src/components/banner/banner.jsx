@@ -46,6 +46,7 @@ import EmpresaLoader from "../empLoader";
 import ProfileCard from "../PerfilEmp";
 import Pub from "../publicidade";
 import Pub2 from "../publicidade2";
+import StarRating from "../starts";
 
 const Banner = () => {
   const [load, setLoad] = useState(false);
@@ -374,7 +375,7 @@ const Banner = () => {
                                 />
                                 <div className="de my-auto">
                                   <b>{empresa.nomeEmpresa}</b>
-                                  <p className="d-flex mt-1 my-auto gap-2 f-14">
+                                  {/* <p className="d-flex mt-1 my-auto gap-2 f-14">
                                     {empresa.selo ? (
                                       <img
                                         src={r360}
@@ -441,7 +442,8 @@ const Banner = () => {
                                         SEM DADOS{" "}
                                       </b>
                                     )}
-                                  </p>
+                                  </p> */}
+                                  <StarRating rating={Math.ceil(empresa.avaliacao)} />
                                 </div>
                               </ScrollToTopLink>
                             ))}
