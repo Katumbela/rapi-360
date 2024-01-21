@@ -47,23 +47,23 @@ function Footer() {
   };
 
   return (
-    <div className="footerr bg-white">
+    <div className="footerr bg-dark">
       <div className="container-fluid foo">
         <div className=" mt-4 footer">
           <div className=" row">
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-dark">Contacte nos</h5>
-              <ul>
+              <h5 className="">Contacte nos</h5>
+              <ul className="ende">
                 <li>Endereço: Luanda - Angola</li>
                 <li>Phone: +244 928 134 249</li>
                 <li>E-mail: info@reputacao360.online</li>
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-dark">Para empresas</h5>
+              <h5 className="">Para empresas</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink btn-sm rounded-1 text-white  btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink -sm rounded-1 text-white   -success" to="/pt/login">
                     Área da empresa
                   </ScrollToTopLink>
                 </li>
@@ -75,10 +75,10 @@ function Footer() {
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-dark">Para consumidor</h5>
+              <h5 className="">Para consumidor</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink btn-sm rounded-1 text-white btn btn-success" to="/pt/login">
+                  <ScrollToTopLink className="footerlink -sm rounded-1 text-white  -success" to="/pt/login">
                     Área do consumidor
                   </ScrollToTopLink>
                 </li>
@@ -95,10 +95,10 @@ function Footer() {
               </ul>
             </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
-              <h5 className="text-dark">Central de Ajuda</h5>
+              <h5 className="">Central de Ajuda</h5>
               <ul>
                 <li>
-                  <ScrollToTopLink className="footerlink btn-sm btn btn-outline-danger rounded-1 " to="/pt/reclamar">
+                  <ScrollToTopLink className="footerlink -sm  -outline-danger rounded-1 " to="/pt/reclamar">
                     Reclamar de uma empresa
                   </ScrollToTopLink>
                 </li>
@@ -116,7 +116,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-wrap text-success midias justify-content-between">
+        <div className="d-flex bg-dark flex-wrap text-success midias justify-content-between">
           <div className="d-flex gap-3 ms-4">
             <a target="__blank" href="https://www.facebook.com/j.a.katombela/" className="navlink">
               <i className="bi bi-facebook text-success"></i>
@@ -132,7 +132,7 @@ function Footer() {
             </a>
           
           </div>
-          <img src={icon} className="logo-blogg" alt="" />
+          <img src={icon} className="logo-blogg rounded-3" alt="" />
           <div className="pol">
           <ScrollToTopLink className="link" to="/pt/politicas">
                     Termos & Políticas
@@ -140,9 +140,9 @@ function Footer() {
 
           </div>
         </div>
+        <center className="bg-dark">
         <br />
-        <center>
-          <span>&copy; 2023 - Reputação 360 &middot; </span> Desenvolvido por{" "}
+          <span>&copy; 2024 - Reputação 360 &middot; </span> Desenvolvido por{" "}
           <a
             href="http://linkedin.com/in/joao-afonso-katumbela"
             className="footerlink"

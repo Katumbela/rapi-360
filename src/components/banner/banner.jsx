@@ -195,133 +195,284 @@ const Banner = () => {
             Compre de modo mais <b className="text-success">seguro</b>,
             pesquisando empresas e buscando uma solução para algum problema.
           </p>
+        </div>
 
+        <br />
+        <center>
+          <ScrollToTopLink
+            to={"/pt/empresa/produtos"}
+            className={"btn conheca btn-success "}
+          >
+            Conheça os nossos produtos{" "}
+            <i className="bi bi-arrow-right-short"></i>
+          </ScrollToTopLink>
+        </center>
+      </div>
+      <div className="bg-light">
+        <div className="container">
           <br />
-          <div className="quadros w-md-75 w-lg-75 mx-auto">
-            <ScrollToTopLink
-              to={"/pt/reclamar"}
-              className="qq text-decoration-none hover btn rounded-2 btn-outline-primary"
-            >
-              <span>Pesquise uma empresa </span>{" "}
-              <i className="bi bi-search"></i>
-            </ScrollToTopLink>
-            <ScrollToTopLink
-              to={"/pt/cadastro/empresa"}
-              className="q text-decoration-none rounded-2"
-            >
-              <span>Cadastre uma empresa</span>{" "}
-              <i className="bi bi-building-add"></i>
-            </ScrollToTopLink>
-            <a
+          <h5 className="fw-bolder"><b>Explore a R360</b></h5>
+          <div className="quadros  w-md-75 w-lg-75 mx-auto">
+            <div className="ppp">
+              <div className=" my-2">
+                <ScrollToTopLink
+                  to={"/pt/reclamar"}
+                  className="qq  text-decoration-none hover btn rounded-2 btn-outline-dark"
+                >
+                  <span>Pesquise uma empresa </span>{" "}
+                  <i className="bi bi-search"></i>
+                </ScrollToTopLink>
+              </div>
+              <div className=" my-2">
+                <ScrollToTopLink
+                  to={"/pt/cadastro/empresa"}
+                  className="q w-100 text-decoration-none rounded-2"
+                >
+                  <span>Cadastre uma empresa</span>{" "}
+                  <i className="bi bi-building-add"></i>
+                </ScrollToTopLink>
+              </div>
+              <div className=" my-2">
+ <a
               href="https://pleno.ao"
               target="__blank"
-              className="text-decoration-none q rounded-2"
+              className="text-decoration-none h-100  q rounded-2"
             >
               <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
             </a>
+              </div>
+              <div className=" my-2">
+                
             <ScrollToTopLink
               to={"/pt/descontos"}
-              className="q text-decoration-none rounded-2"
+              className="q  text-decoration-none rounded-2"
             >
               <span>Cupons de Desconto</span>{" "}
               <i className="bi bi-ticket-perforated"></i>
             </ScrollToTopLink>
+              </div>
+              <div className=" my-2">
+                
             <ScrollToTopLink
               to={"/pt/central-de-ajuda"}
-              className="q text-decoration-none rounded-2"
+              className="q  text-decoration-none rounded-2"
             >
               <span> Central de Ajuda </span>{" "}
               <i className="bi bi-question-circle"></i>
             </ScrollToTopLink>
+              </div>
+              <div className=" my-2">
+                
             <ScrollToTopLink
               to={"/pt/reclamar"}
-              className="q text-decoration-none rounded-2"
+              className="q  text-decoration-none rounded-2"
             >
               <span>Faça uma Reclamação</span>{" "}
               <i className="bi bi-megaphone"></i>
             </ScrollToTopLink>
-          </div>
-        </div>
-
-      <br />
-      <center>
-        <ScrollToTopLink
-          to={"/pt/empresa/produtos"}
-          className={"btn conheca btn-success "}
-        >
-          Conheça os nossos produtos <i className="bi bi-arrow-right-short"></i>
-        </ScrollToTopLink>
-      </center>
-      </div>
-<Pub2 />
-
-      <div className="ranking-emp bg-light py-4 ">
-     <div className="container">
-     <div className="row">
-          <div className="col-12 col-lg-4">
-            <h3>
-              <b>Ranking das empresas</b>
-            </h3>
-
-            <i className="f-12 fw-400">Referente aos últimos 30 dias</i>
-            <br />
-            <span>
-              Com base nas avaliações que os consumidores deixam para as
-              empresas das quais reclamaram, a gente constrói nossos rankings. É
-              assim que nosso site ajuda as pessoas a saberem em quais marcas
-              podem confiar mais!
-            </span>
-            <br />
-            <br />
-            <ScrollToTopLink
-              to={"/pt/ranking"}
-              className="btn rounded-1 btn-outline-success"
-            >
-              Ver Ranking Completo
-            </ScrollToTopLink>
-          </div>
-          <div className="col-12 col-lg-8 my-lg-0 my-5">
-            <div className="tabss w-100   overflow-x-auto">
-              <ul className="w-100 overflow-x-auto">
-                {categorias.map((categoria) => (
-                  <li key={categoria}>
-                    <button
-                      className={`btn btn-sm ${
-                        categoria === categoriaSelecionada
-                          ? "btn-success"
-                          : "btn-outline-success"
-                      } categoria-button`}
-                      onClick={() =>
-                        handleClickCategoria(
-                          categoria === "Todos" ? "" : categoria
-                        )
-                      }
-                    >
-                      {categoria}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              </div>
             </div>
 
-            {/* Cards com os dados das melhores empresas  */}
+           
+          </div>
+          <br />
+          <br />
+        </div>
+      </div>
+      <Pub2 />
 
-            <div className="bests-worst">
-              <div className="row">
-                <div className="melhores col-12 col-md-6">
-                  <div className="card-best bg-white border-lightt p-2 rounded-1">
-                    <div className="bg-success d-flex gap-2 head-texts rounded-1 p-3">
-                      <img src={bom} alt="" />
-                      <span className="my-auto text-white">
-                        <b>Top 5 Melhores empresas mais bem avaliadas</b>
-                      </span>
+      <div className="ranking-emp bg-light py-4 ">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-lg-4">
+              <h3>
+                <b>Ranking das empresas</b>
+              </h3>
+
+              <i className="f-12 fw-400">Referente aos últimos 30 dias</i>
+              <br />
+              <span>
+                Com base nas avaliações que os consumidores deixam para as
+                empresas das quais reclamaram, a gente constrói nossos rankings.
+                É assim que nosso site ajuda as pessoas a saberem em quais
+                marcas podem confiar mais!
+              </span>
+              <br />
+              <br />
+              <ScrollToTopLink
+                to={"/pt/ranking"}
+                className="btn rounded-1 btn-outline-dark"
+              >
+                Ver Ranking Completo
+              </ScrollToTopLink>
+            </div>
+            <div className="col-12 col-lg-8 my-lg-0 my-5">
+              <div className="tabss w-100   overflow-x-auto">
+                <ul className="w-100 overflow-x-auto">
+                  {categorias.map((categoria) => (
+                    <li key={categoria}>
+                      <button
+                        className={`btn btn-sm ${
+                          categoria === categoriaSelecionada
+                            ? "btn-success"
+                            : "btn-outline-dark"
+                        } categoria-button`}
+                        onClick={() =>
+                          handleClickCategoria(
+                            categoria === "Todos" ? "" : categoria
+                          )
+                        }
+                      >
+                        {categoria}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Cards com os dados das melhores empresas  */}
+
+              <div className="bests-worst">
+                <div className="row">
+                  <div className="melhores col-12 col-md-6">
+                    <div className="card-best bg-white border-lightt p-2 rounded-1">
+                      <div className="bg-success d-flex gap-2 head-texts rounded-1 p-3">
+                        <img src={bom} alt="" />
+                        <span className="my-auto text-white">
+                          <b>Top 5 Melhores empresas mais bem avaliadas</b>
+                        </span>
+                      </div>
+                      <br />
+                      {melhoresEmpresasOrdenadas?.length != 0 ? (
+                        <>
+                          {melhoresEmpresasPorCategoria
+                            .slice(0, 5)
+                            .map((empresa, index) => (
+                              <ScrollToTopLink
+                                key={empresa.id}
+                                to={`/pt/empresa/${empresa.id}`}
+                                title={"Clique para ver empresa"}
+                                className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
+                              >
+                                <h5 className="my-auto text-success">
+                                  <b>{`${index + 1}º`}</b>
+                                </h5>
+                                <img
+                                  src={empresa.logo}
+                                  className="logo-empresa"
+                                  alt=""
+                                />
+                                <div className="de my-auto">
+                                  <b>{empresa.nomeEmpresa}</b>
+                                  <p className="d-flex mt-1 my-auto gap-2 f-14">
+                                    {empresa.selo ? (
+                                      <img
+                                        src={r360}
+                                        alt=""
+                                        className="icon-empresa"
+                                      />
+                                    ) : empresa.avaliacao >= 5.0 &&
+                                      empresa.avaliacao <= 6.9 ? (
+                                      <img
+                                        src={regular}
+                                        alt=""
+                                        className="icon-empresa"
+                                      />
+                                    ) : empresa.avaliacao >= 7.0 &&
+                                      empresa.avaliacao <= 10.0 ? (
+                                      <img
+                                        src={otimo}
+                                        alt=""
+                                        className="icon-empresa"
+                                      />
+                                    ) : empresa.avaliacao >= 3.0 &&
+                                      empresa.avaliacao <= 4.9 ? (
+                                      <img
+                                        src={ruim}
+                                        alt=""
+                                        className="icon-empresa"
+                                      />
+                                    ) : empresa.avaliacao <= 2.9 ? (
+                                      <img
+                                        src={naorecomendado}
+                                        alt=""
+                                        className="icon-empresa"
+                                      />
+                                    ) : null}
+
+                                    {empresa.selo ? (
+                                      <b className="my-auto f-12 text-secondary">
+                                        {" "}
+                                        R360
+                                      </b>
+                                    ) : empresa.avaliacao >= 5.0 &&
+                                      empresa.avaliacao <= 6.9 ? (
+                                      <b className="my-auto f-12 text-secondary">
+                                        REGULAR
+                                      </b>
+                                    ) : empresa.avaliacao >= 7.0 &&
+                                      empresa.avaliacao <= 10.0 ? (
+                                      <b className="my-auto f-12 text-secondary">
+                                        ÓTIMO
+                                      </b>
+                                    ) : empresa.avaliacao >= 3.0 &&
+                                      empresa.avaliacao <= 4.9 ? (
+                                      <b className="my-auto f-12 text-secondary">
+                                        RUÍM
+                                      </b>
+                                    ) : empresa.avaliacao <= 2.9 ? (
+                                      <AbreviarTexto
+                                        className="my-auto f-12 text-secondary"
+                                        texto={"NÃO RECOMENDADO"}
+                                        largura={90}
+                                      />
+                                    ) : (
+                                      <b className="my-auto f-12 text-secondary">
+                                        SEM DADOS{" "}
+                                      </b>
+                                    )}
+                                  </p>
+                                </div>
+                              </ScrollToTopLink>
+                            ))}
+                        </>
+                      ) : (
+                        <>
+                          <EmpresaLoader className="w" />
+
+                          <br />
+                          <EmpresaLoader className="w" />
+                          <br />
+                          <EmpresaLoader className="w" />
+                        </>
+                      )}
+                      {categoriaSelecionada != "" &&
+                        melhoresEmpresasPorCategoria?.length <= 0 && (
+                          <>
+                            <center className="w-75 mx-auto my-3">
+                              <span className="text-secondary f-10 ">
+                                Não há ainda nenhuma empresa cadastrada nesta
+                                categoria
+                              </span>
+                            </center>
+                          </>
+                        )}
                     </div>
-                    <br />
-                    {melhoresEmpresasOrdenadas?.length != 0 ? (
-                      <>
-                        {melhoresEmpresasPorCategoria
-                          .slice(0, 5)
-                          .map((empresa, index) => (
+                  </div>
+                  <div className="piores mt-5 mt-md-0 col-12 col-md-6">
+                    <div className="card-best bg-white border-lightt p-2 rounded-1">
+                      <div className="bg-danger d-flex  gap-2 head-texts rounded-1 p-3">
+                        <img src={mau} alt="" />
+                        <span className="text-white my-auto">
+                          <b>
+                            Top 5 <b>Piores</b> empresas mais bem avaliadas
+                          </b>
+                        </span>
+                      </div>
+                      <br />
+                      {pioresEmpresasOrdenadas?.length != 0 ? (
+                        <>
+                          {pioresEmpresasPorCategoria.map((empresa, index) => (
                             <ScrollToTopLink
                               key={empresa.id}
                               to={`/pt/empresa/${empresa.id}`}
@@ -338,7 +489,7 @@ const Banner = () => {
                               />
                               <div className="de my-auto">
                                 <b>{empresa.nomeEmpresa}</b>
-                                <p className="d-flex mt-1 my-auto gap-2 f-14">
+                                <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
                                   {empresa.selo ? (
                                     <img
                                       src={r360}
@@ -409,161 +560,36 @@ const Banner = () => {
                               </div>
                             </ScrollToTopLink>
                           ))}
-                      </>
-                    ) : (
-                      <>
-                        <EmpresaLoader className="w" />
-
-                        <br />
-                        <EmpresaLoader className="w" />
-                        <br />
-                        <EmpresaLoader className="w" />
-                      </>
-                    )}
-                    {categoriaSelecionada != "" &&
-                      melhoresEmpresasPorCategoria?.length <= 0 && (
+                        </>
+                      ) : (
                         <>
-                          <center className="w-75 mx-auto my-3">
-                            <span className="text-secondary f-10 ">
-                              Não há ainda nenhuma empresa cadastrada nesta
-                              categoria
-                            </span>
-                          </center>
+                          <EmpresaLoader className="w" />
+
+                          <br />
+                          <EmpresaLoader className="w" />
+                          <br />
+                          <EmpresaLoader className="w" />
                         </>
                       )}
-                  </div>
-                </div>
-                <div className="piores mt-5 mt-md-0 col-12 col-md-6">
-                  <div className="card-best bg-white border-lightt p-2 rounded-1">
-                    <div className="bg-danger d-flex  gap-2 head-texts rounded-1 p-3">
-                      <img src={mau} alt="" />
-                      <span className="text-white my-auto">
-                        <b>
-                          Top 5 <b>Piores</b> empresas mais bem avaliadas
-                        </b>
-                      </span>
+
+                      {categoriaSelecionada != "" &&
+                        pioresEmpresasPorCategoria?.length <= 0 && (
+                          <>
+                            <center className="w-75 mx-auto my-3">
+                              <span className="text-secondary f-10 ">
+                                Não há ainda nenhuma empresa cadastrada nesta
+                                categoria
+                              </span>
+                            </center>
+                          </>
+                        )}
                     </div>
-                    <br />
-                    {pioresEmpresasOrdenadas?.length != 0 ? (
-                      <>
-                        {pioresEmpresasPorCategoria.map((empresa, index) => (
-                          <ScrollToTopLink
-                            key={empresa.id}
-                            to={`/pt/empresa/${empresa.id}`}
-                            title={"Clique para ver empresa"}
-                            className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
-                          >
-                            <h5 className="my-auto text-success">
-                              <b>{`${index + 1}º`}</b>
-                            </h5>
-                            <img
-                              src={empresa.logo}
-                              className="logo-empresa"
-                              alt=""
-                            />
-                            <div className="de my-auto">
-                              <b>{empresa.nomeEmpresa}</b>
-                              <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
-                                {empresa.selo ? (
-                                  <img
-                                    src={r360}
-                                    alt=""
-                                    className="icon-empresa"
-                                  />
-                                ) : empresa.avaliacao >= 5.0 &&
-                                  empresa.avaliacao <= 6.9 ? (
-                                  <img
-                                    src={regular}
-                                    alt=""
-                                    className="icon-empresa"
-                                  />
-                                ) : empresa.avaliacao >= 7.0 &&
-                                  empresa.avaliacao <= 10.0 ? (
-                                  <img
-                                    src={otimo}
-                                    alt=""
-                                    className="icon-empresa"
-                                  />
-                                ) : empresa.avaliacao >= 3.0 &&
-                                  empresa.avaliacao <= 4.9 ? (
-                                  <img
-                                    src={ruim}
-                                    alt=""
-                                    className="icon-empresa"
-                                  />
-                                ) : empresa.avaliacao <= 2.9 ? (
-                                  <img
-                                    src={naorecomendado}
-                                    alt=""
-                                    className="icon-empresa"
-                                  />
-                                ) : null}
-
-                                {empresa.selo ? (
-                                  <b className="my-auto f-12 text-secondary">
-                                    {" "}
-                                    R360
-                                  </b>
-                                ) : empresa.avaliacao >= 5.0 &&
-                                  empresa.avaliacao <= 6.9 ? (
-                                  <b className="my-auto f-12 text-secondary">
-                                    REGULAR
-                                  </b>
-                                ) : empresa.avaliacao >= 7.0 &&
-                                  empresa.avaliacao <= 10.0 ? (
-                                  <b className="my-auto f-12 text-secondary">
-                                    ÓTIMO
-                                  </b>
-                                ) : empresa.avaliacao >= 3.0 &&
-                                  empresa.avaliacao <= 4.9 ? (
-                                  <b className="my-auto f-12 text-secondary">
-                                    RUÍM
-                                  </b>
-                                ) : empresa.avaliacao <= 2.9 ? (
-                                  <AbreviarTexto
-                                    className="my-auto f-12 text-secondary"
-                                    texto={"NÃO RECOMENDADO"}
-                                    largura={90}
-                                  />
-                                ) : (
-                                  <b className="my-auto f-12 text-secondary">
-                                    SEM DADOS{" "}
-                                  </b>
-                                )}
-                              </p>
-                            </div>
-                          </ScrollToTopLink>
-                        ))}
-                      </>
-                    ) : (
-                      <>
-                        <EmpresaLoader className="w" />
-
-                        <br />
-                        <EmpresaLoader className="w" />
-                        <br />
-                        <EmpresaLoader className="w" />
-                      </>
-                    )}
-
-                    {categoriaSelecionada != "" &&
-                      pioresEmpresasPorCategoria?.length <= 0 && (
-                        <>
-                          <center className="w-75 mx-auto my-3">
-                            <span className="text-secondary f-10 ">
-                              Não há ainda nenhuma empresa cadastrada nesta
-                              categoria
-                            </span>
-                          </center>
-                        </>
-                      )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-     </div>
       </div>
 
       <br />
@@ -578,13 +604,15 @@ const Banner = () => {
             <div className="my-auto">
               <h2 className="fw-bold">Encontre os melhores descontos</h2>
               <h5 className="text-secondary">
-                Compre com desconto e em segurança nas empresas mais confiáveis e validadas pela R360 e clientes que já usaramseus serviços ou produtos
+                Compre com desconto e em segurança nas empresas mais confiáveis
+                e validadas pela R360 e clientes que já usaramseus serviços ou
+                produtos
               </h5>
 
               <br />
               <ScrollToTopLink
                 to={"/pt/descontos"}
-                className="btn rounded-1 btn-outline-success"
+                className="btn rounded-1 btn-outline-dark"
               >
                 Ver Todos os Descontos
               </ScrollToTopLink>
@@ -604,94 +632,92 @@ const Banner = () => {
         </h2>
         <br />
         <div className="lista-lojas">
-         {
-          todasEmpresas?.length != 0 ?
-          (
+          {todasEmpresas?.length != 0 ? (
             <div className="d-flex scroll-md gap-4">
-            {todasEmpresas.map(
-              (empresa) =>
-                empresa.selo === true && (
-                  <div
-                    key={empresa.id}
-                    className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm"
-                  >
-                    <img src={empresa.logo} alt="" className="logo-empresa" />
-                    <div className="bod">
-                      <br />
-                      <AbreviarTexto
-                        texto={empresa.nomeEmpresa}
-                        largura={"190"}
-                      />
+              {todasEmpresas.map(
+                (empresa) =>
+                  empresa.selo === true && (
+                    <div
+                      key={empresa.id}
+                      className="card-loja text-center rounded-1 border-lightt p-3 shadow-sm"
+                    >
+                      <img src={empresa.logo} alt="" className="logo-empresa" />
+                      <div className="bod">
+                        <br />
+                        <AbreviarTexto
+                          texto={empresa.nomeEmpresa}
+                          largura={"190"}
+                        />
 
-                      <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
-                        {empresa.selo ? (
-                          <img src={r360} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
-                          <img src={regular} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 7.0 &&
-                          empresa.avaliacao <= 10.0 ? (
-                          <img src={otimo} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 3.0 &&
-                          empresa.avaliacao <= 4.9 ? (
-                          <img src={ruim} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao <= 2.9 ? (
-                          <img
-                            src={naorecomendado}
-                            alt=""
-                            className="icon-empresa"
-                          />
-                        ) : null}
+                        <p className="d-flex justify-content-center mt-1 my-auto gap-2 f-14">
+                          {empresa.selo ? (
+                            <img src={r360} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao >= 5.0 &&
+                            empresa.avaliacao <= 6.9 ? (
+                            <img
+                              src={regular}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : empresa.avaliacao >= 7.0 &&
+                            empresa.avaliacao <= 10.0 ? (
+                            <img src={otimo} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao >= 3.0 &&
+                            empresa.avaliacao <= 4.9 ? (
+                            <img src={ruim} alt="" className="icon-empresa" />
+                          ) : empresa.avaliacao <= 2.9 ? (
+                            <img
+                              src={naorecomendado}
+                              alt=""
+                              className="icon-empresa"
+                            />
+                          ) : null}
 
-                        {empresa.selo ? (
-                          <b className="my-auto f-12 text-secondary"> R360</b>
-                        ) : empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
-                          <b className="my-auto f-12 text-secondary">REGULAR</b>
-                        ) : empresa.avaliacao >= 7.0 &&
-                          empresa.avaliacao <= 10.0 ? (
-                          <b className="my-auto f-12 text-secondary">ÓTIMO</b>
-                        ) : empresa.avaliacao >= 3.0 &&
-                          empresa.avaliacao <= 4.9 ? (
-                          <b className="my-auto f-12 text-secondary">RUÍM</b>
-                        ) : empresa.avaliacao <= 2.9 ? (
-                          <AbreviarTexto
-                            className="my-auto f-12 text-secondary"
-                            texto={"NÃO RECOMENDADO"}
-                            largura={90}
-                          />
-                        ) : (
-                          <b className="my-auto f-12 text-secondary">
-                            SEM DADOS{" "}
-                          </b>
-                        )}
-                      </p>
-                      <a
-                        href={`https://${empresa.siteEmpresa}`}
-                        className="btn mt-2 btn-sm btn-outline-success"
-                      >
-                        Acessar <i className="bi bi-arrow-right-short"></i>
-                      </a>
+                          {empresa.selo ? (
+                            <b className="my-auto f-12 text-secondary"> R360</b>
+                          ) : empresa.avaliacao >= 5.0 &&
+                            empresa.avaliacao <= 6.9 ? (
+                            <b className="my-auto f-12 text-secondary">
+                              REGULAR
+                            </b>
+                          ) : empresa.avaliacao >= 7.0 &&
+                            empresa.avaliacao <= 10.0 ? (
+                            <b className="my-auto f-12 text-secondary">ÓTIMO</b>
+                          ) : empresa.avaliacao >= 3.0 &&
+                            empresa.avaliacao <= 4.9 ? (
+                            <b className="my-auto f-12 text-secondary">RUÍM</b>
+                          ) : empresa.avaliacao <= 2.9 ? (
+                            <AbreviarTexto
+                              className="my-auto f-12 text-secondary"
+                              texto={"NÃO RECOMENDADO"}
+                              largura={90}
+                            />
+                          ) : (
+                            <b className="my-auto f-12 text-secondary">
+                              SEM DADOS{" "}
+                            </b>
+                          )}
+                        </p>
+                        <a
+                          href={`https://${empresa.siteEmpresa}`}
+                          className="btn mt-2 btn-sm btn-outline-dark"
+                        >
+                          Acessar <i className="bi bi-arrow-right-short"></i>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                )
-            )}
-          </div>
-          )
-          :
-          (
-            <>
-
-            <div className="d-flex gap-4">
-
-            <ProfileCard />
-            <ProfileCard />
-            <ProfileCard />
+                  )
+              )}
             </div>
-
+          ) : (
+            <>
+              <div className="d-flex gap-4">
+                <ProfileCard />
+                <ProfileCard />
+                <ProfileCard />
+              </div>
             </>
-          )
-         }
+          )}
         </div>
       </div>
 
@@ -743,7 +769,7 @@ const Banner = () => {
       <br />
       <br />
       <br />
-      <div className="benefits pt-4 pb-5 bg-success">
+      <div className="benefits pt-4 pb-5 bg-dark">
         <div className="bbann justify-content-between d-flex">
           <img src={africa} alt="" className="africa-ban" />
           <img src={africa} alt="" className="africa-ban" />
@@ -814,8 +840,7 @@ const Banner = () => {
                       <br />
                       <br />
                       <a href="/pt/#blog" className="f-14">
-                        Ver matérias{" "}
-                        <i className="bi bi-arrow-right-short"></i>
+                        Ver matérias <i className="bi bi-arrow-right-short"></i>
                       </a>
                     </div>
                   </div>
@@ -909,7 +934,7 @@ const Banner = () => {
               <ScrollToTopLink
                 disabled
                 to={"/pt/descontos"}
-                className="btn rounded-1 disabled btn-outline-success"
+                className="btn rounded-1 disabled btn-outline-dark"
               >
                 Brevemente Disponível
               </ScrollToTopLink>
@@ -921,7 +946,7 @@ const Banner = () => {
 
       <br />
       <br />
-<Pub />
+      <Pub />
       <br />
       <br />
     </>
