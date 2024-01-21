@@ -164,12 +164,9 @@ const Home = ({ cart, nomee, emaill }) => {
       < Header style={{ marginBottom: '5rem' }} nomee={nomee} emaill={emaill} cart={cart} />
      <Banner></Banner>
      
-      <div className="s">
-       
 
        
         < Footer />
-      </div>
       {/* <CookieConsent
         location="bottom"
         buttonText="Aceitar"

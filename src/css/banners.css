@@ -420,9 +420,15 @@
     position: relative;
     z-index: 1;
   }
-.bg-success {
-    background: #00ff99!important;
-}
+  .bg-success {
+      background: #00ff99!important;
+  }
+  .bg-success2 {
+      background: #00b36b!important;
+  }
+  .bg-success3 {
+      background: #002919!important;
+  }
 
   .card-ranking {
     white-space: nowrap;

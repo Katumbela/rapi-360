@@ -25,6 +25,9 @@ import gk from "../../imgs/gokside.png";
 import pleno from "../../imgs/pleno.png";
 import ruim from "../../imgs/ruim.webp";
 import logo from "../../imgs/icon.png";
+import bb1 from "../../imgs/bb1.jpeg";
+import bb2 from "../../imgs/bb2.jpeg";
+import bb3 from "../../imgs/bb3.png";
 import desconto from "../../imgs/descontos.webp";
 import desc from "../../imgs/desc.png";
 import blog from "../../imgs/blog.png";
@@ -186,32 +189,31 @@ const Banner = () => {
   return (
     <>
       <div className="banner bg-success shadow-md">
-        <div className="body-banner text-center container">
-          <h4 className="f-reg  titulo">
+        <div className="body-banner text-start w-lg-50 container">
+          <h2 className="f-reg  titulo">
             O <b className="text-">Reputa</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
-          </h4>
-          <p className="f-14  text-`">
+          </h2>
+          <p className="f-12  text-`">
             Compre de modo mais <b className="text-success">seguro</b>,
             pesquisando empresas e buscando uma solução para algum problema.
           </p>
         </div>
-
-        <br />
-        <center>
-          <ScrollToTopLink
-            to={"/pt/empresa/produtos"}
-            className={"btn conheca btn-success "}
-          >
-            Conheça os nossos produtos{" "}
-            <i className="bi bi-arrow-right-short"></i>
-          </ScrollToTopLink>
-        </center>
+        <div className="bbb">
+          <div className="b1"></div>
+          <div className="d1"></div>
+          <img src={bb2} alt="" className="b2" />
+          <img src={bb3} alt="" className="b3" />
+        </div>
       </div>
       <div className="bg-light">
         <div className="container">
           <br />
-          <h5 className="fw-bolder"><b>Explore a R360</b></h5>
+          <div className="  w-md-75 w-lg-75">
+            <h5 className="fw-bolder">
+              <b>Explore a R360</b>
+            </h5>
+          </div>
           <div className="quadros  w-md-75 w-lg-75 mx-auto">
             <div className="ppp">
               <div className=" my-2">
@@ -233,52 +235,60 @@ const Banner = () => {
                 </ScrollToTopLink>
               </div>
               <div className=" my-2">
- <a
-              href="https://pleno.ao"
-              target="__blank"
-              className="text-decoration-none h-100  q rounded-2"
-            >
-              <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
-            </a>
+                <a
+                  href="https://pleno.ao"
+                  target="__blank"
+                  className="text-decoration-none h-100  q rounded-2"
+                >
+                  <span>Domínios AO</span> <i className="bi bi-hdd-rack"></i>
+                </a>
               </div>
               <div className=" my-2">
-                
-            <ScrollToTopLink
-              to={"/pt/descontos"}
-              className="q  text-decoration-none rounded-2"
-            >
-              <span>Cupons de Desconto</span>{" "}
-              <i className="bi bi-ticket-perforated"></i>
-            </ScrollToTopLink>
+                <ScrollToTopLink
+                  to={"/pt/descontos"}
+                  className="q  text-decoration-none rounded-2"
+                >
+                  <span>Cupons de Desconto</span>{" "}
+                  <i className="bi bi-ticket-perforated"></i>
+                </ScrollToTopLink>
               </div>
               <div className=" my-2">
-                
-            <ScrollToTopLink
-              to={"/pt/central-de-ajuda"}
-              className="q  text-decoration-none rounded-2"
-            >
-              <span> Central de Ajuda </span>{" "}
-              <i className="bi bi-question-circle"></i>
-            </ScrollToTopLink>
+                <ScrollToTopLink
+                  to={"/pt/central-de-ajuda"}
+                  className="q  text-decoration-none rounded-2"
+                >
+                  <span> Central de Ajuda </span>{" "}
+                  <i className="bi bi-question-circle"></i>
+                </ScrollToTopLink>
               </div>
               <div className=" my-2">
-                
-            <ScrollToTopLink
-              to={"/pt/reclamar"}
-              className="q  text-decoration-none rounded-2"
-            >
-              <span>Faça uma Reclamação</span>{" "}
-              <i className="bi bi-megaphone"></i>
-            </ScrollToTopLink>
+                <ScrollToTopLink
+                  to={"/pt/reclamar"}
+                  className="q  text-decoration-none rounded-2"
+                >
+                  <span>Faça uma Reclamação</span>{" "}
+                  <i className="bi bi-megaphone"></i>
+                </ScrollToTopLink>
               </div>
             </div>
-
-           
           </div>
           <br />
           <br />
         </div>
       </div>
+
+      <center className="mb-2 py-4 bg-secondary2">
+        <b>É uma empresa ?</b>
+        <br />
+
+        <ScrollToTopLink
+          to={"/pt/empresa/produtos"}
+          className={"btn btn-sm rounded-pill btn-success "}
+        >
+          Soluções
+          <i className="bi bi-arrow-right-short"></i>
+        </ScrollToTopLink>
+      </center>
       <Pub2 />
 
       <div className="ranking-emp bg-light py-4 ">
@@ -336,7 +346,7 @@ const Banner = () => {
                 <div className="row">
                   <div className="melhores col-12 col-md-6">
                     <div className="card-best bg-white border-lightt p-2 rounded-1">
-                      <div className="bg-success d-flex gap-2 head-texts rounded-1 p-3">
+                      <div className="bg-success2 d-flex gap-2 head-texts rounded-1 p-3">
                         <img src={bom} alt="" />
                         <span className="my-auto text-white">
                           <b>Top 5 Melhores empresas mais bem avaliadas</b>
@@ -769,7 +779,7 @@ const Banner = () => {
       <br />
       <br />
       <br />
-      <div className="benefits pt-4 pb-5 bg-dark">
+      <div className="benefits pt-4 pb-5 bg-success3">
         <div className="bbann justify-content-between d-flex">
           <img src={africa} alt="" className="africa-ban" />
           <img src={africa} alt="" className="africa-ban" />
@@ -949,6 +959,25 @@ const Banner = () => {
       <Pub />
       <br />
       <br />
+      <div className="bg-success3 text-center">
+        <br />
+        <br />
+        <div className="container py-2 text-white">
+          <h1>Seja Ouvido</h1>
+          <h3>
+            R360 é umaplataforma de avaliação aberta para todos. compartilhe
+            suas experiências para ajudar outras pessoas a fazerem escolhas
+            melhores e incentivar as empresas a melhorarem seu jogo, atendimento
+            ou serviço
+          </h3>
+          <br />
+          <button className="btn bg-white rounded-pill">
+            Avaliar empresas
+          </button>
+        </div>
+        <br />
+        <br />
+      </div>
     </>
   );
 };
