@@ -366,7 +366,7 @@ const Banner = () => {
                                 className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                               >
                                 <h5 className="my-auto text-success">
-                                  <b>{`${index + 1}º`}</b>
+                                  {/* <b>{`${index + 1}º`}</b> */}
                                 </h5>
                                 <img
                                   src={empresa.logo}
@@ -444,6 +444,7 @@ const Banner = () => {
                                     )}
                                   </p> */}
                                   <StarRating rating={Math.ceil(empresa.avaliacao)} />
+                                  <span className="text-secondary f-12"><AbreviarTexto texto={empresa.enderecoEmpresa} largura={190} /></span>
                                 </div>
                               </ScrollToTopLink>
                             ))}
@@ -492,7 +493,7 @@ const Banner = () => {
                               className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                             >
                               <h5 className="my-auto text-success">
-                                <b>{`${index + 1}º`}</b>
+                                {/* <b>{`${index + 1}º`}</b> */}
                               </h5>
                               <img
                                 src={empresa.logo}
@@ -501,7 +502,7 @@ const Banner = () => {
                               />
                               <div className="de my-auto">
                                 <b>{empresa.nomeEmpresa}</b>
-                                <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
+                                {/* <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
                                   {empresa.selo ? (
                                     <img
                                       src={r360}
@@ -568,7 +569,10 @@ const Banner = () => {
                                       SEM DADOS{" "}
                                     </b>
                                   )}
-                                </p>
+                                </p> */}
+                                 <StarRating rating={Math.ceil(empresa.avaliacao)} />
+                                  <span className="text-secondary f-12"><AbreviarTexto texto={empresa.enderecoEmpresa} largura={190} /></span>
+                               
                               </div>
                             </ScrollToTopLink>
                           ))}

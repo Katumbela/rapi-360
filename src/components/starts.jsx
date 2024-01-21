@@ -5,7 +5,7 @@ import React from 'react';
 export default function StarRating  ({ rating })  {
   const getStarIcons = () => {
     const stars = Array.from({ length: 5 }, (_, index) => (
-      <i className={`bi bi-star-fill bg-light2 px-1 mx-0 ${index < rating ? 'text-warning' : 'text-white'}`} key={index} ></i>
+      <i className={`bi bi-star-fill text-white bg-light2 px-1 mx-0 ${index < rating ? 'bg-warning' : 'text-white'}`} key={index} ></i>
     ));
     return stars;
   };
