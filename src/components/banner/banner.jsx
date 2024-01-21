@@ -922,7 +922,6 @@ const Banner = () => {
           <img src={sdq} alt="" />
         </center>
       </div>
-      <br />
       <div className="desconto container">
         <div className="row flex-row-reverse">
           <div className="col-12 imm col-md-5">
@@ -956,9 +955,6 @@ const Banner = () => {
 
       <br />
       <br />
-      <Pub />
-      <br />
-      <br />
       <div className="bg-success3 text-center">
         <br />
         <br />
@@ -978,6 +974,9 @@ const Banner = () => {
         <br />
         <br />
       </div>
+      <br />
+      <br />
+      <Pub />
     </>
   );
 };
