@@ -288,7 +288,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
   }, []);
 
   // Mapeia a nota da empresa para a largura da barra de progresso
-  const larguraProgressBar = (empresaEscolhida?.avaliacao / 10) * 100;
+  const larguraProgressBar = (empresaEscolhida?.avaliacao / 5) * 100;
 
   // Função para calcular os percentuais de pessoas que solicitariam novamente e não solicitariam
   const calcularPercentuaisSolicitariamNovamente = () => {
@@ -482,7 +482,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       </h5>
                       <div className="d-flex gap-2">
                         <h2 className="f-reg">{empresaEscolhida?.avaliacao}</h2>
-                        <span className="my-auto text-secondary"> / 10</span>
+                        <span className="my-auto text-secondary"> / 5</span>
                       </div>
                     </div>
                   </div>
@@ -533,7 +533,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                               1
                             ) <= 69.0
                           ? "bg-warning"
-                          : "bg-success"
+                          : "bg-success2"
                       } `}
                       style={{
                         width:
@@ -545,7 +545,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   </div>
                   {empresaEscolhida?.avaliacao != null ? (
                     <span className="f-reg my-auto">
-                      {percentuaisSolicitariam.percentualSolicitariam}%
+                      {percentuaisSolicitariam.percentualSolicitariam.toFixed(1)}%
                     </span>
                   ) : (
                     <span className="f-reg my-auto">0 </span>
@@ -565,7 +565,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     aria-valuemax="100"
                   >
                     <div
-                      className={`progress-bar bg-success `}
+                      className={`progress-bar bg-success2 `}
                       style={{
                         width: `${TotalReclamacoesRespondidas()}%`,
                       }}
@@ -601,7 +601,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                           : empresaEscolhida?.avaliacao >= 5.0 &&
                             empresaEscolhida?.avaliacao <= 6.9
                           ? "bg-warning"
-                          : "bg-success"
+                          : "bg-success2"
                       } `}
                       style={{ width: `${larguraProgressBar}%` }}
                     ></div>
@@ -695,7 +695,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                                   <b>{empresa?.avaliacao} </b>
                                 </h4>
                                 <span className="text-secondary f-12 mt-auto">
-                                  / 10
+                                  / 5
                                 </span>
                               </div>
                             </div>
@@ -934,7 +934,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                                   <b>{empresa?.avaliacao} </b>
                                 </h4>
                                 <span className="text-secondary f-12 mt-auto">
-                                  / 10
+                                  / 5
                                 </span>
                               </div>
                             </div>

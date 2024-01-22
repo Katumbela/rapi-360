@@ -34,7 +34,7 @@ const AbreviarTexto = ({ texto, largura }) => {
   };
 
   return (
-    <div ref={textoRef} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+    <div className='w-100' ref={textoRef} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
       {texto}
     </div>
   );

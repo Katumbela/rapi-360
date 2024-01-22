@@ -507,7 +507,7 @@ const Header = (props) => {
                       <h4 className="f-reg my-auto">
                         <b>{empresa.avaliacao} </b>
                       </h4>
-                      <span className="text-secondary f-12 mt-auto">/ 10</span>
+                      <span className="text-secondary f-12 mt-auto">/ 5</span>
                     </div>
                   </div>
                 </a>
@@ -576,7 +576,7 @@ const Header = (props) => {
                             <b>{empresa.avaliacao} </b>
                           </h4>
                           <span className="text-secondary f-12 mt-auto">
-                            / 10
+                            / 5
                           </span>
                         </div>
                       </div>

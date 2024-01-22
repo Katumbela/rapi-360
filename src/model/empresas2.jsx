@@ -31,7 +31,7 @@ const obterDadosDoFirebase = async () => {
 
       return {
         id: doc.id,
-        avaliacao: mediaClassificacoes.toFixed(2),
+        avaliacao: mediaClassificacoes.toFixed(1),
         ...empresaData,
       };
     }));

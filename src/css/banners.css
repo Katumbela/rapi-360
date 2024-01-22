@@ -305,13 +305,11 @@
 
 .logo-empresa {
     height: 3em;
-    border-radius: 90px!important;
-    border: 2px solid #00b23b;
+    /* border-radius: 90px!important; */
+    /* border: 2px solid #00b23b; */
     width: 3em;
-    aspect-ratio: 6/3;
+    /* aspect-ratio: 6/3; */
     object-fit: contain;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 .icon-empresa {
     height: 1.6em;
@@ -434,4 +432,29 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
+  }
+
+
+  /* Add this style to your CSS file */
+  .bg-warning-half {
+    background: linear-gradient(90deg, rgba(255, 193, 7, 1) 50%, #e8e3dad6 50%)!important;
+  }
+
+  /* Add this style to your CSS file */
+  .bg-success-half {
+    background: linear-gradient(90deg, #00ff99 50%, #e8e3dad6 50%)!important;
+  }
+
+  /* Add this style to your CSS file */
+  .bg-success2-half {
+    background: linear-gradient(90deg, #00b36b 50%, #e8e3dad6 50%)!important;
+  }
+
+  /* Add this style to your CSS file */
+  .bg-danger-half {
+    background: linear-gradient(90deg, red 50%, #e8e3dad6 50%)!important;
+  }
+
+  .bg-danger {
+    background: red!important;
   }

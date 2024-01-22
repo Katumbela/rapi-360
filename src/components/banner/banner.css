@@ -209,7 +209,7 @@ select:focus,
     width: 60%;
   }
 .bbb img {
-  height: 8em!important;
+  height: 14em!important;
 }
 
 .bbb .b1 {
@@ -317,7 +317,7 @@ select:focus,
 
 
 .bbb img {
-  height: 5em;
+  height: 10em;
 }
 
 
@@ -355,7 +355,7 @@ right: 0;
 }
 
 .bg-secondary2 {
-  background: rgba(232, 227, 218, 0.839);
+  background: #e8e3dad6;
 }
 .bg-light2 {
   background: rgba(232, 227, 218, 0.912);

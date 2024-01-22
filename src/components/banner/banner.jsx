@@ -27,7 +27,7 @@ import ruim from "../../imgs/ruim.webp";
 import logo from "../../imgs/icon.png";
 import bb1 from "../../imgs/bb1.jpeg";
 import bb2 from "../../imgs/bb2.jpeg";
-import bb3 from "../../imgs/bb3.png";
+import bb3 from "../../imgs/mmm.png";
 import desconto from "../../imgs/descontos.webp";
 import desc from "../../imgs/desc.png";
 import blog from "../../imgs/blog.png";
@@ -194,16 +194,14 @@ const Banner = () => {
           <h2 className="f-reg  titulo">
             O <b className="text-">Reputa</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
-          </h2>
-          <p className="f-12  text-`">
-            Compre de modo mais <b className="text-success">seguro</b>,
-            pesquisando empresas e buscando uma solução para algum problema.
-          </p>
+        <br />
+           Encontre empresas pra confiar
+            </h2>
+         
         </div>
         <div className="bbb">
           <div className="b1"></div>
           <div className="d1"></div>
-          <img src={bb2} alt="" className="b2" />
           <img src={bb3} alt="" className="b3" />
         </div>
       </div>
@@ -373,78 +371,53 @@ const Banner = () => {
                                   className="logo-empresa"
                                   alt=""
                                 />
-                                <div className="de my-">
+                                <div className="de w-100 my-">
                                   <b>{empresa.nomeEmpresa}</b>
-                                  {/* <p className="d-flex mt-1 my-auto gap-2 f-14">
-                                    {empresa.selo ? (
-                                      <img
-                                        src={r360}
-                                        alt=""
-                                        className="icon-empresa"
-                                      />
-                                    ) : empresa.avaliacao >= 5.0 &&
-                                      empresa.avaliacao <= 6.9 ? (
-                                      <img
-                                        src={regular}
-                                        alt=""
-                                        className="icon-empresa"
-                                      />
-                                    ) : empresa.avaliacao >= 7.0 &&
-                                      empresa.avaliacao <= 10.0 ? (
-                                      <img
-                                        src={otimo}
-                                        alt=""
-                                        className="icon-empresa"
-                                      />
-                                    ) : empresa.avaliacao >= 3.0 &&
-                                      empresa.avaliacao <= 4.9 ? (
-                                      <img
-                                        src={ruim}
-                                        alt=""
-                                        className="icon-empresa"
-                                      />
-                                    ) : empresa.avaliacao <= 2.9 ? (
-                                      <img
-                                        src={naorecomendado}
-                                        alt=""
-                                        className="icon-empresa"
-                                      />
-                                    ) : null}
+                               
+                                  <div className="gap-2 d-flex">
+                                    <StarRating
+                                      rating={empresa.avaliacao}
+                                    />
+                                    <span className="text-secondary">
+                                      {empresa.avaliacao}
+                                    </span>
+                                  </div>
+                                  <span className="text-secondary f-12">
+                                    {empresa?.enderecoEmpresa
+                                      .split(" ")
+                                      .slice(0, 3)
+                                      .join(" ")}
+                                    {empresa?.enderecoEmpresa.split(" ")
+                                      .length > 3
+                                      ? " ..."
+                                      : ""}{" "}
+                                    - Angola
+                                  </span>
 
-                                    {empresa.selo ? (
-                                      <b className="my-auto f-12 text-secondary">
+                                  <div className="b-emp w-100">
+                                    <span className=" text-dark f-12">
+                                      Categoria:{" "}
+                                      <b className="fw-bolder">
                                         {" "}
-                                        R360
+                                        {empresa.categoria}
                                       </b>
-                                    ) : empresa.avaliacao >= 5.0 &&
-                                      empresa.avaliacao <= 6.9 ? (
-                                      <b className="my-auto f-12 text-secondary">
-                                        REGULAR
-                                      </b>
-                                    ) : empresa.avaliacao >= 7.0 &&
-                                      empresa.avaliacao <= 10.0 ? (
-                                      <b className="my-auto f-12 text-secondary">
-                                        ÓTIMO
-                                      </b>
-                                    ) : empresa.avaliacao >= 3.0 &&
-                                      empresa.avaliacao <= 4.9 ? (
-                                      <b className="my-auto f-12 text-secondary">
-                                        RUÍM
-                                      </b>
-                                    ) : empresa.avaliacao <= 2.9 ? (
-                                      <AbreviarTexto
-                                        className="my-auto f-12 text-secondary"
-                                        texto={"NÃO RECOMENDADO"}
-                                        largura={90}
-                                      />
-                                    ) : (
-                                      <b className="my-auto f-12 text-secondary">
-                                        SEM DADOS{" "}
-                                      </b>
-                                    )}
-                                  </p> */}
-                                  <StarRating rating={Math.ceil(empresa.avaliacao)} />
-                                  <span className="text-secondary f-12"><AbreviarTexto texto={empresa.enderecoEmpresa} largura={190} /></span>
+                                    </span>
+                                    <div className="d-flex py-2 gap-3">
+                                      <a
+                                        href={`https://${empresa.siteEmpresa}`}
+                                      >
+                                        <i className="bi bi-globe"></i>
+                                      </a>
+                                      <a
+                                        href={`mailto:${empresa.emailEmpresa}`}
+                                      >
+                                        <i className="bi bi-envelope"></i>
+                                      </a>
+                                      <a href={`https://${empresa.whatsapp}`}>
+                                        <i className="bi bi-telephone"></i>
+                                      </a>
+                                    </div>
+                                  </div>
                                 </div>
                               </ScrollToTopLink>
                             ))}
@@ -477,11 +450,11 @@ const Banner = () => {
                   </div>
                   <div className="piores mt-5 mt-md-0 col-12 col-md-6">
                     <div className="card-best bg-white border-lightt p-2 rounded-1">
-                      <div className="bg-danger d-flex  gap-2 head-texts rounded-1 p-3">
-                        <img src={mau} alt="" />
+                      <div className="bg-warning d-flex  gap-2 head-texts rounded-1 p-3">
+                        <img src={r360} style={{height:'3em'}} alt="" />
                         <span className="text-white my-auto">
                           <b>
-                            Top 5 <b>Piores</b> empresas mais bem avaliadas
+                            Top 5 empresasverificadas pela R360
                           </b>
                         </span>
                       </div>
@@ -495,87 +468,60 @@ const Banner = () => {
                               title={"Clique para ver empresa"}
                               className="empresa text-decoration-none my-3 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                             >
-                              <h5 className="my-auto text-success">
-                                {/* <b>{`${index + 1}º`}</b> */}
-                              </h5>
                               <img
                                 src={empresa.logo}
                                 className="logo-empresa"
                                 alt=""
                               />
-                              <div className="de my-">
-                                <b>{empresa.nomeEmpresa}</b>
-                                {/* <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
-                                  {empresa.selo ? (
-                                    <img
-                                      src={r360}
-                                      alt=""
-                                      className="icon-empresa"
-                                    />
-                                  ) : empresa.avaliacao >= 5.0 &&
-                                    empresa.avaliacao <= 6.9 ? (
-                                    <img
-                                      src={regular}
-                                      alt=""
-                                      className="icon-empresa"
-                                    />
-                                  ) : empresa.avaliacao >= 7.0 &&
-                                    empresa.avaliacao <= 10.0 ? (
-                                    <img
-                                      src={otimo}
-                                      alt=""
-                                      className="icon-empresa"
-                                    />
-                                  ) : empresa.avaliacao >= 3.0 &&
-                                    empresa.avaliacao <= 4.9 ? (
-                                    <img
-                                      src={ruim}
-                                      alt=""
-                                      className="icon-empresa"
-                                    />
-                                  ) : empresa.avaliacao <= 2.9 ? (
-                                    <img
-                                      src={naorecomendado}
-                                      alt=""
-                                      className="icon-empresa"
-                                    />
-                                  ) : null}
+                              <div className="d w-100 my-">
+                                <b>
+                                  {empresa?.nomeEmpresa
+                                    .split(" ")
+                                    .slice(0, 4)
+                                    .join(" ")}
+                                  {empresa?.nomeEmpresa.split(" ").length > 3
+                                    ? " ..."
+                                    : ""}
+                                </b>
 
-                                  {empresa.selo ? (
-                                    <b className="my-auto f-12 text-secondary">
+                                <div className="gap-2 d-flex">
+                                  <StarRating rating={empresa.avaliacao} />
+                                  <span className="text-secondary">
+                                    {empresa.avaliacao}
+                                  </span>
+                                </div>
+                                <span className="text-secondary f-12">
+                                  {empresa?.enderecoEmpresa
+                                    .split(" ")
+                                    .slice(0, 3)
+                                    .join(" ")}
+                                  {empresa?.enderecoEmpresa.split(" ").length >
+                                  3
+                                    ? " ..."
+                                    : ""}{" "}
+                                  - Angola
+                                </span>
+
+                                <div className="b-emp w-100">
+                                  <span className=" text-dark f-12">
+                                    Categoria:{" "}
+                                    <b className="fw-bolder">
                                       {" "}
-                                      R360
+                                      {empresa.categoria}
                                     </b>
-                                  ) : empresa.avaliacao >= 5.0 &&
-                                    empresa.avaliacao <= 6.9 ? (
-                                    <b className="my-auto f-12 text-secondary">
-                                      REGULAR
-                                    </b>
-                                  ) : empresa.avaliacao >= 7.0 &&
-                                    empresa.avaliacao <= 10.0 ? (
-                                    <b className="my-auto f-12 text-secondary">
-                                      ÓTIMO
-                                    </b>
-                                  ) : empresa.avaliacao >= 3.0 &&
-                                    empresa.avaliacao <= 4.9 ? (
-                                    <b className="my-auto f-12 text-secondary">
-                                      RUÍM
-                                    </b>
-                                  ) : empresa.avaliacao <= 2.9 ? (
-                                    <AbreviarTexto
-                                      className="my-auto f-12 text-secondary"
-                                      texto={"NÃO RECOMENDADO"}
-                                      largura={90}
-                                    />
-                                  ) : (
-                                    <b className="my-auto f-12 text-secondary">
-                                      SEM DADOS{" "}
-                                    </b>
-                                  )}
-                                </p> */}
-                                 <StarRating rating={Math.ceil(empresa.avaliacao)} />
-                                  <span className="text-secondary f-12"><AbreviarTexto texto={empresa.enderecoEmpresa} largura={190} /></span>
-                               
+                                  </span>
+                                  <div className="d-flex py-2 gap-3">
+                                    <a href={`https://${empresa.siteEmpresa}`}>
+                                      <i className="bi bi-globe"></i>
+                                    </a>
+                                    <a href={`mailto:${empresa.emailEmpresa}`}>
+                                      <i className="bi bi-envelope"></i>
+                                    </a>
+                                    <a href={`https://${empresa.whatsapp}`}>
+                                      <i className="bi bi-telephone"></i>
+                                    </a>
+                                  </div>
+                                </div>
                               </div>
                             </ScrollToTopLink>
                           ))}

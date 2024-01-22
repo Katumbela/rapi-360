@@ -27,6 +27,7 @@
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "react-star-rating-component": "^1.4.1",
     "react-toastify": "^9.1.2",
     "react-world-flags": "^1.5.1",
     "react-youtube": "^10.1.0",

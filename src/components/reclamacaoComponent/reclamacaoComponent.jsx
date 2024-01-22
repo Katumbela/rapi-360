@@ -33,7 +33,7 @@ export default function ReclamacaoItem({ reclamacao }) {
       <div className="d-flex gap-3 justify-content-start">
         <div
           className={`d-flex my-auto gap-2 ${
-            reclamacao.status === 'respondido' ? ' bg-success' : ' bg-danger'
+            reclamacao.status === 'respondido' ? ' bg-success2' : ' bg-danger'
           } w-auto rounded-pill f-10 px-3 py-1 text-white`}
         >
           {reclamacao.status === 'respondido' ? (
