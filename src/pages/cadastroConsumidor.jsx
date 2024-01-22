@@ -38,6 +38,7 @@ const CadastroConsumidor = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       // Send user data to Firestore if the registration is successful
       await db.collection("cliente").add({
         uid: userCredential.user.uid,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         ...userData,
       });
 

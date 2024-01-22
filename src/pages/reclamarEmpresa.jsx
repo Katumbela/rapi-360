@@ -345,6 +345,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         status: "nao-respondido",
         quando: formattedDate,
         photo: user?.pictureUrl,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         // Adicione outros campos necessários, como data, usuário, etc.
       };
 

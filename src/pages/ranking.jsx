@@ -93,7 +93,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
   useEffect(() => {
     const calcularMediaAvaliacoes = () => {
       const empresasComMediaMaiorQue6 = dadosEmpresas.filter(
-        (empresa) => parseFloat(empresa.avaliacao) > 6
+        (empresa) => parseFloat(empresa.avaliacao) > 3
       );
 
       setmelhoresMediaEmpresas(empresasComMediaMaiorQue6);

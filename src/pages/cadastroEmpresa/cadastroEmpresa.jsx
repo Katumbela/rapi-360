@@ -123,6 +123,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         logo: logoFileURL,
         capa: capaFileURL,
         quando: formattedDate,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
       // Obtém o docId da empresa recém-adicionada
@@ -161,6 +162,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         quando: formattedDate,
         titulo: "Avaliação da sua empresa",
         solicitarNovamente: "sim",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         // Adicione outros campos necessários, como data, usuário, etc.
       };
 
@@ -420,23 +422,24 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                             <option value="">Selecione uma categoria</option>
                             <option value="Educacao">Educação & EdTech</option>
                             <option value="Startup">Startup</option>
-                            <option value="supermercados">Supermercados</option>
-                            <option value="bancos">Bancos</option>
-                            <option value="telefoniaETV">
+                            <option value="Supermercados">Supermercados</option>
+                            <option value="Bancos">Bancos</option>
+                            <option value="Telefonia, TV & Internet">
                               Telefonia, TV & Internet
                             </option>
-                            <option value="belezaEEstetica">
+                            <option value="Beleza & Estetica">
                               Beleza & Estética
                             </option>
-                            <option value="seguradoras">Seguradoras</option>
-                            <option value="sitesEPortais">
+                            <option value="Seguradoras">Seguradoras</option>
+                            <option value="Sites & Portais">
                               Sites & Portais
                             </option>
-                            <option value="LojaOnline">Loja Online</option>
+                            <option value="Loja Online">Loja Online</option>
                             <option value="Pagina">Pagina </option>
-                            <option value="softwares">Softwares</option>
+                            <option value="Softwares">Softwares</option>
+                            <option value="IT e Tecnologia">Softwares</option>
                             <option value="Saas">Saas</option>
-                            <option value="ecommerce">E-commerce</option>
+                            <option value="E-commerce">E-commerce</option>
                             <option value="Outro">Outro</option>
                           </select>
                         </div>
