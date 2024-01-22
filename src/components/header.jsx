@@ -497,14 +497,15 @@ const Header = (props) => {
                     </p>
                     <hr />
                     <div className="d-flex  gap-2 justify-content-center">
-
-                    <h5>{empresa.avaliacao}</h5>
-                    <span className="text-secondary">/ 5</span>
+                      <h5>{empresa.avaliacao}</h5>
+                      <span className="text-secondary">/ 5</span>
                     </div>
                     <div className="f-16 d-flex gap-2 justify-content-center">
-                    <StarRating title={empresa.avaliacao} className="f-16 mx-auto"
-                                      rating={empresa.avaliacao}
-                                    />
+                      <StarRating
+                        title={empresa.avaliacao}
+                        className="f-16 mx-auto"
+                        rating={empresa.avaliacao}
+                      />
                     </div>
 
                     {/* <div className="d-flex gap-2 justify-content-center">
