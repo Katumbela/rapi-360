@@ -934,7 +934,7 @@ const Banner = () => {
       <div className="bg-success3 text-center">
         <br />
         <br />
-        <div className="container py-2 text-white">
+        <div className="container w-75 py-2 text-white">
           <h1>Seja Ouvido</h1>
           <h3>
             R360 é umaplataforma de avaliação aberta para todos. compartilhe
@@ -943,7 +943,7 @@ const Banner = () => {
             ou serviço
           </h3>
           <br />
-          <button className="btn bg-white rounded-pill">
+          <button className="btn text-dark bg-white rounded-pill">
             Avaliar empresas
           </button>
         </div>
