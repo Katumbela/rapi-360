@@ -380,27 +380,27 @@ const Header = (props) => {
         </button>
       </div>
 
-      <div className={`menu-ssm ${menuAberto ? "aberto" : ""}`}>
+      <div className={`menu-ssm bg-secondary2 ${menuAberto ? "aberto" : ""}`}>
         <div className="w-100  text-endd">
           <button className="burger " onClick={toggleMenu}>
             <i className="bi bi-x"></i>
           </button>
         </div>
 
-        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/desconto"}>
+        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/desconto"}>
           Descontos
         </ScrollToTopLink>
 
-        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/ranking"}>
+        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/ranking"}>
           Ranking
         </ScrollToTopLink>
 
-        <ScrollToTopLink className={"text-decoration-none"} to={"/pt/#blog"}>
+        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/#blog"}>
           Blog
         </ScrollToTopLink>
 
         <ScrollToTopLink
-          className={"text-decoration-none"}
+          className={"text-decoration-none text-dark"}
           to={"/pt/empresa/produtos"}
         >
           <span className="premio-md">Produtos</span>

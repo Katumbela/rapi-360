@@ -80,11 +80,11 @@ const Banner = () => {
   });
 
   const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
-    .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
+    .filter((empresa) => parseFloat(empresa.avaliacao) >= 3)
     .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
 
   const pioresEmpresasPorCategoria = empresasFiltradasPorCategoria
-    .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
+    .filter((empresa) => parseFloat(empresa.avaliacao) < 3)
     .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
 
   useEffect(() => {
@@ -95,11 +95,11 @@ const Banner = () => {
 
         // Convertendo avaliação para números antes de ordenar
         const melhoresEmpresas = dadosEmpresas
-          .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
+          .filter((empresa) => parseFloat(empresa.avaliacao) >= 3)
           .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
 
         const pioresEmpresas = dadosEmpresas
-          .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
+          .filter((empresa) => parseFloat(empresa.avaliacao) < 3)
           .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
 
         setMelhoresEmpresasOrdenadas(melhoresEmpresas);
@@ -373,7 +373,7 @@ const Banner = () => {
                                   className="logo-empresa"
                                   alt=""
                                 />
-                                <div className="de my-auto">
+                                <div className="de my-">
                                   <b>{empresa.nomeEmpresa}</b>
                                   {/* <p className="d-flex mt-1 my-auto gap-2 f-14">
                                     {empresa.selo ? (
@@ -457,6 +457,9 @@ const Banner = () => {
                           <EmpresaLoader className="w" />
                           <br />
                           <EmpresaLoader className="w" />
+
+                          <br />
+                          <br />
                         </>
                       )}
                       {categoriaSelecionada != "" &&
@@ -500,7 +503,7 @@ const Banner = () => {
                                 className="logo-empresa"
                                 alt=""
                               />
-                              <div className="de my-auto">
+                              <div className="de my-">
                                 <b>{empresa.nomeEmpresa}</b>
                                 {/* <p className="d-flex justify-content-start mt-1 my-auto gap-2 f-14">
                                   {empresa.selo ? (
@@ -585,6 +588,8 @@ const Banner = () => {
                           <EmpresaLoader className="w" />
                           <br />
                           <EmpresaLoader className="w" />
+                          <br />
+                          <br />
                         </>
                       )}
 

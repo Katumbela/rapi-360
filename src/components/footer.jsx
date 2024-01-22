@@ -51,6 +51,10 @@ function Footer() {
       <div className="container-fluid foo">
         <div className=" mt-4 footer">
           <div className=" row">
+            <div className="col-12 container px-3 text-start py-3">
+            <img src={icon} className="logo-foo rounded-2" alt="" />
+       
+            </div>
             <div className="col-12 my-2 my-md-1 col-sm-3 col-md-3 text-start">
               <h5 className="">Contacte nos</h5>
               <ul className="ende">
@@ -132,8 +136,7 @@ function Footer() {
             </a>
           
           </div>
-          <img src={icon} className="logo-blogg rounded-3" alt="" />
-          <div className="pol">
+         <div className="pol">
           <ScrollToTopLink className="link" to="/pt/politicas">
                     Termos & Políticas
                   </ScrollToTopLink>
