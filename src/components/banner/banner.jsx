@@ -188,7 +188,7 @@ const Banner = () => {
 
   return (
     <>
-      <div className="banner bg-success shadow-md">
+      <div className="banner bg-success text-start shadow-md">
         <div className="body-banner text-start w-lg-50 container">
           <h2 className="f-reg  titulo">
             O <b className="text-">Reputa</b> <b className="text-">360</b> te
