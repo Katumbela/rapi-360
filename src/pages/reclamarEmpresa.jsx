@@ -58,6 +58,7 @@ import ScrollToTopLink from "../components/scrollTopLink";
 import EmpresaLoader from "../components/empLoader";
 import Loader from "../components/loader";
 import Pub from "../components/publicidade";
+import StarRating from "../components/starts";
 
 const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   // const { user, handleLogout } = useContext(UserContext);
@@ -74,7 +75,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   const [empresaEscolhida, setEmpresaEscolhida] = useState(null);
   const [reclamacoesEmpresa, setReclamacoesEmpresa] = useState([]);
 
- 
   useEffect(() => {
     const pegarEmpresa = async () => {
       try {
@@ -155,7 +155,6 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
       setReclamacoesRespondidas(reclamacoesRespondidas);
     }
   }, [reclamacoesEmpresa, empresaEscolhida]);
-
 
   // const [avaliacaoUsuario, setAvaliacaoUsuario] = useState(null);
 
@@ -266,7 +265,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     solicitarNovamente: null,
     titulo: "",
     historia: "",
-    
+
     anexos: [], // Certifique-se de inicializar como um array vazio
   });
 
@@ -345,6 +344,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
         emailCliente: user.email,
         status: "nao-respondido",
         quando: formattedDate,
+        photo: user?.pictureUrl,
         // Adicione outros campos necessários, como data, usuário, etc.
       };
 
@@ -399,40 +399,10 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                     >
                       <h5 className="f-reg">{empresaEscolhida?.nomeEmpresa}</h5>
                     </ScrollToTopLink>
-                    <p className="d-flex mt-1 my-auto gap-2 f-14">
-                      {empresaEscolhida?.avaliacao >= 5.0 &&
-                      empresaEscolhida?.avaliacao <= 6.9 ? (
-                        <img src={regular} alt="" className="icon-empresa" />
-                      ) : empresaEscolhida?.avaliacao >= 7.0 &&
-                        empresaEscolhida?.avaliacao <= 10.0 ? (
-                        <img src={otimo} alt="" className="icon-empresa" />
-                      ) : empresaEscolhida?.avaliacao >= 3.0 &&
-                        empresaEscolhida?.avaliacao <= 4.9 ? (
-                        <img src={ruim} alt="" className="icon-empresa" />
-                      ) : empresaEscolhida?.avaliacao <= 2.9 ? (
-                        <img
-                          src={naorecomendado}
-                          alt=""
-                          className="icon-empresa"
-                        />
-                      ) : null}
-                      {empresaEscolhida?.avaliacao >= 5.0 &&
-                      empresaEscolhida?.avaliacao <= 6.9 ? (
-                        <b className="my-auto text-secondary">REGULAR</b>
-                      ) : empresaEscolhida?.avaliacao >= 7.0 &&
-                        empresaEscolhida?.avaliacao <= 10.0 ? (
-                        <b className="my-auto text-secondary">ÓTIMO</b>
-                      ) : empresaEscolhida?.avaliacao >= 3.0 &&
-                        empresaEscolhida?.avaliacao <= 4.9 ? (
-                        <b className="my-auto text-secondary">RUÍM</b>
-                      ) : empresaEscolhida?.avaliacao <= 2.9 ? (
-                        <b className="my-auto text-secondary">
-                          NÃO RECOMENDADO
-                        </b>
-                      ) : (
-                        <b className="my-auto text-secondary">SEM DADOS </b>
-                      )}
-                    </p>
+                    <div className="d-flex gap-2">
+                      <StarRating rating={empresaEscolhida.avaliacao} />
+                      <h4>{empresaEscolhida.avaliacao}</h4>
+                    </div>
                   </div>
                 </>
               ) : (
@@ -457,6 +427,13 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
             <>
               <div className="text-dark py-2">
                 <div className="text-center mb-3 headc">
+                  {/* <img
+                    src={user.pictureUrl}
+                    style={{ height: "96px" }}
+                    className=""
+                    alt="User"
+                  /> */}
+
                   <h2 className="text-dark">
                     Vamos começar.{" "}
                     <b className="text-success">Conte sua história</b>

@@ -209,6 +209,7 @@ const Banner = () => {
           <div className="  w-md-75 w-lg-75">
             <h5 className="fw-bolder">
               <b>Explore a R360</b>
+             
             </h5>
           </div>
           <div className="quadros  w-md-75 w-lg-75 mx-auto">
@@ -370,7 +371,15 @@ const Banner = () => {
                                   alt=""
                                 />
                                 <div className="de w-100 my-">
-                                  <b>{empresa.nomeEmpresa}</b>
+                                <b>
+                                  {empresa?.nomeEmpresa
+                                    .split(" ")
+                                    .slice(0, 4)
+                                    .join(" ")}
+                                  {empresa?.nomeEmpresa.split(" ").length > 3
+                                    ? " ..."
+                                    : ""}
+                                </b>
 
                                   <div className="gap-2 d-flex">
                                     <StarRating rating={empresa.avaliacao} />
@@ -452,7 +461,7 @@ const Banner = () => {
                       <div className="bg-warning d-flex  gap-2 head-texts rounded-1 p-3">
                         <img src={r360} style={{ height: "3em" }} alt="" />
                         <span className="text-white my-auto">
-                          <b>Top 5 empresasverificadas pela R360</b>
+                          <b>Top 5 empresas verificadas pela R360</b>
                         </span>
                       </div>
                       <br />

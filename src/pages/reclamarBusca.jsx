@@ -56,11 +56,11 @@ import AbreviarTexto from "../components/abreviarTexto";
 import ScrollToTopLink from "../components/scrollTopLink";
 import obterDadosDoFirebase from "../model/empresas2";
 import Pub from "../components/publicidade";
+import StarRating from "../components/starts";
 
 const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const { user, handleLogout } = useContext(UserContext);
   document.title = `Busque a empresa a reclamar | Reputação 360`;
-
 
   const [dadosEmpresas, setDadosEmpresas] = useState([]);
 
@@ -77,7 +77,6 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
 
     ordenarEmpresas();
   }, []);
-  
 
   useEffect(() => {
     // Adicione um listener para o estado da autenticação
@@ -196,37 +195,38 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-  
+
     // Filtrar empresas com base no termo de pesquisa
     const results = dadosEmpresas.filter((empresa) => {
       const lowerCasedTerm = searchTerm.toLowerCase();
-      const nomeEmpresaLowerCase = empresa.nomeEmpresa ? empresa.nomeEmpresa.toLowerCase() : '';
-      const siteEmpresaLowerCase = empresa.siteEmpresa ? empresa.siteEmpresa.toLowerCase() : '';
-      const numeroBI = empresa.numeroBI ? empresa.numeroBI : '';
-  
+      const nomeEmpresaLowerCase = empresa.nomeEmpresa
+        ? empresa.nomeEmpresa.toLowerCase()
+        : "";
+      const siteEmpresaLowerCase = empresa.siteEmpresa
+        ? empresa.siteEmpresa.toLowerCase()
+        : "";
+      const numeroBI = empresa.numeroBI ? empresa.numeroBI : "";
+
       return (
         nomeEmpresaLowerCase.includes(lowerCasedTerm) ||
         siteEmpresaLowerCase.includes(lowerCasedTerm) ||
         numeroBI.includes(searchTerm)
       );
     });
-  
+
     // Atualizar os resultados da pesquisa
     setSearchResults(results);
-  
+
     // Exibir as sugestões
     setShowSuggestions(true);
   };
-  
 
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
 
   const handleInputClick = () => {
     // Exibir sugestões ao clicar no input
     setShowSuggestions(true);
   };
-
 
   const handleBlur = () => {
     // Aguarde um curto período antes de fechar as sugestões para permitir o clique nas sugestões
@@ -234,7 +234,6 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
       setShowSuggestions(false);
     }, 200);
   };
-
 
   return (
     <div className="w-100">
@@ -255,7 +254,6 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
           <div className="container">
             <span className="f-16 container">
               Busque pela empresa que deseja reclamar ou um serviço a avaliar
-
             </span>
             <br />
             <br />
@@ -276,58 +274,23 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
             <div className="res-pesquisa pesquisa pesquisa-md pesq-busca">
               {searchResults.length > 0 && searchTerm !== "" ? (
                 searchResults.map((empresa, index) => (
-                  <ScrollToTopLink
+                  <ScrollToTopLink title={'Clique para ver esta empresa'}
                     key={empresa.id}
                     to={`/pt/empresa/${empresa.id}`}
-                    title={"Clique para ver empresa"}
                     className="empresa w-100 text-decoration-none my-1 shadow-sm d-flex gap-2 border-lightt p-2 rounded-1"
                   >
                     <img src={empresa.logo} className="logo-empresa" alt="" />
                     <div className="de text-start my-auto">
-                      <b>{empresa.nomeEmpresa}</b>
-                      <p className="d-flex mt-1 my-auto gap-2 f-14">
-                        {empresa.selo ? (
-                          <img src={r360} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
-                          <img src={regular} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 7.0 &&
-                          empresa.avaliacao <= 10.0 ? (
-                          <img src={otimo} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao >= 3.0 &&
-                          empresa.avaliacao <= 4.9 ? (
-                          <img src={ruim} alt="" className="icon-empresa" />
-                        ) : empresa.avaliacao <= 2.9 ? (
-                          <img
-                            src={naorecomendado}
-                            alt=""
-                            className="icon-empresa"
-                          />
-                        ) : null}
-
-                        {empresa.selo ? (
-                          <b className="my-auto f-12 text-secondary"> R360</b>
-                        ) : empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
-                          <b className="my-auto f-12 text-secondary">REGULAR</b>
-                        ) : empresa.avaliacao >= 7.0 &&
-                          empresa.avaliacao <= 10.0 ? (
-                          <b className="my-auto f-12 text-secondary">ÓTIMO</b>
-                        ) : empresa.avaliacao >= 3.0 &&
-                          empresa.avaliacao <= 4.9 ? (
-                          <b className="my-auto f-12 text-secondary">RUÍM</b>
-                        ) : empresa.avaliacao <= 2.9 ? (
-                          <AbreviarTexto
-                            className="my-auto f-12 text-secondary"
-                            texto={"NÃO RECOMENDADO"}
-                            largura={90}
-                          />
-                        ) : (
-                          <b className="my-auto f-12 text-secondary">
-                            SEM DADOS{" "}
-                          </b>
-                        )}
-                      </p>
+                      <b className="text-dark">
+                        {empresa?.nomeEmpresa.split(" ").slice(0, 4).join(" ")}
+                        {empresa?.nomeEmpresa.split(" ").length > 3
+                          ? " ..."
+                          : ""}
+                      </b>
+                      <div className="d-flex gap-2">
+                        <StarRating rating={empresa.avaliacao} />
+                        <h4>{empresa.avaliacao}</h4>
+                      </div>
                     </div>
                   </ScrollToTopLink>
                 ))
@@ -343,7 +306,7 @@ const ReclamarBuscar = ({ cart, nomee, emaill }) => {
                     </p>
                   </p>
                 </>
-              ) : null }
+              ) : null}
             </div>
           </div>
         </center>

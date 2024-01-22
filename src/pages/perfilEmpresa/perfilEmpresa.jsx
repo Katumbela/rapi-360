@@ -347,26 +347,34 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         <div className="dados-empresa mt-4 py-3 mt-md-0 container">
           <div className="row">
             <div className="col-12 col-md-2"></div>
-            <div className="col-12 ps-md-4  pt-sm-0 col-md-8">
+            <div className="col-12 ps-md-4 pt-3  pt-sm-0 col-md-8">
               {empresaEscolhida?.nomeEmpresa != null ? (
                 <>
                   <b className="f-20 mt-5 f-reg">
                     {empresaEscolhida?.nomeEmpresa}
                   </b>
+                  <br />
+                  <div className="d-flex gap-2">
+
+                  <StarRating rating={empresaEscolhida?.avaliacao}/>
+                 <span className="my-auto">&middot; </span> <h4>{empresaEscolhida?.avaliacao}</h4>
+                  </div>
+
+                  {empresaEscolhida?.selo === true ? (
+                      <p className="d-flex text-secondary gap-2">
+                        <img src={r360} alt="" className="icon-empresa" />{" "}
+                        <span className="text-dark">
+                          Verificado pela <b>R360</b>
+                        </span>
+                      </p>
+                    ) : null}
+
                   <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
                     <p className="d-flex text-secondary gap-2">
                       <i className="bi bi-calendar"></i>
                       {empresaEscolhida?.quando}
                     </p>
 
-                    {empresaEscolhida?.selo === true ? (
-                      <p className="d-flex text-secondary gap-2">
-                        <img src={r360} alt="" className="icon-empresa" />{" "}
-                        <span className="text-secondary">
-                          Certificado pelo <b>R360</b>
-                        </span>
-                      </p>
-                    ) : null}
                   </div>
                 </>
               ) : (
@@ -380,7 +388,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                 to={`/pt/reclamar/${empresaEscolhida?.id}`}
                 className="btn btn-danger m-auto rec-b  gap-2 d-flex"
               >
-                <i className="bi bi-megaphone"></i> Reclamar
+                <i className="bi bi-megaphone"></i> Avaliar
               </ScrollToTopLink>
             </div>
           </div>
@@ -391,14 +399,13 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               to={"/pt/"}
               className="text-primary text-decoration-none gap-2 d-flex"
             >
-              <i className="bi bi-house"></i>Pagina Inicial
+              <i className="bi bi-house"></i>Início 
             </ScrollToTopLink>
-            <p className="text-secondary gap-2 d-flex">
-              <i className="bi bi-megaphone"></i>Reclamações
+            <p>{'>'}</p>
+            <p className="text-primary gap-2 d-flex">
+              {empresaEscolhida?.nomeEmpresa}
             </p>
-            <p className="text-secondary gap-2 d-flex">
-              <i className="bi bi-file-earmark-person"></i>Sobre
-            </p>
+            
           </div>
         </div>
       </div>
@@ -494,7 +501,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                     </div>
                   </div>
                   <div className="mx-auto my-2 border-1 rounded-1 text-center bg-white p-3">
-                    <span className="f-12">Reclamações</span>
+                    <span className="f-12">Avaliações</span>
                     <b className="d-flex gap-2 f-reg mx-auto justify-content-center">
                       <i className="bi bi-megaphone"></i>{" "}
                       {reclamacoesEmpresa?.length}
@@ -506,9 +513,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       <div className="d-flex gap-2">
                         <i className="bi f-reg bi-exclamation-circle"></i>
                         <p>
-                          A empresa se enquadra como Não Recomendada pois não
-                          responde a pelo menos 50% das reclamações recebidas no
-                          Reputação 360.
+                         Média de avaliações muito baixa, esta empresa pode ser nova ou tem recebido poucas avaliações
                         </p>
                       </div>
                     </>
@@ -605,10 +610,10 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   >
                     <div
                       className={`progress-bar ${
-                        empresaEscolhida?.avaliacao <= 4
+                        empresaEscolhida?.avaliacao <= 2
                           ? "bg-danger"
-                          : empresaEscolhida?.avaliacao >= 5.0 &&
-                            empresaEscolhida?.avaliacao <= 6.9
+                          : empresaEscolhida?.avaliacao >= 2.1 &&
+                            empresaEscolhida?.avaliacao <= 3.9
                           ? "bg-warning"
                           : "bg-success2"
                       } `}
@@ -633,7 +638,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
               <br />
               <div className="card-sobre-empresa border-1 bg-white p-3">
-                <b className="text-dark f-reg">
+                <b className="text-dark">
                   Quem viu {empresaEscolhida?.nomeEmpresa} também viu:
                 </b>
                 <br />
@@ -774,14 +779,14 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   {reclamacoesEmpresa.length > reclamacoesParaExibir && (
                     <div className="text-center my-3">
                       <button className="btn btn-link" onClick={handleVerMais}>
-                        Ver mais reclamações
+                        Ver mais Avaliações
                       </button>
                     </div>
                   )}
                   {reclamacoesParaExibir > 5 && (
                     <div className="text-center my-3">
                       <button className="btn btn-link" onClick={handleVerMenos}>
-                        Ver menos reclamações
+                        Ver menos Avaliações
                       </button>
                     </div>
                   )}
@@ -794,14 +799,14 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   {reclamacoesParaExibir > 5 && (
                     <div className="text-center my-3">
                       <button className="btn btn-link" onClick={handleVerMenos}>
-                        Ver menos reclamações
+                        Ver menos Avaliações
                       </button>
                     </div>
                   )}
                   {reclamacoesParaExibir <= 5 && (
                     <div className="text-center my-3">
                       <button className="btn btn-link" onClick={handleVerMais}>
-                        Ver mais reclamações
+                        Ver mais Avaliações
                       </button>
                     </div>
                   )}
@@ -894,7 +899,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
 
               <br />
               <div className="card-sobre-empresa border-1 bg-white p-3">
-                <b className="text-dark f-reg">
+                <b className="text-dark ">
                   Quem viu {empresaEscolhida?.nomeEmpresa} também viu:
                 </b>
                 <br />

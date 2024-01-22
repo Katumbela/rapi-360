@@ -1,3 +1,7 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;700&family=Roboto:wght@900&display=swap');
+
+
 .banner {
   /* background: linear-gradient(90deg , #000000dd , #000000dd), url(../../imgs/elemax.webp) center center; */
   background-size: cover;
@@ -371,4 +375,18 @@ right: 0;
   padding: .05rem .4rem;
   background: #12ff36;
   border-radius: 60px!important;
+}
+
+.foto {
+  height: 2.5em!important;
+  width: 2.5em!important;
+  border-radius: 90px!important;
+  background: #630087;
+  display: grid;
+  place-content: center!important;
+  color: white!important;
+}
+
+.f-reg {
+font-family: 'Roboto', sans-serif!important;
 }

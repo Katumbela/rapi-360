@@ -495,8 +495,7 @@ const Header = (props) => {
                         className="my-auto text-secondary"
                       ></AbreviarTexto>
                     </p>
-                    <hr />
-                    <div className="d-flex  gap-2 justify-content-center">
+                    <div className="d-flex mt-2 gap-2 justify-content-center">
                       <h5>{empresa.avaliacao}</h5>
                       <span className="text-secondary">/ 5</span>
                     </div>
@@ -569,36 +568,18 @@ const Header = (props) => {
                             className="my-auto text-secondary"
                           ></AbreviarTexto>
                         </p>
-                        <hr />
 
-                        <div className="d-flex gap-2 justify-content-center">
-                          {empresa.avaliacao >= 5.0 &&
-                          empresa.avaliacao <= 6.9 ? (
-                            <img
-                              src={regular}
-                              alt=""
-                              className="icon-empresa"
-                            />
-                          ) : empresa.avaliacao >= 7.0 &&
-                            empresa.avaliacao <= 10.0 ? (
-                            <img src={otimo} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao >= 3.0 &&
-                            empresa.avaliacao <= 4.9 ? (
-                            <img src={ruim} alt="" className="icon-empresa" />
-                          ) : empresa.avaliacao <= 2.9 ? (
-                            <img
-                              src={naorecomendado}
-                              alt=""
-                              className="icon-empresa"
-                            />
-                          ) : null}
-                          <h4 className="f-reg my-auto">
-                            <b>{empresa.avaliacao} </b>
-                          </h4>
-                          <span className="text-secondary f-12 mt-auto">
-                            / 5
-                          </span>
-                        </div>
+                        <div className="d-flex  gap-2 justify-content-center">
+                                <h5>{empresa.avaliacao}</h5>
+                                <span className="text-secondary">/ 5</span>
+                              </div>
+                              <div className="f-16 d-flex gap-2 justify-content-center">
+                                <StarRating
+                                  title={empresa.avaliacao}
+                                  className="f-16 mx-auto"
+                                  rating={empresa.avaliacao}
+                                />
+                              </div>
                       </div>
                     </a>
                   ))}
