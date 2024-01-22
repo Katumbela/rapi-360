@@ -78,14 +78,13 @@ const Banner = () => {
       categoriaSelecionada === "" || empresa.categoria === categoriaSelecionada
     );
   });
-
   const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
-    .filter((empresa) => parseFloat(empresa.avaliacao) >= 3)
+    .filter((empresa) => parseFloat(empresa.avaliacao) >= 1.5 && !empresa.selo)
     .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
 
-  const pioresEmpresasPorCategoria = empresasFiltradasPorCategoria
-    .filter((empresa) => parseFloat(empresa.avaliacao) < 3)
-    .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
+  const pioresEmpresasPorCategoria = empresasFiltradasPorCategoria.filter(
+    (empresa) => empresa.selo
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -194,10 +193,9 @@ const Banner = () => {
           <h2 className="f-reg  titulo">
             O <b className="text-">Reputa</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
-        <br />
-           Encontre empresas pra confiar
-            </h2>
-         
+            <br />
+            Encontre empresas pra confiar
+          </h2>
         </div>
         <div className="bbb">
           <div className="b1"></div>
@@ -373,11 +371,9 @@ const Banner = () => {
                                 />
                                 <div className="de w-100 my-">
                                   <b>{empresa.nomeEmpresa}</b>
-                               
+
                                   <div className="gap-2 d-flex">
-                                    <StarRating
-                                      rating={empresa.avaliacao}
-                                    />
+                                    <StarRating rating={empresa.avaliacao} />
                                     <span className="text-secondary">
                                       {empresa.avaliacao}
                                     </span>
@@ -402,20 +398,23 @@ const Banner = () => {
                                         {empresa.categoria}
                                       </b>
                                     </span>
-                                    <div className="d-flex py-2 gap-3">
-                                      <a
-                                        href={`https://${empresa.siteEmpresa}`}
-                                      >
-                                        <i className="bi bi-globe"></i>
-                                      </a>
-                                      <a
-                                        href={`mailto:${empresa.emailEmpresa}`}
-                                      >
-                                        <i className="bi bi-envelope"></i>
-                                      </a>
-                                      <a href={`https://${empresa.whatsapp}`}>
-                                        <i className="bi bi-telephone"></i>
-                                      </a>
+                                    <div className="d-flex justify-content-between">
+                                      <div className="d-flex my-auto py-2 gap-3">
+                                        <a
+                                          href={`https://${empresa.siteEmpresa}`}
+                                        >
+                                          <i className="bi bi-globe"></i>
+                                        </a>
+                                        <a
+                                          href={`mailto:${empresa.emailEmpresa}`}
+                                        >
+                                          <i className="bi bi-envelope"></i>
+                                        </a>
+                                        <a href={`tel:${empresa.whatsapp}`}>
+                                          <i className="bi bi-telephone"></i>
+                                        </a>
+                                      </div>
+
                                     </div>
                                   </div>
                                 </div>
@@ -451,11 +450,9 @@ const Banner = () => {
                   <div className="piores mt-5 mt-md-0 col-12 col-md-6">
                     <div className="card-best bg-white border-lightt p-2 rounded-1">
                       <div className="bg-warning d-flex  gap-2 head-texts rounded-1 p-3">
-                        <img src={r360} style={{height:'3em'}} alt="" />
+                        <img src={r360} style={{ height: "3em" }} alt="" />
                         <span className="text-white my-auto">
-                          <b>
-                            Top 5 empresasverificadas pela R360
-                          </b>
+                          <b>Top 5 empresasverificadas pela R360</b>
                         </span>
                       </div>
                       <br />
@@ -510,16 +507,29 @@ const Banner = () => {
                                       {empresa.categoria}
                                     </b>
                                   </span>
-                                  <div className="d-flex py-2 gap-3">
-                                    <a href={`https://${empresa.siteEmpresa}`}>
-                                      <i className="bi bi-globe"></i>
-                                    </a>
-                                    <a href={`mailto:${empresa.emailEmpresa}`}>
-                                      <i className="bi bi-envelope"></i>
-                                    </a>
-                                    <a href={`https://${empresa.whatsapp}`}>
-                                      <i className="bi bi-telephone"></i>
-                                    </a>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex my-auto py-2 gap-3">
+                                      <a
+                                        href={`https://${empresa.siteEmpresa}`}
+                                      >
+                                        <i className="bi bi-globe"></i>
+                                      </a>
+                                      <a
+                                        href={`mailto:${empresa.emailEmpresa}`}
+                                      >
+                                        <i className="bi bi-envelope"></i>
+                                      </a>
+                                      <a href={`tel:${empresa.whatsapp}`}>
+                                        <i className="bi bi-telephone"></i>
+                                      </a>
+                                    </div>
+
+                                    <div className="my-auto py-2">
+                                      <div className="verified my-auto f-10">
+                                        <i className="bi bi-shield-check"></i>{" "}
+                                        Verified
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

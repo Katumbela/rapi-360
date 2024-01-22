@@ -365,3 +365,10 @@ right: 0;
   height: 4em;
   margin-left: 1.5rem;
 }
+
+.verified {
+  color: black;
+  padding: .05rem .4rem;
+  background: #12ff36;
+  border-radius: 60px!important;
+}

@@ -32,12 +32,12 @@ export default function StarRating({ rating }) {
               }
           bg-secondary2
           ${
-            halfFilled && roundedRating >= 3 && roundedRating <= 3.9
+            halfFilled && roundedRating >= 3 && roundedRating <= 4
               ? "bg-success-half"
               : ""
           }${
             halfFilled && roundedRating < 2
-              ? "bg-danger-half"
+              ? "bg-success-half"
               : ""
           }
         ${halfFilled && roundedRating >= 4 ? "bg-success2-half" : ""}`}

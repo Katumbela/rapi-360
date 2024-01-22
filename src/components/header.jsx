@@ -36,6 +36,7 @@ import ScrollToTopLink from "./scrollTopLink";
 import { db } from "../pages/firebase";
 import obterDadosDoFirebase from "../model/empresas2";
 import ProfileCard from "./PerfilEmp";
+import StarRating from "./starts";
 const Header = (props) => {
   const [ph, setPh] = useState("");
   const [user, setUser] = useState(null);
@@ -387,15 +388,24 @@ const Header = (props) => {
           </button>
         </div>
 
-        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/desconto"}>
+        <ScrollToTopLink
+          className={"text-decoration-none text-dark"}
+          to={"/pt/desconto"}
+        >
           Descontos
         </ScrollToTopLink>
 
-        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/ranking"}>
+        <ScrollToTopLink
+          className={"text-decoration-none text-dark"}
+          to={"/pt/ranking"}
+        >
           Ranking
         </ScrollToTopLink>
 
-        <ScrollToTopLink className={"text-decoration-none text-dark"} to={"/pt/#blog"}>
+        <ScrollToTopLink
+          className={"text-decoration-none text-dark"}
+          to={"/pt/#blog"}
+        >
           Blog
         </ScrollToTopLink>
 
@@ -407,23 +417,22 @@ const Header = (props) => {
         </ScrollToTopLink>
         {user ? (
           <>
-          
-          <span className="btn text-success f-reg d-flex gap-2">
-            {" "}
-            {/* <i className="bi tex-success bi-person-circle"></i>{" "} */}
-            <AbreviarTexto
-              className="text-success f-reg"
-              texto={user.name}
-              largura={100}
-            />{" "}
-          </span>
+            <span className="btn text-success f-reg d-flex gap-2">
+              {" "}
+              {/* <i className="bi tex-success bi-person-circle"></i>{" "} */}
+              <AbreviarTexto
+                className="text-success f-reg"
+                texto={user.name}
+                largura={100}
+              />{" "}
+            </span>
 
-          <NavLink
-                    onClick={handleLogout}
-                    className={"my-auto btn btn-outline-danger"}
-                  >
-                    Sair
-                  </NavLink>
+            <NavLink
+              onClick={handleLogout}
+              className={"my-auto btn btn-outline-danger"}
+            >
+              Sair
+            </NavLink>
           </>
         ) : (
           <>
@@ -487,8 +496,18 @@ const Header = (props) => {
                       ></AbreviarTexto>
                     </p>
                     <hr />
+                    <div className="d-flex  gap-2 justify-content-center">
 
-                    <div className="d-flex gap-2 justify-content-center">
+                    <h5>{empresa.avaliacao}</h5>
+                    <span className="text-secondary">/ 5</span>
+                    </div>
+                    <div className="f-16 d-flex gap-2 justify-content-center">
+                    <StarRating title={empresa.avaliacao} className="f-16 mx-auto"
+                                      rating={empresa.avaliacao}
+                                    />
+                    </div>
+
+                    {/* <div className="d-flex gap-2 justify-content-center">
                       {empresa.avaliacao >= 5.0 && empresa.avaliacao <= 6.9 ? (
                         <img src={regular} alt="" className="icon-empresa" />
                       ) : empresa.avaliacao >= 7.0 &&
@@ -508,7 +527,7 @@ const Header = (props) => {
                         <b>{empresa.avaliacao} </b>
                       </h4>
                       <span className="text-secondary f-12 mt-auto">/ 5</span>
-                    </div>
+                    </div> */}
                   </div>
                 </a>
               ))
