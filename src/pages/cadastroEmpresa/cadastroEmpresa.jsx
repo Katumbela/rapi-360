@@ -99,11 +99,13 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
       const storageRef = firebase.storage().ref();
 
       // Upload de logo
+
       const logoFileRef = storageRef.child(logoFileName);
       await logoFileRef.put(logoFile);
       const logoFileURL = await logoFileRef.getDownloadURL();
 
       // Upload de capa
+
       const capaFileRef = storageRef.child(capaFileName);
       await capaFileRef.put(capaFile);
       const capaFileURL = await capaFileRef.getDownloadURL();
