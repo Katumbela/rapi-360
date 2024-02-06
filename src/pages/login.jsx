@@ -14,6 +14,8 @@ import Footer from "../components/footer";
 import ScrollToTopLink from "../components/scrollTopLink";
 import Swal from "sweetalert2";
 import { db } from "./firebase";
+import { ToastContainer, toast } from "react-toastify";
+import Loader from "../components/loader";
 
 const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   const { handleLogin, push } = useContext(UserContext);
@@ -22,37 +24,43 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
   const [user, setUser] = useState(null);
 
-
   // verificar login do usuario
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         try {
           // Consultar o Firestore para obter o documento do usuário com base no e-mail
-          const querySnapshot = await db.collection("cliente").where("email", "==", user.email).get();
-  
+          const querySnapshot = await db
+            .collection("cliente")
+            .where("email", "==", user.email)
+            .get();
+
           if (!querySnapshot.empty) {
             // Se houver um documento correspondente, obter os dados
             const userData = {
-              name: user.displayName ,
+              name: user.displayName,
               email: user.email,
               pictureUrl: user.photoURL,
               uid: user.uid,
-              tel: user.phoneNumber ? user.phoneNumber : querySnapshot.docs[0].get("phone"),
+              tel: user.phoneNumber
+                ? user.phoneNumber
+                : querySnapshot.docs[0].get("phone"),
               // Adicione outros campos conforme necessário
               bi: querySnapshot.docs[0].get("bi"),
               nome: querySnapshot.docs[0].get("name"),
               city: querySnapshot.docs[0].get("city"),
               // Adicione outros campos conforme necessário
             };
-  
+
             // Atualizar o estado do usuário com os dados
             setUser(userData);
-  
+
             // Salvar dados no localStorage
             localStorage.setItem("users", JSON.stringify(userData));
           } else {
-            console.warn("Documento não encontrado no Firestore para o e-mail do usuário.");
+            // console.warn(
+            //   "Documento não encontrado no Firestore para o e-mail do usuário."
+            // );
           }
         } catch (error) {
           console.error("Erro ao buscar dados do Firestore:", error);
@@ -62,11 +70,10 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
         setUser(null);
       }
     });
-  
+
     // Cleanup the subscription when the component unmounts
     return () => unsubscribe();
   }, []);
-  
 
   const handleLoginWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -123,6 +130,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
   };
 
   const [email, setEmail] = useState("");
+  const [load, setLoad] = useState(false);
   const [password, setPassword] = useState("");
 
   const handleChangeEmail = (e) => {
@@ -133,6 +141,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
     setPassword(e.target.value);
   };
   const handleLoginWithEmailAndPassword = () => {
+    setLoad(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -147,6 +156,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
           // Adicione outros dados do usuário conforme necessário
         };
 
+        setLoad(false);
         localStorage.setItem("users", JSON.stringify(userData));
         window.location.href = "/pt";
       })
@@ -161,6 +171,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
             .fetchSignInMethodsForEmail(email)
             .then((signInMethods) => {
               if (signInMethods.includes("google.com")) {
+                setLoad(false);
                 // Usuário registrado com Google, mostre a mensagem apropriada
                 Swal.fire({
                   icon: "info",
@@ -168,6 +179,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                   text: "Esta conta foi registrada com o Google. Faça login com o Google.",
                 });
               } else {
+                setLoad(false);
                 // Usuário registrado com e-mail e senha, mostre a mensagem de erro padrão
                 Swal.fire({
                   icon: "error",
@@ -177,6 +189,8 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
               }
             })
             .catch((fetchError) => {
+              setLoad(false);
+              toast.warning(fetchError.message.split(":")[1]);
               console.error(fetchError);
             });
         } else {
@@ -192,6 +206,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
   return (
     <>
+      <ToastContainer />
       <Header
         style={{ marginBottom: "5rem" }}
         nomee={nomee}
@@ -258,11 +273,16 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
                     {/* Botão de login */}
                     <button
-                      className="d-flex w-100 rounded-1 justify-content-center btn btn-primary"
+                      disabled={load}
+                      className="d-flex w-100 rounded-1 justify-content-center btn btn-success"
                       onClick={handleLoginWithEmailAndPassword}
                     >
-                      <span>Entrar</span>
+                     {
+                      load ? <Loader /> :  <span>Entrar</span>
+                     }
                     </button>
+                    <br />
+                    <a href="/pt/login/empresa">Entrar como empresa</a>
                     <br />
                     <br />
 

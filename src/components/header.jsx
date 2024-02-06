@@ -92,9 +92,9 @@ const Header = (props) => {
             // Salvar dados no localStorage
             localStorage.setItem("users", JSON.stringify(userData));
           } else {
-            console.warn(
-              "Documento não encontrado no Firestore para o e-mail do usuário."
-            );
+            // console.warn(
+            //   "Documento não encontrado no Firestore para o e-mail do usuário."
+            // );
           }
         } catch (error) {
           console.error("Erro ao buscar dados do Firestore:", error);
@@ -330,7 +330,7 @@ const Header = (props) => {
             <ul>
               <li>
                 {user ? (
-                  <span className="btn d-flex gap-2">
+                  <NavLink to={'/pt/perfil'} className="btn d-flex gap-2">
                     {" "}
                     <i className="bi tex-success bi-person-circle"></i>{" "}
                     <AbreviarTexto
@@ -338,7 +338,7 @@ const Header = (props) => {
                       texto={user.name}
                       largura={100}
                     />{" "}
-                  </span>
+                  </NavLink>
                 ) : (
                   <NavLink className={"btn btn-outline-success"} to="/pt/login">
                     {" "}

@@ -83,7 +83,7 @@ const Ranking = ({ cart, nomee, emaill }) => {
         const dados = await obterDadosDoFirebase();
         setDadosEmpresas(dados);
       } catch (error) {
-        console.error("Erro ao obter dados do Firebase:", error.message);
+        // console.error("Erro ao obter dados do Firebase:", error.message);
       }
     };
 

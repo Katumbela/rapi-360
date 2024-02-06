@@ -36,10 +36,10 @@ const obterDadosDoFirebase = async () => {
       };
     }));
 
-    console.log('Dados do Firebase:', dadosEmpresas);
+    // console.log('Dados do Firebase:', dadosEmpresas);
     return dadosEmpresas;
   } catch (error) {
-    console.error('Erro ao obter dados do Firebase:', error.message);
+    // console.error('Erro ao obter dados do Firebase:', error.message);
     return []; // ou retorne um valor padrão caso ocorra um erro
   }
 };

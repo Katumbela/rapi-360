@@ -8,5 +8,7 @@
 .user-p {
     border-radius: 90px!important;
     border: 2px solid #ffd000!important;
-    margin: auto .2rem!important;
+    margin: .5rem .2rem!important;
+    height: 4em;
+    width: 4em;
 }

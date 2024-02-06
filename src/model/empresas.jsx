@@ -112,26 +112,3 @@ const dadosEmpresas = [
   
   export default dadosEmpresas;
   
-
-
-// import { db } from "../pages/firebase";
-// Função para obter dados do Firebase
-// const dadosEmpresas = async () => {
-//   try {
-//     const empresasRef = db.collection('empresa');
-//     const snapshot = await empresasRef.get();
-//     const dadosEmpresas = snapshot.docs.map((doc) => ({
-//       id: doc.id,
-//       avaliacao: '9.9',
-//       ...doc.data(),
-//     }));
-
-//     console.log('Dados do Firebase:', dadosEmpresas);
-//     return dadosEmpresas;
-//   } catch (error) {
-//     console.error('Erro ao obter dados do Firebase:', error.message);
-//     return []; // ou retorne um valor padrão caso ocorra um erro
-//   }
-// };
-
-// export default dadosEmpresas;

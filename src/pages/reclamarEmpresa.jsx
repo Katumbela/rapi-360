@@ -243,9 +243,9 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
             // Salvar dados no localStorage
             localStorage.setItem("users", JSON.stringify(userData));
           } else {
-            console.warn(
-              "Documento não encontrado no Firestore para o e-mail do usuário."
-            );
+            // console.warn(
+            //   "Documento não encontrado no Firestore para o e-mail do usuário."
+            // );
           }
         } catch (error) {
           console.error("Erro ao buscar dados do Firestore:", error);

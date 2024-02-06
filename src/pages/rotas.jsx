@@ -29,6 +29,8 @@ import CentralAjuda from "./centralAjuda";
 import Produtos from "./produtos";
 import Blog from "./blog";
 import SolicitarCadastro from "./solicitarCadastro";
+import LoginEmpresa from "./entrarEmpresa/entrarEmpresa";
+import PerfilMinhaEmpresa from "./minhaEmpresa/perfilMinhaEmpresa";
 
 
 const RotasPT = (props) => {
@@ -44,6 +46,7 @@ const RotasPT = (props) => {
                     <Route element={<Home nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/" />
                     <Route element={<Mensagens nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/mensagens" />
                     <Route element={<Perfil nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/perfil" />
+                    <Route element={<PerfilMinhaEmpresa nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/perfil/minha-empresa" />
                     <Route element={<Conversa nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/conversa/:uid" />
                     <Route element={<NotFoundPage nomee={nomee} emaill={emaill} cart={cart}/>}  />
                     <Route element={<Contactar  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/contactar" exact />
@@ -60,6 +63,7 @@ const RotasPT = (props) => {
                     <Route element={<CadastroEmpresa  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/cadastro/empresa" exact />
                     <Route element={<Faqs  nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/faqs" exact />
                     <Route element={<Login cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/login" exact />
+                    <Route element={<LoginEmpresa cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/login/empresa" exact />
                     <Route element={<SolicitarCadastro cart={cart}  emaill={emaill} setEmaill = {setEmaill} nomee={nomee} setNomee={setNomee}  />} path="/pt/solicitar-cadastro" exact />
                     <Route element={<NotFoundPage/>}/>
                     <Route element={<SubmitP  nomee={nomee} emaill={emaill} cart={cart} handleClick={handleClick} />} path="/pt/add-artigo" exact />

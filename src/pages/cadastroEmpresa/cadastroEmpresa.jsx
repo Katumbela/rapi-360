@@ -142,7 +142,7 @@ const CadastroEmpresa = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
 
       // Upload de arquivos para o Storage
       const anexosURLs = await Promise.all(
-        formData.anexos.map(async (anexo) => {
+        formData.anexos.map( async (anexo) => {
           const storageRef = firebase.storage().ref();
           const fileRef = storageRef.child(`reclamacoes/${anexo.name}`); // Pasta "reclamacoes"
           await fileRef.put(anexo);

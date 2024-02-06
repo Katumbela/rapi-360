@@ -3,8 +3,12 @@ import { NavLink, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import user from '../imgs/default.png';
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { db } from "./firebase";
+import ReclamacaoItem from "../components/reclamacaoComponent/reclamacaoComponent";
+import Comment from "../components/skeletons/comment";
 
 function Perfil({ nomee, emaill, cart }) {
   const { uid } = useParams();
@@ -110,13 +114,58 @@ function Perfil({ nomee, emaill, cart }) {
   const enviarMensagem = () => {
     verificarEAtualizar();
   };
+  
+
+
+  const [reclamacoesEmpresa, setReclamacoesEmpresa] = useState([]);
+
+  useEffect(() => {
+    const pegarEmpresa = async () => {
+      try {
+       
+        
+
+          // Supondo que as reclamações estejam em uma coleção "reclamacoes"
+          const reclamacoesRef = db.collection("reclamacoes");
+          const reclamacoesSnapshot = await reclamacoesRef
+            .where("emailCliente", "==", use.email)
+            .get();
+
+          try {
+            const reclamacoesData = reclamacoesSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+
+            setReclamacoesEmpresa(reclamacoesData);
+          } catch (error) {
+            console.error("Erro ao obter reclamações:", error.message);
+          }
+      } catch (error) {
+        console.error("Erro ao pegar empresa:", error.message);
+      }
+    };
+
+    pegarEmpresa();
+  }, [use]);
+
+
+  const [reclamacoesParaExibir, setReclamacoesParaExibir] = useState(4);
+
+  const handleVerMais = () => {
+    setReclamacoesParaExibir((prevCount) => prevCount + 4);
+  };
+
+  const handleVerMenos = () => {
+    setReclamacoesParaExibir((prevCount) => Math.max(prevCount - 4, 4));
+  };
 
   return (
-    <div className="text-center">
+    <div className="text-center c">
       <Header nomee={nomee} emaill={emaill} cart={cart} />
       <br />
       <br />
-      <img className="user-p" src={use.photo} alt="" />
+      <img className="user-p " src={use.photo ?? user} alt="" />
       <h2>{use.name}</h2>
       <p className="f-12">{use.email}</p>
       <NavLink to={'/pt/login'} className="f-16 navlink">Sair</NavLink>
@@ -133,11 +182,86 @@ function Perfil({ nomee, emaill, cart }) {
           placeholder={use.tel}
         />
       </div>
-      <button className="btn btn-primary" onClick={enviarMensagem}>
+      <button className="btn btn-success" onClick={enviarMensagem}>
         salvar
       </button>
 
       <br />
+
+      <center className="container">
+
+
+      <br />
+      <div className="container">
+            <div className="card-sobre-empresa border-1 text-start  bg-white p-3">
+              <b className="text-dark f-reg">Reclamações de clientes </b>
+
+              {/* O que estão falando desta empresa, card */}
+              {use.email ? (
+                <>
+                  {reclamacoesEmpresa?.length != 0 ? (
+                    reclamacoesEmpresa
+                      .slice(0, reclamacoesParaExibir)
+                      .map((reclamacao, index) => (
+                        <ReclamacaoItem key={index} reclamacao={reclamacao} />
+                      ))
+                  ) : (
+                    <>
+                      <center>
+                        <br />
+                        <br />
+                        <i className="bi bi-megaphone f-24 text-secondary"></i>{" "}
+                        <br />
+                        <br />
+                        <span className="text-secondary f-14 w-75">
+                          Não há ainda reclamações ou avaliações pfeitas por sí
+                        </span>
+                       
+                      </center>
+                      <br />
+                    </>
+                  )}
+                  {reclamacoesEmpresa.length > reclamacoesParaExibir && (
+                    <div className="text-center my-3">
+                      <button className="btn btn-link" onClick={handleVerMais}>
+                        Ver mais Avaliações
+                      </button>
+                    </div>
+                  )}
+                  {reclamacoesParaExibir > 5 && (
+                    <div className="text-center my-3">
+                      <button className="btn btn-link" onClick={handleVerMenos}>
+                        Ver menos Avaliações
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {[...Array(reclamacoesParaExibir)].map((_, index) => (
+                    <Comment key={index} className="w-100" />
+                  ))}
+                  {reclamacoesParaExibir > 5 && (
+                    <div className="text-center my-3">
+                      <button className="btn btn-link" onClick={handleVerMenos}>
+                        Ver menos Avaliações
+                      </button>
+                    </div>
+                  )}
+                  {reclamacoesParaExibir <= 5 && (
+                    <div className="text-center my-3">
+                      <button className="btn btn-link" onClick={handleVerMais}>
+                        Ver mais Avaliações
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+      </div>
+        
+      </center>
       <br />
       <br />
       <Footer />
