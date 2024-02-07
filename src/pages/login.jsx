@@ -282,7 +282,7 @@ const Login = ({ setNomee, setEmaill, cart, nomee, emaill }) => {
                      }
                     </button>
                     <br />
-                    <a href="/pt/login/empresa">Entrar como empresa</a>
+                    <a className=" rounded-1 justify-content-center btn btn-outline-success" href="/pt/login/empresa">Entrar como empresa</a>
                     <br />
                     <br />
 

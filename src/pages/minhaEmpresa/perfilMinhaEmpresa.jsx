@@ -19,9 +19,11 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
   const [ph, setPh] = useState(false);
   const [telefone, setTelefone] = useState("");
   const [outrosDados, setOutrosDados] = useState({
-    // Adicione outros campos conforme necessário
     cidade: "",
     site: "",
+    fb: "-",
+    insta: "-",
+    youtube: "-",
     sobre: "",
   });
 
@@ -67,8 +69,12 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
         const doc = querySnapshot.docs[0];
         await doc.ref.update({
           tel: telefone,
-          city: outrosDados.cidade,
+          ciendereoEmpresaty: outrosDados.cidade,
           site: outrosDados.site,
+          fb: outrosDados.fb,
+          site: outrosDados.site,
+          insta: outrosDados.insta,
+          youtube: outrosDados.youtube,
           sobre: outrosDados.sobre,
           // Adicione outros campos conforme necessário
         });
@@ -90,9 +96,9 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
       setPh(false);
       console.error("Erro ao atualizar informações:", error);
       Swal.fire({
-        icon: "error",
+        icon: "warning",
         title: "Erro ao atualizar informações",
-        text: "Ocorreu um erro ao tentar atualizar as informações. Por favor, tente novamente.",
+        text: "Ocorreu um erro ao tentar atualizar as informações , preencha todos os campos.",
       });
     }
   };
@@ -231,6 +237,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
                 className=" mx-auto form-control"
                 onChange={(e) => setTelefone(e.target.value)}
               />
+
               {/* Adicione outros campos conforme necessário */}
               <label htmlFor="" className="f-12 text-secondary">
                 Cidade
@@ -243,6 +250,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
                   setOutrosDados({ ...outrosDados, cidade: e.target.value })
                 }
               />
+
               <label htmlFor="" className="f-12 text-secondary">
                 Site
               </label>
@@ -254,6 +262,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
                   setOutrosDados({ ...outrosDados, site: e.target.value })
                 }
               />
+
               <label htmlFor="" className="f-12 text-secondary">
                 Sobre
               </label>
@@ -262,6 +271,43 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
                 className=" mx-auto form-control"
                 onChange={(e) =>
                   setOutrosDados({ ...outrosDados, sobre: e.target.value })
+                }
+              />
+
+              {/* Inputs para os campos adicionais */}
+              <label htmlFor="" className="f-12 text-secondary">
+                Facebook
+              </label>
+              <input
+                value={outrosDados.fb}
+                type="text"
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, fb: e.target.value })
+                }
+              />
+
+              <label htmlFor="" className="f-12 text-secondary">
+                Instagram
+              </label>
+              <input
+                value={outrosDados.insta}
+                type="text"
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, insta: e.target.value })
+                }
+              />
+
+              <label htmlFor="" className="f-12 text-secondary">
+                YouTube
+              </label>
+              <input
+                value={outrosDados.youtube}
+                type="text"
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, youtube: e.target.value })
                 }
               />
             </div>
@@ -277,6 +323,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
 
             <br />
           </div>
+
           <div className="col-12 col-md-7">
             <center className="">
               <br />
@@ -288,20 +335,20 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
                   {empresa.email ? (
                     <>
                       {reclamacoesEmpresa?.length != 0 ? (
-                         reclamacoesEmpresa
-                         .sort((a, b) => {
-                           // Função para converter a string de data em um objeto Date
-                           const dateA = new Date(a.quando);
-                           const dateB = new Date(b.quando);
-                           
-                           // Classificar as datas pelo mais recente
-                           return dateA - dateB;
-                         })
-                         .slice(0, reclamacoesParaExibir)
-                         .map((reclamacao, index) => (
-                           <ReclamacaoIt key={index} reclamacao={reclamacao} />
-                         ))
-                     ) : (
+                        reclamacoesEmpresa
+                          .sort((a, b) => {
+                            // Função para converter a string de data em um objeto Date
+                            const dateA = new Date(a.quando);
+                            const dateB = new Date(b.quando);
+
+                            // Classificar as datas pelo mais recente
+                            return dateA - dateB;
+                          })
+                          .slice(0, reclamacoesParaExibir)
+                          .map((reclamacao, index) => (
+                            <ReclamacaoIt key={index} reclamacao={reclamacao} />
+                          ))
+                      ) : (
                         <>
                           <center>
                             <br />
