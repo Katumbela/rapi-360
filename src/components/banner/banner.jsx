@@ -903,7 +903,7 @@ const Banner = () => {
         <br />
         <br />
         <div className="container w-75 py-2 text-white">
-          <h1>Seja Ouvido</h1>
+          <h1 className="f-reg fw-bold">Seja Ouvido</h1>
           <h3>
             R360 é umaplataforma de avaliação aberta para todos. compartilhe
             suas experiências para ajudar outras pessoas a fazerem escolhas
