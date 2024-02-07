@@ -75,7 +75,7 @@ const Banner = () => {
 
   const empresasFiltradasPorCategoria = todasEmpresas.filter((empresa) => {
     return (
-      categoriaSelecionada === "" || empresa.categoria === categoriaSelecionada
+      categoriaSelecionada === "" || empresa.categoria.toLowerCase() === categoriaSelecionada.toLowerCase()
     );
   });
   const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
@@ -115,44 +115,7 @@ const Banner = () => {
     setCategoriaSelecionada(categoria);
   };
 
-  // const empresasFiltradas = dadosEmpresas.filter((empresa) => {
-  //   return (
-  //     categoriaSelecionada === "" || empresa.categoria === categoriaSelecionada
-  //   );
-  // });
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getCursosData();
-  //     setCursos(data);
-  //   };
-
-  //   // ordenarEmpresas();
-
-  //   const ordenarEmpresas = async () => {
-  //     try {
-  //       const dadosEmpresas = await obterDadosDoFirebase();
-
-  //       // Convertendo avaliação para números antes de ordenar
-  //       const melhoresEmpresas = dadosEmpresas
-  //         .filter((empresa) => parseFloat(empresa.avaliacao) >= 6)
-  //         .sort((a, b) => parseFloat(b.avaliacao) - parseFloat(a.avaliacao));
-
-  //       const pioresEmpresas = dadosEmpresas
-  //         .filter((empresa) => parseFloat(empresa.avaliacao) < 6)
-  //         .sort((a, b) => parseFloat(a.avaliacao) - parseFloat(b.avaliacao));
-
-  //       setMelhoresEmpresasOrdenadas(melhoresEmpresas);
-  //       setPioresEmpresasOrdenadas(pioresEmpresas);
-  //       setDadosEmpresas(dadosEmpresas);
-  //     } catch (error) {
-  //       console.error("Erro ao ordenar empresas:", error.message);
-  //     }
-  //   };
-
-  //   ordenarEmpresas();
-  //   fetchData();
-  // }, []); // o segundo argumento do useEffect é um array de dependências, coloque aqui qualquer dependência necessária
-
+  
   const [searchTerm, setSearchTerm] = useState("");
   function handleSearchInputChange(e) {
     setSearchTerm(e.target.value);
@@ -196,7 +159,7 @@ const Banner = () => {
       <div className="banner bg-success text-start shadow-md">
         <div className="body-banner text-start w-lg-50 container">
           <h2 className="f-reg  titulo">
-            O <b className="text-">Reputa</b> <b className="text-">360</b> te
+            O <b className="text-">Reputação</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
             <br />
             Encontre empresas pra confiar

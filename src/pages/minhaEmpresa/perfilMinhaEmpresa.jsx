@@ -33,7 +33,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
 
       // Preencher os campos de entrada com os dados existentes
       setTelefone(empresa.tel);
-    //   console.log(empresa);
+      //   console.log(empresa);
       setOutrosDados({
         cidade: empresa.city,
         site: empresa.site,
@@ -55,9 +55,12 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
     setPh(true);
     try {
       // Consulta para obter o documento com base no email da empresa
-      const empresaRef = firebase.firestore().collection("empresa").where("emailEmpresa", "==", empresa.email);
+      const empresaRef = firebase
+        .firestore()
+        .collection("empresa")
+        .where("emailEmpresa", "==", empresa.email);
       const querySnapshot = await empresaRef.get();
-  
+
       // Verificar se a consulta retornou algum documento
       if (!querySnapshot.empty) {
         // Atualizar o primeiro documento retornado pela consulta
@@ -93,7 +96,6 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
       });
     }
   };
-  
 
   const verificarEAtualizar = async () => {
     console.log("Chamando verificarEAtualizar");
@@ -134,7 +136,9 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
   const obterTelefonePorEmail = async (email) => {
     try {
       const usersRef = firebase.firestore().collection("empresa");
-      const snapshot = await usersRef.where("emailEmpresa", "==", empresa.email).get();
+      const snapshot = await usersRef
+        .where("emailEmpresa", "==", empresa.email)
+        .get();
 
       if (!snapshot.empty) {
         const documento = snapshot.docs[0].data();
@@ -147,7 +151,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
         }));
       }
     } catch (error) {
-    //   console.error("Erro ao obter telefone por e-mail:", error);
+      //   console.error("Erro ao obter telefone por e-mail:", error);
     }
   };
 
@@ -174,7 +178,7 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
           // console.log(reclamacoesData[0])
           setReclamacoesEmpresa(reclamacoesData);
         } catch (error) {
-        //   console.error("Erro ao obter reclamações:", error.message);
+          //   console.error("Erro ao obter reclamações:", error.message);
         }
       } catch (error) {
         // console.error("Erro ao pegar empresa:", error.message, use.userId);
@@ -196,150 +200,181 @@ function PerfilMinhaEmpresa({ nomee, emaill, cart }) {
 
   return (
     <>
+      <Header nomee={nomee} emaill={emaill} cart={cart} />
 
-<Header nomee={nomee} emaill={emaill} cart={cart} />
-    
-    
-    <div className="text-center c">
-      <img className="user-p " src={empresa.pictureUrl ?? user} alt="" />
-      <h2>{empresa.nome}</h2>
-      <span className="f-12 text-secondary">ID: <b><a href={"/pt/empresa/"+empresa.uid}>{empresa.uid}</a></b></span>
-      <p className="f-12">{empresa.email}</p>
-      <NavLink to={"/pt/login"} className="f-16 navlink">
-        Sair
-      </NavLink>
+      <div className="text-center c">
+        <img className="user-p " src={empresa.pictureUrl ?? user} alt="" />
+        <h2>{empresa.nome}</h2>
+        <span className="f-12 text-secondary">
+          ID:{" "}
+          <b>
+            <a href={"/pt/empresa/" + empresa.uid}>{empresa.uid}</a>
+          </b>
+        </span>
+        <p className="f-12">{empresa.email}</p>
+        <NavLink to={"/pt/login"} className="f-16 navlink">
+          Terminar Sesssão
+        </NavLink>
 
-      {/* Formulário para atualizar informações */}
+        {/* Formulário para atualizar informações */}
 
-      <div className="text-start w-75 mx-auto">
-        <br />
-        <label htmlFor="" className="f-12 text-secondary">
-          Telefone
-        </label>
-        <input
-          value={telefone}
-          type="tel"
-          className=" mx-auto form-control"
-          onChange={(e) => setTelefone(e.target.value)}
-        />
-        {/* Adicione outros campos conforme necessário */}
-        <label htmlFor="" className="f-12 text-secondary">
-          Cidade
-        </label>
-        <input
-          value={outrosDados.cidade}
-          type="text"
-          className=" mx-auto form-control"
-          onChange={(e) =>
-            setOutrosDados({ ...outrosDados, cidade: e.target.value })
-          }
-        />
-        <label htmlFor="" className="f-12 text-secondary">
-          Site
-        </label>
-        <input
-          value={outrosDados.site}
-          type="text"
-          className=" mx-auto form-control"
-          onChange={(e) =>
-            setOutrosDados({ ...outrosDados, site: e.target.value })
-          }
-        />
-        <label htmlFor="" className="f-12 text-secondary">
-          Sobre
-        </label>
-        <textarea
-          value={outrosDados.sobre}
-          className=" mx-auto form-control"
-          onChange={(e) =>
-            setOutrosDados({ ...outrosDados, sobre: e.target.value })
-          }
-        />
-      </div>
-      <button
-        disabled={ph}
-        className="btn btn-sm btn-success"
-        onClick={atualizarInformacoes}
-      >
-        {ph ? "Atualizando..." : "Atualizar"}
-      </button>
+        <div className="row container mx-auto">
+          <div className="col-12 col-md-5">
+            <div className="text-start">
+              <br />
+              <label htmlFor="" className="f-12 text-secondary">
+                Telefone
+              </label>
+              <input
+                value={telefone}
+                type="tel"
+                className=" mx-auto form-control"
+                onChange={(e) => setTelefone(e.target.value)}
+              />
+              {/* Adicione outros campos conforme necessário */}
+              <label htmlFor="" className="f-12 text-secondary">
+                Cidade
+              </label>
+              <input
+                value={outrosDados.cidade}
+                type="text"
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, cidade: e.target.value })
+                }
+              />
+              <label htmlFor="" className="f-12 text-secondary">
+                Site
+              </label>
+              <input
+                value={outrosDados.site}
+                type="text"
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, site: e.target.value })
+                }
+              />
+              <label htmlFor="" className="f-12 text-secondary">
+                Sobre
+              </label>
+              <textarea
+                value={outrosDados.sobre}
+                className=" mx-auto form-control"
+                onChange={(e) =>
+                  setOutrosDados({ ...outrosDados, sobre: e.target.value })
+                }
+              />
+            </div>
+            <button
+              disabled={ph}
+              className="btn btn-sm btn-success"
+              onClick={atualizarInformacoes}
+            >
+              {ph ? "Atualizando..." : "Atualizar"}
+            </button>
 
-      {/* Restante do código para exibição de reclamações e outras informações */}
+            {/* Restante do código para exibição de reclamações e outras informações */}
 
-      <br />
-      <center className="container">
-        <br />
-        <div className="container">
-          <div className="card-sobre-empresa border-1 text-start  bg-white p-3">
-            <b className="text-dark f-reg">Reclamações de clientes </b>
+            <br />
+          </div>
+          <div className="col-12 col-md-7">
+            <center className="">
+              <br />
+              <div className="container">
+                <div className="card-sobre-empresa border-1 text-start  bg-white p-3">
+                  <b className="text-dark f-reg">Reclamações de clientes </b>
 
-            {/* O que estão falando desta empresa, card */}
-            {empresa.email ? (
-              <>
-                {reclamacoesEmpresa?.length != 0 ? (
-                  reclamacoesEmpresa
-                    .slice(0, reclamacoesParaExibir)
-                    .map((reclamacao, index) => (
-                      <ReclamacaoIt key={index} reclamacao={reclamacao} />
-                    ))
-                ) : (
-                  <>
-                    <center>
-                      <br />
-                      <br />
-                      <i className="bi bi-megaphone f-24 text-secondary"></i>{" "}
-                      <br />
-                      <br />
-                      <span className="text-secondary f-14 w-75">
-                        Não há ainda reclamações ou avaliações pfeitas por sí
-                      </span>
-                    </center>
-                    <br />
-                  </>
-                )}
-                {reclamacoesEmpresa.length > reclamacoesParaExibir && (
-                  <div className="text-center my-3">
-                    <button className="btn btn-link" onClick={handleVerMais}>
-                      Ver mais Avaliações
-                    </button>
-                  </div>
-                )}
-                {reclamacoesParaExibir > 5 && (
-                  <div className="text-center my-3">
-                    <button className="btn btn-link" onClick={handleVerMenos}>
-                      Ver menos Avaliações
-                    </button>
-                  </div>
-                )}
-              </>
-            ) : (
-              <>
-                {[...Array(reclamacoesParaExibir)].map((_, index) => (
-                  <Comment key={index} className="w-100" />
-                ))}
-                {reclamacoesParaExibir > 5 && (
-                  <div className="text-center my-3">
-                    <button className="btn btn-link" onClick={handleVerMenos}>
-                      Ver menos Avaliações
-                    </button>
-                  </div>
-                )}
-                {reclamacoesParaExibir <= 5 && (
-                  <div className="text-center my-3">
-                    <button className="btn btn-link" onClick={handleVerMais}>
-                      Ver mais Avaliações
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
+                  {/* O que estão falando desta empresa, card */}
+                  {empresa.email ? (
+                    <>
+                      {reclamacoesEmpresa?.length != 0 ? (
+                         reclamacoesEmpresa
+                         .sort((a, b) => {
+                           // Função para converter a string de data em um objeto Date
+                           const dateA = new Date(a.quando);
+                           const dateB = new Date(b.quando);
+                           
+                           // Classificar as datas pelo mais recente
+                           return dateA - dateB;
+                         })
+                         .slice(0, reclamacoesParaExibir)
+                         .map((reclamacao, index) => (
+                           <ReclamacaoIt key={index} reclamacao={reclamacao} />
+                         ))
+                     ) : (
+                        <>
+                          <center>
+                            <br />
+                            <br />
+                            <i className="bi bi-megaphone f-24 text-secondary"></i>{" "}
+                            <br />
+                            <br />
+                            <span className="text-secondary f-14 w-75">
+                              Não há ainda reclamações ou avaliações feitas por
+                              sí
+                            </span>
+                          </center>
+                          <br />
+                        </>
+                      )}
+                      {reclamacoesEmpresa.length > reclamacoesParaExibir && (
+                        <div className="text-center my-3">
+                          <button
+                            className="btn btn-link"
+                            onClick={handleVerMais}
+                          >
+                            Ver mais Avaliações
+                          </button>
+                        </div>
+                      )}
+                      {reclamacoesParaExibir > 5 && (
+                        <div className="text-center my-3">
+                          <button
+                            className="btn btn-link"
+                            onClick={handleVerMenos}
+                          >
+                            Ver menos Avaliações
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {[...Array(reclamacoesParaExibir)].map((_, index) => (
+                        <Comment key={index} className="w-100" />
+                      ))}
+                      {reclamacoesParaExibir > 5 && (
+                        <div className="text-center my-3">
+                          <button
+                            className="btn btn-link"
+                            onClick={handleVerMenos}
+                          >
+                            Ver menos Avaliações
+                          </button>
+                        </div>
+                      )}
+                      {reclamacoesParaExibir <= 5 && (
+                        <div className="text-center my-3">
+                          <button
+                            className="btn btn-link"
+                            onClick={handleVerMais}
+                          >
+                            Ver mais Avaliações
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            </center>
+            <br />
           </div>
         </div>
-      </center>
-      <br />
-      <br />
-      <Footer />
-    </div>
+
+        <br />
+        <Footer />
+      </div>
     </>
   );
 }
