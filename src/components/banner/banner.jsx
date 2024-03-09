@@ -75,7 +75,8 @@ const Banner = () => {
 
   const empresasFiltradasPorCategoria = todasEmpresas.filter((empresa) => {
     return (
-      categoriaSelecionada === "" || empresa.categoria.toLowerCase() === categoriaSelecionada.toLowerCase()
+      categoriaSelecionada === "" ||
+      empresa.categoria.toLowerCase() === categoriaSelecionada.toLowerCase()
     );
   });
   const melhoresEmpresasPorCategoria = empresasFiltradasPorCategoria
@@ -115,7 +116,6 @@ const Banner = () => {
     setCategoriaSelecionada(categoria);
   };
 
-  
   const [searchTerm, setSearchTerm] = useState("");
   function handleSearchInputChange(e) {
     setSearchTerm(e.target.value);
@@ -177,7 +177,6 @@ const Banner = () => {
           <div className="  w-md-75 w-lg-75">
             <h5 className="fw-bolder">
               <b>Explore a R360</b>
-             
             </h5>
           </div>
           <div className="quadros  w-md-75 w-lg-75 mx-auto">
@@ -339,15 +338,15 @@ const Banner = () => {
                                   alt=""
                                 />
                                 <div className="de w-100 my-">
-                                <b>
-                                  {empresa?.nomeEmpresa
-                                    .split(" ")
-                                    .slice(0, 4)
-                                    .join(" ")}
-                                  {empresa?.nomeEmpresa.split(" ").length > 3
-                                    ? " ..."
-                                    : ""}
-                                </b>
+                                  <b>
+                                    {empresa?.nomeEmpresa
+                                      .split(" ")
+                                      .slice(0, 4)
+                                      .join(" ")}
+                                    {empresa?.nomeEmpresa.split(" ").length > 3
+                                      ? " ..."
+                                      : ""}
+                                  </b>
 
                                   <div className="gap-2 d-flex">
                                     <StarRating rating={empresa.avaliacao} />
@@ -377,21 +376,30 @@ const Banner = () => {
                                     </span>
                                     <div className="d-flex justify-content-between">
                                       <div className="d-flex my-auto py-2 gap-3">
-                                        <a
-                                          href={`https://${empresa.siteEmpresa}`}
-                                        >
-                                          <i className="bi bi-globe"></i>
-                                        </a>
-                                        <a
-                                          href={`mailto:${empresa.emailEmpresa}`}
-                                        >
-                                          <i className="bi bi-envelope"></i>
-                                        </a>
-                                        <a href={`tel:${empresa.whatsapp}`}>
-                                          <i className="bi bi-telephone"></i>
-                                        </a>
-                                      </div>
+                                        {empresa.siteEmpresa.toLowerCase !==
+                                          "n/a" ?? (
+                                          <a
+                                            href={`https://${empresa.siteEmpresa}`}
+                                          >
+                                            <i className="bi bi-globe"></i>
+                                          </a>
+                                        )}
+                                        {empresa.emailEmpresa.toLowerCase !==
+                                          "n/a" ?? (
+                                          <a
+                                            href={`mailto:${empresa.emailEmpresa}`}
+                                          >
+                                            <i className="bi bi-envelope"></i>
+                                          </a>
+                                        )}
 
+                                        {empresa.whatsapp.toLowerCase !==
+                                          "n/a" ?? (
+                                          <a href={`tel:${empresa.whatsapp}`}>
+                                            <i className="bi bi-telephone"></i>
+                                          </a>
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
