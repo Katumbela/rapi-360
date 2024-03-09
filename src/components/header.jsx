@@ -450,7 +450,7 @@ const Header = (props) => {
           ) : null}
           <div className="listas-lojas mb-3  d-flex gap-3 overflow-x-auto listas-descontos">
             {searchResults != "" ? (
-              searchResults.map((empresa) => (
+              searchResults.slice(0, 5).map((empresa) => (
                 <a
                   onClick={handleBlur}
                   key={empresa.id}

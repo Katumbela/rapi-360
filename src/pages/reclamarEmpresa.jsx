@@ -263,6 +263,7 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
   const [formData, setFormData] = useState({
     classificacao: 0,
     solicitarNovamente: null,
+    mostrarNome: false,
     titulo: "",
     historia: "",
 
@@ -280,6 +281,13 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
     setFormData({
       ...formData,
       solicitarNovamente: solicitacao,
+    });
+  };
+
+  const handleMostrarNome = (decisao) => {
+    setFormData({
+      ...formData,
+      mostrarNome: decisao,
     });
   };
 
@@ -565,6 +573,46 @@ const ReclamarEmpresa = ({ cart, nomee, emaill }) => {
                       multiple
                     />
                     <br />
+                  </div>
+
+                  <div className="col-12 my-2 ">
+                    <div className="titul mt-3">
+                      <div className="d-flex f-reg gap-2">
+                        <i className="bi text-success bi-person-circle"></i>
+                        <b>
+                          Deseja mostrar seu nome na avaliação ?
+                          <span className="text-danger">*</span>
+                        </b>
+                      </div>
+                    </div>{" "}
+                    {/* {formData.mostrarNome ? 'sim' : 'nao'} */}
+                    <label htmlFor="" className="text-secondary f-12">
+                      Nós respeitamos a sua privacidade, no entanto deixamos a
+                      sua escolha sobre a exposição do seu nome
+                    </label>
+                    <br />
+                    <br />
+                    <div className="d-flex justify-content-around">
+                      <label htmlFor="simMostrar" className="f-18">
+                        <input
+                          type="radio"
+                          checked={formData.mostrarNome === true}
+                          onChange={() => handleMostrarNome(true)}
+                          id="simMostrar"
+                        />
+                        Sim
+                      </label>
+
+                      <label htmlFor="naoMostrar" className="f-18">
+                        <input
+                          type="radio"
+                          checked={formData.mostrarNome === false}
+                          onChange={() => handleMostrarNome(false)}
+                          id="naoMostrar"
+                        />
+                        Não
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
