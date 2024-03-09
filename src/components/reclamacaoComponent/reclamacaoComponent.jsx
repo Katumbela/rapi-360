@@ -18,32 +18,37 @@ export default function ReclamacaoItem({ reclamacao }) {
 
   return (
     <div className="p-3 bg-light my-3 border-rounded-2">
-      <div className="d-flex gap-2">
-        {reclamacao?.photo ? (
-          <>
-            <img
-              src={reclamacao.photo}
-              style={{ height: "96px" }}
-              alt="User"
-              className="foto"
-            />
-          </>
-        ) : (
-          <>
-            <div className="foto">
-              <div>
-                {reclamacao.cliente.split(" ")[0][0]}{" "}
-                {reclamacao.cliente.split(" ")[1][0]}
-              </div>
+      {reclamacao.mostrarNome ? (
+        <>
+          <div className="d-flex gap-2">
+            {reclamacao?.photo ? (
+              <>
+                <img
+                  src={reclamacao.photo}
+                  style={{ height: "96px" }}
+                  alt="User"
+                  className="foto"
+                />
+              </>
+            ) : (
+              <>
+                <div className="foto">
+                  <div>
+                    {reclamacao.cliente.split(" ")[0][0]}{" "}
+                    {reclamacao.cliente.split(" ")[1][0]}
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div className="d-flex flex-column">
+              <b>{reclamacao.cliente}</b>
+              <span className="text-secondary f-12">Auditado por R360</span>
             </div>
-          </>
-        )}
-        <div className="d-flex flex-column">
-          <b>{reclamacao.cliente}</b>
-          <span className="text-secondary f-12">Auditado por R360</span>
-        </div>
-      </div>
-      <hr />
+          </div>
+          <hr /> 
+        </>
+      ) : null}
       <StarRating rating={reclamacao.classificacao.toFixed(1)} />
       <b className="f-reg"> {reclamacao.titulo}</b>
 

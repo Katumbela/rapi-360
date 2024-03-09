@@ -355,26 +355,25 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                   </b>
                   <br />
                   <div className="d-flex gap-2">
-
-                  <StarRating rating={empresaEscolhida?.avaliacao}/>
-                 <span className="my-auto">&middot; </span> <h4>{empresaEscolhida?.avaliacao}</h4>
+                    <StarRating rating={empresaEscolhida?.avaliacao} />
+                    <span className="my-auto">&middot; </span>{" "}
+                    <h4>{empresaEscolhida?.avaliacao}</h4>
                   </div>
 
                   {empresaEscolhida?.selo === true ? (
-                      <p className="d-flex text-secondary gap-2">
-                        <img src={r360} alt="" className="icon-empresa" />{" "}
-                        <span className="text-dark">
-                          Verificado pela <b>R360</b>
-                        </span>
-                      </p>
-                    ) : null}
+                    <p className="d-flex text-secondary gap-2">
+                      <img src={r360} alt="" className="icon-empresa" />{" "}
+                      <span className="text-dark">
+                        Verificado pela <b>R360</b>
+                      </span>
+                    </p>
+                  ) : null}
 
                   <div className="d-flex gap-4 f-14 mt-2 flex-wrap">
                     <p className="d-flex text-secondary gap-2">
                       <i className="bi bi-calendar"></i>
                       {empresaEscolhida?.quando}
                     </p>
-
                   </div>
                 </>
               ) : (
@@ -395,17 +394,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
         </div>
         <div className="opcoes bg-white border-b-t py-2">
           <div className="d-flex justify-content-center my-auto gap-4 overflow-x-auto">
-            <ScrollToTopLink
-              to={"/pt/"}
-              className="text-primary text-decoration-none gap-2 d-flex"
-            >
-              <i className="bi bi-house"></i>Início 
-            </ScrollToTopLink>
-            <p>{'>'}</p>
             <p className="text-primary gap-2 d-flex">
               {empresaEscolhida?.nomeEmpresa}
             </p>
-            
           </div>
         </div>
       </div>
@@ -487,12 +478,9 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                           <b className="f-reg">SEM DADOS </b>
                         )}
                       </h5> */}
-                      <div className="gap-2 d-flex"> 
-                      <span className="text-secondary">
-                        Rating: 
-                        </span>
+                      <div className="gap-2 d-flex">
+                        <span className="text-secondary">Rating:</span>
                         <StarRating rating={empresaEscolhida?.avaliacao} />
-                       
                       </div>
                       <div className="d-flex gap-2">
                         <h2 className="f-reg">{empresaEscolhida?.avaliacao}</h2>
@@ -513,7 +501,8 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
                       <div className="d-flex gap-2">
                         <i className="bi f-reg bi-exclamation-circle"></i>
                         <p>
-                         Média de avaliações muito baixa, esta empresa pode ser nova ou tem recebido poucas avaliações
+                          Média de avaliações muito baixa, esta empresa pode ser
+                          nova ou tem recebido poucas avaliações
                         </p>
                       </div>
                     </>
