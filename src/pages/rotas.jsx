@@ -31,6 +31,7 @@ import Blog from "./blog";
 import SolicitarCadastro from "./solicitarCadastro";
 import LoginEmpresa from "./entrarEmpresa/entrarEmpresa";
 import PerfilMinhaEmpresa from "./minhaEmpresa/perfilMinhaEmpresa";
+import EmailSender from "./how-to-use-api";
 
 
 const RotasPT = (props) => {
@@ -45,6 +46,7 @@ const RotasPT = (props) => {
                     <Route path="/pt/enviar-mensagem/:uid" exact element={<EnviarMensagem  nomee={nomee} emaill={emaill} cart={cart} />} />
                     <Route element={<Home nomee={nomee} emaill={emaill} cart={cart} />} path="/pt/" />
                     <Route element={<Mensagens nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/mensagens" />
+                    <Route element={<EmailSender nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/how-to-use" />
                     <Route element={<Perfil nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/perfil" />
                     <Route element={<PerfilMinhaEmpresa nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/perfil/minha-empresa" />
                     <Route element={<Conversa nomee={nomee} emaill={emaill} cart={cart}/>} path="/pt/conversa/:uid" />

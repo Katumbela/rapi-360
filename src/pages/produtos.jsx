@@ -283,10 +283,10 @@ const Produtos = ({ cart, nomee, emaill }) => {
               </ul>
               <br />
               <center>
-                <button className="btn btn-primary disable" disabled>
+                <a href="/pt/how-to-use" className="btn btn-primary disable" disabled>
                   {" "}
-                  Indisponível
-                </button>
+                  Como usar
+                </a>
               </center>
             </div>
             <div className="card-solucao">
