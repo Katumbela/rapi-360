@@ -3,40 +3,8 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 
 function EmailSender({ cart, emaill, nomee }) {
-  const [emailData, setEmailData] = useState({
-    to: "",
-    subject: "",
-    body: "",
-    smtp: {
-      host: "",
-      port: "",
-    },
-    email: "",
-    password: "",
-    emailFrom: "",
-    key: "",
-  });
 
-  const [response, setResponse] = useState("");
-
-  const sendEmail = async () => {
-    try {
-      const response = await fetch(
-        "https://api.reputacao360.online/api/enviar-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(emailData),
-        }
-      );
-      const data = await response.json();
-      setResponse(data.message);
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  };
+  document.title = 'R360 API | API Reputação 360'
 
   return (
     <>
@@ -48,12 +16,9 @@ function EmailSender({ cart, emaill, nomee }) {
       />
 
       <div className="container mt-5">
-        <h1>API de Envio de E-mails gratuito</h1>
+        <h1>API de Envio de E-mails e Mensagens via WhatsApp</h1>
         <p>
-          Esta é uma API simples para enviar e-mails usando um servidor SMTP
-          configurado. Ele fornece uma rota para enviar e-mails através de um
-          servidor SMTP configurado, aceitando solicitações POST com os dados do
-          e-mail.
+          Esta é uma API simples para enviar e-mails e mensagens via WhatsApp. Ele fornece uma rota para enviar e-mails através de um servidor SMTP configurado e outra rota para enviar mensagens via WhatsApp, aceitando solicitações POST com os dados apropriados.
         </p>
         <br />
         <br />
@@ -103,18 +68,18 @@ function EmailSender({ cart, emaill, nomee }) {
         <pre>
           <code>
             {`{
-  "to": "destinatario@example.com",
-  "subject": "Assunto do E-mail",
-  "body": "Corpo do E-mail",
-  "smtp": {
-    "host": "mail.exemplo.com",
-    "port": 465
-  },
-  "email": "seu_email@exemplo.com",
-  "password": "sua_senha",
-  "emailFrom": "remetente@example.com",
-  "key": "Angola2020*"
-}`}
+              "to": "destinatario@example.com",
+              "subject": "Assunto do E-mail",
+              "body": "Corpo do E-mail",
+              "smtp": {
+                "host": "mail.exemplo.com",
+                "port": 465
+              },
+              "email": "seu_email@exemplo.com",
+              "password": "sua_senha",
+              "emailFrom": "remetente@example.com",
+              "key": "Angola2020*"
+            }`}
           </code>
         </pre>
 
@@ -125,11 +90,45 @@ function EmailSender({ cart, emaill, nomee }) {
         <pre>
           <code>
             {`{
-  "to": "destinatario@example.com",
-  "subject": "Assunto do E-mail",
-  "body": "<p>Corpo do E-mail</p>",
-  "key": "Angola2020*"
-}`}
+              "to": "destinatario@example.com",
+              "subject": "Assunto do E-mail",
+              "body": "<p>Corpo do E-mail</p>",
+              "key": "Angola2020*"
+            }`}
+          </code>
+        </pre>
+
+        <br />
+        <br />
+        <hr />
+        <br />
+        <br />
+
+        <h3>Uso Enviar Mensagem via WhatsApp</h3>
+        <p>
+          Para enviar uma mensagem via WhatsApp, faça uma solicitação POST para a rota{" "}
+          <code>/api/whatsapp/sendText</code> com os seguintes dados no corpo da
+          solicitação:
+        </p>
+        <ul>
+          <li>
+            <code>chatId</code>: Nº Telefone no WhatsApp.
+          </li>
+          <li>
+            <code>text</code>: Texto da mensagem.
+          </li>
+          <li>
+            <code>session</code>: default
+          </li>
+        </ul>
+        <p>Exemplo de solicitação:</p>
+        <pre>
+          <code>
+            {`{
+              "chatId": "244928134249@c.us",
+              "text": "Hi there! text 3",
+              "session": "default"
+            }`}
           </code>
         </pre>
       </div>
