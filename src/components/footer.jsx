@@ -8,7 +8,7 @@ import Swal from "sweetalert";
 import Loader from "./loader";
 import icone from "../imgs/icone.png";
 import logo from "../imgs/logo-d.png";
-import icon from "../imgs/logo-new.jpeg";
+import icon from "../imgs/logos/logo_for_black.png";
 import ScrollToTopLink from "./scrollTopLink";
 // import sendEmail from '../pages/server';
 
