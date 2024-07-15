@@ -117,17 +117,15 @@ function EmailSender({ cart, emaill, nomee }) {
           <li>
             <code>text</code>: Texto da mensagem.
           </li>
-          <li>
-            <code>session</code>: default
-          </li>
+
         </ul>
         <p>Exemplo de solicitação:</p>
         <pre>
           <code>
             {`{
-              "chatId": "244928134249@c.us",
-              "text": "Hi there! text 3",
-              "session": "default"
+              "chatId": "244928134249",
+              "text": "Hi there! test ",
+              
             }`}
           </code>
         </pre>
