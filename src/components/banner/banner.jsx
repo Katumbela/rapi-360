@@ -158,7 +158,7 @@ const Banner = () => {
     <>
       <div className="banner bg-success text-start shadow-md">
         <div className="body-banner text-start w-lg-50 container">
-          <h2 className="f-reg  titulo">
+          <h2 className="f-reg text-white titulo">
             O <b className="text-">Reputação</b> <b className="text-">360</b> te
             aproxima das marcas que têm a confiança do consumidor!
             <br />
