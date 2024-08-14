@@ -216,10 +216,9 @@
     background: rgb(255, 255, 255) !important;
   }
   
-  .publicidad img {
-    aspect-ratio: 4/3;
+  .publicidad img { 
     object-fit: contain;
-    width: 90% !important;
+    width: 100% !important;
   }
   
   .pubb {
