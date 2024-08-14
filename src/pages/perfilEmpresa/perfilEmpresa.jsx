@@ -843,6 +843,7 @@ const PerfilEmpresa = ({ cart, nomee, emaill }) => {
               <h5 className="p-2 info-empresa bg-light rounded-2 text-decoration-none">
                 {" "}
                 <a
+                target="__blank"
                   className=" text-decoration-none"
                   href={`https://${empresaEscolhida?.siteEmpresa}`}
                 >
