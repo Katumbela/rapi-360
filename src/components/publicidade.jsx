@@ -1,9 +1,4 @@
-import React from "react";
-import pub1 from "../imgs/pub1.jpeg";
-import pub2 from "../imgs/pub2.jpeg";
-import pub3 from "../imgs/pub3.jpeg";
-import pub4 from "../imgs/pub4.jpeg";
-import pub5 from "../imgs/pub5.png";
+import React from "react"; 
 
 const Pub = () => {
   return (
