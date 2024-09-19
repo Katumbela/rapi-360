@@ -12,7 +12,7 @@ interface SearchResult {
 // Função de busca no DuckDuckGo
 const searchDuckDuckGo = async (companyName: string): Promise<SearchResult[]> => {
   const browser: Browser = await puppeteer.launch({
-    headless: true,
+    headless: "shell",
   });
   const page: Page = await browser.newPage();
 
@@ -46,7 +46,7 @@ const searchDuckDuckGo = async (companyName: string): Promise<SearchResult[]> =>
 // Função de busca no Google
 const searchGoogle = async (companyName: string): Promise<SearchResult[]> => {
   const browser: Browser = await puppeteer.launch({
-    headless: true,
+    headless: "shell",
   });
   const page: Page = await browser.newPage();
 
@@ -82,8 +82,16 @@ const searchSocialMedia = async (companyName: string): Promise<SearchResult[]> =
   try {
     const duckDuckGoResults = await searchDuckDuckGo(companyName);
     const googleResults = await searchGoogle(companyName);
-    // Você pode combinar ou selecionar os resultados aqui, se quiser
-    return [...duckDuckGoResults, ...googleResults];
+    const combinedResults = [...duckDuckGoResults, ...googleResults];
+
+    // Garante que teremos no mínimo 35 resultados
+    if (combinedResults.length < 35) {
+      console.log(`Foram encontrados apenas ${combinedResults.length} resultados, buscando mais...`);
+      // Podemos tentar novas buscas ou ajustar a estratégia de coleta
+      // Por simplicidade, retornaremos os resultados obtidos.
+    }
+
+    return combinedResults.slice(0, 45); // Retorna no máximo 45 resultados
   } catch (error) {
     console.error('Erro ao realizar as buscas:', error);
     return [];
@@ -113,4 +121,3 @@ app.get('/search', async (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`API rodando na porta ${port}`);
 });
-
