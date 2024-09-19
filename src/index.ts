@@ -14,9 +14,9 @@ const API_KEY = 'AIzaSyCa_ExTewizCy7gANFSKeTV-zROEdmf168'; // Substitua pela sua
 const CX = 'a2dea454ed7fb435a'; // Substitua pelo seu CX (Custom Search Engine ID)
 
 // Função para buscar resultados usando Google Custom Search API
-const searchGoogleCustom = async (query: string): Promise<SearchResult[]> => {
+const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'us'): Promise<SearchResult[]> => {
   try {
-    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}`;
+    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}&num=10&start=${start}&gl=${country}&excludeTerms=site:empresa.com`;
 
     const response = await axios.get(url);
     const results = response.data.items;
@@ -37,6 +37,7 @@ const searchGoogleCustom = async (query: string): Promise<SearchResult[]> => {
   }
 };
 
+
 // Função para analisar o sentimento
 const analyzeSentiment = (text: string): string => {
   const sentiment = new Sentiment();
@@ -52,16 +53,28 @@ const analyzeSentiment = (text: string): string => {
 };
 
 // Função para realizar a busca e analisar o sentimento dos resultados
-const searchWithSentiment = async (query: string): Promise<SearchResult[]> => {
-  const googleResults = await searchGoogleCustom(query);
+const searchWithSentiment = async (query: string, country: string = 'us'): Promise<SearchResult[]> => {
+  const allResults: SearchResult[] = [];
+  let startIndex = 1;
+  let hasMoreResults = true;
 
-  googleResults.forEach(result => {
-    const combinedText = `${result.title} ${result.snippet}`;
-    result.sentiment = analyzeSentiment(combinedText);
-  });
+  while (hasMoreResults && startIndex <= 90) { // Limite de 90 resultados
+    const googleResults = await searchGoogleCustom(query, startIndex, country);
+    if (googleResults.length === 0) {
+      hasMoreResults = false;
+    } else {
+      googleResults.forEach(result => {
+        const combinedText = `${result.title} ${result.snippet}`;
+        result.sentiment = analyzeSentiment(combinedText);
+      });
+      allResults.push(...googleResults);
+      startIndex += 10;
+    }
+  }
 
-  return googleResults;
+  return allResults;
 };
+
 
 // Configurando o servidor Express
 const app = express();
