@@ -13,10 +13,22 @@ interface SearchResult {
 const API_KEY = 'AIzaSyCa_ExTewizCy7gANFSKeTV-zROEdmf168'; // Substitua pela sua API Key
 const CX = 'a2dea454ed7fb435a'; // Substitua pelo seu CX (Custom Search Engine ID)
 
+
+const buildQuery = (query: string, sites: string[]): string => {
+  const siteQueries = sites.map(site => `site:${site}`).join(' OR ');
+  return `${query} (${siteQueries})`;
+};
+
+
+
 // Função para buscar resultados usando Google Custom Search API
-const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'us'): Promise<SearchResult[]> => {
+const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'ao'): Promise<SearchResult[]> => {
   try {
-    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}&num=10&start=${start}&gl=${country}&excludeTerms=site:empresa.com`;
+    // Lista de domínios de redes sociais
+    const socialMediaDomains = ['facebook.com', 'twitter.com', 'linkedin.com', 'instagram.com'];
+    const filteredQuery = buildQuery(query, socialMediaDomains);
+
+    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(filteredQuery)}&num=15&start=${start}&gl=${country}`;
 
     const response = await axios.get(url);
     const results = response.data.items;
@@ -36,6 +48,7 @@ const searchGoogleCustom = async (query: string, start: number = 1, country: str
     return [];
   }
 };
+
 
 // Função para analisar o sentimento
 const analyzeSentiment = (text: string): string => {
@@ -69,6 +82,11 @@ const searchWithSentiment = async (query: string, country: string = 'ao'): Promi
   let startIndex = 1;
   let hasMoreResults = true;
 
+  // Primeiro, buscar em redes sociais
+  const socialMediaResults = await searchGoogleCustom(query, startIndex, country);
+  allResults.push(...socialMediaResults);
+
+  // Em seguida, buscar no restante da web
   while (hasMoreResults && startIndex <= 90) { // Limite de 90 resultados
     const googleResults = await searchGoogleCustom(query, startIndex, country);
     if (googleResults.length === 0) {
@@ -87,13 +105,14 @@ const searchWithSentiment = async (query: string, country: string = 'ao'): Promi
   return prioritizeSocialMedia(allResults);
 };
 
+
 // Configurando o servidor Express
 const app = express();
 const port = 3000;
 
 app.get('/search', async (req: Request, res: Response) => {
   const companyName = req.query.companyName as string;
-  const country = req.query.country as string || 'us';
+  const country = req.query.country as string || 'ao';
 
   if (!companyName) {
     return res.status(400).json({ error: 'Parâmetro companyName é obrigatório' });
