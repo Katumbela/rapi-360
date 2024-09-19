@@ -16,7 +16,7 @@ const CX = 'a2dea454ed7fb435a'; // Substitua pelo seu CX (Custom Search Engine I
 // Função para buscar resultados usando Google Custom Search API
 const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'ao'): Promise<SearchResult[]> => {
   try {
-    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}&num=20&start=${start}&gl=${country}`;
+    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}&num=15&start=${start}&gl=${country}`;
 
     const response = await axios.get(url);
     const results = response.data.items;
