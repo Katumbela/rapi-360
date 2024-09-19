@@ -37,7 +37,6 @@ const searchGoogleCustom = async (query: string, start: number = 1, country: str
   }
 };
 
-
 // Função para analisar o sentimento
 const analyzeSentiment = (text: string): string => {
   const sentiment = new Sentiment();
@@ -52,8 +51,20 @@ const analyzeSentiment = (text: string): string => {
   }
 };
 
+// Função para classificar resultados por prioridade de redes sociais
+const prioritizeSocialMedia = (results: SearchResult[]): SearchResult[] => {
+  const socialMediaDomains = ['twitter.com', 'facebook.com', 'instagram.com', 'linkedin.com'];
+  return results.sort((a, b) => {
+    const aIsSocial = socialMediaDomains.some(domain => a.link.includes(domain));
+    const bIsSocial = socialMediaDomains.some(domain => b.link.includes(domain));
+    if (aIsSocial && !bIsSocial) return -1;
+    if (!aIsSocial && bIsSocial) return 1;
+    return 0; // Se ambos são ou não são redes sociais, mantém a ordem
+  });
+};
+
 // Função para realizar a busca e analisar o sentimento dos resultados
-const searchWithSentiment = async (query: string, country: string = 'us'): Promise<SearchResult[]> => {
+const searchWithSentiment = async (query: string, country: string = 'ao'): Promise<SearchResult[]> => {
   const allResults: SearchResult[] = [];
   let startIndex = 1;
   let hasMoreResults = true;
@@ -72,9 +83,9 @@ const searchWithSentiment = async (query: string, country: string = 'us'): Promi
     }
   }
 
-  return allResults;
+  // Priorizar redes sociais
+  return prioritizeSocialMedia(allResults);
 };
-
 
 // Configurando o servidor Express
 const app = express();
@@ -82,13 +93,14 @@ const port = 3000;
 
 app.get('/search', async (req: Request, res: Response) => {
   const companyName = req.query.companyName as string;
+  const country = req.query.country as string || 'us';
 
   if (!companyName) {
     return res.status(400).json({ error: 'Parâmetro companyName é obrigatório' });
   }
 
   try {
-    const results = await searchWithSentiment(companyName);
+    const results = await searchWithSentiment(companyName, country);
     return res.json(results);
   } catch (error) {
     console.error('Erro ao realizar a pesquisa:', error);
