@@ -1,104 +1,69 @@
-import puppeteer, { Browser, Page } from 'puppeteer';
 import express, { Request, Response } from 'express';
+import axios from 'axios';
+import Sentiment from 'sentiment';
 
 interface SearchResult {
   title: string;
-  url: string;
-  description: string;
-  favicon: string;
-  thumbnail: string;
+  link: string;
+  snippet: string;
+  sentiment: string;
 }
 
-// Função de busca no DuckDuckGo
-const searchDuckDuckGo = async (companyName: string): Promise<SearchResult[]> => {
-  const browser: Browser = await puppeteer.launch({
-    headless: "shell",
-  });
-  const page: Page = await browser.newPage();
+// Configurações da Google API
+const API_KEY = 'AIzaSyCa_ExTewizCy7gANFSKeTV-zROEdmf168'; // Substitua pela sua API Key
+const CX = 'a2dea454ed7fb435a'; // Substitua pelo seu CX (Custom Search Engine ID)
 
-  const searchQuery: string = `${companyName} site:twitter.com OR site:facebook.com OR site:instagram.com OR site:linkedin.com`;
-  await page.goto(`https://duckduckgo.com/?q=${encodeURIComponent(searchQuery)}`);
-
-  const results: SearchResult[] = await page.evaluate(() => {
-    const elements = Array.from(document.querySelectorAll('.result')); // Seleciona cada bloco de resultado
-
-    return elements.map(el => {
-      const titleElement = el.querySelector('a.result__a') as HTMLAnchorElement | null;
-      const urlElement = el.querySelector('a.result__a') as HTMLAnchorElement | null;
-      const descriptionElement = el.querySelector('.result__snippet') as HTMLElement | null;
-      const faviconElement = el.querySelector('.result__icon img') as HTMLImageElement | null;
-      const thumbnailElement = el.querySelector('.tile--img__img') as HTMLImageElement | null;
-
-      return {
-        title: titleElement ? titleElement.textContent || '' : '',
-        url: urlElement ? urlElement.href : '',
-        description: descriptionElement ? descriptionElement.textContent || '' : '',
-        favicon: faviconElement ? faviconElement.src : '',
-        thumbnail: thumbnailElement ? thumbnailElement.src : ''
-      };
-    });
-  });
-
-  await browser.close();
-  return results;
-};
-
-// Função de busca no Google
-const searchGoogle = async (companyName: string): Promise<SearchResult[]> => {
-  const browser: Browser = await puppeteer.launch({
-    headless: "shell",
-  });
-  const page: Page = await browser.newPage();
-
-  const searchQuery: string = `${companyName} site:twitter.com OR site:facebook.com OR site:instagram.com OR site:linkedin.com`;
-  await page.goto(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`);
-
-  const results: SearchResult[] = await page.evaluate(() => {
-    const elements = Array.from(document.querySelectorAll('.g')); // Seleciona cada bloco de resultado
-
-    return elements.map(el => {
-      const titleElement = el.querySelector('h3') as HTMLElement | null;
-      const urlElement = el.querySelector('a') as HTMLAnchorElement | null;
-      const descriptionElement = el.querySelector('.IsZvec') as HTMLElement | null;
-      const faviconElement = el.querySelector('img[src*="favicon"]') as HTMLImageElement | null;
-      const thumbnailElement = el.querySelector('img') as HTMLImageElement | null;
-
-      return {
-        title: titleElement ? titleElement.textContent || '' : '',
-        url: urlElement ? urlElement.href : '',
-        description: descriptionElement ? descriptionElement.textContent || '' : '',
-        favicon: faviconElement ? faviconElement.src : '',
-        thumbnail: thumbnailElement ? thumbnailElement.src : ''
-      };
-    });
-  });
-
-  await browser.close();
-  return results;
-};
-
-// Função principal que combina resultados de diferentes motores de busca
-const searchSocialMedia = async (companyName: string): Promise<SearchResult[]> => {
+// Função para buscar resultados usando Google Custom Search API
+const searchGoogleCustom = async (query: string): Promise<SearchResult[]> => {
   try {
-    const duckDuckGoResults = await searchDuckDuckGo(companyName);
-    const googleResults = await searchGoogle(companyName);
-    const combinedResults = [...duckDuckGoResults, ...googleResults];
+    const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}`;
 
-    // Garante que teremos no mínimo 35 resultados
-    if (combinedResults.length < 35) {
-      console.log(`Foram encontrados apenas ${combinedResults.length} resultados, buscando mais...`);
-      // Podemos tentar novas buscas ou ajustar a estratégia de coleta
-      // Por simplicidade, retornaremos os resultados obtidos.
+    const response = await axios.get(url);
+    const results = response.data.items;
+
+    if (!results) {
+      return [];
     }
 
-    return combinedResults.slice(0, 45); // Retorna no máximo 45 resultados
+    return results.map((result: any) => ({
+      title: result.title,
+      link: result.link,
+      snippet: result.snippet,
+      sentiment: ''  // O sentimento será adicionado depois
+    }));
   } catch (error) {
-    console.error('Erro ao realizar as buscas:', error);
+    console.error('Erro ao buscar no Google Custom Search:', error);
     return [];
   }
 };
 
-// Configurando a API com Express
+// Função para analisar o sentimento
+const analyzeSentiment = (text: string): string => {
+  const sentiment = new Sentiment();
+  const result = sentiment.analyze(text);
+
+  if (result.score > 0) {
+    return 'positive';
+  } else if (result.score < 0) {
+    return 'negative';
+  } else {
+    return 'neutral';
+  }
+};
+
+// Função para realizar a busca e analisar o sentimento dos resultados
+const searchWithSentiment = async (query: string): Promise<SearchResult[]> => {
+  const googleResults = await searchGoogleCustom(query);
+
+  googleResults.forEach(result => {
+    const combinedText = `${result.title} ${result.snippet}`;
+    result.sentiment = analyzeSentiment(combinedText);
+  });
+
+  return googleResults;
+};
+
+// Configurando o servidor Express
 const app = express();
 const port = 3000;
 
@@ -110,7 +75,7 @@ app.get('/search', async (req: Request, res: Response) => {
   }
 
   try {
-    const results = await searchSocialMedia(companyName);
+    const results = await searchWithSentiment(companyName);
     return res.json(results);
   } catch (error) {
     console.error('Erro ao realizar a pesquisa:', error);
