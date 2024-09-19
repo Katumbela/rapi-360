@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "build": {
-    "env": {
-      "CI": "false"
-    }
-  }
+  "builds": [
+    { "src": "package.json", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "public": true
 }
