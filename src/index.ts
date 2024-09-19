@@ -22,7 +22,7 @@ const buildQuery = (query: string, sites: string[]): string => {
 
 
 // Função para buscar resultados usando Google Custom Search API
-const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'ao'): Promise<SearchResult[]> => {
+const searchGoogleCustom = async (query: string, start: number = 1, country: string = 'us'): Promise<SearchResult[]> => {
   try {
     // Lista de domínios de redes sociais
     const socialMediaDomains = ['facebook.com', 'twitter.com', 'linkedin.com', 'instagram.com'];
@@ -82,11 +82,6 @@ const searchWithSentiment = async (query: string, country: string = 'ao'): Promi
   let startIndex = 1;
   let hasMoreResults = true;
 
-  // Primeiro, buscar em redes sociais
-  const socialMediaResults = await searchGoogleCustom(query, startIndex, country);
-  allResults.push(...socialMediaResults);
-
-  // Em seguida, buscar no restante da web
   while (hasMoreResults && startIndex <= 90) { // Limite de 90 resultados
     const googleResults = await searchGoogleCustom(query, startIndex, country);
     if (googleResults.length === 0) {
@@ -105,14 +100,13 @@ const searchWithSentiment = async (query: string, country: string = 'ao'): Promi
   return prioritizeSocialMedia(allResults);
 };
 
-
 // Configurando o servidor Express
 const app = express();
 const port = 3000;
 
 app.get('/search', async (req: Request, res: Response) => {
   const companyName = req.query.companyName as string;
-  const country = req.query.country as string || 'ao';
+  const country = req.query.country as string || 'us';
 
   if (!companyName) {
     return res.status(400).json({ error: 'Parâmetro companyName é obrigatório' });
